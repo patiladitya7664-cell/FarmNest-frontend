@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmNest Admin - Farmers</title>
+
+    <link rel="stylesheet" href="csss/admin.css">
+
+    <!-- Icons -->
+    <link 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
+    rel="stylesheet">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        🌾 FarmNest
+        <span>Admin</span>
+    </div>
+
+
+    <ul class="menu">
+
+        <li>
+            <a href="dashboard.html">
+                <i class="fa fa-chart-line"></i>
+                Dashboard
+            </a>
+        </li>
+
+
+        <li class="active">
+            <a href="farmer.html">
+                <i class="fa fa-tractor"></i>
+                Farmers
+            </a>
+        </li>
+
+
+        <li>
+            <a href="customer.html">
+                <i class="fa fa-users"></i>
+                Customers
+            </a>
+        </li>
+
+
+        <li>
+            <a href="HOMEPAGE/products.html">
+                <i class="fa fa-box"></i>
+                Products
+            </a>
+        </li>
+
+
+        <li>
+            <a href="orders.html">
+                <i class="fa fa-cart-shopping"></i>
+                Orders
+            </a>
+        </li>
+
+
+        <li>
+            <a href="payments.html">
+                <i class="fa fa-credit-card"></i>
+                Payments
+            </a>
+        </li>
+
+
+        <li>
+            <a href="reviews.html">
+                <i class="fa fa-star"></i>
+                Reviews
+            </a>
+        </li>
+
+
+        <li>
+            <a href="settings.html">
+                <i class="fa fa-gear"></i>
+                Settings
+            </a>
+        </li>
+
+    </ul>
+
+
+</aside>
+
+
+
+
+<!-- ================= MAIN AREA ================= -->
+
+<div class="main">
+
+
+<!-- HEADER -->
+
+<header class="topbar">
+
+
+<div>
+    <h2>Farmers Management</h2>
+    <p>Manage registered farmers</p>
+</div>
+
+
+<div class="admin-profile">
+
+    <img src="images/admin.png">
+
+    <span>
+        Admin
+    </span>
+
+</div>
+
+
+</header>
+
+
+
+<!-- ================= CONTENT ================= -->
+
+
+<section class="content">
+
+
+<div class="page-header">
+
+
+<div>
+<h1>
+    Farmers
+</h1>
+
+<p>
+    Total registered farmers and verification status
+</p>
+
+</div>
+
+
+<button class="btn-primary">
+
+<i class="fa fa-plus"></i>
+
+Add Farmer
+
+</button>
+
+
+</div>
+
+
+
+<!-- STAT CARDS -->
+
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+<i class="fa fa-users"></i>
+
+<div>
+
+<h3>
+250
+</h3>
+
+<p>
+Total Farmers
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<i class="fa fa-check-circle"></i>
+
+<div>
+
+<h3>
+210
+</h3>
+
+<p>
+Approved
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<i class="fa fa-clock"></i>
+
+<div>
+
+<h3>
+30
+</h3>
+
+<p>
+Pending
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<i class="fa fa-ban"></i>
+
+<div>
+
+<h3>
+10
+</h3>
+
+<p>
+Rejected
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+<!-- ================= SEARCH SECTION ================= -->
+
+<div class="table-tools">
+
+
+<div class="search-box">
+
+<i class="fa fa-search"></i>
+
+<input 
+type="text" 
+placeholder="Search farmer name, email, location..."
+>
+
+</div>
+
+
+
+<div class="filter-box">
+
+<select>
+
+<option>
+All Status
+</option>
+
+<option>
+Approved
+</option>
+
+<option>
+Pending
+</option>
+
+<option>
+Rejected
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- ================= FARMER TABLE ================= -->
+
+
+<div class="table-card">
+
+
+<table class="admin-table">
+
+
+<thead>
+
+<tr>
+
+<th>
+ID
+</th>
+
+
+<th>
+Farmer
+</th>
+
+
+<th>
+Contact
+</th>
+
+
+<th>
+Location
+</th>
+
+
+<th>
+Crops
+</th>
+
+
+<th>
+Status
+</th>
+
+
+<th>
+Action
+</th>
+
+
+</tr>
+
+</thead>
+
+
+
+<tbody>
+
+
+
+<tr>
+
+
+<td>
+#FN001
+</td>
+
+
+
+<td>
+
+<div class="user-info">
+
+<img src="images/farmer1.jpg">
+
+
+<div>
+
+<h4>
+Rajesh Patil
+</h4>
+
+<p>
+Organic Farmer
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</td>
+
+
+
+
+<td>
+
+<p>
+9876543210
+</p>
+
+<p>
+rajesh@gmail.com
+</p>
+
+
+</td>
+
+
+
+
+<td>
+
+Nagpur,
+Maharashtra
+
+</td>
+
+
+
+<td>
+
+Rice, Wheat,
+Dal
+
+</td>
+
+
+
+
+<td>
+
+<span class="status approved">
+
+Approved
+
+</span>
+
+</td>
+
+
+
+<td>
+
+
+<button class="action view">
+
+<i class="fa fa-eye"></i>
+
+</button>
+
+
+<button class="action edit">
+
+<i class="fa fa-edit"></i>
+
+</button>
+
+
+<button class="action delete">
+
+<i class="fa fa-trash"></i>
+
+</button>
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+<tr>
+
+
+<td>
+#FN002
+</td>
+
+
+
+<td>
+
+<div class="user-info">
+
+<img src="images/farmer2.jpg">
+
+
+<div>
+
+<h4>
+Suresh More
+</h4>
+
+<p>
+Vegetable Farmer
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</td>
+
+
+
+
+<td>
+
+<p>
+9123456780
+</p>
+
+<p>
+suresh@gmail.com
+</p>
+
+
+</td>
+
+
+
+
+<td>
+
+Pune,
+Maharashtra
+
+</td>
+
+
+
+<td>
+
+Tomato,
+Onion,
+Potato
+
+</td>
+
+
+
+
+<td>
+
+<span class="status pending">
+
+Pending
+
+</span>
+
+</td>
+
+
+
+<td>
+
+
+<button class="action view">
+
+<i class="fa fa-eye"></i>
+
+</button>
+
+
+<button class="action approve">
+
+<i class="fa fa-check"></i>
+
+</button>
+
+
+<button class="action reject">
+
+<i class="fa fa-xmark"></i>
+
+</button>
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+
+<tr>
+
+
+<td>
+#FN003
+</td>
+
+
+
+<td>
+
+<div class="user-info">
+
+<img src="images/farmer3.jpg">
+
+
+<div>
+
+<h4>
+Amit Sharma
+</h4>
+
+<p>
+Fruit Farmer
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</td>
+
+
+
+
+<td>
+
+<p>
+9988776655
+</p>
+
+<p>
+amit@gmail.com
+</p>
+
+
+</td>
+
+
+
+
+<td>
+
+Nashik,
+Maharashtra
+
+</td>
+
+
+
+<td>
+
+Apple,
+Grapes
+
+</td>
+
+
+
+
+<td>
+
+<span class="status rejected">
+
+Rejected
+
+</span>
+
+</td>
+
+
+
+<td>
+
+
+<button class="action view">
+
+<i class="fa fa-eye"></i>
+
+</button>
+
+
+<button class="action delete">
+
+<i class="fa fa-trash"></i>
+
+</button>
+
+
+</td>
+
+
+</tr>
+
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+<!-- ================= PAGINATION ================= -->
+
+
+<div class="pagination">
+
+
+<button>
+<i class="fa fa-angle-left"></i>
+</button>
+
+
+<button class="active">
+1
+</button>
+
+
+<button>
+2
+</button>
+
+
+<button>
+3
+</button>
+
+
+<button>
+4
+</button>
+
+
+<button>
+<i class="fa fa-angle-right"></i>
+</button>
+
+
+</div>
+
+
+
+
+
+</section>
+
+<!-- ================= END CONTENT ================= -->
+
+
+
+
+
+<!-- ================= ADD FARMER MODAL ================= -->
+
+
+<div class="modal" id="farmerModal">
+
+
+<div class="modal-content">
+
+
+<div class="modal-header">
+
+<h2>
+Add New Farmer
+</h2>
+
+
+<button class="close-modal">
+
+<i class="fa fa-xmark"></i>
+
+</button>
+
+
+</div>
+
+
+
+
+
+<form class="farmer-form">
+
+
+<div class="form-group">
+
+<label>
+Farmer Name
+</label>
+
+<input 
+type="text"
+placeholder="Enter farmer name"
+>
+
+</div>
+
+
+
+
+<div class="form-group">
+
+<label>
+Email
+</label>
+
+<input 
+type="email"
+placeholder="Enter email"
+>
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+<label>
+Phone Number
+</label>
+
+<input 
+type="number"
+placeholder="Enter mobile number"
+>
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+<label>
+Location
+</label>
+
+<input 
+type="text"
+placeholder="Village / City"
+>
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+<label>
+Main Crop
+</label>
+
+<input 
+type="text"
+placeholder="Rice, Wheat, Vegetables..."
+>
+
+</div>
+
+
+
+
+<div class="form-group">
+
+<label>
+Status
+</label>
+
+
+<select>
+
+<option>
+Approved
+</option>
+
+<option>
+Pending
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+<button class="btn-primary">
+
+<i class="fa fa-save"></i>
+
+Save Farmer
+
+</button>
+
+
+</form>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ================= FOOTER ================= -->
+
+
+<footer class="admin-footer">
+
+
+<p>
+
+© 2026 FarmNest Admin Panel.
+All Rights Reserved.
+
+</p>
+
+
+</footer>
+
+
+
+
+
+
+</div>
+
+<!-- MAIN END -->
+
+
+
+<script src="js/script.js"></script>
+<script src="jss/admin.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>FarmNest | Products</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h2>🌿 FarmNest</h2>
+
+<p>Admin Panel</p>
+
+</div>
+
+<ul>
+
+<li>
+
+<a href="dashboard.html">
+
+<i class="fas fa-chart-line"></i>
+
+Dashboard
+
+</a>
+
+</li>
+
+<li>
+
+<a href="farmers.html">
+
+<i class="fas fa-user-tie"></i>
+
+Farmers
+
+</a>
+
+</li>
+
+<li>
+
+<a href="customers.html">
+
+<i class="fas fa-users"></i>
+
+Customers
+
+</a>
+
+</li>
+
+<li class="active">
+
+<a href="HOMEPAGE/products.html">
+
+<i class="fas fa-seedling"></i>
+
+Products
+
+</a>
+
+</li>
+
+<li>
+
+<a href="orders.html">
+
+<i class="fas fa-box"></i>
+
+Orders
+
+</a>
+
+</li>
+
+<li>
+
+<a href="payments.html">
+
+<i class="fas fa-wallet"></i>
+
+Payments
+
+</a>
+
+</li>
+
+<li>
+
+<a href="reports.html">
+
+<i class="fas fa-chart-pie"></i>
+
+Reports
+
+</a>
+
+</li>
+
+<li>
+
+<a href="../HOMEPAGE/index.html">
+
+<i class="fas fa-sign-out-alt"></i>
+
+Logout
+
+</a>
+
+</li>
+
+</ul>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+<div>
+
+<h1>Products Management</h1>
+
+<p>Manage all farm products available on FarmNest.</p>
+
+</div>
+
+<button class="add-btn">
+
+<i class="fas fa-plus"></i>
+
+Add Product
+
+</button>
+
+</header>
+
+<!-- Statistics -->
+
+<section class="cards">
+
+<div class="card">
+
+<i class="fas fa-boxes"></i>
+
+<div>
+
+<h2>245</h2>
+
+<p>Total Products</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-circle-check"></i>
+
+<div>
+
+<h2>198</h2>
+
+<p>Approved</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-clock"></i>
+
+<div>
+
+<h2>32</h2>
+
+<p>Pending</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-circle-xmark"></i>
+
+<div>
+
+<h2>15</h2>
+
+<p>Rejected</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Search -->
+
+<section class="table-toolbar">
+
+<div class="search-box">
+
+<i class="fas fa-search"></i>
+
+<input
+type="text"
+id="searchProduct"
+placeholder="Search Product...">
+
+</div>
+
+<select id="categoryFilter">
+
+<option value="all">
+
+All Categories
+
+</option>
+
+<option>Vegetables</option>
+
+<option>Fruits</option>
+
+<option>Grains</option>
+
+<option>Dairy</option>
+
+<option>Organic</option>
+
+</select>
+
+</section>
+
+<!-- Products Table Part 2 Starts Here -->
+ <!-- ================= Products Table ================= -->
+
+<section class="table-container">
+
+    <table id="productsTable">
+
+        <thead>
+
+            <tr>
+
+                <th>Image</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Farmer</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>
+                    <img src="../images/rice.jpg"
+                         alt="Rice"
+                         class="product-img">
+                </td>
+
+                <td>Premium Rice</td>
+
+                <td>Grains</td>
+
+                <td>Patil Farm</td>
+
+                <td>₹65 / kg</td>
+
+                <td>250 kg</td>
+
+                <td>
+                    <span class="status success">
+                        Approved
+                    </span>
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-id="P001">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="edit-btn">
+                        <i class="fas fa-pen"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <img src="../images/wheat.jpg"
+                         alt="Wheat"
+                         class="product-img">
+                </td>
+
+                <td>Organic Wheat</td>
+
+                <td>Grains</td>
+
+                <td>Green Agro</td>
+
+                <td>₹48 / kg</td>
+
+                <td>180 kg</td>
+
+                <td>
+                    <span class="status pending">
+                        Pending
+                    </span>
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-id="P002">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="edit-btn">
+                        <i class="fas fa-pen"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <img src="../images/tomato.jpg"
+                         alt="Tomato"
+                         class="product-img">
+                </td>
+
+                <td>Fresh Tomato</td>
+
+                <td>Vegetables</td>
+
+                <td>Shinde Farm</td>
+
+                <td>₹35 / kg</td>
+
+                <td>95 kg</td>
+
+                <td>
+                    <span class="status success">
+                        Approved
+                    </span>
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-id="P003">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="edit-btn">
+                        <i class="fas fa-pen"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <img src="../images/apple.jpg"
+                         alt="Apple"
+                         class="product-img">
+                </td>
+
+                <td>Fresh Apple</td>
+
+                <td>Fruits</td>
+
+                <td>Organic Farm</td>
+
+                <td>₹140 / kg</td>
+
+                <td>60 kg</td>
+
+                <td>
+                    <span class="status failed">
+                        Rejected
+                    </span>
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-id="P004">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="edit-btn">
+                        <i class="fas fa-pen"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+                    <img src="../images/milk.jpg"
+                         alt="Milk"
+                         class="product-img">
+                </td>
+
+                <td>Fresh Milk</td>
+
+                <td>Dairy</td>
+
+                <td>Happy Dairy</td>
+
+                <td>₹60 / L</td>
+
+                <td>120 L</td>
+
+                <td>
+                    <span class="status success">
+                        Approved
+                    </span>
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-id="P005">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="edit-btn">
+                        <i class="fas fa-pen"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<!-- ================= Pagination ================= -->
+
+<div class="pagination">
+
+    <button>
+        <i class="fas fa-angle-left"></i>
+    </button>
+
+    <button class="active">1</button>
+
+    <button>2</button>
+
+    <button>3</button>
+
+    <button>
+        <i class="fas fa-angle-right"></i>
+    </button>
+
+</div>
+
+<!-- Product Details Modal (Part 3 me aayega) -->
+ <!-- ================= PRODUCT DETAILS MODAL ================= -->
+
+<div class="modal" id="productModal">
+
+    <div class="modal-content">
+
+        <span class="close-modal">&times;</span>
+
+        <h2>
+            <i class="fas fa-seedling"></i>
+            Product Details
+        </h2>
+
+        <div class="product-details">
+
+            <div class="product-image-box">
+
+                <img
+                    id="modalProductImage"
+                    src="../images/rice.jpg"
+                    alt="Product Image">
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="detail-row">
+                    <span>Product ID</span>
+                    <strong id="modalProductId">P001</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Product Name</span>
+                    <strong id="modalProductName">Premium Rice</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Category</span>
+                    <strong id="modalCategory">Grains</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Farmer</span>
+                    <strong id="modalFarmer">Patil Farm</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Price</span>
+                    <strong id="modalPrice">₹65 / kg</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Available Stock</span>
+                    <strong id="modalStock">250 kg</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Status</span>
+                    <strong class="status success" id="modalStatus">
+                        Approved
+                    </strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Description</span>
+
+                    <p id="modalDescription">
+                        Fresh premium-quality farm product supplied directly by verified farmers.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button class="download-btn">
+                <i class="fas fa-download"></i>
+                Download Report
+            </button>
+
+            <button class="print-btn">
+                <i class="fas fa-print"></i>
+                Print Details
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="admin-footer">
+
+    <p>
+        © 2026 FarmNest Admin Panel.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+</main>
+
+</div>
+
+<script src="js/script.js"></script>
+<script src="js/products.js"></script>
+
+</body>
+</html>

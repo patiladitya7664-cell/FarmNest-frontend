@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmNest | Payments</title>
+
+    <link rel="stylesheet" href="csss/admin.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🌿 FarmNest</h2>
+            <p>Admin Panel</p>
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="dashboard.html">
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="farmers.html">
+                    <i class="fas fa-user-tie"></i>
+                    Farmers
+                </a>
+            </li>
+
+            <li>
+                <a href="customers.html">
+                    <i class="fas fa-users"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="HOMEPAGE/products.html">
+                    <i class="fas fa-seedling"></i>
+                    Products
+                </a>
+            </li>
+
+            <li>
+                <a href="orders.html">
+                    <i class="fas fa-box"></i>
+                    Orders
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="payments.html">
+                    <i class="fas fa-wallet"></i>
+                    Payments
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fas fa-chart-pie"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="feedback.html">
+                    <i class="fas fa-comments"></i>
+                    Feedback
+                </a>
+            </li>
+
+            <li>
+                <a href="../HOMEPAGE/index.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ================= Main ================= -->
+
+    <main class="main-content">
+
+        <!-- Topbar -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Payments Management</h1>
+
+                <p>
+                    Monitor all customer payments and farmer payouts.
+                </p>
+
+            </div>
+
+            <div class="admin-profile">
+
+                <img src="../images/admin.png" alt="Admin">
+
+                <div>
+
+                    <h4>Admin</h4>
+
+                    <small>FarmNest</small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ================= Statistics ================= -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <i class="fas fa-indian-rupee-sign"></i>
+
+                <div>
+
+                    <h2>₹8,75,420</h2>
+
+                    <p>Total Revenue</p>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-credit-card"></i>
+
+                <div>
+
+                    <h2>₹35,280</h2>
+
+                    <p>Today's Payments</p>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-clock"></i>
+
+                <div>
+
+                    <h2>18</h2>
+
+                    <p>Pending Payments</p>
+
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-circle-check"></i>
+
+                <div>
+
+                    <h2>542</h2>
+
+                    <p>Successful Transactions</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= Search & Filter ================= -->
+
+        <section class="table-toolbar">
+
+            <div class="search-box">
+
+                <i class="fas fa-search"></i>
+
+                <input
+                    type="text"
+                    id="searchPayment"
+                    placeholder="Search Transaction ID, Customer or Farmer">
+
+            </div>
+
+            <select id="paymentFilter">
+
+                <option value="all">All Payments</option>
+
+                <option value="success">Successful</option>
+
+                <option value="pending">Pending</option>
+
+                <option value="failed">Failed</option>
+
+            </select>
+
+        </section>
+
+        <!-- Payments Table Part 2 yahin se start hoga -->
+                 <!-- ================= Payments Table ================= -->
+
+        <section class="table-container">
+
+            <table id="paymentsTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Transaction ID</th>
+
+                        <th>Customer</th>
+
+                        <th>Farmer</th>
+
+                        <th>Method</th>
+
+                        <th>Amount</th>
+
+                        <th>Date</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>TXN1001</td>
+
+                        <td>Rahul Patil</td>
+
+                        <td>Patil Farm</td>
+
+                        <td><i class="fas fa-mobile-alt"></i> UPI</td>
+
+                        <td>₹850</td>
+
+                        <td>30 Jul 2026</td>
+
+                        <td>
+                            <span class="status success">
+                                Success
+                            </span>
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn" data-id="TXN1001">
+                                <i class="fas fa-eye"></i>
+                            </button>
+
+                            <button class="edit-btn">
+                                <i class="fas fa-pen"></i>
+                            </button>
+
+                            <button class="delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>TXN1002</td>
+
+                        <td>Sneha Sharma</td>
+
+                        <td>Green Agro</td>
+
+                        <td><i class="fas fa-credit-card"></i> Card</td>
+
+                        <td>₹1450</td>
+
+                        <td>30 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status pending">
+
+                                Pending
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn" data-id="TXN1002">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>TXN1003</td>
+
+                        <td>Amit More</td>
+
+                        <td>Organic Farm</td>
+
+                        <td><i class="fas fa-money-bill-wave"></i> COD</td>
+
+                        <td>₹620</td>
+
+                        <td>29 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status failed">
+
+                                Failed
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn" data-id="TXN1003">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>TXN1004</td>
+
+                        <td>Priya Deshmukh</td>
+
+                        <td>Fresh Farm</td>
+
+                        <td><i class="fas fa-mobile-alt"></i> UPI</td>
+
+                        <td>₹2100</td>
+
+                        <td>29 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status success">
+
+                                Success
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn" data-id="TXN1004">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>TXN1005</td>
+
+                        <td>Neha Joshi</td>
+
+                        <td>Patil Agro</td>
+
+                        <td><i class="fas fa-credit-card"></i> Card</td>
+
+                        <td>₹980</td>
+
+                        <td>28 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status success">
+
+                                Success
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn" data-id="TXN1005">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- ================= Pagination ================= -->
+
+        <div class="pagination">
+
+            <button>
+                <i class="fas fa-angle-left"></i>
+            </button>
+
+            <button class="active">1</button>
+
+            <button>2</button>
+
+            <button>3</button>
+
+            <button>
+                <i class="fas fa-angle-right"></i>
+            </button>
+
+        </div>
+
+        <!-- Part 3 me Receipt Modal aur Footer aayega -->
+                 <!-- ================= Payment Receipt Modal ================= -->
+
+        <div class="modal" id="paymentModal">
+
+            <div class="modal-content">
+
+                <span class="close-modal">&times;</span>
+
+                <h2>
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    Payment Receipt
+                </h2>
+
+                <div class="receipt-details">
+
+                    <div class="receipt-row">
+                        <span>Transaction ID</span>
+                        <strong id="receiptTxn">TXN1001</strong>
+                    </div>
+
+                    <div class="receipt-row">
+                        <span>Customer</span>
+                        <strong id="receiptCustomer">Rahul Patil</strong>
+                    </div>
+
+                    <div class="receipt-row">
+                        <span>Farmer</span>
+                        <strong id="receiptFarmer">Patil Farm</strong>
+                    </div>
+
+                    <div class="receipt-row">
+                        <span>Payment Method</span>
+                        <strong id="receiptMethod">UPI</strong>
+                    </div>
+
+                    <div class="receipt-row">
+                        <span>Amount</span>
+                        <strong id="receiptAmount">₹850</strong>
+                    </div>
+
+                    <div class="receipt-row">
+                        <span>Status</span>
+                        <strong class="status success">Success</strong>
+                    </div>
+
+                    <div class="receipt-row">
+                        <span>Date</span>
+                        <strong id="receiptDate">30 Jul 2026</strong>
+                    </div>
+
+                </div>
+
+                <div class="modal-actions">
+
+                    <button class="download-btn">
+                        <i class="fas fa-download"></i>
+                        Download Invoice
+                    </button>
+
+                    <button class="print-btn">
+                        <i class="fas fa-print"></i>
+                        Print Receipt
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= Recent Activity ================= -->
+
+        <section class="recent-section">
+
+            <h2>Recent Transactions</h2>
+
+            <div class="activity-list">
+
+                <div class="activity-item">
+
+                    <i class="fas fa-circle-check"></i>
+
+                    <div>
+
+                        <h4>Payment Received</h4>
+
+                        <p>Rahul Patil paid ₹850 using UPI.</p>
+
+                    </div>
+
+                    <span>2 min ago</span>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <i class="fas fa-credit-card"></i>
+
+                    <div>
+
+                        <h4>Card Payment</h4>
+
+                        <p>Sneha Sharma completed ₹1450 payment.</p>
+
+                    </div>
+
+                    <span>15 min ago</span>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <i class="fas fa-money-bill-wave"></i>
+
+                    <div>
+
+                        <h4>Cash on Delivery</h4>
+
+                        <p>Amit More selected COD.</p>
+
+                    </div>
+
+                    <span>40 min ago</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/script.js"></script>
+<script src="jss/payment.js"></script>
+
+</body>
+
+</html>

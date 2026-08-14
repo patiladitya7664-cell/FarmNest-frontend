@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>FarmNest | Settings</title>
+
+<link rel="stylesheet"
+href="csss/admin.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h2>🌿 FarmNest</h2>
+
+<p>Admin Panel</p>
+
+</div>
+
+<ul>
+
+<li>
+<a href="dashboard.html">
+<i class="fas fa-chart-line"></i>
+Dashboard
+</a>
+</li>
+
+<li>
+<a href="HOMEPAGE/products.html">
+<i class="fas fa-seedling"></i>
+Products
+</a>
+</li>
+
+<li>
+<a href="orders.html">
+<i class="fas fa-box"></i>
+Orders
+</a>
+</li>
+
+<li>
+<a href="payments.html">
+<i class="fas fa-wallet"></i>
+Payments
+</a>
+</li>
+
+<li class="active">
+<a href="settings.html">
+<i class="fas fa-gear"></i>
+Settings
+</a>
+</li>
+
+<li>
+<a href="../HOMEPAGE/index.html">
+<i class="fas fa-sign-out-alt"></i>
+Logout
+</a>
+</li>
+
+</ul>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+<h1>Account Settings</h1>
+
+<p>
+Manage your FarmNest admin account and preferences.
+</p>
+
+</header>
+
+<section class="settings-container">
+
+<div class="profile-card">
+
+<img src="../images/admin.png"
+alt="Admin"
+class="profile-image">
+
+<h3>Admin User</h3>
+
+<p>admin@farmnest.com</p>
+
+<button class="change-photo">
+
+<i class="fas fa-camera"></i>
+
+Change Photo
+
+</button>
+
+</div>
+
+<div class="settings-form">
+
+<h2>Profile Information</h2>
+
+<form>
+
+<div class="form-group">
+
+<label>Full Name</label>
+
+<input
+type="text"
+value="Admin User">
+
+</div>
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+type="email"
+value="admin@farmnest.com">
+
+</div>
+
+<div class="form-group">
+
+<label>Mobile Number</label>
+
+<input
+type="tel"
+value="+91 9876543210">
+
+</div>
+
+<!-- Part 2 Starts Here -->
+ <!-- ================= Security ================= -->
+
+<h2>Security</h2>
+
+<div class="form-group">
+
+    <label>Current Password</label>
+
+    <input
+        type="password"
+        id="currentPassword"
+        placeholder="Enter current password">
+
+</div>
+
+<div class="form-group">
+
+    <label>New Password</label>
+
+    <input
+        type="password"
+        id="newPassword"
+        placeholder="Enter new password">
+
+</div>
+
+<div class="form-group">
+
+    <label>Confirm Password</label>
+
+    <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm new password">
+
+</div>
+
+<!-- ================= Preferences ================= -->
+
+<h2>Preferences</h2>
+
+<div class="setting-item">
+
+    <div>
+
+        <h4>Dark Mode</h4>
+
+        <p>Enable dark theme for the admin panel.</p>
+
+    </div>
+
+    <label class="switch">
+
+        <input type="checkbox" id="darkMode">
+
+        <span class="slider"></span>
+
+    </label>
+
+</div>
+
+<div class="setting-item">
+
+    <div>
+
+        <h4>Email Notifications</h4>
+
+        <p>Receive order and payment notifications.</p>
+
+    </div>
+
+    <label class="switch">
+
+        <input type="checkbox" checked id="emailNotify">
+
+        <span class="slider"></span>
+
+    </label>
+
+</div>
+
+<div class="setting-item">
+
+    <div>
+
+        <h4>SMS Notifications</h4>
+
+        <p>Receive SMS alerts for important updates.</p>
+
+    </div>
+
+    <label class="switch">
+
+        <input type="checkbox" id="smsNotify">
+
+        <span class="slider"></span>
+
+    </label>
+
+</div>
+
+<div class="form-group">
+
+    <label>Language</label>
+
+    <select id="language">
+
+        <option>English</option>
+
+        <option>Hindi</option>
+
+        <option>Marathi</option>
+
+    </select>
+
+</div>
+
+<!-- ================= Buttons ================= -->
+
+<div class="settings-buttons">
+
+    <button
+        type="button"
+        class="save-btn">
+
+        <i class="fas fa-save"></i>
+
+        Save Changes
+
+    </button>
+
+    <button
+        type="reset"
+        class="reset-btn">
+
+        <i class="fas fa-rotate-left"></i>
+
+        Reset
+
+    </button>
+
+    <button
+        type="button"
+        class="logout-btn">
+
+        <i class="fas fa-right-from-bracket"></i>
+
+        Logout
+
+    </button>
+
+</div>
+
+</form>
+
+</div>
+
+</section>
+<!-- ================= FOOTER ================= -->
+
+<footer class="admin-footer">
+
+    <p>
+        © 2026 FarmNest Admin Panel. All Rights Reserved.
+    </p>
+
+</footer>
+
+</main>
+
+</div>
+
+<script src="js/script.js"></script>
+<script src="jss/settings.js"></script>
+
+</body>
+</html>

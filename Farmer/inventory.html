@@ -1,0 +1,687 @@
+       <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmNest | Inventory Management</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>🌿 FarmNest</h2>
+
+            <p>Farmer Panel</p>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="farmer-dashboard.html">
+
+                    <i class="fas fa-home"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="my-crops.html">
+
+                    <i class="fas fa-seedling"></i>
+
+                    My Crops
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="inventory.html">
+
+                    <i class="fas fa-boxes"></i>
+
+                    Inventory
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="farmer-orders.html">
+
+                    <i class="fas fa-cart-shopping"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="earnings.html">
+
+                    <i class="fas fa-wallet"></i>
+
+                    Earnings
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="analytics.html">
+
+                    <i class="fas fa-chart-line"></i>
+
+                    Analytics
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="reports.html">
+
+                    <i class="fas fa-file-alt"></i>
+
+                    Reports
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="notifications.html">
+
+                    <i class="fas fa-bell"></i>
+
+                    Notifications
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="profile.html">
+
+                    <i class="fas fa-user"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../HOMEPAGE/index.html">
+
+                    <i class="fas fa-sign-out-alt"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <div class="top-bar">
+
+            <h1>Inventory Management</h1>
+
+            <button class="add-product-btn">
+
+                <i class="fas fa-plus"></i>
+
+                Add Product
+
+            </button>
+
+        </div>
+
+        <!-- Summary Cards -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <i class="fas fa-box"></i>
+
+                <h2>245</h2>
+
+                <p>Total Products</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-check-circle"></i>
+
+                <h2>198</h2>
+
+                <p>In Stock</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-exclamation-triangle"></i>
+
+                <h2>32</h2>
+
+                <p>Low Stock</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-times-circle"></i>
+
+                <h2>15</h2>
+
+                <p>Out of Stock</p>
+
+            </div>
+
+        </section>
+
+        <!-- Search & Filter -->
+
+        <div class="search-filter">
+
+            <input
+                type="text"
+                id="searchInventory"
+                placeholder="Search Product Name or Product ID">
+
+            <select id="categoryFilter">
+
+                <option value="">All Categories</option>
+
+                <option>Vegetables</option>
+
+                <option>Fruits</option>
+
+                <option>Grains</option>
+
+                <option>Pulses</option>
+
+                <option>Dairy</option>
+
+                <option>Spices</option>
+
+            </select>
+
+            <button>
+
+                <i class="fas fa-search"></i>
+
+            </button>
+
+        </div>
+       <!-- Inventory Table -->
+
+        <section class="table-section">
+
+            <table id="inventoryTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Product ID</th>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Stock</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Last Updated</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>#P001</td>
+
+                        <td>Organic Tomatoes</td>
+
+                        <td>Vegetables</td>
+
+                        <td>120 Kg</td>
+
+                        <td>₹45/Kg</td>
+
+                        <td>
+
+                            <span class="status in-stock">
+
+                                In Stock
+
+                            </span>
+
+                        </td>
+
+                        <td>31 Jul 2026</td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#P002</td>
+
+                        <td>Fresh Potatoes</td>
+
+                        <td>Vegetables</td>
+
+                        <td>40 Kg</td>
+
+                        <td>₹32/Kg</td>
+
+                        <td>
+
+                            <span class="status low-stock">
+
+                                Low Stock
+
+                            </span>
+
+                        </td>
+
+                        <td>30 Jul 2026</td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#P003</td>
+
+                        <td>Organic Wheat</td>
+
+                        <td>Grains</td>
+
+                        <td>250 Kg</td>
+
+                        <td>₹55/Kg</td>
+
+                        <td>
+
+                            <span class="status in-stock">
+
+                                In Stock
+
+                            </span>
+
+                        </td>
+
+                        <td>29 Jul 2026</td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#P004</td>
+
+                        <td>Green Chilli</td>
+
+                        <td>Vegetables</td>
+
+                        <td>0 Kg</td>
+
+                        <td>₹80/Kg</td>
+
+                        <td>
+
+                            <span class="status out-stock">
+
+                                Out of Stock
+
+                            </span>
+
+                        </td>
+
+                        <td>28 Jul 2026</td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#P005</td>
+
+                        <td>Fresh Onion</td>
+
+                        <td>Vegetables</td>
+
+                        <td>180 Kg</td>
+
+                        <td>₹28/Kg</td>
+
+                        <td>
+
+                            <span class="status in-stock">
+
+                                In Stock
+
+                            </span>
+
+                        </td>
+
+                        <td>31 Jul 2026</td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+                <!-- Pagination -->
+
+        <div class="pagination">
+
+            <button>
+                <i class="fas fa-angle-left"></i>
+            </button>
+
+            <button class="active">1</button>
+
+            <button>2</button>
+
+            <button>3</button>
+
+            <button>
+                <i class="fas fa-angle-right"></i>
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Product Details Modal -->
+
+<div class="modal" id="productModal">
+
+    <div class="modal-content">
+
+        <span class="close">&times;</span>
+
+        <h2>Product Details</h2>
+
+        <div class="details">
+
+            <div class="detail-row">
+
+                <strong>Product ID :</strong>
+
+                <span>#P001</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Product Name :</strong>
+
+                <span>Organic Tomatoes</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Category :</strong>
+
+                <span>Vegetables</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Available Stock :</strong>
+
+                <span>120 Kg</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Price :</strong>
+
+                <span>₹45 / Kg</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Status :</strong>
+
+                <span class="status in-stock">
+
+                    In Stock
+
+                </span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Warehouse :</strong>
+
+                <span>Warehouse A</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Last Updated :</strong>
+
+                <span>31 Jul 2026</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Description :</strong>
+
+                <span>
+
+                    Fresh organic tomatoes harvested directly from the farm.
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button class="edit-btn">
+
+                <i class="fas fa-pen"></i>
+
+                Edit Product
+
+            </button>
+
+            <button class="delete-btn">
+
+                <i class="fas fa-trash"></i>
+
+                Delete Product
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+
+<footer class="footer">
+
+    <p>
+
+        © 2026 FarmNest | Farmer Inventory Management | All Rights Reserved.
+
+    </p>
+
+</footer>
+
+<script src="js/inovetory.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmNest | Analytics</title>
+
+    <link rel="stylesheet" href="../ADMIN/csss/admin.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>🌿 FarmNest</h2>
+
+            <p>Farmer Panel</p>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="farmer-dashboard.html">
+
+                    <i class="fas fa-home"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="my-crops.html">
+
+                    <i class="fas fa-seedling"></i>
+
+                    My Crops
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="inventory.html">
+
+                    <i class="fas fa-boxes"></i>
+
+                    Inventory
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="farmer-orders.html">
+
+                    <i class="fas fa-shopping-cart"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="earnings.html">
+
+                    <i class="fas fa-wallet"></i>
+
+                    Earnings
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="analytics.html">
+
+                    <i class="fas fa-chart-line"></i>
+
+                    Analytics
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="reports.html">
+
+                    <i class="fas fa-file-alt"></i>
+
+                    Reports
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="notifications.html">
+
+                    <i class="fas fa-bell"></i>
+
+                    Notifications
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="profile.html">
+
+                    <i class="fas fa-user"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../HOMEPAGE/index.html">
+
+                    <i class="fas fa-sign-out-alt"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main-content">
+
+        <div class="top-bar">
+
+            <h1>
+
+                Farm Analytics Dashboard
+
+            </h1>
+
+            <div class="top-actions">
+
+                <button id="refreshAnalytics">
+
+                    <i class="fas fa-rotate"></i>
+
+                    Refresh
+
+                </button>
+
+                <button id="exportReport">
+
+                    <i class="fas fa-download"></i>
+
+                    Export Report
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Analytics Cards -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <i class="fas fa-indian-rupee-sign"></i>
+
+                <h2 class="count" data-target="245000">0</h2>
+
+                <p>Total Revenue</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-cart-shopping"></i>
+
+                <h2 class="count" data-target="1280">0</h2>
+
+                <p>Total Orders</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-users"></i>
+
+                <h2 class="count" data-target="845">0</h2>
+
+                <p>Customers</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-star"></i>
+
+                <h2 class="count" data-target="98">0</h2>
+
+                <p>Positive Reviews %</p>
+
+            </div>
+
+        </section>
+                <!-- Charts Section -->
+
+        <section class="charts">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <h2>Revenue Analytics</h2>
+
+                    <select id="analyticsFilter">
+
+                        <option>This Month</option>
+                        <option>Last Month</option>
+                        <option>Last 6 Months</option>
+                        <option>This Year</option>
+
+                    </select>
+
+                </div>
+
+                <canvas id="revenueChart"></canvas>
+
+            </div>
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <h2>Weekly Orders</h2>
+
+                </div>
+
+                <canvas id="ordersChart"></canvas>
+
+            </div>
+
+        </section>
+
+        <!-- Product Distribution -->
+
+        <section class="product-chart">
+
+            <div class="chart-card">
+
+                <div class="card-header">
+
+                    <h2>Product Distribution</h2>
+
+                </div>
+
+                <canvas id="productChart"></canvas>
+
+            </div>
+
+        </section>
+
+        <!-- Search -->
+
+        <div class="search-section">
+
+            <input
+                type="text"
+                id="searchAnalytics"
+                placeholder="Search Product / Customer">
+
+            <button>
+
+                <i class="fas fa-search"></i>
+
+            </button>
+
+        </div>
+
+        <!-- Analytics Table -->
+
+        <section class="table-section">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Product</th>
+                        <th>Orders</th>
+                        <th>Revenue</th>
+                        <th>Growth</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>Organic Tomatoes</td>
+
+                        <td>245</td>
+
+                        <td>₹58,400</td>
+
+                        <td>+18%</td>
+
+                        <td>
+
+                            <span class="status success">
+
+                                High
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Fresh Potatoes</td>
+
+                        <td>188</td>
+
+                        <td>₹42,600</td>
+
+                        <td>+12%</td>
+
+                        <td>
+
+                            <span class="status success">
+
+                                High
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Green Chilli</td>
+
+                        <td>132</td>
+
+                        <td>₹21,900</td>
+
+                        <td>+8%</td>
+
+                        <td>
+
+                            <span class="status warning">
+
+                                Medium
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Onion</td>
+
+                        <td>96</td>
+
+                        <td>₹17,800</td>
+
+                        <td>-3%</td>
+
+                        <td>
+
+                            <span class="status danger">
+
+                                Low
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Wheat</td>
+
+                        <td>275</td>
+
+                        <td>₹71,200</td>
+
+                        <td>+22%</td>
+
+                        <td>
+
+                            <span class="status success">
+
+                                High
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+            <!-- Bottom Section -->
+
+        <section class="bottom-grid">
+
+            <!-- Top Selling Products -->
+
+            <div class="analytics-card">
+
+                <h2>Top Selling Products</h2>
+
+                <ul class="top-products">
+
+                    <li>
+
+                        <span>🥬 Organic Vegetables</span>
+
+                        <strong>420 Orders</strong>
+
+                    </li>
+
+                    <li>
+
+                        <span>🍅 Fresh Tomatoes</span>
+
+                        <strong>385 Orders</strong>
+
+                    </li>
+
+                    <li>
+
+                        <span>🌾 Wheat</span>
+
+                        <strong>310 Orders</strong>
+
+                    </li>
+
+                    <li>
+
+                        <span>🥔 Potatoes</span>
+
+                        <strong>295 Orders</strong>
+
+                    </li>
+
+                    <li>
+
+                        <span>🌶 Green Chilli</span>
+
+                        <strong>248 Orders</strong>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- Monthly Performance -->
+
+            <div class="analytics-card">
+
+                <h2>Monthly Performance</h2>
+
+                <div class="performance-list">
+
+                    <div class="performance-item">
+
+                        <span>Revenue Growth</span>
+
+                        <strong>+22%</strong>
+
+                    </div>
+
+                    <div class="performance-item">
+
+                        <span>Orders Growth</span>
+
+                        <strong>+18%</strong>
+
+                    </div>
+
+                    <div class="performance-item">
+
+                        <span>Customer Growth</span>
+
+                        <strong>+15%</strong>
+
+                    </div>
+
+                    <div class="performance-item">
+
+                        <span>Product Sales</span>
+
+                        <strong>+26%</strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Recent Activities -->
+
+        <section class="activity-card">
+
+            <h2>Recent Analytics Activity</h2>
+
+            <div class="activity-list">
+
+                <div class="activity-item">
+
+                    <i class="fas fa-chart-line"></i>
+
+                    <div>
+
+                        <h4>Revenue Increased</h4>
+
+                        <p>Today's revenue increased by 15%.</p>
+
+                    </div>
+
+                    <span>2 Min Ago</span>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <i class="fas fa-cart-shopping"></i>
+
+                    <div>
+
+                        <h4>New Orders</h4>
+
+                        <p>24 new customer orders received.</p>
+
+                    </div>
+
+                    <span>10 Min Ago</span>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <i class="fas fa-user-plus"></i>
+
+                    <div>
+
+                        <h4>New Customers</h4>
+
+                        <p>12 customers joined FarmNest.</p>
+
+                    </div>
+
+                    <span>25 Min Ago</span>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <i class="fas fa-seedling"></i>
+
+                    <div>
+
+                        <h4>Product Updated</h4>
+
+                        <p>Inventory report updated successfully.</p>
+
+                    </div>
+
+                    <span>1 Hour Ago</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<!-- Footer -->
+
+<footer class="footer">
+
+    <p>
+
+        © 2026 FarmNest | Farmer Analytics Dashboard | All Rights Reserved.
+
+    </p>
+
+</footer>
+
+<script src="../ADMIN/jss/analytics.js"></script>
+
+</body>
+
+</html>    

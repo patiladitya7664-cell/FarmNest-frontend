@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmNest | Farmer Orders</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>🌿 FarmNest</h2>
+
+            <p>Farmer Panel</p>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="farmer-dashboard.html">
+
+                    <i class="fas fa-home"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="my-crops.html">
+
+                    <i class="fas fa-seedling"></i>
+
+                    My Crops
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="inventory.html">
+
+                    <i class="fas fa-boxes"></i>
+
+                    Inventory
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="farmer-orders.html">
+
+                    <i class="fas fa-cart-shopping"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="earnings.html">
+
+                    <i class="fas fa-wallet"></i>
+
+                    Earnings
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="analytics.html">
+
+                    <i class="fas fa-chart-line"></i>
+
+                    Analytics
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="reports.html">
+
+                    <i class="fas fa-file-alt"></i>
+
+                    Reports
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="notifications.html">
+
+                    <i class="fas fa-bell"></i>
+
+                    Notifications
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="profile.html">
+
+                    <i class="fas fa-user"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../HOMEPAGE/index.html">
+
+                    <i class="fas fa-sign-out-alt"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <div class="top-bar">
+
+            <h1>
+
+                Orders Management
+
+            </h1>
+
+            <button class="refresh-btn">
+
+                <i class="fas fa-rotate"></i>
+
+                Refresh
+
+            </button>
+
+        </div>
+
+        <!-- Summary Cards -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <i class="fas fa-cart-shopping"></i>
+
+                <h2>325</h2>
+
+                <p>Total Orders</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-clock"></i>
+
+                <h2>18</h2>
+
+                <p>Pending Orders</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-truck"></i>
+
+                <h2>42</h2>
+
+                <p>Shipped Orders</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-circle-check"></i>
+
+                <h2>265</h2>
+
+                <p>Delivered</p>
+
+            </div>
+
+        </section>
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <input
+
+                type="text"
+
+                id="searchOrders"
+
+                placeholder="Search Order ID, Customer or Product">
+
+            <button>
+
+                <i class="fas fa-search"></i>
+
+            </button>
+
+        </div>
+                <!-- Orders Table -->
+
+        <section class="table-section">
+
+            <table id="ordersTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                        <th>Order Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>#FN1001</td>
+
+                        <td>Rahul Sharma</td>
+
+                        <td>Organic Tomatoes</td>
+
+                        <td>25 Kg</td>
+
+                        <td>₹2,500</td>
+
+                        <td>30 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status pending">
+
+                                Pending
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="accept-btn">
+
+                                <i class="fas fa-check"></i>
+
+                            </button>
+
+                            <button class="reject-btn">
+
+                                <i class="fas fa-times"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#FN1002</td>
+
+                        <td>Priya Patil</td>
+
+                        <td>Fresh Potatoes</td>
+
+                        <td>40 Kg</td>
+
+                        <td>₹3,800</td>
+
+                        <td>29 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status processing">
+
+                                Processing
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="accept-btn">
+
+                                <i class="fas fa-check"></i>
+
+                            </button>
+
+                            <button class="reject-btn">
+
+                                <i class="fas fa-times"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#FN1003</td>
+
+                        <td>Amit Deshmukh</td>
+
+                        <td>Green Chilli</td>
+
+                        <td>15 Kg</td>
+
+                        <td>₹1,650</td>
+
+                        <td>28 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status shipped">
+
+                                Shipped
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="accept-btn">
+
+                                <i class="fas fa-check"></i>
+
+                            </button>
+
+                            <button class="reject-btn">
+
+                                <i class="fas fa-times"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#FN1004</td>
+
+                        <td>Sneha Joshi</td>
+
+                        <td>Organic Wheat</td>
+
+                        <td>60 Kg</td>
+
+                        <td>₹4,200</td>
+
+                        <td>27 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status delivered">
+
+                                Delivered
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="accept-btn">
+
+                                <i class="fas fa-check"></i>
+
+                            </button>
+
+                            <button class="reject-btn">
+
+                                <i class="fas fa-times"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#FN1005</td>
+
+                        <td>Vikas Patil</td>
+
+                        <td>Fresh Onions</td>
+
+                        <td>50 Kg</td>
+
+                        <td>₹3,450</td>
+
+                        <td>26 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status pending">
+
+                                Pending
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="accept-btn">
+
+                                <i class="fas fa-check"></i>
+
+                            </button>
+
+                            <button class="reject-btn">
+
+                                <i class="fas fa-times"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+                <!-- Pagination -->
+
+        <div class="pagination">
+
+            <button><i class="fas fa-angle-left"></i></button>
+
+            <button class="active">1</button>
+
+            <button>2</button>
+
+            <button>3</button>
+
+            <button><i class="fas fa-angle-right"></i></button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Order Details Modal -->
+
+<div class="modal" id="orderModal">
+
+    <div class="modal-content">
+
+        <span class="close">&times;</span>
+
+        <h2>Order Details</h2>
+
+        <div class="details">
+
+            <div class="detail-row">
+
+                <strong>Order ID :</strong>
+
+                <span>#FN1001</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Customer :</strong>
+
+                <span>Rahul Sharma</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Mobile :</strong>
+
+                <span>+91 9876543210</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Email :</strong>
+
+                <span>rahul@gmail.com</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Product :</strong>
+
+                <span>Organic Tomatoes</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Quantity :</strong>
+
+                <span>25 Kg</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Price :</strong>
+
+                <span>₹2,500</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Order Date :</strong>
+
+                <span>30 Jul 2026</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Delivery Address :</strong>
+
+                <span>
+                    Flat No. 12,
+                    Green Valley Society,
+                    Pune, Maharashtra
+                </span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Payment :</strong>
+
+                <span>Online (Paid)</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Status :</strong>
+
+                <span class="status pending">
+
+                    Pending
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button class="accept-btn">
+
+                <i class="fas fa-check"></i>
+
+                Accept Order
+
+            </button>
+
+            <button class="reject-btn">
+
+                <i class="fas fa-times"></i>
+
+                Reject Order
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+
+<footer class="footer">
+
+    <p>
+
+        © 2026 FarmNest | Farmer Orders Panel | All Rights Reserved.
+
+    </p>
+
+</footer>
+
+<script src="js/farmer-order.js"></script>
+
+</body>
+
+</html>

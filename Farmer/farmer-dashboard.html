@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Farmer Dashboard | FarmNest</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <img src="../images/logo.png">
+        <h2>FarmNest</h2>
+    </div>
+
+
+    <ul>
+
+        <li class="active">
+            <a href="farmer-dashboard.html">
+                <i class="fa fa-home"></i>
+                Dashboard
+            </a>
+        </li>
+
+
+        <li>
+            <a href="my-crops.html">
+                <i class="fa fa-seedling"></i>
+                My Crops
+            </a>
+        </li>
+
+
+        <li>
+            <a href="add-product.html">
+                <i class="fa fa-plus"></i>
+                Add Product
+            </a>
+        </li>
+
+
+        <li>
+            <a href="inventory.html">
+                <i class="fa fa-box"></i>
+                Inventory
+            </a>
+        </li>
+
+
+        <li>
+            <a href="farmer-orders.html">
+                <i class="fa fa-shopping-cart"></i>
+                Orders
+            </a>
+        </li>
+
+
+        <li>
+            <a href="storage.html">
+                <i class="fa fa-warehouse"></i>
+                Smart Storage
+            </a>
+        </li>
+
+
+        <li>
+            <a href="earnings.html">
+                <i class="fa fa-money-bill"></i>
+                Earnings
+            </a>
+        </li>
+
+
+        <li>
+            <a href="analytics.html">
+                <i class="fa fa-chart-line"></i>
+                Analytics
+            </a>
+        </li>
+
+
+        <li>
+            <a href="reports.html">
+                <i class="fa fa-file"></i>
+                Reports
+            </a>
+        </li>
+
+
+        <li>
+            <a href="notifications.html">
+                <i class="fa fa-bell"></i>
+                Notifications
+            </a>
+        </li>
+
+
+        <li>
+            <a href="profile.html">
+                <i class="fa fa-user"></i>
+                Profile
+            </a>
+        </li>
+
+
+    </ul>
+
+
+</aside>
+
+
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+
+<header>
+
+    <div>
+        <h1>Farmer Dashboard</h1>
+        <p>Welcome back, Farmer 👨‍🌾</p>
+    </div>
+
+
+    <div class="profile">
+
+        <img src="../images/farmer.png">
+
+        <span>
+            Aditya Farmer
+        </span>
+
+    </div>
+
+
+</header>
+
+
+
+
+<!-- DASHBOARD CARDS -->
+
+
+<section class="cards">
+
+
+<div class="card">
+
+<i class="fa fa-seedling"></i>
+
+<div>
+<h3>25</h3>
+<p>Total Crops</p>
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<i class="fa fa-box"></i>
+
+<div>
+<h3>120</h3>
+<p>Total Products</p>
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<i class="fa fa-shopping-cart"></i>
+
+<div>
+<h3>45</h3>
+<p>Total Orders</p>
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<i class="fa fa-indian-rupee-sign"></i>
+
+<div>
+<h3>₹85,000</h3>
+<p>Total Earnings</p>
+</div>
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- CONTENT GRID -->
+
+
+<div class="dashboard-grid">
+
+
+<section class="panel">
+
+
+<h2>
+Recent Orders
+</h2>
+
+
+<table>
+
+<tr>
+
+<th>Order ID</th>
+<th>Product</th>
+<th>Quantity</th>
+<th>Status</th>
+
+</tr>
+
+
+<tr>
+
+<td>#FN101</td>
+<td>Organic Rice</td>
+<td>20 Kg</td>
+<td>
+<span class="status success">
+Delivered
+</span>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>#FN102</td>
+<td>Wheat</td>
+<td>30 Kg</td>
+<td>
+<span class="status pending">
+Pending
+</span>
+</td>
+
+</tr>
+
+
+</table>
+
+
+</section>
+
+
+
+
+
+<section class="panel">
+
+
+<h2>
+Crop Summary
+</h2>
+
+
+<div class="crop">
+
+
+<p>
+Organic Rice
+</p>
+
+<div class="progress">
+
+<span style="width:80%">
+</span>
+
+</div>
+
+</div>
+
+
+
+
+<div class="crop">
+
+<p>
+Wheat
+</p>
+
+<div class="progress">
+
+<span style="width:60%">
+</span>
+
+</div>
+
+</div>
+
+
+
+
+<div class="crop">
+
+<p>
+Pulses
+</p>
+
+<div class="progress">
+
+<span style="width:40%">
+</span>
+
+</div>
+
+</div>
+
+
+</section>
+
+
+</div>
+
+
+
+
+
+
+<!-- QUICK ACTIONS -->
+
+
+<section class="quick">
+
+
+<h2>
+Quick Actions
+</h2>
+
+
+<button>
+<i class="fa fa-plus"></i>
+Add Product
+</button>
+
+
+<button>
+<i class="fa fa-box"></i>
+Manage Inventory
+</button>
+
+
+<button>
+<i class="fa fa-chart-line"></i>
+View Analytics
+</button>
+
+
+
+</section>
+
+
+
+
+
+</div>
+
+
+
+<script src="js/farmer-dashboard.js"></script>
+
+
+</body>
+
+</html>

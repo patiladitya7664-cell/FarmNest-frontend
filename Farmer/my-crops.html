@@ -1,0 +1,692 @@
+  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FarmNest | My Crops</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>🌿 FarmNest</h2>
+
+            <p>Farmer Panel</p>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="farmer-dashboard.html">
+
+                    <i class="fas fa-home"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="my-crops.html">
+
+                    <i class="fas fa-seedling"></i>
+
+                    My Crops
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="inventory.html">
+
+                    <i class="fas fa-boxes"></i>
+
+                    Inventory
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="farmer-dashboard.html">
+
+                    <i class="fas fa-shopping-cart"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="earnings.html">
+
+                    <i class="fas fa-wallet"></i>
+
+                    Earnings
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="analytics.html">
+
+                    <i class="fas fa-chart-line"></i>
+
+                    Analytics
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="reports.html">
+
+                    <i class="fas fa-file-alt"></i>
+
+                    Reports
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="notifications.html">
+
+                    <i class="fas fa-bell"></i>
+
+                    Notifications
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="profile.html">
+
+                    <i class="fas fa-user"></i>
+
+                    Profile
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="../HOMEPAGE/index.html">
+
+                    <i class="fas fa-sign-out-alt"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="main-content">
+
+        <div class="top-bar">
+
+            <h1>
+
+                My Crops
+
+            </h1>
+
+            <button class="add-crop-btn">
+
+                <i class="fas fa-plus"></i>
+
+                Add New Crop
+
+            </button>
+
+        </div>
+
+        <!-- Summary Cards -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <i class="fas fa-seedling"></i>
+
+                <h2>185</h2>
+
+                <p>Total Crops</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-check-circle"></i>
+
+                <h2>142</h2>
+
+                <p>Available Crops</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-exclamation-triangle"></i>
+
+                <h2>28</h2>
+
+                <p>Low Stock</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fas fa-times-circle"></i>
+
+                <h2>15</h2>
+
+                <p>Sold Out</p>
+
+            </div>
+
+        </section>
+
+        <!-- Search & Filter -->
+
+        <div class="search-filter">
+
+            <input
+                type="text"
+                id="searchCrop"
+                placeholder="Search Crop Name or Crop ID">
+
+            <select id="categoryFilter">
+
+                <option value="">All Categories</option>
+
+                <option>Vegetables</option>
+
+                <option>Fruits</option>
+
+                <option>Grains</option>
+
+                <option>Pulses</option>
+
+                <option>Spices</option>
+
+                <option>Dairy</option>
+
+            </select>
+
+            <button>
+
+                <i class="fas fa-search"></i>
+
+            </button>
+
+        </div>     
+       <!-- Crop Table -->
+
+        <section class="table-section">
+
+            <table id="cropTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Crop ID</th>
+                        <th>Crop Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Harvest Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>#CR001</td>
+
+                        <td>Organic Tomatoes</td>
+
+                        <td>Vegetables</td>
+
+                        <td>120 Kg</td>
+
+                        <td>₹45 / Kg</td>
+
+                        <td>31 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status available">
+
+                                Available
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#CR002</td>
+
+                        <td>Fresh Potatoes</td>
+
+                        <td>Vegetables</td>
+
+                        <td>35 Kg</td>
+
+                        <td>₹30 / Kg</td>
+
+                        <td>29 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status low-stock">
+
+                                Low Stock
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#CR003</td>
+
+                        <td>Organic Wheat</td>
+
+                        <td>Grains</td>
+
+                        <td>260 Kg</td>
+
+                        <td>₹55 / Kg</td>
+
+                        <td>28 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status available">
+
+                                Available
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#CR004</td>
+
+                        <td>Green Chilli</td>
+
+                        <td>Vegetables</td>
+
+                        <td>0 Kg</td>
+
+                        <td>₹80 / Kg</td>
+
+                        <td>26 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status sold-out">
+
+                                Sold Out
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>#CR005</td>
+
+                        <td>Fresh Onion</td>
+
+                        <td>Vegetables</td>
+
+                        <td>180 Kg</td>
+
+                        <td>₹28 / Kg</td>
+
+                        <td>31 Jul 2026</td>
+
+                        <td>
+
+                            <span class="status available">
+
+                                Available
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <button class="view-btn">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                            <button class="edit-btn">
+
+                                <i class="fas fa-pen"></i>
+
+                            </button>
+
+                            <button class="delete-btn">
+
+                                <i class="fas fa-trash"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+                <!-- Pagination -->
+
+        <div class="pagination">
+
+            <button>
+                <i class="fas fa-angle-left"></i>
+            </button>
+
+            <button class="active">1</button>
+
+            <button>2</button>
+
+            <button>3</button>
+
+            <button>
+                <i class="fas fa-angle-right"></i>
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Crop Details Modal -->
+
+<div class="modal" id="cropModal">
+
+    <div class="modal-content">
+
+        <span class="close">&times;</span>
+
+        <h2>Crop Details</h2>
+
+        <div class="details">
+
+            <div class="detail-row">
+
+                <strong>Crop ID :</strong>
+
+                <span>#CR001</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Crop Name :</strong>
+
+                <span>Organic Tomatoes</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Category :</strong>
+
+                <span>Vegetables</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Available Quantity :</strong>
+
+                <span>120 Kg</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Price :</strong>
+
+                <span>₹45 / Kg</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Harvest Date :</strong>
+
+                <span>31 Jul 2026</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Farm Location :</strong>
+
+                <span>Pune, Maharashtra</span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Status :</strong>
+
+                <span class="status available">
+
+                    Available
+
+                </span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <strong>Description :</strong>
+
+                <span>
+
+                    Fresh organically grown tomatoes harvested directly from the farm.
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button class="edit-btn">
+
+                <i class="fas fa-pen"></i>
+
+                Edit Crop
+
+            </button>
+
+            <button class="delete-btn">
+
+                <i class="fas fa-trash"></i>
+
+                Delete Crop
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Footer -->
+
+<footer class="footer">
+
+    <p>
+
+        © 2026 FarmNest | Farmer Crop Management | All Rights Reserved.
+
+    </p>
+
+</footer>
+
+<script src="js/crops.js"></script>
+
+</body>
+
+</html>

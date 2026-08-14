@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FarmNest | Reviews</title>
+
+<link rel="stylesheet" href="csss/admin.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+<h2>🌿 FarmNest</h2>
+<p>Admin Panel</p>
+
+</div>
+
+<ul>
+
+<li><a href="dashboard.html">
+<i class="fas fa-chart-line"></i>
+Dashboard
+</a></li>
+
+<li><a href="HOMEPAGE/products.html">
+<i class="fas fa-seedling"></i>
+Products
+</a></li>
+
+<li><a href="orders.html">
+<i class="fas fa-box"></i>
+Orders
+</a></li>
+
+<li><a href="payments.html">
+<i class="fas fa-wallet"></i>
+Payments
+</a></li>
+
+<li class="active"><a href="reviews.html">
+<i class="fas fa-star"></i>
+Reviews
+</a></li>
+
+<li><a href="../HOMEPAGE/index.html">
+<i class="fas fa-sign-out-alt"></i>
+Logout
+</a></li>
+
+</ul>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+<div>
+
+<h1>Customer Reviews</h1>
+
+<p>
+Manage customer ratings and product reviews.
+</p>
+
+</div>
+
+</header>
+
+<!-- Statistics -->
+
+<section class="cards">
+
+<div class="card">
+
+<i class="fas fa-star"></i>
+
+<div>
+
+<h2>584</h2>
+
+<p>Total Reviews</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-face-smile"></i>
+
+<div>
+
+<h2>468</h2>
+
+<p>Positive</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-face-meh"></i>
+
+<div>
+
+<h2>82</h2>
+
+<p>Average</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<i class="fas fa-face-frown"></i>
+
+<div>
+
+<h2>34</h2>
+
+<p>Negative</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Search -->
+
+<section class="table-toolbar">
+
+<div class="search-box">
+
+<i class="fas fa-search"></i>
+
+<input
+type="text"
+id="searchReview"
+placeholder="Search Customer or Product">
+
+</div>
+
+<select id="ratingFilter">
+
+<option value="all">All Ratings</option>
+
+<option value="5">★★★★★</option>
+
+<option value="4">★★★★☆</option>
+
+<option value="3">★★★☆☆</option>
+
+<option value="2">★★☆☆☆</option>
+
+<option value="1">★☆☆☆☆</option>
+
+</select>
+
+</section>
+
+<!-- Reviews Table (Part 2 Starts Here) -->
+ <!-- ================= Reviews Table ================= -->
+
+<section class="table-container">
+
+    <table id="reviewsTable">
+
+        <thead>
+
+            <tr>
+
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Farmer</th>
+                <th>Rating</th>
+                <th>Review</th>
+                <th>Date</th>
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>Rahul Patil</td>
+
+                <td>Premium Rice</td>
+
+                <td>Patil Farm</td>
+
+                <td>
+                    ⭐⭐⭐⭐⭐
+                </td>
+
+                <td>
+                    Excellent quality rice. Fresh and clean packaging.
+                </td>
+
+                <td>
+                    30 Jul 2026
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-review="1">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="reply-btn">
+                        <i class="fas fa-reply"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Priya Sharma</td>
+
+                <td>Organic Wheat</td>
+
+                <td>Green Agro</td>
+
+                <td>
+                    ⭐⭐⭐⭐☆
+                </td>
+
+                <td>
+                    Good quality. Delivery was on time.
+                </td>
+
+                <td>
+                    29 Jul 2026
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-review="2">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="reply-btn">
+                        <i class="fas fa-reply"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Amit More</td>
+
+                <td>Fresh Tomato</td>
+
+                <td>Shinde Farm</td>
+
+                <td>
+                    ⭐⭐⭐☆☆
+                </td>
+
+                <td>
+                    Average freshness, but packaging was good.
+                </td>
+
+                <td>
+                    28 Jul 2026
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-review="3">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="reply-btn">
+                        <i class="fas fa-reply"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Sneha Joshi</td>
+
+                <td>Fresh Milk</td>
+
+                <td>Happy Dairy</td>
+
+                <td>
+                    ⭐⭐☆☆☆
+                </td>
+
+                <td>
+                    Delivery was delayed.
+                </td>
+
+                <td>
+                    27 Jul 2026
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-review="4">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="reply-btn">
+                        <i class="fas fa-reply"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Neha Kulkarni</td>
+
+                <td>Organic Apple</td>
+
+                <td>Organic Farm</td>
+
+                <td>
+                    ⭐⭐⭐⭐⭐
+                </td>
+
+                <td>
+                    Very fresh fruits. Highly recommended.
+                </td>
+
+                <td>
+                    26 Jul 2026
+                </td>
+
+                <td>
+
+                    <button class="view-btn" data-review="5">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="reply-btn">
+                        <i class="fas fa-reply"></i>
+                    </button>
+
+                    <button class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<!-- ================= Pagination ================= -->
+
+<div class="pagination">
+
+    <button>
+        <i class="fas fa-angle-left"></i>
+    </button>
+
+    <button class="active">1</button>
+
+    <button>2</button>
+
+    <button>3</button>
+
+    <button>
+        <i class="fas fa-angle-right"></i>
+    </button>
+
+</div>
+
+<!-- Review Details Modal (Part 3 me add karenge) -->
+ <!-- ================= REVIEW DETAILS MODAL ================= -->
+
+<div class="modal" id="reviewModal">
+
+    <div class="modal-content">
+
+        <span class="close-modal">&times;</span>
+
+        <h2>
+            <i class="fas fa-star"></i>
+            Review Details
+        </h2>
+
+        <div class="review-details">
+
+            <div class="detail-row">
+                <span>Customer</span>
+                <strong id="reviewCustomer">Rahul Patil</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Product</span>
+                <strong id="reviewProduct">Premium Rice</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Farmer</span>
+                <strong id="reviewFarmer">Patil Farm</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Rating</span>
+                <strong id="reviewRating">⭐⭐⭐⭐⭐</strong>
+            </div>
+
+            <div class="detail-row">
+                <span>Review</span>
+                <p id="reviewMessage">
+                    Excellent quality rice. Fresh packaging and fast delivery.
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <span>Date</span>
+                <strong id="reviewDate">30 Jul 2026</strong>
+            </div>
+
+        </div>
+
+        <div class="reply-section">
+
+            <label for="adminReply">
+                Reply to Customer
+            </label>
+
+            <textarea id="adminReply"
+                rows="5"
+                placeholder="Write your reply..."></textarea>
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button class="send-btn">
+                <i class="fas fa-paper-plane"></i>
+                Send Reply
+            </button>
+
+            <button class="close-btn">
+                <i class="fas fa-times"></i>
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="admin-footer">
+
+    <p>
+        © 2026 FarmNest Admin Panel. All Rights Reserved.
+    </p>
+
+</footer>
+
+</main>
+
+</div>
+
+<script src="js/script.js"></script>
+<script src="jss/reviews.js"></script>
+
+</body>
+</html>

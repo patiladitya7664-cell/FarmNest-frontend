@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FarmNest | Product Details</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="logo">
+
+<img src="images/logo.png" alt="Logo">
+
+<h2>FarmNest</h2>
+
+</div>
+
+<nav>
+
+<a href="HOMEPAGE/index.html">Home</a>
+<a href="HOMEPAGE/products.html">Products</a>
+<a href="cart.html">Cart</a>
+
+</nav>
+
+</header>
+
+<section class="product-details">
+
+<div class="product-image">
+
+<img src="images/vegetables.jpg" id="mainProductImage">
+
+</div>
+
+<div class="product-info">
+
+<span class="badge">Organic</span>
+
+<h1>Fresh Organic Vegetables</h1>
+
+<div class="rating">
+
+★★★★★ (4.8)
+
+</div>
+
+<h2>₹120 <del>₹150</del></h2>
+
+<p>
+
+Fresh vegetables directly from farmers.
+
+100% Organic & Chemical Free.
+
+</p>
+
+<div class="quantity-box">
+
+<button onclick="changeQty(-1)">-</button>
+
+<input type="number" id="qty" value="1">
+
+<button onclick="changeQty(1)">+</button>
+
+</div>
+
+<div class="product-buttons">
+
+<button class="btn">
+
+<i class="fas fa-cart-plus"></i>
+
+Add to Cart
+
+</button>
+
+<button class="btn secondary">
+
+<i class="fas fa-heart"></i>
+
+Wishlist
+
+</button>
+
+</div>
+
+<ul class="product-features">
+
+<li>✔ Organic Certified</li>
+
+<li>✔ Farm Fresh</li>
+
+<li>✔ Fast Delivery</li>
+
+<li>✔ Secure Payment</li>
+
+</ul>
+
+</div>
+
+</section>
+
+<section class="reviews">
+
+<h2>Customer Reviews</h2>
+
+<div class="review-card">
+
+<h4>Rahul Sharma ⭐⭐⭐⭐⭐</h4>
+
+<p>
+
+Excellent quality vegetables.
+
+</p>
+
+</div>
+
+<div class="review-card">
+
+<h4>Priya Patel ⭐⭐⭐⭐☆</h4>
+
+<p>
+
+Fresh products and fast delivery.
+
+</p>
+
+</div>
+
+</section>
+
+<script src="js/product-details.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,650 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmNest | Earnings</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/earning.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🌿 FarmNest</h2>
+            <p>Farmer Panel</p>
+        </div>
+
+        <ul>
+
+            <li>
+                <a href="farmer-dashboard.html">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="my-crops.html">
+                    <i class="fas fa-seedling"></i>
+                    My Crops
+                </a>
+            </li>
+
+            <li>
+                <a href="inventory.html">
+                    <i class="fas fa-boxes"></i>
+                    Inventory
+                </a>
+            </li>
+
+            <li>
+                <a href="farmer-orders.html">
+                    <i class="fas fa-cart-shopping"></i>
+                    Orders
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="earnings.html">
+                    <i class="fas fa-wallet"></i>
+                    Earnings
+                </a>
+            </li>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fas fa-chart-line"></i>
+                    Analytics
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fas fa-file-alt"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="notifications.html">
+                    <i class="fas fa-bell"></i>
+                    Notifications
+                </a>
+            </li>
+
+            <li>
+                <a href="profile.html">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="../HOMEPAGE/index.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+
+        <div class="top-bar">
+
+            <div>
+
+                <h1>
+                    <i class="fas fa-wallet"></i>
+                    Earnings
+                </h1>
+
+                <p class="page-subtitle">
+                    Track your income, payments and sales performance.
+                </p>
+
+            </div>
+
+            <button class="download-btn" id="downloadReport">
+                <i class="fas fa-download"></i>
+                Download Report
+            </button>
+
+        </div>
+
+
+        <!-- ================= SUMMARY CARDS ================= -->
+
+        <section class="earning-cards">
+
+            <div class="earning-card">
+
+                <div class="earning-icon">
+                    <i class="fas fa-indian-rupee-sign"></i>
+                </div>
+
+                <div>
+
+                    <p>Total Earnings</p>
+
+                    <h2>₹2,84,500</h2>
+
+                    <span class="positive">
+                        <i class="fas fa-arrow-trend-up"></i>
+                        +18.5% this month
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="earning-card">
+
+                <div class="earning-icon">
+                    <i class="fas fa-calendar-days"></i>
+                </div>
+
+                <div>
+
+                    <p>This Month</p>
+
+                    <h2>₹48,750</h2>
+
+                    <span class="positive">
+                        <i class="fas fa-arrow-trend-up"></i>
+                        +12.4%
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="earning-card">
+
+                <div class="earning-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+
+                <div>
+
+                    <p>Pending Payment</p>
+
+                    <h2>₹12,800</h2>
+
+                    <span class="pending-text">
+                        <i class="fas fa-hourglass-half"></i>
+                        Processing
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="earning-card">
+
+                <div class="earning-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+
+                <div>
+
+                    <p>Completed Payments</p>
+
+                    <h2>₹2,71,700</h2>
+
+                    <span class="positive">
+                        <i class="fas fa-check"></i>
+                        Successfully Paid
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CHART + BREAKDOWN ================= -->
+
+        <section class="earning-grid">
+
+            <!-- Earnings Chart -->
+
+            <div class="earning-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>Earnings Overview</h2>
+
+                        <p>Monthly earnings performance</p>
+
+                    </div>
+
+                    <select id="earningPeriod">
+
+                        <option value="monthly">
+                            Monthly
+                        </option>
+
+                        <option value="weekly">
+                            Weekly
+                        </option>
+
+                        <option value="yearly">
+                            Yearly
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="chart-container">
+
+                    <canvas id="earningChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- Earnings Breakdown -->
+
+            <div class="earning-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>Earnings Breakdown</h2>
+
+                        <p>Income by category</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="breakdown-item">
+
+                    <div class="breakdown-info">
+
+                        <span>
+                            <i class="fas fa-wheat-awn"></i>
+                            Grains
+                        </span>
+
+                        <strong>₹98,500</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <span style="width: 75%;"></span>
+
+                    </div>
+
+                    <small>35% of total earnings</small>
+
+                </div>
+
+
+                <div class="breakdown-item">
+
+                    <div class="breakdown-info">
+
+                        <span>
+                            <i class="fas fa-seedling"></i>
+                            Vegetables
+                        </span>
+
+                        <strong>₹76,200</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <span style="width: 60%;"></span>
+
+                    </div>
+
+                    <small>27% of total earnings</small>
+
+                </div>
+
+
+                <div class="breakdown-item">
+
+                    <div class="breakdown-info">
+
+                        <span>
+                            <i class="fas fa-lemon"></i>
+                            Fruits
+                        </span>
+
+                        <strong>₹54,800</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <span style="width: 45%;"></span>
+
+                    </div>
+
+                    <small>19% of total earnings</small>
+
+                </div>
+
+
+                <div class="breakdown-item">
+
+                    <div class="breakdown-info">
+
+                        <span>
+                            <i class="fas fa-bowl-food"></i>
+                            Pulses
+                        </span>
+
+                        <strong>₹35,000</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <span style="width: 30%;"></span>
+
+                    </div>
+
+                    <small>12% of total earnings</small>
+
+                </div>
+
+
+                <div class="breakdown-item">
+
+                    <div class="breakdown-info">
+
+                        <span>
+                            <i class="fas fa-pepper-hot"></i>
+                            Spices
+                        </span>
+
+                        <strong>₹20,000</strong>
+
+                    </div>
+
+                    <div class="progress">
+
+                        <span style="width: 20%;"></span>
+
+                    </div>
+
+                    <small>7% of total earnings</small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RECENT TRANSACTIONS ================= -->
+
+        <section class="transactions-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>Recent Transactions</h2>
+
+                    <p>Latest payments received from customers</p>
+
+                </div>
+
+                <button class="filter-btn" id="filterTransactions">
+
+                    <i class="fas fa-filter"></i>
+                    Filter
+
+                </button>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table id="transactionsTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Transaction ID</th>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Product</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>#TXN1001</td>
+                            <td>#FN1001</td>
+                            <td>Rahul Sharma</td>
+                            <td>Organic Rice</td>
+                            <td>₹4,500</td>
+                            <td>30 Jul 2026</td>
+
+                            <td>
+                                <span class="payment-status paid">
+                                    Paid
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>#TXN1002</td>
+                            <td>#FN1002</td>
+                            <td>Priya Patil</td>
+                            <td>Tur Dal</td>
+                            <td>₹3,800</td>
+                            <td>29 Jul 2026</td>
+
+                            <td>
+                                <span class="payment-status paid">
+                                    Paid
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>#TXN1003</td>
+                            <td>#FN1003</td>
+                            <td>Amit Deshmukh</td>
+                            <td>Organic Wheat</td>
+                            <td>₹5,200</td>
+                            <td>28 Jul 2026</td>
+
+                            <td>
+                                <span class="payment-status pending">
+                                    Pending
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>#TXN1004</td>
+                            <td>#FN1004</td>
+                            <td>Sneha Joshi</td>
+                            <td>Fresh Vegetables</td>
+                            <td>₹2,750</td>
+                            <td>27 Jul 2026</td>
+
+                            <td>
+                                <span class="payment-status paid">
+                                    Paid
+                                </span>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>#TXN1005</td>
+                            <td>#FN1005</td>
+                            <td>Vikas Patil</td>
+                            <td>Fresh Onions</td>
+                            <td>₹3,450</td>
+                            <td>26 Jul 2026</td>
+
+                            <td>
+                                <span class="payment-status pending">
+                                    Pending
+                                </span>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PAYMENT SUMMARY ================= -->
+
+        <section class="payment-summary">
+
+            <div class="summary-box">
+
+                <i class="fas fa-money-bill-transfer"></i>
+
+                <div>
+
+                    <h4>Total Sales</h4>
+                    <p>₹3,12,400</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <i class="fas fa-receipt"></i>
+
+                <div>
+
+                    <h4>Platform Fee</h4>
+                    <p>₹8,450</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <i class="fas fa-truck-fast"></i>
+
+                <div>
+
+                    <h4>Delivery Charges</h4>
+                    <p>₹6,750</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <i class="fas fa-wallet"></i>
+
+                <div>
+
+                    <h4>Net Earnings</h4>
+                    <p>₹2,97,200</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <p>
+        © 2026 FarmNest | Farmer Earnings Panel |
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- Chart.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="js/earning.js"></script>
+
+</body>
+
+</html>
+

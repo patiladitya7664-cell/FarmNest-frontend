@@ -1,0 +1,476 @@
+
+/* =========================================
+   FARMNEST - ADD PRODUCT PAGE
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f4f8f4;
+    color: #263238;
+}
+
+/* =========================================
+   MAIN LAYOUT
+   ========================================= */
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: #1b5e20;
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 25px 15px;
+}
+
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar .logo h2 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.sidebar .logo p {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin: 7px 0;
+}
+
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: white;
+    padding: 13px 15px;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+.sidebar ul li a i {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li.active a {
+    background: #2e7d32;
+    transform: translateX(3px);
+}
+
+/* =========================================
+   MAIN CONTENT
+   ========================================= */
+
+.main-content {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+/* =========================================
+   TOP BAR
+   ========================================= */
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.top-bar h1 {
+    color: #1b5e20;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.back-btn {
+    text-decoration: none;
+    background: white;
+    color: #2e7d32;
+    border: 1px solid #d5e5d5;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #2e7d32;
+    color: white;
+}
+
+/* =========================================
+   FORM SECTION
+   ========================================= */
+
+.form-section {
+    display: flex;
+    justify-content: center;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 950px;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+    border: 1px solid #e5eee5;
+}
+
+.form-header {
+    border-bottom: 1px solid #e5eee5;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.form-header h2 {
+    color: #1b5e20;
+    margin-bottom: 5px;
+}
+
+.form-header p {
+    color: #78909c;
+    font-size: 14px;
+}
+
+/* =========================================
+   FORM ROW
+   ========================================= */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* =========================================
+   FORM GROUP
+   ========================================= */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #37474f;
+}
+
+/* =========================================
+   INPUT BOX
+   ========================================= */
+
+.input-box {
+    position: relative;
+}
+
+.input-box i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #2e7d32;
+    z-index: 1;
+}
+
+.input-box input,
+.input-box select {
+    width: 100%;
+    height: 48px;
+    padding: 0 15px 0 42px;
+    border: 1px solid #d6e2d6;
+    border-radius: 9px;
+    outline: none;
+    background: #fbfdfb;
+    color: #263238;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.input-box select {
+    cursor: pointer;
+}
+
+.input-box input:focus,
+.input-box select:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.10);
+    background: white;
+}
+
+/* =========================================
+   RADIO BUTTONS
+   ========================================= */
+
+.radio-group {
+    display: flex;
+    gap: 25px;
+    padding: 12px 0;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.radio-group input {
+    accent-color: #2e7d32;
+    width: 17px;
+    height: 17px;
+}
+
+/* =========================================
+   IMAGE UPLOAD
+   ========================================= */
+
+.upload-box {
+    border: 2px dashed #a5c9a7;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    background: #f8fcf8;
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    border-color: #2e7d32;
+    background: #f1f8f1;
+}
+
+.upload-box i {
+    font-size: 35px;
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+.upload-box p {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.upload-box input[type="file"] {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    font-size: 13px;
+}
+
+.upload-box small {
+    display: block;
+    margin-top: 8px;
+    color: #78909c;
+}
+
+/* =========================================
+   TEXTAREA
+   ========================================= */
+
+.form-group textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 14px;
+    border: 1px solid #d6e2d6;
+    border-radius: 9px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    background: #fbfdfb;
+    transition: 0.3s;
+}
+
+.form-group textarea:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.10);
+    background: white;
+}
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1px solid #e5eee5;
+    padding-top: 22px;
+    margin-top: 10px;
+}
+
+.cancel-btn,
+.submit-btn {
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.cancel-btn {
+    background: #eceff1;
+    color: #455a64;
+}
+
+.cancel-btn:hover {
+    background: #cfd8dc;
+}
+
+.submit-btn {
+    background: #2e7d32;
+    color: white;
+}
+
+.submit-btn:hover {
+    background: #1b5e20;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 125, 50, 0.25);
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.footer {
+    margin-left: 250px;
+    text-align: center;
+    padding: 18px;
+    background: white;
+    border-top: 1px solid #e5eee5;
+    color: #78909c;
+    font-size: 13px;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main-content {
+        width: calc(100% - 210px);
+        margin-left: 210px;
+        padding: 20px;
+    }
+
+    .footer {
+        margin-left: 210px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+    }
+
+    .dashboard {
+        display: block;
+    }
+
+    .sidebar ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .footer {
+        margin-left: 0;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .top-bar h1 {
+        font-size: 22px;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .sidebar ul {
+        grid-template-columns: 1fr;
+    }
+
+    .form-card {
+        padding: 15px;
+    }
+}
+

@@ -1,0 +1,596 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmNest | Delivery Management</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/delivery.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🌿 FarmNest</h2>
+            <p>Admin Panel</p>
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li>
+                <a href="admin-dashboard.html">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="farmer-verification.html">
+                    <i class="fas fa-user-check"></i>
+                    Farmer Verification
+                </a>
+            </li>
+
+            <li>
+                <a href="customers.html">
+                    <i class="fas fa-users"></i>
+                    Customers
+                </a>
+            </li>
+
+            <li>
+                <a href="products.html">
+                    <i class="fas fa-box"></i>
+                    Products
+                </a>
+            </li>
+
+            <li>
+                <a href="orders.html">
+                    <i class="fas fa-cart-shopping"></i>
+                    Orders
+                </a>
+            </li>
+
+            <li class="active">
+                <a href="delivery.html">
+                    <i class="fas fa-truck"></i>
+                    Delivery
+                </a>
+            </li>
+
+            <li>
+                <a href="payments.html">
+                    <i class="fas fa-credit-card"></i>
+                    Payments
+                </a>
+            </li>
+
+            <li>
+                <a href="reports.html">
+                    <i class="fas fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="feedback.html">
+                    <i class="fas fa-comments"></i>
+                    Feedback
+                </a>
+            </li>
+
+            <li>
+                <a href="profile.html">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="../HOMEPAGE/index.html">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+                <h1>
+                    <i class="fas fa-truck"></i>
+                    Delivery Management
+                </h1>
+
+                <p>
+                    Manage and track FarmNest deliveries
+                </p>
+            </div>
+
+            <div class="admin-profile">
+                <i class="fas fa-user-circle"></i>
+                <span>Admin</span>
+            </div>
+
+        </header>
+
+
+        <!-- ================= STAT CARDS ================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+
+                <div>
+                    <h3 id="totalDeliveries">120</h3>
+                    <p>Total Deliveries</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card pending">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+
+                <div>
+                    <h3 id="pendingDeliveries">24</h3>
+                    <p>Pending</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card transit">
+                <div class="stat-icon">
+                    <i class="fas fa-truck-fast"></i>
+                </div>
+
+                <div>
+                    <h3 id="outDeliveries">18</h3>
+                    <p>Out for Delivery</p>
+                </div>
+            </div>
+
+
+            <div class="stat-card completed">
+                <div class="stat-icon">
+                    <i class="fas fa-circle-check"></i>
+                </div>
+
+                <div>
+                    <h3 id="completedDeliveries">78</h3>
+                    <p>Completed</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ================= TOOLBAR ================= -->
+
+        <section class="delivery-section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Delivery Orders</h2>
+                    <p>Monitor all active deliveries</p>
+                </div>
+
+                <div class="toolbar">
+
+                    <div class="search-box">
+
+                        <i class="fas fa-search"></i>
+
+                        <input
+                            type="text"
+                            id="searchDelivery"
+                            placeholder="Search order or customer...">
+
+                    </div>
+
+
+                    <select id="statusFilter">
+
+                        <option value="all">
+                            All Status
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Out for Delivery">
+                            Out for Delivery
+                        </option>
+
+                        <option value="Delivered">
+                            Delivered
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= DELIVERY TABLE ================= -->
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Order ID</th>
+
+                            <th>Customer</th>
+
+                            <th>Delivery Boy</th>
+
+                            <th>Pickup</th>
+
+                            <th>Destination</th>
+
+                            <th>Amount</th>
+
+                            <th>Status</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="deliveryTable">
+
+                        <tr data-status="Out for Delivery">
+
+                            <td>
+                                <strong>#FN1001</strong>
+                            </td>
+
+                            <td>
+                                <div class="customer">
+                                    <i class="fas fa-user"></i>
+
+                                    <div>
+                                        <strong>Rahul Sharma</strong>
+                                        <small>9876543210</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <strong>Rohit Patil</strong>
+                                <small>DLV001</small>
+                            </td>
+
+                            <td>
+                                FarmNest Warehouse A
+                            </td>
+
+                            <td>
+                                Nagpur City
+                            </td>
+
+                            <td>
+                                ₹1,250
+                            </td>
+
+                            <td>
+                                <span class="status out">
+                                    Out for Delivery
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button
+                                        class="view-btn"
+                                        onclick="viewDelivery('FN1001')"
+                                        title="View">
+
+                                        <i class="fas fa-eye"></i>
+
+                                    </button>
+
+
+                                    <button
+                                        class="track-btn"
+                                        onclick="trackDelivery('FN1001')"
+                                        title="Track">
+
+                                        <i class="fas fa-location-dot"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr data-status="Pending">
+
+                            <td>
+                                <strong>#FN1002</strong>
+                            </td>
+
+                            <td>
+                                <div class="customer">
+
+                                    <i class="fas fa-user"></i>
+
+                                    <div>
+                                        <strong>Priya Verma</strong>
+                                        <small>9123456780</small>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                            <td>
+                                <strong>Amit Singh</strong>
+                                <small>DLV002</small>
+                            </td>
+
+                            <td>
+                                FarmNest Warehouse B
+                            </td>
+
+                            <td>
+                                Wardha Road
+                            </td>
+
+                            <td>
+                                ₹850
+                            </td>
+
+                            <td>
+                                <span class="status pending-status">
+                                    Pending
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button
+                                        class="view-btn"
+                                        onclick="viewDelivery('FN1002')">
+
+                                        <i class="fas fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="track-btn"
+                                        onclick="trackDelivery('FN1002')">
+
+                                        <i class="fas fa-location-dot"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr data-status="Delivered">
+
+                            <td>
+                                <strong>#FN1003</strong>
+                            </td>
+
+                            <td>
+
+                                <div class="customer">
+
+                                    <i class="fas fa-user"></i>
+
+                                    <div>
+                                        <strong>Amit Joshi</strong>
+                                        <small>9988776655</small>
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <strong>Vikas More</strong>
+                                <small>DLV003</small>
+                            </td>
+
+                            <td>
+                                FarmNest Warehouse C
+                            </td>
+
+                            <td>
+                                Sitabuldi
+                            </td>
+
+                            <td>
+                                ₹1,560
+                            </td>
+
+                            <td>
+
+                                <span class="status delivered">
+                                    Delivered
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <div class="action-buttons">
+
+                                    <button
+                                        class="view-btn"
+                                        onclick="viewDelivery('FN1003')">
+
+                                        <i class="fas fa-eye"></i>
+
+                                    </button>
+
+                                    <button
+                                        class="track-btn"
+                                        onclick="trackDelivery('FN1003')">
+
+                                        <i class="fas fa-location-dot"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= DELIVERY MODAL ================= -->
+
+<div class="modal" id="deliveryModal">
+
+    <div class="modal-content">
+
+        <button class="close-btn" onclick="closeModal()">
+            <i class="fas fa-xmark"></i>
+        </button>
+
+        <h2>
+            <i class="fas fa-truck"></i>
+            Delivery Details
+        </h2>
+
+        <div class="delivery-details">
+
+            <div>
+                <span>Order ID</span>
+                <strong id="modalOrder">#FN1001</strong>
+            </div>
+
+            <div>
+                <span>Customer</span>
+                <strong id="modalCustomer">Rahul Sharma</strong>
+            </div>
+
+            <div>
+                <span>Delivery Boy</span>
+                <strong id="modalBoy">Rohit Patil</strong>
+            </div>
+
+            <div>
+                <span>Pickup Location</span>
+                <strong id="modalPickup">
+                    FarmNest Warehouse A
+                </strong>
+            </div>
+
+            <div>
+                <span>Destination</span>
+                <strong id="modalDestination">
+                    Nagpur City
+                </strong>
+            </div>
+
+            <div>
+                <span>Payment</span>
+                <strong id="modalAmount">₹1,250</strong>
+            </div>
+
+        </div>
+
+        <div class="modal-actions">
+
+            <button onclick="callCustomer()">
+                <i class="fas fa-phone"></i>
+                Call Customer
+            </button>
+
+            <button onclick="sendOTP()">
+                <i class="fas fa-key"></i>
+                Send OTP
+            </button>
+
+            <button onclick="markDelivered()">
+                <i class="fas fa-check"></i>
+                Mark Delivered
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <p>
+        © 2026 FarmNest | Admin Delivery Management |
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script src="js/delivery.js"></script>
+
+</body>
+
+</html>

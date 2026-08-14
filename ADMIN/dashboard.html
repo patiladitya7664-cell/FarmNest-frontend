@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmNest | Admin Dashboard</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="csss/admin-dashboard.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="../images/logo.png" alt="FarmNest Logo">
+
+            <h2>FarmNest</h2>
+
+        </div>
+
+        <ul class="menu">
+
+            <li class="active">
+                <a href="dashboard.html">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="farmers.html">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Farmers</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="customers.html">
+                    <i class="fas fa-users"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="HOMEPAGE/products.html">
+                    <i class="fas fa-box"></i>
+                    <span>Products</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="orders.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Orders</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="payments.html">
+                    <i class="fas fa-wallet"></i>
+                    <span>Payments</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Analytics</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="reviews.html">
+                    <i class="fas fa-star"></i>
+                    <span>Reviews</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="settings.html">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="logout">
+
+            <a href="../login.html">
+                <i class="fas fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <h1>Admin Dashboard</h1>
+
+                <p>Welcome back, Administrator 👋</p>
+
+            </div>
+
+            <div class="header-right">
+
+                <div class="search-box">
+
+                    <i class="fas fa-search"></i>
+
+                    <input type="text" placeholder="Search...">
+
+                </div>
+
+                <button class="icon-btn">
+
+                    <i class="fas fa-bell"></i>
+
+                </button>
+
+                <button class="icon-btn">
+
+                    <i class="fas fa-envelope"></i>
+
+                </button>
+
+                <div class="profile">
+
+                    <img src="../images/users/admin.jpg" alt="Admin">
+
+                    <div>
+
+                        <h4>Administrator</h4>
+
+                        <small>Super Admin</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ================= WELCOME ================= -->
+
+        <section class="welcome-banner">
+
+            <div>
+
+                <h2>Welcome to FarmNest Admin Panel 🌾</h2>
+
+                <p>
+                    Manage farmers, customers, products, orders,
+                    payments and analytics from one place.
+                </p>
+
+            </div>
+
+        </section>
+        <!-- ================= DASHBOARD CARDS ================= -->
+
+<section class="dashboard-cards">
+
+    <div class="card revenue-card">
+        <div class="card-info">
+            <h4>Total Revenue</h4>
+            <h2>₹12.6L</h2>
+            <span><i class="fas fa-arrow-trend-up"></i> +18% This Month</span>
+        </div>
+
+        <div class="card-icon">
+            <i class="fas fa-indian-rupee-sign"></i>
+        </div>
+    </div>
+
+    <div class="card orders-card">
+        <div class="card-info">
+            <h4>Total Orders</h4>
+            <h2>2,845</h2>
+            <span><i class="fas fa-arrow-trend-up"></i> +10%</span>
+        </div>
+
+        <div class="card-icon">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </div>
+
+    <div class="card farmer-card">
+        <div class="card-info">
+            <h4>Registered Farmers</h4>
+            <h2>584</h2>
+            <span><i class="fas fa-user-plus"></i> +15 New</span>
+        </div>
+
+        <div class="card-icon">
+            <i class="fas fa-user-tie"></i>
+        </div>
+    </div>
+
+    <div class="card customer-card">
+        <div class="card-info">
+            <h4>Total Customers</h4>
+            <h2>3,426</h2>
+            <span><i class="fas fa-users"></i> Active Users</span>
+        </div>
+
+        <div class="card-icon">
+            <i class="fas fa-users"></i>
+        </div>
+    </div>
+
+    <div class="card product-card">
+        <div class="card-info">
+            <h4>Products</h4>
+            <h2>950</h2>
+            <span><i class="fas fa-seedling"></i> Available</span>
+        </div>
+
+        <div class="card-icon">
+            <i class="fas fa-box"></i>
+        </div>
+    </div>
+
+    <div class="card delivery-card">
+        <div class="card-info">
+            <h4>Delivered Orders</h4>
+            <h2>2,170</h2>
+            <span><i class="fas fa-truck"></i> 96% Success</span>
+        </div>
+
+        <div class="card-icon">
+            <i class="fas fa-truck"></i>
+        </div>
+    </div>
+
+</section>
+
+<!-- ================= CHARTS ================= -->
+
+<section class="chart-grid">
+
+    <div class="chart-card">
+
+        <div class="card-header">
+
+            <h3>Revenue Overview</h3>
+
+            <select>
+
+                <option>This Month</option>
+                <option>Last Month</option>
+                <option>This Year</option>
+
+            </select>
+
+        </div>
+
+        <canvas id="revenueChart"></canvas>
+
+    </div>
+
+    <div class="chart-card">
+
+        <div class="card-header">
+
+            <h3>Orders Overview</h3>
+
+            <select>
+
+                <option>Weekly</option>
+                <option>Monthly</option>
+
+            </select>
+
+        </div>
+
+        <canvas id="ordersChart"></canvas>
+
+    </div>
+
+</section>
+
+<!-- ================= BOTTOM SECTION ================= -->
+
+<section class="bottom-grid">
+
+    <!-- Recent Orders -->
+
+    <div class="table-card">
+
+        <div class="card-header">
+
+            <h3>Recent Orders</h3>
+
+            <a href="orders.html">View All</a>
+
+        </div>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>#FN1001</td>
+                    <td>Rahul Sharma</td>
+                    <td>Organic Rice</td>
+                    <td><span class="status delivered">Delivered</span></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>#FN1002</td>
+                    <td>Priya Patil</td>
+                    <td>Tur Dal</td>
+                    <td><span class="status pending">Pending</span></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>#FN1003</td>
+                    <td>Amit Verma</td>
+                    <td>Wheat</td>
+                    <td><span class="status processing">Processing</span></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="quick-actions">
+
+        <h3>Quick Actions</h3>
+
+        <button>
+            <i class="fas fa-user-plus"></i>
+            Add Farmer
+        </button>
+
+        <button>
+            <i class="fas fa-plus-circle"></i>
+            Add Product
+        </button>
+
+        <button>
+            <i class="fas fa-bullhorn"></i>
+            Send Notice
+        </button>
+
+        <button onclick="window.location.href='analytics.html'">
+            <i class="fas fa-chart-pie"></i>
+            View Analytics
+        </button>
+
+    </div>
+
+</section>
+<!-- ================= FARMERS & CUSTOMERS ================= -->
+
+<section class="info-grid">
+
+    <!-- Top Farmers -->
+
+    <div class="info-card">
+
+        <div class="card-header">
+            <h3>Top Farmers</h3>
+            <a href="farmers.html">View All</a>
+        </div>
+
+        <div class="user-list">
+
+            <div class="user-item">
+                <img src="../images/Ramesh.jpg" alt="">
+                <div>
+                    <h4>Ramesh Patil</h4>
+                    <p>Nashik, Maharashtra</p>
+                </div>
+                <span class="badge">120 Orders</span>
+            </div>
+
+            <div class="user-item">
+                <img src="../images/Suresh.jpg" alt="">
+                <div>
+                    <h4>Suresh Shinde</h4>
+                    <p>Pune, Maharashtra</p>
+                </div>
+                <span class="badge">98 Orders</span>
+            </div>
+
+            <div class="user-item">
+                <img src="../images/mahesh.jpg" alt="">
+                <div>
+                    <h4>Mahesh Jadhav</h4>
+                    <p>Satara</p>
+                </div>
+                <span class="badge">85 Orders</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Latest Customers -->
+
+    <div class="info-card">
+
+        <div class="card-header">
+            <h3>Latest Customers</h3>
+            <a href="customers.html">View All</a>
+        </div>
+
+        <div class="user-list">
+
+            <div class="user-item">
+                <img src="../images/users/customer1.jpg" alt="">
+                <div>
+                    <h4>Rahul Sharma</h4>
+                    <p>Mumbai</p>
+                </div>
+                <span class="online"></span>
+            </div>
+
+            <div class="user-item">
+                <img src="../images/users/customer2.jpg" alt="">
+                <div>
+                    <h4>Priya Patil</h4>
+                    <p>Pune</p>
+                </div>
+                <span class="online"></span>
+            </div>
+
+            <div class="user-item">
+                <img src="../images/users/customer3.jpg" alt="">
+                <div>
+                    <h4>Amit Verma</h4>
+                    <p>Nagpur</p>
+                </div>
+                <span class="offline"></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= ACTIVITY & NOTIFICATIONS ================= -->
+
+<section class="activity-grid">
+
+    <!-- Activity Timeline -->
+
+    <div class="activity-card">
+
+        <div class="card-header">
+
+            <h3>Recent Activities</h3>
+
+        </div>
+
+        <ul class="timeline">
+
+            <li>
+                <i class="fas fa-user-plus"></i>
+                <div>
+                    <h4>New Farmer Registered</h4>
+                    <small>10 Minutes Ago</small>
+                </div>
+            </li>
+
+            <li>
+                <i class="fas fa-shopping-cart"></i>
+                <div>
+                    <h4>New Order Received</h4>
+                    <small>25 Minutes Ago</small>
+                </div>
+            </li>
+
+            <li>
+                <i class="fas fa-truck"></i>
+                <div>
+                    <h4>Order Delivered Successfully</h4>
+                    <small>1 Hour Ago</small>
+                </div>
+            </li>
+
+            <li>
+                <i class="fas fa-wallet"></i>
+                <div>
+                    <h4>Payment Received</h4>
+                    <small>Today</small>
+                </div>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Notifications -->
+
+    <div class="notification-card">
+
+        <div class="card-header">
+
+            <h3>Notifications</h3>
+
+        </div>
+
+        <div class="notification-list">
+
+            <div class="notify success">
+                <i class="fas fa-check-circle"></i>
+                Product Added Successfully
+            </div>
+            <div class="notify warning">
+                <i class="fas fa-exclamation-circle"></i>
+                Stock Running Low
+            </div>
+
+            <div class="notify primary">
+                <i class="fas fa-user"></i>
+                8 New Customers Joined
+            </div>
+
+            <div class="notify danger">
+                <i class="fas fa-triangle-exclamation"></i>
+                Payment Pending
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="dashboard-footer">
+
+    <p>
+
+        © 2026 FarmNest Admin Dashboard |
+        Developed with ❤️ for Smart Agriculture
+
+    </p>
+
+</footer>
+
+           
+
+        <!-- Statistics Cards yahan se next part me start honge -->
+
+    </main>
+
+</div>
+
+<script src="js/script.js"></script>
+<script src="js/admin-dashboard.js"></script>
+
+</body>
+</html>

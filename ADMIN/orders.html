@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmNest | Assigned Orders</title>
+
+<link rel="stylesheet" href="../css/admin.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div class="logo">
+<h2>🌿 FarmNest</h2>
+</div>
+
+<ul>
+
+<li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+
+<li class="active">
+<a href="orders.html">
+<i class="fas fa-box"></i> Orders
+</a>
+</li>
+
+<li>
+<a href="delivery.html">
+<i class="fas fa-truck"></i> Active Delivery
+</a>
+</li>
+
+<li>
+<a href="history.html">
+<i class="fas fa-clock"></i> History
+</a>
+</li>
+
+<li>
+<a href="earnings.html">
+<i class="fas fa-wallet"></i> Earnings
+</a>
+</li>
+
+<li>
+<a href="profile.html">
+<i class="fas fa-user"></i> Profile
+</a>
+</li>
+
+<li>
+<a href="../HOMEPAGE/index.html">
+<i class="fas fa-sign-out-alt"></i> Logout
+</a>
+</li>
+
+</ul>
+
+</aside>
+
+<!-- Main -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+<h1>Assigned Orders</h1>
+
+<div class="search-box">
+
+<input
+type="text"
+placeholder="Search Order...">
+
+<i class="fas fa-search"></i>
+
+</div>
+
+</header>
+
+<!-- Filters -->
+
+<div class="filter-bar">
+
+<button class="active">All</button>
+
+<button>Pending</button>
+
+<button>Picked</button>
+
+<button>Delivered</button>
+
+</div>
+
+<!-- Orders Table -->
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Order ID</th>
+
+<th>Customer</th>
+
+<th>Farmer</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>#FN1001</td>
+
+<td>Rahul Patil</td>
+
+<td>Shinde Farm</td>
+
+<td>₹950</td>
+
+<td>
+<span class="status pending">
+Pending
+</span>
+</td>
+
+<td>
+
+<button class="view-btn"
+data-order="FN1001">
+
+<i class="fas fa-eye"></i>
+
+View
+
+</button>
+
+<button class="accept-btn">
+
+Accept
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>#FN1002</td>
+
+<td>Priya Sharma</td>
+
+<td>Patil Agro</td>
+
+<td>₹650</td>
+
+<td>
+
+<span class="status progress">
+
+Picked
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn"
+data-order="FN1002">
+
+<i class="fas fa-eye"></i>
+
+View
+
+</button>
+
+<button class="delivery-btn">
+
+Start
+
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>#FN1003</td>
+
+<td>Amit More</td>
+
+<td>Green Farm</td>
+
+<td>₹1200</td>
+
+<td>
+
+<span class="status success">
+
+Delivered
+
+</span>
+
+</td>
+
+<td>
+
+<button class="view-btn"
+data-order="FN1003">
+
+<i class="fas fa-eye"></i>
+
+View
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- Order Details -->
+
+<section class="order-details">
+
+<h2>Order Information</h2>
+
+<div class="details-grid">
+
+<div class="card">
+
+<h3>Customer</h3>
+
+<p>Rahul Patil</p>
+
+<p>📞 9876543210</p>
+
+<p>Nashik, Maharashtra</p>
+
+</div>
+
+<div class="card">
+
+<h3>Farmer</h3>
+
+<p>Shinde Farm</p>
+
+<p>📞 9876541230</p>
+
+</div>
+
+<div class="card">
+
+<h3>Products</h3>
+
+<p>Rice 10kg</p>
+
+<p>Wheat 5kg</p>
+
+<p>Tur Dal 2kg</p>
+
+</div>
+
+<div class="card">
+
+<h3>Total</h3>
+
+<h2>₹950</h2>
+
+<button class="delivery-btn">
+
+Start Delivery
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+<!-- ===========================
+     ORDER DETAILS MODAL
+=========================== -->
+
+<div class="modal" id="orderModal">
+
+    <div class="modal-content">
+
+        <span class="close-modal">&times;</span>
+
+        <h2>
+            <i class="fas fa-box-open"></i>
+            Order Details
+        </h2>
+
+        <div class="modal-grid">
+
+            <!-- Customer -->
+
+            <div class="modal-card">
+
+                <h3>Customer</h3>
+
+                <p><strong>Name :</strong> Rahul Patil</p>
+
+                <p><strong>Phone :</strong> 9876543210</p>
+
+                <p><strong>Address :</strong> Nashik, Maharashtra</p>
+
+                <button class="call-btn">
+                    <i class="fas fa-phone"></i>
+                    Call Customer
+                </button>
+
+            </div>
+
+            <!-- Farmer -->
+
+            <div class="modal-card">
+
+                <h3>Farmer</h3>
+
+                <p><strong>Name :</strong> Shinde Farm</p>
+
+                <p><strong>Phone :</strong> 9876541230</p>
+
+                <button class="call-btn">
+                    <i class="fas fa-phone"></i>
+                    Call Farmer
+                </button>
+
+            </div>
+
+            <!-- Products -->
+
+            <div class="modal-card">
+
+                <h3>Products</h3>
+
+                <ul>
+
+                    <li>🌾 Rice - 10kg</li>
+
+                    <li>🌾 Wheat - 5kg</li>
+
+                    <li>🥣 Tur Dal - 2kg</li>
+
+                </ul>
+
+                <h3>Total : ₹950</h3>
+
+            </div>
+
+            <!-- Delivery -->
+
+            <div class="modal-card">
+
+                <h3>Delivery</h3>
+
+                <button class="map-btn">
+
+                    <i class="fas fa-location-dot"></i>
+
+                    Open Google Maps
+
+                </button>
+
+                <br><br>
+
+                <input
+                    type="text"
+                    placeholder="Enter OTP">
+
+                <br><br>
+
+                <button class="verify-btn">
+
+                    Verify OTP
+
+                </button>
+
+                <br><br>
+
+                <button class="done-btn">
+
+                    <i class="fas fa-check-circle"></i>
+
+                    Mark Delivered
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/script.js"></script>
+<script src="..//js/JS/orders.js"></script>
+
+</body>
+</html>

@@ -1,260 +1,118 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
+    <title>FarmNest | Cart</title>
 
-<meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
 
+  <body>
+    <!-- ================= HEADER ================= -->
 
-<title>
-FarmNest | Cart
-</title>
+    <header>
+      <!-- Logo -->
+      <div class="logo">
+        <img src="../images/web-logo/farmnest-logo.png" alt="FarmNest Logo" />
 
+        <h2>FarmNest</h2>
+      </div>
 
-<link rel="stylesheet" href="../css/style.css">
+      <!-- Navigation -->
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html" class="active"> Home </a>
+          </li>
 
+          <li>
+            <a href="wishlist.html"> Wishlist </a>
+          </li>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+          <li>
+            <a href="cart.html"> Cart </a>
+          </li>
 
+          <li>
+            <a href="products.html"> Products </a>
+          </li>
 
-</head>
+          <li>
+            <a href="categories.html"> Categories </a>
+          </li>
 
+          <li>
+            <a href="about.html"> About </a>
+          </li>
 
+          <li>
+            <a href="contact.html"> Contact </a>
+          </li>
+        </ul>
+      </nav>
 
-<body>
+      <!-- Mobile Menu -->
+      <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </header>
 
+    <!-- ================= CART HERO ================= -->
 
+    <section class="cart-hero">
+      <h1>Your Shopping Cart 🛒</h1>
 
-<!-- ================= HEADER ================= -->
+      <p>Fresh products waiting for you</p>
+    </section>
 
+    <!-- ================= CART SECTION ================= -->
 
-<header class="header">
+    <section class="cart-section">
+      <div id="cartContainer">
+        <!-- Products will load here using JS -->
+      </div>
 
+      <div class="cart-summary">
+        <h2>Cart Summary</h2>
 
-<div class="logo">
+        <div class="summary-row">
+          <span> Total Items </span>
 
-<i class="fa-solid fa-seedling"></i>
+          <strong id="totalItems"> 0 </strong>
+        </div>
 
-FarmNest
+        <div class="summary-row">
+          <span> Total Price </span>
 
-</div>
+          <strong id="totalPrice"> ₹0 </strong>
+        </div>
 
+        <a href="checkout.html" class="checkout-btn"> Proceed To Checkout </a>
+      </div>
+    </section>
 
+    <!-- ================= CTA ================= -->
+    HOMEPAG
 
-<nav>
+    <section class="cta">
+      <h2>Thank You For Supporting Farmers 🌱</h2>
 
+      <p>Every purchase helps Indian farmers.</p>
+    </section>
 
-<a href="index.html">
-Home
-</a>
+    <footer>
+      <p>© 2026 FarmNest | Fresh From Farmers To Your Home</p>
+    </footer>
 
-
-<a href="products.html">
-Products
-</a>
-
-
-<a href="cart.html" class="active">
-Cart
-</a>
-
-
-<a href="about.html">
-About
-</a>
-
-
-<a href="contact.html">
-Contact
-</a>
-
-
-</nav>
-
-
-
-<div class="header-icons">
-
-
-<i class="fa-solid fa-cart-shopping"></i>
-
-
-<i class="fa-solid fa-user"></i>
-
-
-</div>
-
-
-
-</header>
-
-
-
-
-
-
-
-
-<!-- ================= CART HERO ================= -->
-
-
-<section class="cart-hero">
-
-
-<h1>
-Your Shopping Cart 🛒
-</h1>
-
-
-<p>
-Fresh products waiting for you
-</p>
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- ================= CART SECTION ================= -->
-
-
-<section class="cart-section">
-
-
-
-<div id="cartContainer">
-
-
-<!-- Products will load here using JS -->
-
-
-</div>
-
-
-
-
-
-
-
-<div class="cart-summary">
-
-
-<h2>
-Cart Summary
-</h2>
-
-
-
-<div class="summary-row">
-
-<span>
-Total Items
-</span>
-
-
-<strong id="totalItems">
-0
-</strong>
-
-
-</div>
-
-
-
-
-
-<div class="summary-row">
-
-<span>
-Total Price
-</span>
-
-
-<strong id="totalPrice">
-₹0
-</strong>
-
-
-</div>
-
-
-
-
-
-<a href="checkout.html"
-class="checkout-btn">
-
-Proceed To Checkout
-
-</a>
-
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- ================= CTA ================= -->
-HOMEPAG
-
-<section class="cta">
-
-
-<h2>
-Thank You For Supporting Farmers 🌱
-</h2>
-
-
-<p>
-Every purchase helps Indian farmers.
-</p>
-
-
-</section>
-
-
-
-
-
-
-
-<footer>
-
-
-<p>
-
-© 2026 FarmNest | Fresh From Farmers To Your Home
-
-</p>
-
-
-</footer>
-
-
-
-
-
-<script src="../JS/cart.js"></script>
-
-
-</body>
-
+    <script src="../js/cart.js"></script>
+  </body>
 </html>

@@ -1,495 +1,348 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>FarmNest | Add Product</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/add-product.css">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/add-product.css" />
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
+    <div class="dashboard">
+      <!-- ================= SIDEBAR ================= -->
 
-<div class="dashboard">
+      <!-- SIDEBAR -->
 
-    <!-- ================= SIDEBAR ================= -->
-
-    <aside class="sidebar">
-
+      <aside class="sidebar">
         <div class="logo">
-            <h2>🌿 FarmNest</h2>
-            <p>Farmer Panel</p>
+          <img src="../images/web-logo/farmnest-logo.png" />
+          <h2>FarmNest</h2>
         </div>
 
         <ul>
-
-            <li>
-                <a href="farmer-dashboard.html">
-                    <i class="fas fa-home"></i>
-                    Dashboard
-                </a>
-            </li>
-
-            <li>
-                <a href="my-crops.html">
-                    <i class="fas fa-seedling"></i>
-                    My Crops
-                </a>
-            </li>
-
-            <li>
-                <a href="inventory.html">
-                    <i class="fas fa-boxes"></i>
-                    Inventory
-                </a>
-            </li>
-
-            <li>
-                <a href="farmer-orders.html">
-                    <i class="fas fa-cart-shopping"></i>
-                    Orders
-                </a>
-            </li>
-
-            <li>
-                <a href="earnings.html">
-                    <i class="fas fa-wallet"></i>
-                    Earnings
-                </a>
-            </li>
-
-            <li>
-                <a href="analytics.html">
-                    <i class="fas fa-chart-line"></i>
-                    Analytics
-                </a>
-            </li>
-
-            <li>
-                <a href="reports.html">
-                    <i class="fas fa-file-alt"></i>
-                    Reports
-                </a>
-            </li>
-
-            <li>
-                <a href="notifications.html">
-                    <i class="fas fa-bell"></i>
-                    Notifications
-                </a>
-            </li>
-
-            <li>
-                <a href="profile.html">
-                    <i class="fas fa-user"></i>
-                    Profile
-                </a>
-            </li>
-
-            <li>
-                <a href="../HOMEPAGE/index.html">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Logout
-                </a>
-            </li>
-
-        </ul>
-
-    </aside>
-
-
-    <!-- ================= MAIN CONTENT ================= -->
-
-    <main class="main-content">
-
-        <div class="top-bar">
-
-            <h1>
-                <i class="fas fa-plus-circle"></i>
-                Add New Product
-            </h1>
-
-            <a href="inventory.html" class="back-btn">
-                <i class="fas fa-arrow-left"></i>
-                Back to Inventory
+          <li>
+            <a href="farmer-dashboard.html">
+              <i class="fas fa-home"></i>
+              Dashboard
             </a>
+          </li>
 
+          <li>
+            <a href="my-crops.html">
+              <i class="fas fa-seedling"></i>
+              My Crops
+            </a>
+          </li>
+
+          <li>
+            <a href="inventory.html">
+              <i class="fas fa-boxes"></i>
+              Inventory
+            </a>
+          </li>
+
+          <li>
+            <a href="farmer-orders.html">
+              <i class="fas fa-cart-shopping"></i>
+              Orders
+            </a>
+          </li>
+
+          <li>
+            <a href="earnings.html">
+              <i class="fas fa-wallet"></i>
+              Earnings
+            </a>
+          </li>
+
+          <li>
+            <a href="analytics.html">
+              <i class="fas fa-chart-line"></i>
+              Analytics
+            </a>
+          </li>
+
+          <li>
+            <a href="reports.html">
+              <i class="fas fa-file-alt"></i>
+              Reports
+            </a>
+          </li>
+
+          <li>
+            <a href="notifications.html">
+              <i class="fas fa-bell"></i>
+              Notifications
+            </a>
+          </li>
+
+          <li>
+            <a href="profile.html">
+              <i class="fas fa-user"></i>
+              Profile
+            </a>
+          </li>
+
+          <li>
+            <a href="../HOMEPAGE/index.html">
+              <i class="fas fa-sign-out-alt"></i>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- ================= MAIN CONTENT ================= -->
+
+      <main class="main-content">
+        <div class="top-bar">
+          <h1>
+            <i class="fas fa-plus-circle"></i>
+            Add New Product
+          </h1>
+
+          <a href="inventory.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Inventory
+          </a>
         </div>
-
 
         <!-- ================= ADD PRODUCT FORM ================= -->
 
         <section class="form-section">
-
-            <div class="form-card">
-
-                <div class="form-header">
-
-                    <h2>Product Information</h2>
-
-                    <p>
-                        Add your agricultural product details below.
-                    </p>
-
-                </div>
-
-
-                <form id="addProductForm">
-
-                    <!-- Product Name -->
-
-                    <div class="form-group">
-
-                        <label for="productName">
-                            Product Name
-                        </label>
-
-                        <div class="input-box">
-
-                            <i class="fas fa-box"></i>
-
-                            <input
-                                type="text"
-                                id="productName"
-                                name="productName"
-                                placeholder="Enter product name"
-                                required>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Product Category -->
-
-                    <div class="form-group">
-
-                        <label for="category">
-                            Category
-                        </label>
-
-                        <div class="input-box">
-
-                            <i class="fas fa-layer-group"></i>
-
-                            <select id="category" name="category" required>
-
-                                <option value="">
-                                    Select Category
-                                </option>
-
-                                <option value="Vegetables">
-                                    Vegetables
-                                </option>
-
-                                <option value="Fruits">
-                                    Fruits
-                                </option>
-
-                                <option value="Grains">
-                                    Grains
-                                </option>
-
-                                <option value="Pulses">
-                                    Pulses
-                                </option>
-
-                                <option value="Dairy">
-                                    Dairy
-                                </option>
-
-                                <option value="Spices">
-                                    Spices
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Product Price -->
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-
-                            <label for="price">
-                                Price
-                            </label>
-
-                            <div class="input-box">
-
-                                <i class="fas fa-indian-rupee-sign"></i>
-
-                                <input
-                                    type="number"
-                                    id="price"
-                                    name="price"
-                                    placeholder="Enter price"
-                                    min="1"
-                                    required>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Unit -->
-
-                        <div class="form-group">
-
-                            <label for="unit">
-                                Unit
-                            </label>
-
-                            <div class="input-box">
-
-                                <i class="fas fa-weight-scale"></i>
-
-                                <select id="unit" name="unit" required>
-
-                                    <option value="">
-                                        Select Unit
-                                    </option>
-
-                                    <option value="Kg">
-                                        Kg
-                                    </option>
-
-                                    <option value="Quintal">
-                                        Quintal
-                                    </option>
-
-                                    <option value="Ton">
-                                        Ton
-                                    </option>
-
-                                    <option value="Piece">
-                                        Piece
-                                    </option>
-
-                                    <option value="Liter">
-                                        Liter
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Stock -->
-
-                    <div class="form-row">
-
-                        <div class="form-group">
-
-                            <label for="stock">
-                                Available Stock
-                            </label>
-
-                            <div class="input-box">
-
-                                <i class="fas fa-boxes-stacked"></i>
-
-                                <input
-                                    type="number"
-                                    id="stock"
-                                    name="stock"
-                                    placeholder="Enter stock quantity"
-                                    min="0"
-                                    required>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Warehouse -->
-
-                        <div class="form-group">
-
-                            <label for="warehouse">
-                                Warehouse
-                            </label>
-
-                            <div class="input-box">
-
-                                <i class="fas fa-warehouse"></i>
-
-                                <select id="warehouse" name="warehouse">
-
-                                    <option value="">
-                                        Select Warehouse
-                                    </option>
-
-                                    <option value="Warehouse A">
-                                        Warehouse A
-                                    </option>
-
-                                    <option value="Warehouse B">
-                                        Warehouse B
-                                    </option>
-
-                                    <option value="Warehouse C">
-                                        Warehouse C
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Product Type -->
-
-                    <div class="form-group">
-
-                        <label>
-                            Product Type
-                        </label>
-
-                        <div class="radio-group">
-
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="productType"
-                                    value="Organic"
-                                    checked>
-
-                                Organic
-                            </label>
-
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="productType"
-                                    value="Regular">
-
-                                Regular
-                            </label>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Product Image -->
-
-                    <div class="form-group">
-
-                        <label for="productImage">
-                            Product Image
-                        </label>
-
-                        <div class="upload-box">
-
-                            <i class="fas fa-cloud-arrow-up"></i>
-
-                            <p>
-                                Upload Product Image
-                            </p>
-
-                            <input
-                                type="file"
-                                id="productImage"
-                                name="productImage"
-                                accept="image/*">
-
-                            <small>
-                                JPG, PNG or WEBP
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Description -->
-
-                    <div class="form-group">
-
-                        <label for="description">
-                            Product Description
-                        </label>
-
-                        <textarea
-                            id="description"
-                            name="description"
-                            rows="5"
-                            placeholder="Enter product description..."
-                            required></textarea>
-
-                    </div>
-
-
-                    <!-- Buttons -->
-
-                    <div class="form-buttons">
-
-                        <button
-                            type="reset"
-                            class="cancel-btn">
-
-                            <i class="fas fa-rotate-left"></i>
-
-                            Reset
-
-                        </button>
-
-
-                        <button
-                            type="submit"
-                            class="submit-btn">
-
-                            <i class="fas fa-plus"></i>
-
-                            Add Product
-
-                        </button>
-
-                    </div>
-
-                </form>
-
+          <div class="form-card">
+            <div class="form-header">
+              <h2>Product Information</h2>
+
+              <p>Add your agricultural product details below.</p>
             </div>
 
+            <form id="addProductForm">
+              <!-- Product Name -->
+
+              <div class="form-group">
+                <label for="productName"> Product Name </label>
+
+                <div class="input-box">
+                  <i class="fas fa-box"></i>
+
+                  <input
+                    type="text"
+                    id="productName"
+                    name="productName"
+                    placeholder="Enter product name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Product Category -->
+
+              <div class="form-group">
+                <label for="category"> Category </label>
+
+                <div class="input-box">
+                  <i class="fas fa-layer-group"></i>
+
+                  <select id="category" name="category" required>
+                    <option value="">Select Category</option>
+
+                    <option value="Vegetables">Vegetables</option>
+
+                    <option value="Fruits">Fruits</option>
+
+                    <option value="Grains">Grains</option>
+
+                    <option value="Pulses">Pulses</option>
+
+                    <option value="Dairy">Dairy</option>
+
+                    <option value="Spices">Spices</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Product Price -->
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="price"> Price </label>
+
+                  <div class="input-box">
+                    <i class="fas fa-indian-rupee-sign"></i>
+
+                    <input
+                      type="number"
+                      id="price"
+                      name="price"
+                      placeholder="Enter price"
+                      min="1"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Unit -->
+
+                <div class="form-group">
+                  <label for="unit"> Unit </label>
+
+                  <div class="input-box">
+                    <i class="fas fa-weight-scale"></i>
+
+                    <select id="unit" name="unit" required>
+                      <option value="">Select Unit</option>
+
+                      <option value="Kg">Kg</option>
+
+                      <option value="Quintal">Quintal</option>
+
+                      <option value="Ton">Ton</option>
+
+                      <option value="Piece">Piece</option>
+
+                      <option value="Liter">Liter</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stock -->
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="stock"> Available Stock </label>
+
+                  <div class="input-box">
+                    <i class="fas fa-boxes-stacked"></i>
+
+                    <input
+                      type="number"
+                      id="stock"
+                      name="stock"
+                      placeholder="Enter stock quantity"
+                      min="0"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Warehouse -->
+
+                <div class="form-group">
+                  <label for="warehouse"> Warehouse </label>
+
+                  <div class="input-box">
+                    <i class="fas fa-warehouse"></i>
+
+                    <select id="warehouse" name="warehouse">
+                      <option value="">Select Warehouse</option>
+
+                      <option value="Warehouse A">Warehouse A</option>
+
+                      <option value="Warehouse B">Warehouse B</option>
+
+                      <option value="Warehouse C">Warehouse C</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Product Type -->
+
+              <div class="form-group">
+                <label> Product Type </label>
+
+                <div class="radio-group">
+                  <label>
+                    <input
+                      type="radio"
+                      name="productType"
+                      value="Organic"
+                      checked
+                    />
+
+                    Organic
+                  </label>
+
+                  <label>
+                    <input type="radio" name="productType" value="Regular" />
+
+                    Regular
+                  </label>
+                </div>
+              </div>
+
+              <!-- Product Image -->
+
+              <div class="form-group">
+                <label for="productImage"> Product Image </label>
+
+                <div class="upload-box">
+                  <i class="fas fa-cloud-arrow-up"></i>
+
+                  <p>Upload Product Image</p>
+
+                  <input
+                    type="file"
+                    id="productImage"
+                    name="productImage"
+                    accept="image/*"
+                  />
+
+                  <small> JPG, PNG or WEBP </small>
+                </div>
+              </div>
+
+              <!-- Description -->
+
+              <div class="form-group">
+                <label for="description"> Product Description </label>
+
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="5"
+                  placeholder="Enter product description..."
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Buttons -->
+
+              <div class="form-buttons">
+                <button type="reset" class="cancel-btn">
+                  <i class="fas fa-rotate-left"></i>
+
+                  Reset
+                </button>
+
+                <button type="submit" class="submit-btn">
+                  <i class="fas fa-plus"></i>
+
+                  Add Product
+                </button>
+              </div>
+            </form>
+          </div>
         </section>
+      </main>
+    </div>
 
-    </main>
+    <!-- ================= FOOTER ================= -->
 
-</div>
+    <footer class="footer">
+      <p>© 2026 FarmNest | Farmer Product Management | All Rights Reserved.</p>
+    </footer>
 
-
-<!-- ================= FOOTER ================= -->
-
-<footer class="footer">
-
-    <p>
-        © 2026 FarmNest | Farmer Product Management |
-        All Rights Reserved.
-    </p>
-
-</footer>
-
-
-<script src="js/add-product.js"></script>
-
-</body>
-
+    <script src="js/add-product.js"></script>
+  </body>
 </html>

@@ -1,421 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
+    <title>FarmNest | Products</title>
 
-<meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
 
+  <body>
+    <!-- ================= HEADER ================= -->
 
-<title>
-FarmNest | Products
-</title>
+    <header>
+      <!-- Logo -->
+      <div class="logo">
+        <img src="../images/web-logo/farmnest-logo.png" alt="FarmNest Logo" />
 
+        <h2>FarmNest</h2>
+      </div>
 
+      <!-- Navigation -->
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html" class="active"> Home </a>
+          </li>
 
-<link rel="stylesheet" href="../css/style.css">
+          <li>
+            <a href="wishlist.html"> Wishlist </a>
+          </li>
 
+          <li>
+            <a href="cart.html"> Cart </a>
+          </li>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+          <li>
+            <a href="products.html"> Products </a>
+          </li>
 
+          <li>
+            <a href="categories.html"> Categories </a>
+          </li>
 
-</head>
+          <li>
+            <a href="about.html"> About </a>
+          </li>
 
+          <li>
+            <a href="contact.html"> Contact </a>
+          </li>
+        </ul>
+      </nav>
 
+      <!-- Mobile Menu -->
+      <div class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </header>
 
-<body>
+    <!-- ================= PRODUCT HERO ================= -->
 
+    <section class="product-hero">
+      <div>
+        <h1>Fresh Products Direct From Farmers 🌾</h1>
 
+        <p>Organic grains, pulses and farm products delivered to your home.</p>
+      </div>
+    </section>
 
-<!-- ================= HEADER ================= -->
+    <!-- ================= SEARCH ================= -->
 
+    <section class="product-search">
+      <input type="text" id="productSearch" placeholder="Search products..." />
 
-<header class="header">
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
 
+        <option value="grains">Grains</option>
 
-<div class="logo">
+        <option value="pulses">Pulses</option>
 
-<i class="fa-solid fa-seedling"></i>
+        <option value="vegetables">Vegetables</option>
 
-FarmNest
+        <option value="spices">Spices</option>
+      </select>
+    </section>
 
-</div>
+    <!-- ================= PRODUCTS ================= -->
 
+    <section class="products-section">
+      <h2>Our Farm Products</h2>
+      <div class="product-grid" id="productGrid">
+        <!-- Products will load from backend -->
 
+        <p id="loadingMessage">Loading products...</p>
+      </div>
+    </section>
 
-<nav>
+    <!-- ================= CTA ================= -->
 
+    <section class="cta">
+      <h2>Support Farmers With Every Purchase 🌱</h2>
 
-<a href="index.html">
-Home
-</a>
+      <p>Fresh products directly from Indian farms.</p>
 
+      <a href="cart.html" class="btn"> View Cart </a>
+    </section>
 
-<a href="products.html" class="active">
-Products
-</a>
+    <footer>
+      <p>© 2026 FarmNest | Fresh From Farmers To Your Home</p>
+    </footer>
 
-
-<a href="categories.html">
-Categories
-</a>
-
-
-<a href="about.html">
-About
-</a>
-
-
-<a href="contact.html">
-Contact
-</a>
-
-
-</nav>
-
-
-
-<div class="header-icons">
-
-
-<i class="fa-solid fa-cart-shopping"></i>
-
-
-<i class="fa-solid fa-user"></i>
-
-
-</div>
-
-
-</header>
-
-
-
-
-
-
-
-<!-- ================= PRODUCT HERO ================= -->
-
-
-<section class="product-hero">
-
-
-<div>
-
-
-<h1>
-
-Fresh Products Direct From Farmers 🌾
-
-</h1>
-
-
-
-<p>
-
-Organic grains, pulses and farm products delivered to your home.
-
-</p>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- ================= SEARCH ================= -->
-
-
-<section class="product-search">
-
-
-<input 
-type="text"
-id="productSearch"
-placeholder="Search products...">
-
-
-
-<select id="categoryFilter">
-
-
-<option value="all">
-All Categories
-</option>
-
-
-<option value="grains">
-Grains
-</option>
-
-
-<option value="pulses">
-Pulses
-</option>
-
-
-<option value="vegetables">
-Vegetables
-</option>
-
-
-<option value="spices">
-Spices
-</option>
-
-
-</select>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ================= PRODUCTS ================= -->
-
-<section class="products-section">
-
-    <h2>
-        Our Farm Products
-    </h2>
-
-    <div class="product-grid">
-
-
-        <!-- ================= PRODUCT 1 ================= -->
-
-        <div class="product-card"
-             data-category="grains">
-
-            <div class="wishlist">
-                <i class="fa-solid fa-heart"></i>
-            </div>
-
-            <img
-                src="../images/rice.jpg"
-                alt="Premium Rice">
-
-            <h3>
-                Premium Rice
-            </h3>
-
-            <div class="rating">
-                ⭐⭐⭐⭐⭐
-            </div>
-
-            <p class="price">
-                ₹80 / Kg
-            </p>
-
-            <p>
-                👨‍🌾 Farmer: Ramesh Kumar
-            </p>
-
-            <button>
-                <i class="fa-solid fa-cart-plus"></i>
-                Add To Cart
-            </button>
-
-        </div>
-
-
-        <!-- ================= PRODUCT 2 ================= -->
-
-        <div class="product-card"
-             data-category="grains">
-
-            <div class="wishlist">
-                <i class="fa-solid fa-heart"></i>
-            </div>
-
-            <img
-                src="../images/wheat.jpg"
-                alt="Organic Wheat">
-
-            <h3>
-                Organic Wheat
-            </h3>
-
-            <div class="rating">
-                ⭐⭐⭐⭐
-            </div>
-
-            <p class="price">
-                ₹45 / Kg
-            </p>
-
-            <p>
-                👨‍🌾 Farmer: Suresh Patel
-            </p>
-
-            <button>
-                <i class="fa-solid fa-cart-plus"></i>
-                Add To Cart
-            </button>
-
-        </div>
-
-
-        <!-- ================= PRODUCT 3 ================= -->
-
-        <div class="product-card"
-             data-category="pulses">
-
-            <div class="wishlist">
-                <i class="fa-solid fa-heart"></i>
-            </div>
-
-            <img
-                src="../images/dall.jpg"
-                alt="Fresh Dal">
-
-            <h3>
-                Fresh Dal
-            </h3>
-
-            <div class="rating">
-                ⭐⭐⭐⭐⭐
-            </div>
-
-            <p class="price">
-                ₹120 / Kg
-            </p>
-
-            <p>
-                👨‍🌾 Farmer: Anil Sharma
-            </p>
-
-            <button>
-                <i class="fa-solid fa-cart-plus"></i>
-                Add To Cart
-            </button>
-
-        </div>
-
-
-        <!-- ================= PRODUCT 4 ================= -->
-
-        <div class="product-card"
-             data-category="spices">
-
-            <div class="wishlist">
-                <i class="fa-solid fa-heart"></i>
-            </div>
-
-            <img
-                src="../images/spices.jpg"
-                alt="Natural Spices">
-
-            <h3>
-                Natural Spices
-            </h3>
-
-            <div class="rating">
-                ⭐⭐⭐⭐
-            </div>
-
-            <p class="price">
-                ₹150 / Kg
-            </p>
-
-            <p>
-                👨‍🌾 Farm Fresh
-            </p>
-
-            <button>
-                <i class="fa-solid fa-cart-plus"></i>
-                Add To Cart
-            </button>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-
-
-
-
-
-<!-- ================= CTA ================= -->
-
-
-<section class="cta">
-
-
-<h2>
-
-Support Farmers With Every Purchase 🌱
-
-</h2>
-
-
-<p>
-
-Fresh products directly from Indian farms.
-
-</p>
-
-
-
-<a href="cart.html" class="btn">
-
-View Cart
-
-</a>
-
-
-</section>
-
-
-
-
-
-
-
-<footer>
-
-
-<p>
-
-© 2026 FarmNest | Fresh From Farmers To Your Home
-
-</p>
-
-
-</footer>
-
-
-
-
-
-<script src="../js/product-details.js"></script>
-
-
-</body>
-
-
+    <script src="../js/products.js"></script>
+  </body>
 </html>

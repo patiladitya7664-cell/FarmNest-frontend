@@ -1,9 +1,16 @@
 /* =========================================
    FARMNEST AUTHENTICATION JAVASCRIPT
-   Frontend Version
+   Backend + JWT Version
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    /* ================================
+       API
+    ================================= */
+
+    const API_URL = "http://localhost:5000/api/auth";
+
 
     /* ================================
        GET ELEMENTS
@@ -70,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
        REGISTER USER
     ================================= */
 
-    window.registerUser = function (event) {
+    window.registerUser = async function (event) {
 
         event.preventDefault();
 
@@ -157,82 +164,83 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Get Existing Users */
+        /* ================================
+           BACKEND REGISTER
+        ================================= */
 
-        let users =
-            JSON.parse(
-                localStorage.getItem("farmnestUsers")
-            ) || [];
-
-
-        /* Check Existing Email */
-
-        const existingUser =
-            users.find(
-                user => user.email === email
-            );
-
-
-        if (existingUser) {
+        try {
 
             showMessage(
-                "An account with this email already exists.",
-                "error"
+                "Creating your account...",
+                "success"
             );
 
-            return;
+
+            const response = await fetch(
+                `${API_URL}/register`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password,
+                        role
+                    })
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            if (!response.ok) {
+
+                showMessage(
+                    data.message || "Registration failed.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            /* Success */
+
+            showMessage(
+                "Account created successfully! Please login.",
+                "success"
+            );
+
+
+            registerForm.reset();
+
+
+            /* Switch to Login */
+
+            setTimeout(function () {
+
+                showForm("login");
+
+                document.getElementById("loginEmail").value =
+                    email;
+
+            }, 1000);
+
+
+        } catch (error) {
+
+            console.error("Register Error:", error);
+
+            showMessage(
+                "Cannot connect to FarmNest server. Make sure backend is running.",
+                "error"
+            );
         }
-
-
-        /* Create User */
-
-        const newUser = {
-
-            id: Date.now(),
-
-            name: name,
-
-            email: email,
-
-            role: role,
-
-            password: password,
-
-            createdAt: new Date().toISOString()
-        };
-
-
-        /* Save User */
-
-        users.push(newUser);
-
-        localStorage.setItem(
-            "farmnestUsers",
-            JSON.stringify(users)
-        );
-
-
-        /* Success */
-
-        showMessage(
-            "Account created successfully! Please login.",
-            "success"
-        );
-
-
-        registerForm.reset();
-
-
-        /* Switch to Login */
-
-        setTimeout(function () {
-
-            showForm("login");
-
-            document.getElementById("loginEmail").value =
-                email;
-
-        }, 1000);
     };
 
 
@@ -240,7 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
        LOGIN USER
     ================================= */
 
-    window.loginUser = function (event) {
+    window.loginUser = async function (event) {
 
         event.preventDefault();
 
@@ -253,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("loginPassword").value;
 
 
-        /* Validate */
+        /* Validate Email */
 
         if (!validateEmail(email)) {
 
@@ -266,6 +274,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        /* Validate Password */
+
         if (!password) {
 
             showMessage(
@@ -277,81 +287,124 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Get Users */
+        /* ================================
+           BACKEND LOGIN
+        ================================= */
 
-        const users =
-            JSON.parse(
-                localStorage.getItem("farmnestUsers")
-            ) || [];
-
-
-        /* Find User */
-
-        const user =
-            users.find(
-                user =>
-                    user.email === email &&
-                    user.password === password
-            );
-
-
-        /* Invalid Login */
-
-        if (!user) {
+        try {
 
             showMessage(
-                "Invalid email or password.",
-                "error"
+                "Logging in...",
+                "success"
             );
 
-            return;
-        }
+
+            const response = await fetch(
+                `${API_URL}/login`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                }
+            );
 
 
-        /* Save Current User */
-
-        localStorage.setItem(
-            "farmnestCurrentUser",
-            JSON.stringify(user)
-        );
+            const data = await response.json();
 
 
-        /* Remember Me */
+            /* Login failed */
 
-        const rememberMe =
-            document.getElementById("rememberMe");
+            if (!response.ok) {
+
+                showMessage(
+                    data.message || "Invalid email or password.",
+                    "error"
+                );
+
+                return;
+            }
 
 
-        if (rememberMe && rememberMe.checked) {
+            /* ================================
+               SAVE JWT TOKEN
+            ================================= */
 
             localStorage.setItem(
-                "farmnestRemember",
-                "true"
+                "token",
+                data.token
             );
 
-        } else {
 
-            localStorage.removeItem(
-                "farmnestRemember"
+            /* ================================
+               SAVE USER
+            ================================= */
+
+            localStorage.setItem(
+                "farmnestCurrentUser",
+                JSON.stringify(data.user)
+            );
+
+
+            /* ================================
+               REMEMBER ME
+            ================================= */
+
+            const rememberMe =
+                document.getElementById("rememberMe");
+
+
+            if (rememberMe && rememberMe.checked) {
+
+                localStorage.setItem(
+                    "farmnestRemember",
+                    "true"
+                );
+
+            } else {
+
+                localStorage.removeItem(
+                    "farmnestRemember"
+                );
+            }
+
+
+            /* ================================
+               SUCCESS
+            ================================= */
+
+            showMessage(
+                `Welcome ${data.user.name}! Redirecting...`,
+                "success"
+            );
+
+
+            /* ================================
+               REDIRECT
+            ================================= */
+
+            setTimeout(function () {
+
+                redirectUser(data.user);
+
+            }, 800);
+
+
+        } catch (error) {
+
+            console.error("Login Error:", error);
+
+            showMessage(
+                "Cannot connect to FarmNest server. Make sure backend is running.",
+                "error"
             );
         }
-
-
-        /* Login Success */
-
-        showMessage(
-            `Welcome ${user.name}! Redirecting...`,
-            "success"
-        );
-
-
-        /* Redirect */
-
-        setTimeout(function () {
-
-            redirectUser(user);
-
-        }, 800);
     };
 
 
@@ -362,12 +415,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function redirectUser(user) {
 
         if (user.role === "farmer") {
-
-            /*
-              IMPORTANT:
-              Change this path if your
-              farmer dashboard has another name.
-            */
 
             window.location.href =
                 "../farmer/dashboard.html";
@@ -427,13 +474,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /*
-          Frontend version only.
-          Backend email reset will be added later.
-        */
-
         showMessage(
-            "Password reset feature will be connected with the backend.",
+            "Password reset feature will be connected later.",
             "success"
         );
     };
@@ -464,7 +506,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         message.className =
             "message " + type;
-
     }
 
 
@@ -483,26 +524,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ================================
-       AUTO LOGIN CHECK
+       EXISTING SESSION
     ================================= */
 
+    const token =
+        localStorage.getItem("token");
+
     const currentUser =
-        localStorage.getItem(
-            "farmnestCurrentUser"
-        );
-
-    const remember =
-        localStorage.getItem(
-            "farmnestRemember"
-        );
+        localStorage.getItem("farmnestCurrentUser");
 
 
-    /*
-      If Remember Me is enabled,
-      keep the current login.
-    */
-
-    if (currentUser && remember === "true") {
+    if (token && currentUser) {
 
         try {
 
@@ -510,18 +542,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 JSON.parse(currentUser);
 
             console.log(
-                "FarmNest user session active:",
+                "FarmNest JWT session active:",
                 user.name
             );
 
         } catch (error) {
 
-            localStorage.removeItem(
-                "farmnestCurrentUser"
-            );
+            localStorage.removeItem("token");
 
             localStorage.removeItem(
-                "farmnestRemember"
+                "farmnestCurrentUser"
             );
         }
     }

@@ -51,7 +51,7 @@ Add fresh farm products to continue shopping.
 </p>
 
 
-<a href="HOMEPAGE/products.html" class="btn">
+<a href="products.html" class="btn">
 
 Shop Now
 
@@ -192,12 +192,7 @@ totalItems += qty;
 
 
 
-let price =
-parseInt(
-item.price.replace(/[^0-9]/g,'')
-);
-
-
+let price = Number(item.price) || 0;
 
 totalPrice += price * qty;
 

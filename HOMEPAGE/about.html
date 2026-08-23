@@ -10,6 +10,7 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
 
     <!-- Font Awesome -->
     <link
@@ -26,14 +27,16 @@
                          HEADER
     ==================================================-->
 
-    <header class="header">
+    <header>
 
         <!-- Logo -->
         <div class="logo">
 
-            <i class="fa-solid fa-seedling"></i>
+            <img
+                src="../images/web-logo/farmnest-logo.png"
+                alt="FarmNest Logo">
 
-            <span>FarmNest</span>
+            <h2>FarmNest</h2>
 
         </div>
 
@@ -41,41 +44,63 @@
         <!-- Navigation -->
         <nav>
 
-            <a href="index.html">
-                Home
-            </a>
+            <ul>
 
-            <a href="products.html">
-                Products
-            </a>
+                <li>
+                    <a href="index.html" class="active">
+                        Home
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="wishlist.html">
+                        Wishlist
+                    </a>
+                </li>
 
-            <a href="categories.html">
-                Categories
-            </a>
+                <li>
+                    <a href="cart.html">
+                        Cart
+                    </a>
+                </li>
 
-            <a href="about.html" class="active">
-                About
-            </a>
+                <li>
+                    <a href="products.html">
+                        Products
+                    </a>
+                </li>
 
-            <a href="contact.html">
-                Contact
-            </a>
+                <li>
+                    <a href="categories.html">
+                        Categories
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
 
         </nav>
 
 
-        <!-- Header Icons -->
-        <div class="header-icons">
+        <!-- Mobile Menu -->
+        <div class="menu-btn">
 
-            <i class="fa-solid fa-cart-shopping"></i>
-
-            <i class="fa-solid fa-user"></i>
+            <i class="fas fa-bars"></i>
 
         </div>
 
     </header>
-
-
 
     <!--==================================================
                        ABOUT HERO

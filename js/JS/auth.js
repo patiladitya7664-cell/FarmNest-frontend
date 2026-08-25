@@ -417,14 +417,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (user.role === "farmer") {
 
             window.location.href =
-                "../farmer/dashboard.html";
+                "../Farmer/farmer-dashboard.html";
 
         }
 
         else if (user.role === "admin") {
 
             window.location.href =
-                "../admin/dashboard.html";
+                "../ADMIN/dashboard.html";
 
         }
 

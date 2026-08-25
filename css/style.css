@@ -1868,7 +1868,7 @@ footer .copyright {
 
 .cart-section {
   padding: 80px 8%;
-  background: #f8fff8;
+  background: transparent !important;
 }
 
 .cart-container {
@@ -1888,7 +1888,7 @@ footer .copyright {
 .cart-item {
   display: flex;
   gap: 20px;
-  background: #fff;
+  background: transparent;
   border-radius: 20px;
   padding: 20px;
   box-shadow: var(--shadow);
@@ -1967,12 +1967,18 @@ footer .copyright {
 /* ================= SUMMARY ================= */
 
 .cart-summary {
-  background: #fff;
+  background: transparent;
+
   padding: 30px;
+
   border-radius: 20px;
+
   box-shadow: var(--shadow);
+
   height: fit-content;
+
   position: sticky;
+
   top: 100px;
 }
 
@@ -2024,30 +2030,47 @@ footer .copyright {
     justify-content: center;
   }
 }
-/* ================= EMPTY CART ================= */
+/* ================= EMPTY CART SHOP BUTTON ================= */
 
-.empty-cart {
+.cart-summary .checkout-btn,
+.cart-summary .shop-btn {
+  width: 220px;
+
+  height: 58px;
+
+  margin: 20px auto 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
   text-align: center;
 
-  background: white;
+  border-radius: 30px;
 
-  padding: 80px;
+  background: var(--primary);
 
-  border-radius: 20px;
+  color: #fff;
 
-  box-shadow: var(--shadow);
+  text-decoration: none;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.2);
+
+  transition: all 0.3s ease;
 }
 
-.empty-cart h2 {
-  color: var(--primary);
+.cart-summary .checkout-btn:hover,
+.cart-summary .shop-btn:hover {
+  background: var(--dark);
 
-  margin-bottom: 15px;
-}
+  transform: translateY(-2px);
 
-.empty-cart p {
-  margin-bottom: 25px;
-
-  color: #777;
+  box-shadow: 0 12px 25px rgba(46, 125, 50, 0.25);
 }
 /* ==========================================================
    CHECKOUT PAGE
@@ -4711,22 +4734,15 @@ footer .copyright {
 .checkout-hero {
   height: 55vh;
 
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("../../images/checkout-bg.jpg");
-
-  background-size: cover;
-
-  background-position: center;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.45)
+  );
 
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   text-align: center;
 
   color: white;
@@ -4745,113 +4761,142 @@ footer .copyright {
 /* ================= CHECKOUT SECTION ================= */
 
 .checkout-section {
-  padding: 80px 8%;
-
   display: grid;
 
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 0.8fr);
 
-  gap: 40px;
+  gap: 30px;
 
-  background: #f1f8e9;
+  padding: 60px 8%;
 }
 
-/* ================= CHECKOUT FORM ================= */
+/* ================= DELIVERY FORM COMPACT ================= */
 
 .checkout-form {
-  background: white;
-
-  padding: 40px;
-
+  padding: 25px;
   border-radius: 25px;
 
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  /* Same Glass Effect as Order Summary */
+  background: rgba(255, 255, 255, 0.10);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  box-shadow: var(--shadow);
+
+  transform: translateY(-2px);
+
+  transition: all 0.3s ease;
 }
+
+.checkout-form:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Heading */
 
 .checkout-form h2 {
-  font-size: 32px;
-
-  color: #2e7d32;
-
-  margin-bottom: 30px;
+  font-size: 26px;
+  margin-bottom: 20px;
 }
+
+/* Form */
 
 .checkout-form form {
   display: flex;
-
   flex-direction: column;
-
-  gap: 20px;
+  gap: 12px;
 }
+
+/* Inputs */
 
 .checkout-form input,
 .checkout-form textarea {
-  padding: 15px 20px;
+  width: 100%;
+  padding: 11px 14px;
 
-  border-radius: 12px;
+  font-size: 14px;
 
-  border: 1px solid #ddd;
+  border-radius: 10px;
 
-  font-size: 16px;
+  box-sizing: border-box;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
 
   outline: none;
+
+  transition: all 0.3s ease;
 }
 
-.checkout-form textarea {
-  height: 130px;
-
-  resize: none;
-}
+/* Input Focus */
 
 .checkout-form input:focus,
 .checkout-form textarea:focus {
+  background: rgba(255, 255, 255, 0.18);
+
   border-color: #2e7d32;
 
-  box-shadow: 0 0 10px rgba(46, 125, 50, 0.2);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
 }
+
+/* Textarea */
+
+.checkout-form textarea {
+  height: 85px;
+  resize: vertical;
+}
+
+/* Heading 3 */
 
 .checkout-form h3 {
-  color: #1b5e20;
-
-  margin-top: 20px;
+  font-size: 18px;
+  margin: 8px 0 2px;
 }
+
+/* Labels */
 
 .checkout-form label {
-  font-size: 16px;
-
-  color: #555;
+  font-size: 14px;
+  margin: 0;
 }
 
-.checkout-form button {
-  padding: 16px;
+/* Button */
 
-  background: #2e7d32;
+.checkout-form button {
+  padding: 12px 20px;
+
+  margin-top: 8px;
+
+  font-size: 15px;
+
+  border-radius: 25px;
+
+  background-color: #27b75c;
 
   border: none;
 
-  border-radius: 30px;
-
-  color: white;
-
-  font-size: 18px;
-
-  font-weight: 600;
-
   cursor: pointer;
 
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .checkout-form button:hover {
-  background: #66bb6a;
+  transform: translateY(-2px);
 
-  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(39, 183, 92, 0.25);
 }
 
 /* ================= ORDER SUMMARY ================= */
 
 .order-summary {
-  background: white;
+  background: rgba(255, 255, 255, 0.10);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 
   padding: 35px;
 
@@ -4859,7 +4904,16 @@ footer .copyright {
 
   height: max-content;
 
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  box-shadow: var(--shadow);
+
+  transition: all 0.3s ease;
+}
+
+.order-summary:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
 }
 
 .order-summary h2 {
@@ -4867,17 +4921,188 @@ footer .copyright {
 
   font-size: 30px;
 
-  margin-bottom: 25px;
+  margin: 0 0 25px;
 }
 
 .order-summary h3 {
   font-size: 24px;
 
   color: #1b5e20;
+
+  margin: 0 0 15px;
 }
 
 #checkoutTotal {
   color: #2e7d32;
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+  margin: 15px 0 0;
+}
+/* ================= SHOP PRODUCTS BUTTON ================= */
+
+.order-summary .shop-btn {
+  width: 190px !important;
+
+  height: 48px !important;
+
+  margin: 15px auto 20px !important;
+
+  display: flex !important;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0 !important;
+
+  background: #2e7d32;
+
+  color: #ffffff;
+
+  border: none;
+
+  border-radius: 25px;
+
+  text-decoration: none;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  text-align: center;
+
+  box-shadow: 0 6px 15px rgba(46, 125, 50, 0.18);
+
+  transition: all 0.3s ease;
+}
+
+.order-summary .shop-btn:hover {
+  background: #1b5e20;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 20px rgba(46, 125, 50, 0.22);
+}
+/* ================= TOTAL LINE ================= */
+
+.order-summary .total {
+  margin-top: 5px;
+
+  padding-top: 10px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.35);
+
+  color: #2e7d32;
+
+  font-size: 24px;
+
+  font-weight: 700;
+}
+.order-summary a {
+  width: 220px !important;
+  height: 58px !important;
+
+  margin: 20px auto 25px !important;
+
+  display: flex !important;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 !important;
+
+  border-radius: 30px;
+
+  text-align: center;
+
+  text-decoration: none;
+} /* ================= ORDER SUMMARY ================= */
+
+.order-summary {
+  background: transparent;
+
+  padding: 35px;
+
+  border-radius: 25px;
+
+  height: max-content;
+
+  box-shadow: var(--shadow);
+}
+
+.order-summary h2 {
+  color: #2e7d32;
+
+  font-size: 30px;
+
+  margin: 0 0 25px;
+}
+
+.order-summary h3 {
+  color: #1b5e20;
+
+  font-size: 24px;
+
+  margin: 0 0 15px;
+}
+
+/* ================= SHOP PRODUCTS ================= */
+
+.order-summary .shop-btn {
+  width: 220px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin: 20px auto 25px;
+
+  padding: 0;
+
+  background: #2e7d32;
+
+  color: white;
+
+  border-radius: 30px;
+
+  text-decoration: none;
+
+  font-size: 17px;
+
+  font-weight: 700;
+
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.2);
+
+  transition: 0.3s;
+}
+
+.order-summary .shop-btn:hover {
+  background: #1b5e20;
+
+  transform: translateY(-2px);
+}
+
+/* ================= TOTAL ================= */
+
+.order-summary hr {
+  border: none;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+
+  margin: 5px 0 10px;
+}
+
+#checkoutTotal {
+  color: #2e7d32;
+
+  font-size: 24px;
+
+  font-weight: 700;
 }
 /* =====================================================
    CHECKOUT PAGE PART-2

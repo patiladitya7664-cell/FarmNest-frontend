@@ -7,6 +7,11 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    deliveryBoyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
 
     products: [
       {
@@ -32,6 +37,29 @@ const orderSchema = new mongoose.Schema(
     totalAmount: {
       type: Number,
       required: true,
+    },
+    distance: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
+    totalWeight: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
+    vehicleType: {
+      type: String,
+      enum: ["Bike", "Auto", "Small Truck", "Larger Vehicle"],
+      required: true,
+    },
+
+    deliveryCharge: {
+      type: Number,
+      required: true,
+      min: 0,
     },
 
     shippingAddress: {
@@ -94,7 +122,7 @@ const orderSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 module.exports = mongoose.model("Order", orderSchema);

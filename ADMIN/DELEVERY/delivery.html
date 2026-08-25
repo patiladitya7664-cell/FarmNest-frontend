@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FarmNest | Delivery Panel</title>
+
+    <link
+        rel="stylesheet"
+        href="css/delivery.css"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="delivery-sidebar">
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                🌱
+            </div>
+
+            <div>
+                <h2>FarmNest</h2>
+                <span>Delivery</span>
+            </div>
+
+        </div>
+
+
+        <nav class="delivery-nav">
+
+            <a
+                href="dashboard.html"
+                class="nav-item active"
+            >
+                <span class="nav-icon">🏠</span>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="orders.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">📦</span>
+                <span>Assigned Orders</span>
+            </a>
+
+
+            <a
+                href="history.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">🛵</span>
+                <span>Delivery History</span>
+            </a>
+
+
+            <a
+                href="earning.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">💰</span>
+                <span>Earnings</span>
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="nav-item"
+            >
+                <span class="nav-icon">👤</span>
+                <span>Profile</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="logout-btn"
+                id="logoutBtn"
+            >
+                🚪 Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="delivery-main">
+
+
+        <!-- HEADER -->
+
+        <header class="delivery-header">
+
+            <div class="header-left">
+
+                <button
+                    class="menu-btn"
+                    id="menuBtn"
+                >
+                    ☰
+                </button>
+
+                <div>
+
+                    <h1>
+                        Delivery Panel
+                    </h1>
+
+                    <p>
+                        Manage your deliveries easily
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <div class="delivery-status">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        Online
+                    </span>
+
+                </div>
+
+
+                <div class="delivery-user">
+
+                    <div
+                        class="user-avatar"
+                        id="headerAvatar"
+                    >
+                        🚚
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong id="deliveryName">
+                            Delivery Partner
+                        </strong>
+
+                        <small>
+                            Delivery Executive
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             WELCOME SECTION
+        ====================================================== -->
+
+        <section class="delivery-welcome">
+
+            <div>
+
+                <span class="welcome-label">
+                    WELCOME BACK 👋
+                </span>
+
+                <h2>
+                    Ready for today's deliveries?
+                </h2>
+
+                <p>
+                    Pick up your assigned orders and
+                    deliver them safely to customers.
+                </p>
+
+            </div>
+
+            <div class="welcome-icon">
+                🚚
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             QUICK STATS
+        ====================================================== -->
+
+        <section class="delivery-stats">
+
+
+            <div class="delivery-stat-card">
+
+                <div class="stat-icon">
+                    📦
+                </div>
+
+                <div>
+
+                    <span>
+                        Assigned Orders
+                    </span>
+
+                    <strong id="assignedOrders">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="delivery-stat-card">
+
+                <div class="stat-icon">
+                    🛵
+                </div>
+
+                <div>
+
+                    <span>
+                        Delivered
+                    </span>
+
+                    <strong id="completedOrders">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="delivery-stat-card">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <span>
+                        Pending
+                    </span>
+
+                    <strong id="pendingOrders">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="delivery-stat-card">
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Today's Earnings
+                    </span>
+
+                    <strong id="todayEarnings">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             DASHBOARD GRID
+        ====================================================== -->
+
+        <section class="delivery-dashboard-grid">
+
+
+            <!-- RECENT ORDERS -->
+
+            <div class="delivery-card">
+
+                <div class="delivery-card-header">
+
+                    <div>
+
+                        <h3>
+                            Recent Orders
+                        </h3>
+
+                        <p>
+                            Your latest assigned deliveries
+                        </p>
+
+                    </div>
+
+                    <a href="orders.html">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="recentOrders"
+                    class="recent-orders"
+                >
+
+                    <div class="dashboard-loading">
+                        📦 Loading orders...
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="delivery-card">
+
+                <div class="delivery-card-header">
+
+                    <div>
+
+                        <h3>
+                            Quick Actions
+                        </h3>
+
+                        <p>
+                            Manage your deliveries
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <a
+                        href="orders.html"
+                        class="quick-action"
+                    >
+
+                        <div>
+                            📦
+                        </div>
+
+                        <span>
+                            Assigned Orders
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="history.html"
+                        class="quick-action"
+                    >
+
+                        <div>
+                            🛵
+                        </div>
+
+                        <span>
+                            Delivery History
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="earning.html"
+                        class="quick-action"
+                    >
+
+                        <div>
+                            💰
+                        </div>
+
+                        <span>
+                            Check Earnings
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="profile.html"
+                        class="quick-action"
+                    >
+
+                        <div>
+                            👤
+                        </div>
+
+                        <span>
+                            My Profile
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             DELIVERY TIPS
+        ====================================================== -->
+
+        <section class="delivery-tip">
+
+            <div class="tip-icon">
+                💡
+            </div>
+
+            <div>
+
+                <strong>
+                    Delivery Tip
+                </strong>
+
+                <p>
+                    Always verify the customer's address
+                    and order details before handing over
+                    the package.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <footer class="delivery-footer">
+
+            <p>
+
+                © 2026
+
+                <strong>
+                    FarmNest
+                </strong>
+
+                — Connecting Farmers & Customers 🌱
+
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="JS/delivery.js"
+    ></script>
+
+
+</body>
+
+</html>

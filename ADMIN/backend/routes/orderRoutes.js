@@ -10,6 +10,8 @@ const {
   getAllOrders,
   getFarmerOrders,
   updatePaymentStatus,
+  getDeliveryBoyOrders,
+  assignDeliveryBoy,
 } = require("../controllers/orderController");
 
 const authMiddleware = require("../middleware/authMiddleware");
@@ -18,38 +20,35 @@ const adminMiddleware = require("../middleware/adminMiddleware");
 // Create Order
 router.post("/", authMiddleware, createOrder);
 
-// Get logged-in customer's orders
+// Customer Orders
 router.get("/my-orders", authMiddleware, getMyOrders);
 
-// Farmer - Get orders containing my products
-router.get(
-  "/farmer",
+// Farmer Orders
+router.get("/farmer", authMiddleware, getFarmerOrders);
+
+// Delivery Boy - Assigned Orders
+router.get("/delivery-boy", authMiddleware, getDeliveryBoyOrders);
+
+// Admin - All Orders
+router.get("/admin/all", authMiddleware, adminMiddleware, getAllOrders);
+
+// Admin - Assign Delivery Boy
+router.put(
+  "/:id/assign-delivery",
   authMiddleware,
-  getFarmerOrders
+  assignDeliveryBoy
 );
 
-// Admin - Get All Orders
-router.get(
-  "/admin/all",
-  authMiddleware,
-  adminMiddleware,
-  getAllOrders
-);
-
-// Get single order
+// Single Order
 router.get("/:id", authMiddleware, getOrderById);
 
-// Update order status
+// Update Order Status
 router.put("/:id/status", authMiddleware, updateOrderStatus);
 
-// Cancel order
+// Cancel Order
 router.put("/:id/cancel", authMiddleware, cancelOrder);
 
-// Update Payment Status
-router.put(
-  "/:id/payment",
-  authMiddleware,
-  updatePaymentStatus
-);
+// Payment Status
+router.put("/:id/payment", authMiddleware, updatePaymentStatus);
 
 module.exports = router;

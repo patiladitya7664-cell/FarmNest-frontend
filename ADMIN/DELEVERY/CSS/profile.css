@@ -1,0 +1,606 @@
+/* =========================================================
+   FARMNEST DELIVERY
+   PROFILE PAGE CSS
+========================================================= */
+
+
+/* =========================================================
+   PROFILE PAGE
+========================================================= */
+
+.profile-page {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   PROFILE HERO
+========================================================= */
+
+.profile-hero {
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1b5e20,
+            #2e7d32
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 30px rgba(46, 125, 50, 0.18);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.profile-hero::after {
+    content: "🌱";
+
+    position: absolute;
+
+    right: 35px;
+
+    bottom: -25px;
+
+    font-size: 110px;
+
+    opacity: 0.08;
+}
+
+
+/* =========================================================
+   PROFILE AVATAR
+========================================================= */
+
+.profile-avatar {
+    width: 90px;
+
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    border: 3px solid rgba(255, 255, 255, 0.35);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 42px;
+
+    flex-shrink: 0;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   PROFILE HERO INFO
+========================================================= */
+
+.profile-hero-info {
+    position: relative;
+
+    z-index: 1;
+}
+
+.profile-role {
+    display: inline-block;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    opacity: 0.75;
+
+    margin-bottom: 5px;
+}
+
+.profile-hero-info h2 {
+    margin: 0 0 5px;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+.profile-hero-info p {
+    margin: 0 0 10px;
+
+    font-size: 12px;
+
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   ONLINE STATUS
+========================================================= */
+
+.profile-online {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.14);
+
+    font-size: 10px;
+}
+
+.profile-online .status-dot {
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 255, 255, 0.15);
+}
+
+
+/* =========================================================
+   PROFILE GRID
+========================================================= */
+
+.profile-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.profile-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.04);
+
+    transition: 0.25s ease;
+}
+
+.profile-card:hover {
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   PROFILE CARD HEADER
+========================================================= */
+
+.profile-card-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 17px;
+
+    margin-bottom: 18px;
+
+    border-bottom:
+        1px solid #eeeeee;
+}
+
+.profile-card-header h3 {
+    margin: 0 0 5px;
+
+    color: #1f2937;
+
+    font-size: 14px;
+}
+
+.profile-card-header p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #374151;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 12px;
+
+    border: 1px solid #dfe5df;
+
+    border-radius: 9px;
+
+    background: #fafcfa;
+
+    color: #374151;
+
+    font-size: 11px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #b0b6b1;
+}
+
+.form-group input:focus {
+    border-color: #2e7d32;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(46, 125, 50, 0.09);
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+.profile-save-btn {
+    width: 100%;
+
+    border: none;
+
+    padding: 11px 16px;
+
+    border-radius: 9px;
+
+    background: #2e7d32;
+
+    color: #ffffff;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.profile-save-btn:hover {
+    background: #1b5e20;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 15px rgba(46, 125, 50, 0.18);
+}
+
+
+/* =========================================================
+   PROFILE INFORMATION LIST
+========================================================= */
+
+.profile-info-list {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.profile-info-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid #eeeeee;
+}
+
+.profile-info-row:first-child {
+    padding-top: 0;
+}
+
+.profile-info-row:last-child {
+    border-bottom: none;
+
+    padding-bottom: 0;
+}
+
+
+/* =========================================================
+   INFORMATION ICON
+========================================================= */
+
+.profile-info-icon {
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #e8f5e9;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   INFORMATION TEXT
+========================================================= */
+
+.profile-info-row span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 10px;
+
+    margin-bottom: 4px;
+}
+
+.profile-info-row strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PERFORMANCE
+========================================================= */
+
+.profile-performance {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.performance-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    background: #f8faf8;
+
+    border: 1px solid #edf2ee;
+}
+
+.performance-icon {
+    width: 42px;
+
+    height: 42px;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    background: #e8f5e9;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.performance-item span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 9px;
+
+    margin-bottom: 4px;
+}
+
+.performance-item strong {
+    display: block;
+
+    color: #2e7d32;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-performance {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .profile-hero {
+        padding: 22px;
+
+        gap: 16px;
+    }
+
+    .profile-avatar {
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 32px;
+    }
+
+    .profile-hero-info h2 {
+        font-size: 20px;
+    }
+
+    .profile-performance {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .profile-page {
+        gap: 14px;
+    }
+
+    .profile-hero {
+        padding: 18px;
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .profile-avatar {
+        width: 65px;
+
+        height: 65px;
+    }
+
+    .profile-hero-info h2 {
+        font-size: 18px;
+    }
+
+    .profile-hero-info p {
+        font-size: 10px;
+    }
+
+    .profile-card {
+        padding: 17px;
+    }
+
+    .profile-card-header h3 {
+        font-size: 13px;
+    }
+
+    .performance-item {
+        padding: 13px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .profile-hero-info h2 {
+        font-size: 17px;
+    }
+
+    .profile-card {
+        padding: 14px;
+    }
+
+    .profile-info-icon {
+        width: 34px;
+
+        height: 34px;
+
+        font-size: 14px;
+    }
+}

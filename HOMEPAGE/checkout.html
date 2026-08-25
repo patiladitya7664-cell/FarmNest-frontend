@@ -7,9 +7,15 @@
 
     <title>FarmNest | Checkout</title>
 
+    <!-- MAIN CSS -->
     <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- RESPONSIVE CSS -->
     <link rel="stylesheet" href="../css/responsive.css" />
 
+  
+
+    <!-- FONT AWESOME -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -17,21 +23,22 @@
   </head>
 
   <body>
-    <!-- ================= HEADER ================= -->
+    <!-- =========================================================
+       HEADER
+  ========================================================== -->
 
     <header>
-      <!-- Logo -->
       <div class="logo">
         <img src="../images/web-logo/farmnest-logo.png" alt="FarmNest Logo" />
 
         <h2>FarmNest</h2>
       </div>
 
-      <!-- Navigation -->
+      <!-- NAVIGATION -->
       <nav>
         <ul>
           <li>
-            <a href="index.html" class="active"> Home </a>
+            <a href="index.html"> Home </a>
           </li>
 
           <li>
@@ -39,7 +46,7 @@
           </li>
 
           <li>
-            <a href="cart.html"> Cart </a>
+            <a href="checkout.html" class="active"> Checkout </a>
           </li>
 
           <li>
@@ -60,13 +67,15 @@
         </ul>
       </nav>
 
-      <!-- Mobile Menu -->
+      <!-- MOBILE MENU -->
       <div class="menu-btn">
         <i class="fas fa-bars"></i>
       </div>
     </header>
 
-    <!-- ================= CHECKOUT HERO ================= -->
+    <!-- =========================================================
+       CHECKOUT HERO
+  ========================================================== -->
 
     <section class="checkout-hero">
       <h1>Complete Your Order 🛒</h1>
@@ -74,70 +83,189 @@
       <p>Fresh products delivered from farmers to your home.</p>
     </section>
 
-    <!-- ================= CHECKOUT SECTION ================= -->
+    <!-- =========================================================
+       CHECKOUT SECTION
+  ========================================================== -->
 
     <section class="checkout-section">
-      <!-- CUSTOMER FORM -->
+      <!-- =======================================================
+         CUSTOMER DELIVERY FORM
+    ======================================================== -->
 
       <div class="checkout-form">
         <h2>Delivery Details</h2>
 
         <form id="checkoutForm">
-          <input type="text" placeholder="Full Name" required />
+          <!-- NAME -->
+          <input
+            type="text"
+            id="customerName"
+            name="customerName"
+            placeholder="Full Name"
+            required
+          />
 
-          <input type="email" placeholder="Email Address" required />
+          <!-- EMAIL -->
+          <input
+            type="email"
+            id="customerEmail"
+            name="customerEmail"
+            placeholder="Email Address"
+            required
+          />
 
-          <input type="tel" placeholder="Phone Number" required />
+          <!-- PHONE -->
+          <input
+            type="tel"
+            id="customerPhone"
+            name="customerPhone"
+            placeholder="Phone Number"
+            required
+          />
 
-          <textarea placeholder="Full Delivery Address" required></textarea>
+          <!-- ADDRESS -->
+          <textarea
+            id="deliveryAddress"
+            name="deliveryAddress"
+            placeholder="Full Delivery Address"
+            required
+          ></textarea>
 
-          <input type="text" placeholder="City" required />
+          <!-- CITY -->
+          <input
+            type="text"
+            id="city"
+            name="city"
+            placeholder="City"
+            required
+          />
 
-          <input type="text" placeholder="State" required />
+          <!-- STATE -->
+          <input
+            type="text"
+            id="state"
+            name="state"
+            placeholder="State"
+            required
+          />
 
-          <input type="text" placeholder="Pincode" required />
+          <!-- PINCODE -->
+          <input
+            type="text"
+            id="pincode"
+            name="pincode"
+            placeholder="Pincode"
+            required
+          />
 
+          <!-- DELIVERY DISTANCE -->
+          <input
+            type="number"
+            id="distance"
+            name="distance"
+            placeholder="Delivery Distance (KM)"
+            min="0"
+            step="0.1"
+            required
+          />
+
+          <!-- PAYMENT -->
           <h3>Payment Method</h3>
 
+          <!-- COD -->
           <label>
-            <input type="radio" name="payment" checked />
+            <input type="radio" name="payment" value="COD" checked />
 
             Cash On Delivery
           </label>
 
+          <!-- ONLINE -->
           <label>
-            <input type="radio" name="payment" />
+            <input type="radio" name="payment" value="Online" />
 
-            UPI Payment
+            Online Payment
           </label>
 
-          <label>
-            <input type="radio" name="payment" />
-
-            Card Payment
-          </label>
-
+          <!-- PLACE ORDER -->
           <button type="submit">Place Order</button>
         </form>
       </div>
 
-      <!-- ORDER SUMMARY -->
+      <!-- =======================================================
+         ORDER SUMMARY
+    ======================================================== -->
 
       <div class="order-summary">
         <h2>Order Summary</h2>
 
-        <div id="checkoutItems"></div>
+        <!-- =====================================================
+           DELIVERY INFORMATION
+      ====================================================== -->
 
+        <div class="delivery-info">
+          <p>
+            Distance:
+
+            <span id="deliveryDistance"> 0 KM </span>
+          </p>
+
+          <p>
+            Total Weight:
+
+            <span id="deliveryWeight"> 0 KG </span>
+          </p>
+
+          <p>
+            Vehicle:
+
+            <span id="deliveryVehicle"> - </span>
+          </p>
+
+          <p>
+            Delivery Charge:
+
+            <span id="deliveryCharge"> ₹0 </span>
+          </p>
+        </div>
+
+        <!-- =====================================================
+           CART PRODUCTS
+      ====================================================== -->
+
+        <div id="checkoutItems">
+          <div class="checkout-empty">
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <h3>Your Cart is Empty</h3>
+
+            <p>Add some fresh products to continue.</p>
+
+            <!-- SHOP PRODUCTS -->
+            <a href="products.html" class="shop-btn">
+              <i class="fa-solid fa-bag-shopping"></i>
+
+              Shop Products
+            </a>
+          </div>
+        </div>
+
+        <!-- SEPARATOR -->
         <hr />
 
-        <h3>
-          Total:
-          <span id="checkoutTotal"> ₹0 </span>
-        </h3>
+        <!-- TOTAL -->
+        <div class="checkout-total">
+          <h3>
+            Total:
+
+            <span id="checkoutTotal"> ₹0 </span>
+          </h3>
+        </div>
       </div>
     </section>
 
-    <!-- ================= SUCCESS ================= -->
+    <!-- =========================================================
+       ORDER SUCCESS
+  ========================================================== -->
 
     <div id="orderSuccess">
       <i class="fa-solid fa-circle-check"></i>
@@ -147,11 +275,20 @@
       <p>Thank you for supporting farmers.</p>
     </div>
 
+    <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+
     <footer>
       <p>© 2026 FarmNest | Fresh From Farmers To Your Home</p>
     </footer>
 
+    <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
     <script src="../js/script.js"></script>
+
     <script src="../js/checkout.js"></script>
   </body>
 </html>

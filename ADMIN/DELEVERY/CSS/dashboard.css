@@ -1,0 +1,836 @@
+/* =========================================================
+   FARMNEST DELIVERY
+   DASHBOARD PAGE CSS
+========================================================= */
+
+
+/* =========================================================
+   WELCOME SECTION
+========================================================= */
+
+.delivery-welcome {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 150px;
+
+    padding: 28px 32px;
+
+    margin-bottom: 22px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1b5e20,
+            #388e3c
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 28px
+        rgba(46, 125, 50, 0.16);
+}
+
+.delivery-welcome::before {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: 70px;
+    top: -100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.05);
+}
+
+.delivery-welcome::after {
+    content: "🌱";
+
+    position: absolute;
+
+    right: 100px;
+    bottom: -55px;
+
+    font-size: 170px;
+
+    opacity: 0.06;
+}
+
+
+/* =========================================================
+   WELCOME CONTENT
+========================================================= */
+
+.welcome-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.6px;
+
+    opacity: 0.75;
+}
+
+.delivery-welcome h2 {
+    position: relative;
+    z-index: 2;
+
+    margin: 0 0 7px;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+.delivery-welcome p {
+    position: relative;
+    z-index: 2;
+
+    margin: 0;
+
+    max-width: 480px;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+    opacity: 0.78;
+}
+
+
+/* =========================================================
+   WELCOME ICON
+========================================================= */
+
+.welcome-icon {
+    position: relative;
+    z-index: 3;
+
+    width: 72px;
+    height: 72px;
+
+    flex-shrink: 0;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.14);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 34px;
+
+    backdrop-filter: blur(8px);
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.delivery-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+.delivery-stat-card {
+    min-height: 105px;
+
+    padding: 19px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    background: #ffffff;
+
+    border:
+        1px solid #e5ebe6;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.035);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.delivery-stat-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.07);
+}
+
+
+/* =========================================================
+   STAT ICON
+========================================================= */
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #e8f5e9;
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   STAT TEXT
+========================================================= */
+
+.delivery-stat-card span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #8b958d;
+
+    font-size: 9px;
+
+    font-weight: 500;
+}
+
+.delivery-stat-card strong {
+    display: block;
+
+    color: #2e7d32;
+
+    font-size: 21px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DASHBOARD GRID
+========================================================= */
+
+.delivery-dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.7fr)
+        minmax(280px, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   MAIN CARDS
+========================================================= */
+
+.delivery-card {
+    background: #ffffff;
+
+    border:
+        1px solid #e5ebe6;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,0.035);
+}
+
+.delivery-card-header {
+    min-height: 68px;
+
+    padding: 17px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid #edf1ee;
+}
+
+.delivery-card-header h3 {
+    margin: 0 0 4px;
+
+    color: #354039;
+
+    font-size: 13px;
+}
+
+.delivery-card-header p {
+    margin: 0;
+
+    color: #9aa49d;
+
+    font-size: 9px;
+}
+
+.delivery-card-header a {
+    padding: 7px 11px;
+
+    border-radius: 8px;
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+    text-decoration: none;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.delivery-card-header a:hover {
+    background: #c8e6c9;
+}
+
+
+/* =========================================================
+   RECENT ORDERS
+========================================================= */
+
+.recent-orders {
+    padding: 0 20px;
+}
+
+.recent-order {
+    min-height: 68px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 3px;
+
+    border-bottom:
+        1px solid #f0f2f0;
+}
+
+.recent-order:last-child {
+    border-bottom: none;
+}
+
+.recent-order-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #e8f5e9;
+
+    font-size: 17px;
+}
+
+.recent-order-info {
+    min-width: 0;
+
+    flex: 1;
+}
+
+.recent-order-info strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #354039;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.recent-order-info span {
+    display: block;
+
+    color: #9aa49d;
+
+    font-size: 8px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   ORDER STATUS
+========================================================= */
+
+.recent-order-status {
+    flex-shrink: 0;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background: #fff8e1;
+
+    color: #a66b00;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+
+/* Status variations */
+
+.recent-order-status.delivered {
+    background: #e8f5e9;
+
+    color: #2e7d32;
+}
+
+.recent-order-status.cancelled,
+.recent-order-status.canceled {
+    background: #ffebee;
+
+    color: #c62828;
+}
+
+.recent-order-status.shipped {
+    background: #e3f2fd;
+
+    color: #1565c0;
+}
+
+.recent-order-status.processing {
+    background: #fff3e0;
+
+    color: #e65100;
+}
+
+.recent-order-status.confirmed {
+    background: #e8eaf6;
+
+    color: #3949ab;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.quick-actions {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+
+    padding: 18px;
+}
+
+.quick-action {
+    min-height: 105px;
+
+    padding: 17px 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        1px solid #edf1ed;
+
+    border-radius: 12px;
+
+    background: #f9fbf9;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.quick-action:hover {
+    transform: translateY(-3px);
+
+    background: #e8f5e9;
+
+    border-color: #c8e6c9;
+}
+
+.quick-action div {
+    width: 43px;
+    height: 43px;
+
+    margin-bottom: 9px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    font-size: 20px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.04);
+}
+
+.quick-action span {
+    color: #536057;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   DELIVERY TIP
+========================================================= */
+
+.delivery-tip {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 17px 20px;
+
+    margin-bottom: 20px;
+
+    border:
+        1px solid #f0e7c6;
+
+    border-radius: 14px;
+
+    background: #fffdf4;
+}
+
+.tip-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #fff3cd;
+
+    font-size: 19px;
+}
+
+.delivery-tip strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #705a16;
+
+    font-size: 10px;
+}
+
+.delivery-tip p {
+    margin: 0;
+
+    color: #8c7b45;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.dashboard-loading {
+    min-height: 150px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    color: #929b95;
+
+    font-size: 10px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   EMPTY ORDERS
+========================================================= */
+
+.recent-orders .empty-state {
+    padding: 35px 15px;
+
+    text-align: center;
+}
+
+.recent-orders .empty-state-icon {
+    margin-bottom: 8px;
+
+    font-size: 30px;
+}
+
+.recent-orders .empty-state h3 {
+    margin-bottom: 5px;
+
+    color: #465149;
+
+    font-size: 12px;
+}
+
+.recent-orders .empty-state p {
+    color: #9aa49d;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - 1100px
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .delivery-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .delivery-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 768px
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .delivery-welcome {
+        min-height: 135px;
+
+        padding: 23px;
+    }
+
+    .delivery-welcome h2 {
+        font-size: 20px;
+    }
+
+    .welcome-icon {
+        width: 58px;
+        height: 58px;
+
+        border-radius: 16px;
+
+        font-size: 28px;
+    }
+
+    .delivery-stats {
+        gap: 12px;
+    }
+
+    .delivery-stat-card {
+        padding: 16px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 600px
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .delivery-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .delivery-welcome {
+        padding: 20px;
+
+        align-items: flex-start;
+    }
+
+    .delivery-welcome h2 {
+        max-width: 250px;
+
+        font-size: 18px;
+    }
+
+    .delivery-welcome p {
+        max-width: 240px;
+
+        line-height: 1.6;
+    }
+
+    .welcome-icon {
+        width: 50px;
+        height: 50px;
+
+        font-size: 24px;
+    }
+
+    .delivery-card-header {
+        padding: 15px;
+    }
+
+    .recent-orders {
+        padding: 0 14px;
+    }
+
+    .quick-actions {
+        padding: 14px;
+
+        gap: 9px;
+    }
+
+    .quick-action {
+        min-height: 90px;
+
+        padding: 13px 7px;
+    }
+
+    .delivery-tip {
+        align-items: flex-start;
+
+        padding: 15px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - 400px
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .delivery-welcome {
+        min-height: 125px;
+
+        padding: 17px;
+    }
+
+    .delivery-welcome h2 {
+        font-size: 16px;
+    }
+
+    .delivery-welcome p {
+        font-size: 8px;
+    }
+
+    .welcome-icon {
+        width: 44px;
+        height: 44px;
+
+        font-size: 21px;
+    }
+
+    .delivery-stat-card strong {
+        font-size: 18px;
+    }
+
+    .recent-order {
+        gap: 8px;
+    }
+
+    .recent-order-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .recent-order-status {
+        padding: 4px 7px;
+
+        font-size: 7px;
+    }
+}

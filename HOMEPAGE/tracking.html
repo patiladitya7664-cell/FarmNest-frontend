@@ -7,9 +7,16 @@
 
     <title>FarmNest | Order Tracking</title>
 
+    <!-- MAIN CSS -->
     <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- RESPONSIVE CSS -->
     <link rel="stylesheet" href="../css/responsive.css" />
 
+    <!-- TRACKING CSS -->
+    <link rel="stylesheet" href="../css/tracking.css" />
+
+    <!-- FONT AWESOME -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -17,35 +24,68 @@
   </head>
 
   <body>
-    <!-- ================= HEADER ================= -->
+    <!-- =========================================================
+       HEADER
+  ========================================================== -->
 
-    <header class="header">
+    <header>
+      <!-- LOGO -->
       <div class="logo">
-        <i class="fa-solid fa-seedling"></i>
+        <img src="../images/web-logo/farmnest-logo.png" alt="FarmNest Logo" />
 
-        FarmNest
+        <h2>FarmNest</h2>
       </div>
 
+      <!-- NAVIGATION -->
       <nav>
-        <a href="index.html"> Home </a>
+        <ul>
+          <li>
+            <a href="index.html"> Home </a>
+          </li>
 
-        <a href="products.html"> Products </a>
+          <li>
+            <a href="wishlist.html"> Wishlist </a>
+          </li>
 
-        <a href="cart.html"> Cart </a>
+          <li>
+            <a href="checkout.html"> Checkout </a>
+          </li>
 
-        <a href="tracking.html" class="active"> Tracking </a>
+          <li>
+            <a href="products.html"> Products </a>
+          </li>
 
-        <a href="about.html"> About </a>
+          <li>
+            <a href="categories.html"> Categories </a>
+          </li>
+
+          <li>
+            <a href="tracking.html" class="active"> Tracking </a>
+          </li>
+
+          <li>
+            <a href="profile.html"> Profile </a>
+          </li>
+
+          <li>
+            <a href="about.html"> About </a>
+          </li>
+
+          <li>
+            <a href="contact.html"> Contact </a>
+          </li>
+        </ul>
       </nav>
 
-      <div class="header-icons">
-        <i class="fa-solid fa-cart-shopping"></i>
-
-        <i class="fa-solid fa-user"></i>
+      <!-- MOBILE MENU -->
+      <div class="menu-btn">
+        <i class="fas fa-bars"></i>
       </div>
     </header>
 
-    <!-- ================= TRACK HERO ================= -->
+    <!-- =========================================================
+       TRACKING HERO
+  ========================================================== -->
 
     <section class="tracking-hero">
       <h1>Track Your Order 📦</h1>
@@ -53,83 +93,155 @@
       <p>Know where your farm products are.</p>
     </section>
 
-    <!-- ================= TRACKING SECTION ================= -->
+    <!-- =========================================================
+       TRACKING SECTION
+  ========================================================== -->
 
     <section class="tracking-section">
+      <!-- =======================================================
+         ORDER DETAILS
+    ======================================================== -->
+
       <div class="order-box">
         <h2>Order Details</h2>
 
         <p>
           Order ID:
 
-          <strong> #FN2026 </strong>
+          <strong id="orderId"> Loading... </strong>
         </p>
 
         <p>
           Status:
 
-          <span class="status"> Out For Delivery </span>
+          <span class="status" id="orderStatus"> Loading... </span>
         </p>
       </div>
 
-      <!-- ================= TIMELINE ================= -->
+      <!-- =======================================================
+         DELIVERY INFORMATION
+    ======================================================== -->
 
-      <div class="timeline">
-        <div class="step active">
-          <i class="fa-solid fa-check"></i>
+      <div class="delivery-info">
+        <h2>🚚 Delivery Information</h2>
+
+        <div class="delivery-grid">
+          <div>
+            <span>Distance</span>
+
+            <strong id="trackingDistance"> -- </strong>
+          </div>
 
           <div>
-            <h3>Order Confirmed</h3>
+            <span>Total Weight</span>
 
+            <strong id="trackingWeight"> -- </strong>
+          </div>
+
+          <div>
+            <span>Vehicle</span>
+
+            <strong id="trackingVehicle"> -- </strong>
+          </div>
+
+          <div>
+            <span>Delivery Charge</span>
+
+            <strong id="trackingCharge"> ₹0 </strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- =======================================================
+     ORDER TIMELINE
+======================================================== -->
+
+      <div class="timeline">
+        <!-- ORDER CONFIRMED -->
+        <div class="step" data-status="Confirmed">
+          <div class="timeline-icon">
+            <i class="fa-solid fa-check"></i>
+          </div>
+
+          <div class="timeline-content">
+            <h3>Order Confirmed</h3>
             <p>Your order has been received.</p>
           </div>
         </div>
 
-        <div class="step active">
-          <i class="fa-solid fa-tractor"></i>
+        <!-- PROCESSING -->
+        <div class="step" data-status="Processing">
+          <div class="timeline-icon">
+            <i class="fa-solid fa-tractor"></i>
+          </div>
 
-          <div>
+          <div class="timeline-content">
             <h3>Preparing Product</h3>
-
             <p>Farmer is preparing your order.</p>
           </div>
         </div>
 
-        <div class="step active">
-          <i class="fa-solid fa-truck"></i>
+        <!-- SHIPPED -->
+        <div class="step" data-status="Shipped">
+          <div class="timeline-icon">
+            <i class="fa-solid fa-box"></i>
+          </div>
 
-          <div>
+          <div class="timeline-content">
+            <h3>Order Shipped</h3>
+            <p>Your order has been shipped.</p>
+          </div>
+        </div>
+
+        <!-- OUT FOR DELIVERY -->
+        <div class="step" data-status="Out for Delivery">
+          <div class="timeline-icon">
+            <i class="fa-solid fa-truck"></i>
+          </div>
+
+          <div class="timeline-content">
             <h3>Out For Delivery</h3>
-
             <p>Your order is on the way.</p>
           </div>
         </div>
 
-        <div class="step">
-          <i class="fa-solid fa-house"></i>
+        <!-- DELIVERED -->
+        <div class="step" data-status="Delivered">
+          <div class="timeline-icon">
+            <i class="fa-solid fa-house"></i>
+          </div>
 
-          <div>
+          <div class="timeline-content">
             <h3>Delivered</h3>
-
-            <p>Waiting for delivery.</p>
+            <p>Your order has been delivered.</p>
           </div>
         </div>
       </div>
 
-      <!-- ================= FARMER DETAILS ================= -->
+      <!-- =======================================================
+         FARMER INFORMATION
+    ======================================================== -->
 
       <div class="farmer-delivery">
         <h2>👨‍🌾 Farmer Information</h2>
 
-        <img src="images/farmer1.jpg" />
+        <div class="farmer-card">
+          <div class="farmer-icon">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
 
-        <h3>Ramesh Kumar</h3>
+          <div>
+            <h3 id="farmerName">Farmer</h3>
 
-        <p>Organic Wheat Farmer</p>
+            <p id="farmerInfo">FarmNest Farmer</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ================= CTA ================= -->
+    <!-- =========================================================
+       CTA
+  ========================================================== -->
 
     <section class="cta">
       <h2>Fresh From Farm To Your Door 🌱</h2>
@@ -137,10 +249,20 @@
       <p>Thank you for choosing FarmNest.</p>
     </section>
 
+    <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+
     <footer>
       <p>© 2026 FarmNest | Fresh From Farmers To Your Home</p>
     </footer>
 
+    <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
     <script src="../js/script.js"></script>
+
+    <script src="../js/tracking.js"></script>
   </body>
 </html>

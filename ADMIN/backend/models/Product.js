@@ -37,6 +37,12 @@ const productSchema = new mongoose.Schema(
       min: 0,
     },
 
+    weightPerUnit: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
     unit: {
       type: String,
       default: "kg",
@@ -60,7 +66,7 @@ const productSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 module.exports = mongoose.model("Product", productSchema);

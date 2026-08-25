@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmNest | Delivery Dashboard</title>
+
+    <!-- Delivery CSS -->
+    <link rel="stylesheet" href="css/delivery.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+
+<body>
+
+    <!-- ==============================
+         SIDEBAR
+    =============================== -->
+    <aside class="delivery-sidebar">
+
+        <div class="sidebar-logo">
+            <div class="logo-icon">🌱</div>
+            <div>
+                <h2>FarmNest</h2>
+                <span>Delivery</span>
+            </div>
+        </div>
+
+        <nav class="delivery-nav">
+
+            <a href="dashboard.html" class="nav-item active">
+                <span class="nav-icon">🏠</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="orders.html" class="nav-item">
+                <span class="nav-icon">📦</span>
+                <span>Assigned Orders</span>
+            </a>
+
+            <a href="history.html" class="nav-item">
+
+    <span class="nav-icon">
+        🛵
+    </span>
+
+    <span>
+        Delivery History
+    </span>
+
+</a>
+
+
+<a href="earning.html" class="nav-item">
+
+    <span class="nav-icon">
+        💰
+    </span>
+
+    <span>
+        Earnings
+    </span>
+
+</a>
+
+
+<a href="profile.html" class="nav-item">
+
+    <span class="nav-icon">
+        👤
+    </span>
+
+    <span>
+        Profile
+    </span>
+
+</a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button class="logout-btn" id="logoutBtn">
+                <span>🚪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    =============================== -->
+    <main class="delivery-main">
+
+        <!-- TOP HEADER -->
+        <header class="delivery-header">
+
+            <div class="header-left">
+                <button class="menu-btn" id="menuBtn">☰</button>
+
+                <div>
+                    <h1>Delivery Dashboard</h1>
+                    <p>Manage your assigned deliveries</p>
+                </div>
+            </div>
+
+            <div class="header-right">
+
+                <div class="delivery-status">
+                    <span class="status-dot"></span>
+                    <span>Online</span>
+                </div>
+
+                <div class="delivery-user">
+                    <div class="user-avatar">🚚</div>
+
+                    <div class="user-info">
+                        <strong id="deliveryName">Delivery Partner</strong>
+                        <small>Delivery Executive</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==============================
+             WELCOME SECTION
+        =============================== -->
+        <section class="welcome-section">
+
+            <div class="welcome-content">
+                <span class="welcome-label">WELCOME BACK 👋</span>
+
+                <h2>
+                    Hello, <span id="welcomeName">Delivery Partner</span>!
+                </h2>
+
+                <p>
+                    Here is your delivery overview for today.
+                </p>
+            </div>
+
+            <div class="welcome-icon">
+                🚚
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             STATISTICS
+        =============================== -->
+        <section class="stats-grid">
+
+            <!-- Total Orders -->
+            <div class="stat-card">
+
+                <div class="stat-icon total">
+                    📦
+                </div>
+
+                <div class="stat-content">
+                    <span>Total Assigned</span>
+                    <h3 id="totalOrders">0</h3>
+                    <small>Assigned orders</small>
+                </div>
+
+            </div>
+
+
+            <!-- Pending -->
+            <div class="stat-card">
+
+                <div class="stat-icon pending">
+                    ⏳
+                </div>
+
+                <div class="stat-content">
+                    <span>Pending</span>
+                    <h3 id="pendingOrders">0</h3>
+                    <small>Waiting for delivery</small>
+                </div>
+
+            </div>
+
+
+            <!-- Out For Delivery -->
+            <div class="stat-card">
+
+                <div class="stat-icon out">
+                    🛵
+                </div>
+
+                <div class="stat-content">
+                    <span>Out for Delivery</span>
+                    <h3 id="outForDelivery">0</h3>
+                    <small>Currently delivering</small>
+                </div>
+
+            </div>
+
+
+            <!-- Delivered -->
+            <div class="stat-card">
+
+                <div class="stat-icon delivered">
+                    ✅
+                </div>
+
+                <div class="stat-content">
+                    <span>Delivered</span>
+                    <h3 id="deliveredOrders">0</h3>
+                    <small>Successfully delivered</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             DASHBOARD GRID
+        =============================== -->
+        <section class="dashboard-grid">
+
+
+            <!-- TODAY'S DELIVERY -->
+            <div class="dashboard-card today-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h2>Today's Deliveries</h2>
+                        <p>Your delivery schedule for today</p>
+                    </div>
+
+                    <a href="orders.html" class="view-all">
+                        View All →
+                    </a>
+
+                </div>
+
+
+                <div class="delivery-list" id="todayDeliveryList">
+
+                    <!-- JavaScript will load orders here -->
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            📦
+                        </div>
+
+                        <h3>No deliveries yet</h3>
+
+                        <p>
+                            Your assigned deliveries will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+            <div class="dashboard-card quick-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Manage your deliveries</p>
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions">
+
+                    <a href="orders.html" class="quick-action">
+                        <div class="quick-icon">
+                            📦
+                        </div>
+
+                        <div>
+                            <strong>Assigned Orders</strong>
+                            <span>View delivery orders</span>
+                        </div>
+
+                        <b>→</b>
+                    </a>
+
+
+                    <a href="history.html" class="quick-action">
+                        <div class="quick-icon">
+                            🛵
+                        </div>
+
+                        <div>
+                            <strong>Delivery History</strong>
+                            <span>View completed deliveries</span>
+                        </div>
+
+                        <b>→</b>
+                    </a>
+
+
+                    <a href="profile.html" class="quick-action">
+                        <div class="quick-icon">
+                            👤
+                        </div>
+
+                        <div>
+                            <strong>My Profile</strong>
+                            <span>Manage your profile</span>
+                        </div>
+
+                        <b>→</b>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             FOOTER
+        =============================== -->
+        <footer class="delivery-footer">
+
+            <p>
+                © 2026 <strong>FarmNest</strong> — Connecting Farmers & Customers 🌱
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <!-- ==============================
+         JAVASCRIPT
+    =============================== -->
+    <script src="JS/dashboard.js"></script>
+
+</body>
+</html>
+

@@ -1,6 +1,5 @@
 const Product = require("../models/Product");
 
-
 // ==========================================
 // ADD PRODUCT - FARMER
 // ==========================================
@@ -12,6 +11,7 @@ const addProduct = async (req, res) => {
       description,
       price,
       quantity,
+      weightPerUnit,
       unit,
       image,
     } = req.body;
@@ -21,13 +21,15 @@ const addProduct = async (req, res) => {
       !name ||
       !category ||
       price === undefined ||
-      quantity === undefined
+      quantity === undefined ||
+      weightPerUnit === undefined ||
+      Number(weightPerUnit) <= 0
     ) {
       return res.status(400).json({
-        message: "Name, category, price and quantity are required",
+        message:
+          "Name, category, price, quantity and valid weight are required",
       });
     }
-
     // Only farmer can add products
     if (req.user.role !== "farmer") {
       return res.status(403).json({
@@ -42,6 +44,7 @@ const addProduct = async (req, res) => {
       description,
       price,
       quantity,
+      weightPerUnit,
       unit,
       image,
     });
@@ -58,7 +61,6 @@ const addProduct = async (req, res) => {
     });
   }
 };
-
 
 // ==========================================
 // GET MY PRODUCTS - FARMER
@@ -90,7 +92,6 @@ const getMyProducts = async (req, res) => {
   }
 };
 
-
 // ==========================================
 // GET ALL APPROVED PRODUCTS - PUBLIC
 // ==========================================
@@ -117,7 +118,6 @@ const getAllProducts = async (req, res) => {
     });
   }
 };
-
 
 // ==========================================
 // UPDATE PRODUCT - FARMER
@@ -150,6 +150,7 @@ const updateProduct = async (req, res) => {
       "description",
       "price",
       "quantity",
+      "weightPerUnit",
       "unit",
       "image",
     ];
@@ -174,7 +175,6 @@ const updateProduct = async (req, res) => {
     });
   }
 };
-
 
 // ==========================================
 // DELETE PRODUCT - FARMER
@@ -215,7 +215,6 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-
 // ==========================================
 // GET PENDING PRODUCTS - ADMIN
 // ==========================================
@@ -240,7 +239,6 @@ const getPendingProducts = async (req, res) => {
     });
   }
 };
-
 
 // ==========================================
 // APPROVE PRODUCT - ADMIN
@@ -275,7 +273,6 @@ const approveProduct = async (req, res) => {
   }
 };
 
-
 // ==========================================
 // REJECT PRODUCT - ADMIN
 // ==========================================
@@ -308,7 +305,6 @@ const rejectProduct = async (req, res) => {
     });
   }
 };
-
 
 // ==========================================
 // EXPORT ALL FUNCTIONS

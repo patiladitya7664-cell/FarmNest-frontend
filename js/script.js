@@ -1,6 +1,8 @@
-/* ==========================================================
+/*
+==========================================================
    FARMNEST JAVASCRIPT v1.0
-========================================================== */
+==========================================================
+*/
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -14,9 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
 
-            loader.style.opacity = "0";
-
-            loader.style.visibility = "hidden";
+            if (loader) {
+                loader.style.opacity = "0";
+                loader.style.visibility = "hidden";
+            }
 
         }, 1000);
 
@@ -29,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuBtn = document.querySelector(".menu-btn");
     const nav = document.querySelector("nav");
 
-    if(menuBtn){
+    if (menuBtn) {
 
         menuBtn.addEventListener("click",()=>{
 
@@ -256,259 +259,7 @@ revealOnScroll();
 
 
 });
-/* =====================================================
-   FARMNEST CHECKOUT FUNCTIONALITY
-===================================================== */
 
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-
-const checkoutItems =
-document.getElementById("checkoutItems");
-
-
-const checkoutTotal =
-document.getElementById("checkoutTotal");
-
-
-
-if(!checkoutItems)
-return;
-
-
-
-let cart =
-JSON.parse(
-localStorage.getItem("cart")
-)
-||
-[];
-
-
-
-
-let total = 0;
-
-
-
-
-
-function loadCheckout(){
-
-
-checkoutItems.innerHTML="";
-
-
-if(cart.length===0){
-
-
-checkoutItems.innerHTML=`
-
-<p>
-No products in cart.
-</p>
-
-`;
-
-
-return;
-
-
-}
-
-
-
-
-cart.forEach(item=>{
-
-
-
-let qty =
-item.quantity || 1;
-
-
-
-let price =
-parseInt(
-item.price.replace(/[^0-9]/g,'')
-);
-
-
-
-total += price * qty;
-
-
-
-checkoutItems.innerHTML += `
-
-
-<div class="checkout-item">
-
-
-<img src="${item.image}">
-
-
-<div>
-
-
-<h4>
-${item.name}
-</h4>
-
-
-<p>
-Quantity: ${qty}
-</p>
-
-
-</div>
-
-
-
-<strong>
-₹${price*qty}
-</strong>
-
-
-
-</div>
-
-
-`;
-
-
-
-});
-
-
-
-
-checkoutTotal.innerText =
-"₹"+total;
-
-
-
-}
-
-
-
-
-
-loadCheckout();
-
-
-
-
-
-
-
-
-/* ================= PLACE ORDER ================= */
-
-
-const checkoutForm =
-document.getElementById("checkoutForm");
-
-
-
-if(checkoutForm){
-
-
-
-checkoutForm.addEventListener(
-"submit",
-(e)=>{
-
-
-e.preventDefault();
-
-
-
-let order = {
-
-
-items:cart,
-
-
-amount:total,
-
-
-date:new Date()
-.toLocaleDateString()
-
-
-};
-
-
-
-
-let orders =
-JSON.parse(
-localStorage.getItem("orders")
-)
-||
-[];
-
-
-
-
-orders.push(order);
-
-
-
-localStorage.setItem(
-"orders",
-JSON.stringify(orders)
-);
-
-
-
-
-
-
-
-document.getElementById(
-"orderSuccess"
-)
-.style.display="block";
-
-
-
-
-
-
-localStorage.removeItem(
-"cart"
-);
-
-
-
-
-
-
-setTimeout(()=>{
-
-
-window.location.href=
-"tracking.html";
-
-
-
-},3000);
-
-
-
-
-});
-
-
-}
-
-
-
-
-});
 /* =====================================================
    FARMNEST REGISTER FUNCTIONALITY
 ===================================================== */

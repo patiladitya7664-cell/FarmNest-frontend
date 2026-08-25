@@ -1,232 +1,313 @@
 /* ==========================================================
-   FARMNEST TRACKING JS v1.0
+   FARMNEST TRACKING JS v3.0
+   CUSTOMER → REAL ORDER TRACKING API
 ========================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  const API_URL = "http://localhost:5000/api/orders";
 
-    // Estimated Delivery Date
-    const deliveryText = document.querySelector(".delivery-box p");
+  /* ======================================================
+       GET ELEMENTS
+    ====================================================== */
 
-    if (deliveryText) {
+  const orderIdElement = document.getElementById("orderId");
 
-        const today = new Date();
+  const orderStatusElement = document.getElementById("orderStatus");
 
-        today.setDate(today.getDate() + 1);
+  const trackingDistance = document.getElementById("trackingDistance");
 
-        const options = {
-            weekday: "long",
-            day: "numeric",
-            month: "long"
-        };
+  const trackingWeight = document.getElementById("trackingWeight");
 
-        deliveryText.innerHTML =
-            today.toLocaleDateString("en-IN", options) +
-            " before 7:00 PM";
+  const trackingVehicle = document.getElementById("trackingVehicle");
+
+  const trackingCharge = document.getElementById("trackingCharge");
+
+  const farmerName = document.getElementById("farmerName");
+
+  const farmerInfo = document.getElementById("farmerInfo");
+
+  /* ======================================================
+       GET LAST ORDER ID
+    ====================================================== */
+
+  const lastOrderId = localStorage.getItem("lastOrderId");
+
+  console.log("Tracking Order ID:", lastOrderId);
+
+  if (!lastOrderId) {
+    if (orderIdElement) {
+      orderIdElement.innerText = "No Order Found";
     }
 
-    // Progress Animation
-    const steps = document.querySelectorAll(".step");
-    const lines = document.querySelectorAll(".line");
+    if (orderStatusElement) {
+      orderStatusElement.innerText = "Please place an order first";
+    }
 
-    let current = 0;
+    return;
+  }
 
-    function updateTracking() {
+  /* ======================================================
+       GET LOGIN TOKEN
+    ====================================================== */
 
-        if (current < steps.length) {
+  const token = localStorage.getItem("token");
 
-            steps[current].classList.add("active");
+  console.log("Tracking Token Available:", !!token);
 
-            if (current > 0) {
+  if (!token) {
+    if (orderStatusElement) {
+      orderStatusElement.innerText = "Please login to view your order.";
+    }
 
-                lines[current - 1].classList.add("active");
+    alert("Please login to view your order.");
 
+    return;
+  }
+
+  /* ======================================================
+       FETCH ORDER FROM BACKEND
+    ====================================================== */
+
+  try {
+    const response = await fetch(`${API_URL}/${lastOrderId}`, {
+      method: "GET",
+
+      headers: {
+        "Content-Type": "application/json",
+
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    const data = await response.json();
+
+    console.log("Tracking API Response:", data);
+
+    /* ==================================================
+           API ERROR
+        ================================================== */
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to fetch order");
+    }
+
+    /* ==================================================
+           GET ORDER
+        ================================================== */
+
+    const order = data.order;
+
+    if (!order) {
+      throw new Error("Order data not found");
+    }
+
+    /* ==================================================
+           ORDER ID
+        ================================================== */
+
+    if (orderIdElement) {
+      orderIdElement.innerText = "#" + order._id;
+    }
+
+    /* ==================================================
+           ORDER STATUS
+        ================================================== */
+
+    const currentStatus = order.status || "Pending";
+
+    if (orderStatusElement) {
+      orderStatusElement.innerText = currentStatus;
+
+      orderStatusElement.className = "status";
+
+      orderStatusElement.classList.add(
+        currentStatus.toLowerCase().replaceAll(" ", "-"),
+      );
+    }
+
+    /* ==================================================
+           DELIVERY DISTANCE
+        ================================================== */
+
+    if (trackingDistance) {
+      trackingDistance.innerText =
+        Number(order.distance || 0).toFixed(1) + " KM";
+    }
+
+    /* ==================================================
+           TOTAL WEIGHT
+        ================================================== */
+
+    if (trackingWeight) {
+      trackingWeight.innerText =
+        Number(order.totalWeight || 0).toFixed(2) + " KG";
+    }
+
+    /* ==================================================
+           VEHICLE
+        ================================================== */
+
+    if (trackingVehicle) {
+      trackingVehicle.innerText = order.vehicleType || "-";
+    }
+
+    /* ==================================================
+           DELIVERY CHARGE
+        ================================================== */
+
+    if (trackingCharge) {
+      trackingCharge.innerText =
+        "₹" + Number(order.deliveryCharge || 0).toFixed(2);
+    }
+
+    /* ==================================================
+   FARMER INFORMATION
+================================================== */
+
+    let farmerFound = false;
+
+    if (order.products && order.products.length > 0) {
+      for (const item of order.products) {
+        const product = item.productId;
+
+        if (product && product.farmerId) {
+          farmerFound = true;
+
+          // Farmer is populated object
+          if (typeof product.farmerId === "object") {
+            if (farmerName) {
+              farmerName.innerText = product.farmerId.name || "FarmNest Farmer";
             }
 
-            current++;
+            if (farmerInfo) {
+              farmerInfo.innerText = "Farmer ID: " + product.farmerId._id;
+            }
+          } else {
+            // Fallback if farmerId is only an ID
+            if (farmerName) {
+              farmerName.innerText = "FarmNest Farmer";
+            }
 
+            if (farmerInfo) {
+              farmerInfo.innerText = "Farmer ID: " + product.farmerId;
+            }
+          }
+
+          break;
         }
+      }
     }
 
-    // Initial State
-    steps.forEach(step => step.classList.remove("active"));
-    lines.forEach(line => line.classList.remove("active"));
+    /* ==================================================
+   FARMER FALLBACK
+================================================== */
 
-    updateTracking();
+    if (!farmerFound) {
+      if (farmerName) {
+        farmerName.innerText = "FarmNest Farmer";
+      }
 
-    const interval = setInterval(() => {
+      if (farmerInfo) {
+        farmerInfo.innerText = "Farmer Information";
+      }
+    }
+    
+    /* ==================================================
+           UPDATE TIMELINE
+        ================================================== */
 
-        if (current < steps.length) {
+    updateTimeline(currentStatus);
 
-            updateTracking();
+    /* ==================================================
+           CANCELLED ORDER
+        ================================================== */
 
-        } else {
+    if (currentStatus === "Cancelled") {
+      const steps = document.querySelectorAll(".timeline .step");
 
-            clearInterval(interval);
+      steps.forEach((step) => {
+        step.classList.remove("active");
+      });
+    }
 
-        }
+    /* ==================================================
+           CONSOLE SUCCESS
+        ================================================== */
 
-    }, 2000);
+    console.log("=================================");
 
-});
-/* =====================================================
-   FARMNEST ORDER TRACKING FUNCTIONALITY
-===================================================== */
+    console.log("FarmNest Tracking Loaded");
 
+    console.log("Order ID:", order._id);
 
-document.addEventListener("DOMContentLoaded",()=>{
+    console.log("Status:", currentStatus);
 
+    console.log("Total:", order.totalAmount);
 
-const trackingPage =
-document.querySelector(".tracking-section");
+    console.log("=================================");
+  } catch (error) {
+    console.error("Tracking Error:", error);
 
+    if (orderIdElement) {
+      orderIdElement.innerText = "Error";
+    }
 
+    if (orderStatusElement) {
+      orderStatusElement.innerText = error.message || "Unable to load order";
+    }
+  }
 
-if(!trackingPage)
-return;
+  /* ======================================================
+       UPDATE TIMELINE
+    ====================================================== */
 
+  function updateTimeline(status) {
+    const steps = document.querySelectorAll(".timeline .step");
 
+    if (!steps.length) {
+      console.warn("Timeline steps not found.");
 
-let orders =
-JSON.parse(
-localStorage.getItem("orders")
-)
-||
-[];
+      return;
+    }
 
+    const statusOrder = [
+      "Pending",
 
+      "Confirmed",
 
+      "Processing",
 
-const orderBox =
-document.querySelector(".order-box");
+      "Shipped",
 
+      "Out for Delivery",
 
+      "Delivered",
+    ];
 
-if(orders.length > 0){
+    let currentIndex = statusOrder.indexOf(status);
 
+    /* ----------------------------------------------
+           UNKNOWN STATUS
+        ---------------------------------------------- */
 
+    if (currentIndex < 0) {
+      currentIndex = 0;
+    }
 
-let latestOrder =
-orders[orders.length-1];
+    /* ----------------------------------------------
+           UPDATE STEPS
+        ---------------------------------------------- */
 
+    steps.forEach((step, index) => {
+      step.classList.remove("active");
 
+      const stepStatus = step.dataset.status;
 
-let orderId =
-"FN"+Date.now()
-.toString()
-.slice(-6);
+      const stepIndex = statusOrder.indexOf(stepStatus);
 
-
-
-
-
-orderBox.innerHTML = `
-
-
-<h2>
-Order Details
-</h2>
-
-
-<p>
-
-Order ID:
-
-<strong>
-#${orderId}
-</strong>
-
-</p>
-
-
-
-<p>
-
-Status:
-
-<span class="status">
-Out For Delivery
-</span>
-
-
-</p>
-
-
-
-<p>
-
-Order Date:
-
-${latestOrder.date}
-
-</p>
-
-
-<p>
-
-Total Amount:
-
-<strong>
-₹${latestOrder.amount}
-</strong>
-
-
-</p>
-
-
-`;
-
-
-
-}
-
-
-
-
-
-
-/* ================= AUTO DELIVERY STATUS ================= */
-
-
-let steps =
-document.querySelectorAll(".step");
-
-
-
-let currentStep = 0;
-
-
-
-function updateTracking(){
-
-
-
-if(currentStep < steps.length){
-
-
-steps[currentStep]
-.classList.add("active");
-
-
-
-currentStep++;
-
-
-}
-
-
-
-}
-
-
-
-setInterval(
-updateTracking,
-3000
-);
-
-
-
-
-
-
+      if (stepIndex !== -1 && stepIndex <= currentIndex) {
+        step.classList.add("active");
+      }
+    });
+  }
 });

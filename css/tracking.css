@@ -1,0 +1,902 @@
+/* ==========================================================
+   FARMNEST - ORDER TRACKING PAGE
+   tracking.css
+========================================================== */
+
+:root {
+  --primary: #2e7d32;
+  --secondary: #66bb6a;
+  --dark: #1b5e20;
+  --light: #f1f8e9;
+  --white: #ffffff;
+  --text: #263238;
+  --muted: #78909c;
+  --border: rgba(46, 125, 50, 0.25);
+  --line: rgba(46, 125, 50, 0.25);
+  --shadow: 0 10px 30px rgba(27, 94, 32, 0.1);
+}
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   BODY
+========================================================== */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: transparent !important;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ==========================================================
+   MAIN CONTAINER
+========================================================== */
+
+.tracking-container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.tracking-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.tracking-header h1 {
+  color: var(--dark);
+  font-size: 36px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.tracking-header p {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+/* ==========================================================
+   SEARCH SECTION
+========================================================== */
+
+.tracking-search {
+  background: transparent !important;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: none;
+  margin-bottom: 30px;
+}
+
+.tracking-search h2 {
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+
+/* ==========================================================
+   SEARCH BOX
+========================================================== */
+
+.search-box {
+  display: flex;
+  gap: 12px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 14px 16px;
+
+  background: transparent;
+
+  border: 1px solid rgba(46, 125, 50, 0.3);
+  border-radius: 10px;
+
+  outline: none;
+
+  color: var(--text);
+  font-size: 15px;
+}
+
+.search-box input::placeholder {
+  color: var(--muted);
+}
+
+.search-box input:focus {
+  border-color: var(--primary);
+
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+/* ==========================================================
+   SEARCH BUTTON
+========================================================== */
+
+.search-box button {
+  border: none;
+
+  background: var(--primary);
+  color: var(--white);
+
+  padding: 14px 25px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  transition: all 0.3s ease;
+}
+
+.search-box button:hover {
+  background: var(--dark);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 6px 15px rgba(27, 94, 32, 0.2);
+}
+
+/* ==========================================================
+   ORDER CARD
+========================================================== */
+
+.order-card {
+  background: transparent !important;
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  box-shadow: none;
+
+  margin-bottom: 30px;
+}
+
+/* ==========================================================
+   ORDER HEADER
+========================================================== */
+
+.order-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid rgba(46, 125, 50, 0.18);
+}
+
+.order-header h2 {
+  color: var(--dark);
+
+  margin-bottom: 7px;
+}
+
+.order-id {
+  color: var(--muted);
+
+  font-size: 14px;
+}
+
+/* ==========================================================
+   STATUS BADGE
+========================================================== */
+
+.status-badge {
+  background: rgba(241, 248, 233, 0.6);
+
+  color: var(--dark);
+
+  border: 1px solid rgba(46, 125, 50, 0.25);
+
+  padding: 8px 16px;
+
+  border-radius: 30px;
+
+  font-weight: bold;
+
+  white-space: nowrap;
+}
+
+/* ==========================================================
+   ORDER DETAILS
+========================================================== */
+
+.order-details {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 18px;
+
+  margin-top: 25px;
+}
+
+.detail-box {
+  background: transparent !important;
+
+  border: 1px solid rgba(46, 125, 50, 0.18);
+
+  border-radius: 12px;
+
+  padding: 18px;
+}
+
+.detail-box span {
+  display: block;
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  margin-bottom: 7px;
+}
+
+.detail-box strong {
+  color: var(--dark);
+
+  font-size: 16px;
+}
+
+/* ==========================================================
+   TIMELINE SECTION
+========================================================== */
+
+.timeline-section {
+  background: transparent !important;
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  box-shadow: none;
+}
+
+.timeline-section h2 {
+  color: var(--dark);
+
+  margin-bottom: 30px;
+}
+
+/* ==========================================================
+   TIMELINE
+========================================================== */
+
+.timeline {
+  position: relative;
+
+  margin-left: 20px;
+}
+
+/* Vertical Line */
+
+.timeline::before {
+  content: "";
+
+  position: absolute;
+
+  left: 15px;
+
+  top: 10px;
+
+  bottom: 10px;
+
+  width: 3px;
+
+  background: var(--line);
+
+  border-radius: 10px;
+}
+
+/* ==========================================================
+   TIMELINE ITEM
+========================================================== */
+
+.timeline-item {
+  position: relative;
+
+  display: flex;
+
+  gap: 20px;
+
+  padding-bottom: 30px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* ==========================================================
+   TIMELINE ICON
+========================================================== */
+
+.timeline-icon {
+  width: 32px;
+
+  height: 32px;
+
+  min-width: 32px;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  border: 2px solid rgba(46, 125, 50, 0.35);
+
+  color: var(--dark);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 14px;
+
+  font-weight: bold;
+
+  z-index: 2;
+}
+
+/* Completed */
+
+.timeline-item.completed .timeline-icon {
+  background: var(--primary);
+
+  border-color: var(--primary);
+
+  color: white;
+}
+
+/* Active */
+
+.timeline-item.active .timeline-icon {
+  background: var(--secondary);
+
+  border-color: var(--secondary);
+
+  color: white;
+
+  box-shadow: 0 0 0 6px rgba(102, 187, 106, 0.15);
+}
+
+/* ==========================================================
+   TIMELINE CONTENT
+========================================================== */
+
+.timeline-content h3 {
+  color: var(--dark);
+
+  font-size: 17px;
+
+  margin-bottom: 5px;
+}
+
+.timeline-content p {
+  color: var(--muted);
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+.timeline-date {
+  margin-top: 5px;
+
+  color: #9e9e9e;
+
+  font-size: 12px;
+}
+
+/* ==========================================================
+   ORDER ITEMS
+========================================================== */
+
+.order-items {
+  margin-top: 25px;
+}
+
+.order-items h3 {
+  color: var(--dark);
+
+  margin-bottom: 15px;
+}
+
+/* ==========================================================
+   PRODUCT ITEM
+========================================================== */
+
+.product-item {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 15px;
+
+  border-bottom: 1px solid rgba(46, 125, 50, 0.15);
+}
+
+.product-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+.product-info img {
+  width: 60px;
+
+  height: 60px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+}
+
+.product-info h4 {
+  color: var(--text);
+
+  margin-bottom: 5px;
+}
+
+.product-info p {
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+.product-price {
+  color: var(--dark);
+
+  font-weight: bold;
+}
+
+/* ==========================================================
+   TOTAL
+========================================================== */
+
+.order-total {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: 20px;
+}
+
+.order-total-box {
+  background: transparent !important;
+
+  padding: 18px 25px;
+
+  border-radius: 12px;
+
+  min-width: 230px;
+}
+
+.order-total-box div {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 8px;
+}
+
+.order-total-box .total {
+  border-top: 1px solid rgba(46, 125, 50, 0.25);
+
+  padding-top: 10px;
+
+  margin-top: 10px;
+
+  color: var(--dark);
+
+  font-size: 18px;
+
+  font-weight: bold;
+}
+
+/* ==========================================================
+   EMPTY MESSAGE
+========================================================== */
+
+.tracking-message {
+  text-align: center;
+
+  padding: 30px;
+
+  color: var(--muted);
+}
+
+/* ==========================================================
+   ERROR MESSAGE
+========================================================== */
+
+.tracking-error {
+  background: transparent !important;
+
+  color: #c62828;
+
+  border: 1px solid rgba(198, 40, 40, 0.3);
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  margin-top: 15px;
+}
+
+/* ==========================================================
+   BACK BUTTON
+========================================================== */
+
+.back-btn {
+  display: inline-block;
+
+  margin-top: 25px;
+
+  padding: 12px 20px;
+
+  background: var(--primary);
+
+  color: white;
+
+  text-decoration: none;
+
+  border-radius: 10px;
+
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: var(--dark);
+
+  transform: translateY(-2px);
+}
+
+/* ==========================================================
+   RESPONSIVE - TABLET
+========================================================== */
+
+@media (max-width: 768px) {
+  .tracking-container {
+    width: 94%;
+
+    margin: 25px auto;
+  }
+
+  .tracking-header h1 {
+    font-size: 28px;
+  }
+
+  .search-box {
+    flex-direction: column;
+  }
+
+  .search-box button {
+    width: 100%;
+  }
+
+  .order-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .order-details {
+    grid-template-columns: 1fr;
+  }
+
+  .order-card,
+  .timeline-section {
+    padding: 20px;
+  }
+
+  .product-item {
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE - MOBILE
+========================================================== */
+
+@media (max-width: 480px) {
+  .tracking-header h1 {
+    font-size: 24px;
+  }
+
+  .tracking-container {
+    width: 95%;
+  }
+
+  .timeline {
+    margin-left: 5px;
+  }
+
+  .timeline-item {
+    gap: 12px;
+  }
+
+  .product-info img {
+    width: 50px;
+
+    height: 50px;
+  }
+
+  .product-item {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .product-price {
+    margin-left: 65px;
+  }
+}
+/* ==========================================================
+   FARMER INFORMATION - REMOVE INNER BOX
+========================================================== */
+
+.farmer-info,
+.farmer-information,
+.farmer-card,
+.farmer-details {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.farmer-info *,
+.farmer-information *,
+.farmer-card *,
+.farmer-details * {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+/* ==========================================================
+   FARMNEST TRACKING TIMELINE - FINAL
+========================================================== */
+
+.timeline {
+  position: relative;
+  margin-left: 20px;
+}
+
+/* Vertical Line */
+.timeline::before {
+  content: "";
+  position: absolute;
+
+  left: 15px;
+  top: 10px;
+  bottom: 10px;
+
+  width: 3px;
+
+  background: rgba(46, 125, 50, 0.2);
+  border-radius: 10px;
+
+  z-index: 0;
+}
+
+/* ==========================================================
+   STEP
+========================================================== */
+
+.timeline .step {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 20px;
+
+  padding-bottom: 30px;
+
+  opacity: 0.45;
+
+  transition: all 0.3s ease;
+
+  z-index: 1;
+}
+
+.timeline .step:last-child {
+  padding-bottom: 0;
+}
+
+/* ==========================================================
+   CIRCLE - 32 x 32
+========================================================== */
+
+.timeline .step .timeline-icon {
+  width: 32px !important;
+  height: 32px !important;
+
+  min-width: 32px !important;
+  min-height: 32px !important;
+
+  max-width: 32px !important;
+  max-height: 32px !important;
+
+  flex: 0 0 32px !important;
+
+  box-sizing: border-box !important;
+
+  border-radius: 50% !important;
+
+  background: #e8eeee !important;
+
+  border: 2px solid #b0bec5 !important;
+
+  color: #78909c !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  z-index: 2;
+
+  transition: all 0.3s ease;
+}
+
+/* ==========================================================
+   ICON INSIDE CIRCLE
+========================================================== */
+
+.timeline .step .timeline-icon i {
+  width: auto !important;
+  height: auto !important;
+
+  font-size: 14px !important;
+
+  line-height: 1 !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ==========================================================
+   ACTIVE STEP
+========================================================== */
+
+.timeline .step.active {
+  opacity: 1;
+}
+
+/* ==========================================================
+   ACTIVE CIRCLE
+========================================================== */
+
+.timeline .step.active .timeline-icon {
+  width: 32px !important;
+  height: 32px !important;
+
+  min-width: 32px !important;
+  min-height: 32px !important;
+
+  max-width: 32px !important;
+  max-height: 32px !important;
+
+  flex: 0 0 32px !important;
+
+  border-radius: 50% !important;
+
+  background: #2e7d32 !important;
+
+  border: 2px solid #2e7d32 !important;
+
+  color: #ffffff !important;
+
+  box-shadow: 0 0 0 6px rgba(102, 187, 106, 0.18) !important;
+}
+
+/* ==========================================================
+   TIMELINE CONTENT
+========================================================== */
+
+.timeline .step .timeline-content {
+  flex: 1;
+}
+
+.timeline .step .timeline-content h3 {
+  color: #78909c;
+
+  font-size: 17px;
+
+  margin-bottom: 5px;
+
+  transition: all 0.3s ease;
+}
+
+.timeline .step.active .timeline-content h3 {
+  color: #1b5e20;
+
+  font-weight: 700;
+}
+
+.timeline .step .timeline-content p {
+  color: #9e9e9e;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  transition: all 0.3s ease;
+}
+
+.timeline .step.active .timeline-content p {
+  color: #546e7a;
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 480px) {
+  .timeline {
+    margin-left: 5px;
+  }
+
+  .timeline .step {
+    gap: 12px;
+  }
+
+  .timeline .step .timeline-icon,
+  .timeline .step.active .timeline-icon {
+    width: 30px !important;
+    height: 30px !important;
+
+    min-width: 30px !important;
+    min-height: 30px !important;
+
+    max-width: 30px !important;
+    max-height: 30px !important;
+
+    flex: 0 0 30px !important;
+  }
+
+  .timeline .step .timeline-icon i {
+    font-size: 13px !important;
+  }
+
+  .timeline .step .timeline-content h3 {
+    font-size: 15px;
+  }
+
+  .timeline .step .timeline-content p {
+    font-size: 13px;
+  }
+}

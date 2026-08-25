@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FarmNest | Delivery Profile</title>
+
+    <link rel="stylesheet" href="css/delivery.css">
+
+    <link rel="stylesheet" href="css/profile.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="delivery-sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                🌱
+            </div>
+
+            <div>
+
+                <h2>
+                    FarmNest
+                </h2>
+
+                <span>
+                    Delivery
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="delivery-nav">
+
+
+            <a
+                href="dashboard.html"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    🏠
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="orders.html"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    📦
+                </span>
+
+                <span>
+                    Assigned Orders
+                </span>
+
+            </a>
+
+
+            <a
+                href="history.html"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    🛵
+                </span>
+
+                <span>
+                    Delivery History
+                </span>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="nav-item active"
+            >
+
+                <span class="nav-icon">
+                    👤
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="logout-btn"
+                id="logoutBtn"
+            >
+
+                <span>
+                    🚪
+                </span>
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="delivery-main">
+
+
+        <!-- HEADER -->
+
+        <header class="delivery-header">
+
+
+            <div class="header-left">
+
+
+                <button
+                    class="menu-btn"
+                    id="menuBtn"
+                >
+                    ☰
+                </button>
+
+
+                <div>
+
+                    <h1>
+                        My Profile
+                    </h1>
+
+                    <p>
+                        Manage your delivery partner profile
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="header-right">
+
+
+                <div class="delivery-status">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        Online
+                    </span>
+
+                </div>
+
+
+                <div class="delivery-user">
+
+                    <div
+                        class="user-avatar"
+                        id="headerAvatar"
+                    >
+                        🚚
+                    </div>
+
+
+                    <div class="user-info">
+
+                        <strong id="deliveryName">
+                            Delivery Partner
+                        </strong>
+
+                        <small>
+                            Delivery Executive
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             PROFILE CONTENT
+        ================================================== -->
+
+        <section class="profile-page">
+
+
+            <!-- PROFILE HERO -->
+
+            <div class="profile-hero">
+
+
+                <div class="profile-avatar">
+
+                    <span id="profileAvatar">
+                        🚚
+                    </span>
+
+                </div>
+
+
+                <div class="profile-hero-info">
+
+                    <span class="profile-role">
+                        DELIVERY PARTNER
+                    </span>
+
+
+                    <h2 id="profileName">
+                        Delivery Partner
+                    </h2>
+
+
+                    <p id="profileEmail">
+                        delivery@farmnest.com
+                    </p>
+
+
+                    <div class="profile-online">
+
+                        <span class="status-dot"></span>
+
+                        Available for Delivery
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PROFILE GRID
+            ================================================== -->
+
+            <div class="profile-grid">
+
+
+                <!-- PERSONAL INFORMATION -->
+
+                <section class="profile-card">
+
+
+                    <div class="profile-card-header">
+
+                        <div>
+
+                            <h3>
+                                👤 Personal Information
+                            </h3>
+
+                            <p>
+                                Your basic account information
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form id="profileForm">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                placeholder="Enter full name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Enter email address"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Enter phone number"
+                                maxlength="10"
+                                required
+                            >
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="profile-save-btn"
+                        >
+                            Save Changes
+                        </button>
+
+
+                    </form>
+
+
+                </section>
+
+
+
+                <!-- DELIVERY INFORMATION -->
+
+                <section class="profile-card">
+
+
+                    <div class="profile-card-header">
+
+                        <div>
+
+                            <h3>
+                                🛵 Delivery Information
+                            </h3>
+
+                            <p>
+                                Your delivery partner details
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-info-list">
+
+
+                        <div class="profile-info-row">
+
+                            <div class="profile-info-icon">
+                                🪪
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Delivery ID
+                                </span>
+
+                                <strong id="deliveryId">
+                                    FN-DEL-001
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-info-row">
+
+                            <div class="profile-info-icon">
+                                🛵
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Vehicle
+                                </span>
+
+                                <strong id="vehicle">
+                                    Delivery Bike
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-info-row">
+
+                            <div class="profile-info-icon">
+                                🔢
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Vehicle Number
+                                </span>
+
+                                <strong id="vehicleNumber">
+                                    MH-00-XX-0000
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="profile-info-row">
+
+                            <div class="profile-info-icon">
+                                📍
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    Service Area
+                                </span>
+
+                                <strong id="serviceArea">
+                                    Local Delivery
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DELIVERY STATISTICS
+            ================================================== -->
+
+            <section class="profile-card">
+
+
+                <div class="profile-card-header">
+
+                    <div>
+
+                        <h3>
+                            📊 Delivery Performance
+                        </h3>
+
+                        <p>
+                            Your delivery statistics
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-performance">
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-icon">
+                            📦
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Total Deliveries
+                            </span>
+
+                            <strong id="profileTotalDeliveries">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-icon">
+                            ✅
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Successful Deliveries
+                            </span>
+
+                            <strong id="profileSuccessfulDeliveries">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-icon">
+                            ⭐
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Rating
+                            </span>
+
+                            <strong>
+                                5.0 ⭐
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <footer class="delivery-footer">
+
+            <p>
+
+                © 2026
+
+                <strong>
+                    FarmNest
+                </strong>
+
+                — Connecting Farmers & Customers 🌱
+
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="JS/profile.js"></script>
+
+
+</body>
+
+</html>

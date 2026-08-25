@@ -1,0 +1,588 @@
+/* =========================================================
+   FARMNEST DELIVERY
+   DELIVERY HISTORY PAGE CSS
+========================================================= */
+
+
+/* =========================================================
+   HISTORY STATISTICS
+========================================================= */
+
+.history-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   HISTORY STAT CARD
+========================================================= */
+
+.history-stat-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.04);
+
+    transition: 0.25s ease;
+}
+
+.history-stat-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   HISTORY STAT ICON
+========================================================= */
+
+.history-stat-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    border-radius: 14px;
+
+    background: #e8f5e9;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+
+/* =========================================================
+   HISTORY STAT TEXT
+========================================================= */
+
+.history-stat-card span {
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+.history-stat-card strong {
+    display: block;
+
+    color: #1f2937;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   HISTORY FILTER
+========================================================= */
+
+.history-filter {
+    min-width: 145px;
+
+    padding: 10px 13px;
+
+    border: 1px solid #dce5de;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.history-filter:hover {
+    border-color: #66bb6a;
+}
+
+.history-filter:focus {
+    border-color: #2e7d32;
+
+    box-shadow:
+        0 0 0 3px rgba(46, 125, 50, 0.10);
+}
+
+
+/* =========================================================
+   HISTORY CARD
+========================================================= */
+
+.history-card {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   HISTORY CONTAINER
+========================================================= */
+
+.history-container {
+    padding: 8px 20px 20px;
+}
+
+
+/* =========================================================
+   HISTORY ITEM
+========================================================= */
+
+.history-item {
+    display: grid;
+
+    grid-template-columns:
+        55px
+        1fr
+        170px
+        120px
+        100px;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 17px 5px;
+
+    border-bottom:
+        1px solid #eeeeee;
+
+    transition: 0.2s ease;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-item:hover {
+    background: #fafcfb;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   HISTORY ORDER ICON
+========================================================= */
+
+.history-order-icon {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 12px;
+
+    background: #e8f5e9;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+
+/* =========================================================
+   HISTORY ORDER INFO
+========================================================= */
+
+.history-order-info strong {
+    display: block;
+
+    color: #1f2937;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+}
+
+.history-order-info span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   CUSTOMER INFO
+========================================================= */
+
+.history-customer strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 11px;
+
+    margin-bottom: 4px;
+}
+
+.history-customer span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   DELIVERY DATE
+========================================================= */
+
+.history-date strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 11px;
+
+    margin-bottom: 4px;
+}
+
+.history-date span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   DELIVERY AMOUNT
+========================================================= */
+
+.history-amount {
+    text-align: right;
+}
+
+.history-amount strong {
+    display: block;
+
+    color: #2e7d32;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   DELIVERED BADGE
+========================================================= */
+
+.delivered-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 6px 9px;
+
+    border-radius: 20px;
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   VIEW HISTORY BUTTON
+========================================================= */
+
+.history-view-btn {
+    border: none;
+
+    background: #f1f5f2;
+
+    color: #2e7d32;
+
+    padding: 8px 11px;
+
+    border-radius: 8px;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.history-view-btn:hover {
+    background: #dfeee1;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   EMPTY HISTORY
+========================================================= */
+
+.history-container .empty-state {
+    padding: 55px 20px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.history-loading {
+    text-align: center;
+
+    padding: 50px 20px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .history-item {
+        grid-template-columns:
+            50px
+            1fr
+            130px
+            90px;
+
+        gap: 12px;
+    }
+
+    .history-customer {
+        display: none;
+    }
+
+    .history-amount {
+        text-align: right;
+    }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .history-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .history-stats
+    .history-stat-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .history-item {
+        grid-template-columns:
+            48px
+            1fr
+            100px;
+
+        gap: 10px;
+    }
+
+    .history-date {
+        display: none;
+    }
+
+    .history-amount {
+        text-align: right;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .history-stats {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .history-stats
+    .history-stat-card:last-child {
+        grid-column: auto;
+    }
+
+    .history-stat-card {
+        padding: 16px;
+    }
+
+    .history-stat-icon {
+        width: 46px;
+        height: 46px;
+
+        font-size: 20px;
+    }
+
+    .history-stat-card strong {
+        font-size: 20px;
+    }
+
+
+    /* CARD HEADER */
+
+    .history-card .card-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+    .history-filter {
+        width: 100%;
+    }
+
+
+    /* HISTORY LIST */
+
+    .history-container {
+        padding: 10px 14px 15px;
+    }
+
+    .history-item {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        padding: 15px 4px;
+    }
+
+    .history-order-icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 17px;
+    }
+
+    .history-order-info {
+        flex: 1;
+
+        min-width: 0;
+    }
+
+    .history-order-info strong {
+        font-size: 11px;
+    }
+
+    .history-order-info span {
+        font-size: 9px;
+    }
+
+    .history-amount {
+        text-align: right;
+
+        flex-shrink: 0;
+    }
+
+    .history-amount strong {
+        font-size: 11px;
+    }
+
+    .delivered-badge {
+        display: none;
+    }
+
+    .history-view-btn {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .history-container {
+        padding-left: 10px;
+
+        padding-right: 10px;
+    }
+
+    .history-item {
+        gap: 7px;
+    }
+
+    .history-order-icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: 15px;
+    }
+
+    .history-order-info strong {
+        font-size: 10px;
+    }
+
+    .history-amount strong {
+        font-size: 10px;
+    }
+}

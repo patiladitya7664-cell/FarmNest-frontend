@@ -1,0 +1,693 @@
+/* ==========================================================
+   FARMNEST - FARMER NOTIFICATION PAGE
+   Works with existing style.css
+========================================================== */
+
+/* ==========================================================
+   PAGE LAYOUT
+========================================================== */
+
+.main {
+  position: relative !important;
+  min-height: 100vh !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+/* ==========================================================
+   HEADER FIX
+   Prevent notification content from going behind header
+========================================================== */
+
+.main > header {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+
+  width: 100% !important;
+
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+
+  margin: 0 0 30px 0 !important;
+
+  z-index: 5 !important;
+}
+
+/* ==========================================================
+   NOTIFICATION HEADER
+========================================================== */
+
+.notification-header {
+  position: relative !important;
+
+  width: 100% !important;
+
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+
+  gap: 20px !important;
+
+  margin: 0 0 25px 0 !important;
+
+  padding: 0 !important;
+
+  clear: both !important;
+
+  z-index: 1 !important;
+
+  box-sizing: border-box !important;
+}
+
+.notification-header h2 {
+  margin: 0 0 6px 0 !important;
+}
+
+.notification-header p {
+  margin: 0 !important;
+  color: #777 !important;
+}
+
+/* ==========================================================
+   ACTION BUTTONS
+========================================================== */
+
+.notification-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+}
+
+.notification-actions button {
+  border: none !important;
+
+  padding: 10px 16px !important;
+
+  border-radius: 8px !important;
+
+  cursor: pointer !important;
+
+  font-weight: 600 !important;
+
+  background: #2e7d32 !important;
+
+  color: #ffffff !important;
+
+  transition: all 0.3s ease !important;
+}
+
+.notification-actions button:hover {
+  transform: translateY(-2px) !important;
+}
+
+.notification-actions .clear-btn {
+  background: #d32f2f !important;
+}
+
+/* ==========================================================
+   SUMMARY CARDS
+========================================================== */
+
+.notification-summary {
+  position: relative !important;
+
+  width: 100% !important;
+
+  display: grid !important;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+  gap: 20px !important;
+
+  margin: 0 0 25px 0 !important;
+
+  padding: 0 !important;
+
+  z-index: 1 !important;
+
+  box-sizing: border-box !important;
+}
+
+.summary-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+
+  padding: 20px !important;
+
+  border-radius: 14px !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 15px !important;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08) !important;
+
+  box-sizing: border-box !important;
+
+  transition: 0.3s ease !important;
+}
+
+.summary-card:hover {
+  transform: translateY(-3px) !important;
+}
+
+.summary-card i {
+  font-size: 25px !important;
+
+  color: #2e7d32 !important;
+}
+
+.summary-card h3 {
+  margin: 0 !important;
+
+  font-size: 24px !important;
+}
+
+.summary-card p {
+  margin: 5px 0 0 0 !important;
+
+  color: #777 !important;
+}
+
+/* ==========================================================
+   NOTIFICATION PANEL
+========================================================== */
+
+.notification-panel {
+  position: relative !important;
+
+  width: 100% !important;
+
+  background: rgba(255, 255, 255, 0.95) !important;
+
+  border-radius: 15px !important;
+
+  padding: 25px !important;
+
+  margin: 0 !important;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+
+  box-sizing: border-box !important;
+
+  z-index: 1 !important;
+}
+
+.notification-panel h2 {
+  margin: 0 0 20px 0 !important;
+}
+
+/* ==========================================================
+   NOTIFICATION LIST
+========================================================== */
+
+.notification-list {
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  gap: 12px !important;
+
+  width: 100% !important;
+}
+
+/* ==========================================================
+   NOTIFICATION ITEM
+========================================================== */
+
+.notification {
+  position: relative !important;
+
+  width: 100% !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 15px !important;
+
+  padding: 18px !important;
+
+  border-radius: 12px !important;
+
+  background: #f7f9f7 !important;
+
+  border-left: 5px solid #2e7d32 !important;
+
+  box-sizing: border-box !important;
+
+  transition: all 0.3s ease !important;
+}
+
+.notification:hover {
+  transform: translateX(3px) !important;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.notification.unread {
+  background: #eaf6eb !important;
+
+  border-left-color: #2e7d32 !important;
+}
+
+.notification.read {
+  opacity: 0.75 !important;
+
+  border-left-color: #aaa !important;
+}
+
+/* ==========================================================
+   NOTIFICATION ICON
+========================================================== */
+
+.notification-icon {
+  min-width: 45px !important;
+
+  width: 45px !important;
+
+  height: 45px !important;
+
+  border-radius: 50% !important;
+
+  display: flex !important;
+
+  justify-content: center !important;
+
+  align-items: center !important;
+
+  background: #2e7d32 !important;
+
+  color: #ffffff !important;
+
+  font-size: 18px !important;
+
+  flex-shrink: 0 !important;
+}
+
+/* ==========================================================
+   CONTENT
+========================================================== */
+
+.notification-content {
+  flex: 1 !important;
+
+  min-width: 0 !important;
+}
+
+.notification-content h3 {
+  margin: 0 0 5px 0 !important;
+
+  font-size: 16px !important;
+
+  color: #222 !important;
+}
+
+.notification-content p {
+  margin: 0 !important;
+
+  color: #666 !important;
+
+  font-size: 14px !important;
+
+  line-height: 1.5 !important;
+}
+
+.notification-time {
+  margin-top: 6px !important;
+
+  font-size: 12px !important;
+
+  color: #999 !important;
+}
+
+/* ==========================================================
+   NOTIFICATION BUTTONS
+========================================================== */
+
+.notification-buttons {
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 8px !important;
+
+  flex-shrink: 0 !important;
+}
+
+.notification-buttons button {
+  width: 35px !important;
+
+  height: 35px !important;
+
+  border: none !important;
+
+  border-radius: 7px !important;
+
+  cursor: pointer !important;
+
+  background: #e8f5e9 !important;
+
+  color: #2e7d32 !important;
+
+  transition: all 0.3s ease !important;
+}
+
+.notification-buttons button:hover {
+  background: #2e7d32 !important;
+
+  color: #ffffff !important;
+}
+
+.notification-buttons .delete-btn {
+  background: #ffebee !important;
+
+  color: #d32f2f !important;
+}
+
+.notification-buttons .delete-btn:hover {
+  background: #d32f2f !important;
+
+  color: #ffffff !important;
+}
+
+/* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.empty-notification {
+  text-align: center !important;
+
+  padding: 50px 20px !important;
+
+  color: #777 !important;
+}
+
+.empty-notification i {
+  display: block !important;
+
+  font-size: 50px !important;
+
+  color: #aaa !important;
+
+  margin-bottom: 15px !important;
+}
+
+.empty-notification h3 {
+  margin: 0 0 8px 0 !important;
+}
+
+.empty-notification p {
+  margin: 0 !important;
+}
+
+/* ==========================================================
+   SIDEBAR NOTIFICATION BADGE
+========================================================== */
+
+.notification-badge {
+  display: inline-block;
+
+  min-width: 20px;
+
+  padding: 2px 6px;
+
+  margin-left: 5px;
+
+  border-radius: 50%;
+
+  background: #d32f2f;
+
+  color: #ffffff;
+
+  font-size: 11px;
+
+  text-align: center;
+}
+
+/* ==========================================================
+   RESPONSIVE - TABLET
+========================================================== */
+
+@media (max-width: 900px) {
+  .notification-summary {
+    grid-template-columns: 1fr !important;
+  }
+
+  .notification {
+    align-items: flex-start !important;
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE - MOBILE
+========================================================== */
+
+@media (max-width: 600px) {
+  .main > header {
+    flex-direction: column !important;
+
+    align-items: flex-start !important;
+
+    gap: 15px !important;
+  }
+
+  .notification-header {
+    flex-direction: column !important;
+
+    align-items: flex-start !important;
+  }
+
+  .notification-actions {
+    width: 100% !important;
+  }
+
+  .notification-actions button {
+    flex: 1 !important;
+  }
+
+  .notification-panel {
+    padding: 15px !important;
+  }
+
+  .notification {
+    flex-wrap: wrap !important;
+
+    padding: 15px !important;
+  }
+
+  .notification-content {
+    width: calc(100% - 60px) !important;
+  }
+
+  .notification-buttons {
+    width: 100% !important;
+
+    justify-content: flex-end !important;
+  }
+}
+/* ==========================================================
+   FINAL NOTIFICATION POSITION FIX
+========================================================== */
+
+.main {
+  width: auto !important;
+  box-sizing: border-box !important;
+}
+
+
+/* Notification page sections */
+
+.main > .notification-header,
+.main > .notification-summary,
+.main > .notification-panel {
+  width: 100% !important;
+  max-width: none !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  float: none !important;
+
+  position: relative !important;
+
+  left: 0 !important;
+  right: auto !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/* Recent notification list */
+
+.notification-panel .notification-list {
+  width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  padding: 0 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  align-items: stretch !important;
+}
+
+
+/* Individual notification */
+
+.notification-panel .notification {
+  width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  left: 0 !important;
+  right: auto !important;
+
+  float: none !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/* Notification content */
+
+.notification-panel .notification-content {
+  flex: 1 1 auto !important;
+
+  width: auto !important;
+
+  margin: 0 !important;
+}
+
+
+/* Buttons */
+
+.notification-panel .notification-buttons {
+  margin-left: auto !important;
+}
+
+
+/* Prevent old grid/flex rules */
+
+.notification-panel .notification-list > * {
+  grid-column: auto !important;
+  grid-row: auto !important;
+}
+/* ==========================================================
+   FARMNEST NOTIFICATION - LEFT SIDE ALIGNMENT
+========================================================== */
+
+/* Main content must start after left sidebar */
+.main {
+  margin-left: 250px !important;
+  margin-right: 0 !important;
+
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+
+  direction: ltr !important;
+
+  text-align: left !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/* Header */
+.main > header {
+  width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  direction: ltr !important;
+
+  text-align: left !important;
+}
+
+
+/* Notification heading */
+.notification-header {
+  width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  direction: ltr !important;
+
+  text-align: left !important;
+
+  justify-content: space-between !important;
+}
+
+
+/* Summary */
+.notification-summary {
+  width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  direction: ltr !important;
+}
+
+
+/* Recent Notifications */
+.notification-panel {
+  width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  direction: ltr !important;
+
+  text-align: left !important;
+}
+
+
+/* Notification list */
+.notification-list {
+  width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+  direction: ltr !important;
+}
+
+
+/* Individual notification */
+.notification {
+  width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  direction: ltr !important;
+
+  text-align: left !important;
+}
+
+
+/* Notification content */
+.notification-content {
+  text-align: left !important;
+}
+
+
+/* Buttons stay on right of notification */
+.notification-buttons {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}

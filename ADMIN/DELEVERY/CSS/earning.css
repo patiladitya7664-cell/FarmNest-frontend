@@ -1,0 +1,764 @@
+/* =========================================================
+   FARMNEST DELIVERY
+   EARNING PAGE CSS
+========================================================= */
+
+
+/* =========================================================
+   EARNING PAGE
+========================================================= */
+
+.earning-page {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   EARNING HERO
+========================================================= */
+
+.earning-hero {
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 28px 32px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1b5e20,
+            #2e7d32
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 30px
+        rgba(46, 125, 50, 0.18);
+}
+
+.earning-hero::after {
+    content: "₹";
+
+    position: absolute;
+
+    right: 95px;
+
+    bottom: -55px;
+
+    font-size: 180px;
+
+    font-weight: 800;
+
+    opacity: 0.06;
+}
+
+
+/* =========================================================
+   HERO TEXT
+========================================================= */
+
+.earning-hero span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    opacity: 0.75;
+}
+
+.earning-hero h2 {
+    margin: 0 0 6px;
+
+    font-size: 34px;
+
+    line-height: 1.1;
+
+    font-weight: 700;
+}
+
+.earning-hero p {
+    margin: 0;
+
+    font-size: 11px;
+
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   HERO ICON
+========================================================= */
+
+.earning-hero-icon {
+    position: relative;
+
+    z-index: 1;
+
+    width: 72px;
+
+    height: 72px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.14);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.18);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 34px;
+}
+
+
+/* =========================================================
+   EARNING STATISTICS
+========================================================= */
+
+.earning-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   STAT CARD
+========================================================= */
+
+.earning-stat-card {
+    background: #ffffff;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.04);
+
+    transition: 0.25s ease;
+}
+
+.earning-stat-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   STAT ICON
+========================================================= */
+
+.earning-stat-icon {
+    width: 50px;
+
+    height: 50px;
+
+    flex-shrink: 0;
+
+    border-radius: 13px;
+
+    background: #e8f5e9;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   STAT TEXT
+========================================================= */
+
+.earning-stat-card span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #6b7280;
+
+    font-size: 10px;
+}
+
+.earning-stat-card strong {
+    display: block;
+
+    color: #2e7d32;
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   EARNING CARD
+========================================================= */
+
+.earning-card {
+    background: #ffffff;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.04);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.earning-card-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    border-bottom:
+        1px solid #eeeeee;
+}
+
+.earning-card-header h2 {
+    margin: 0 0 5px;
+
+    color: #1f2937;
+
+    font-size: 15px;
+}
+
+.earning-card-header p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.earning-filter {
+    min-width: 135px;
+
+    padding: 9px 12px;
+
+    border:
+        1px solid #dce5de;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-size: 10px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.earning-filter:focus {
+    border-color: #2e7d32;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(46, 125, 50, 0.09);
+}
+
+
+/* =========================================================
+   EARNING CONTAINER
+========================================================= */
+
+.earning-container {
+    padding: 0 20px 10px;
+}
+
+
+/* =========================================================
+   EARNING ROW
+========================================================= */
+
+.earning-row {
+    display: grid;
+
+    grid-template-columns:
+        55px
+        1fr
+        150px
+        130px
+        100px;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 17px 5px;
+
+    border-bottom:
+        1px solid #eeeeee;
+
+    transition: 0.2s ease;
+}
+
+.earning-row:last-child {
+    border-bottom: none;
+}
+
+.earning-row:hover {
+    background: #fafcfb;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   ORDER ICON
+========================================================= */
+
+.earning-order-icon {
+    width: 43px;
+
+    height: 43px;
+
+    border-radius: 11px;
+
+    background: #e8f5e9;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   ORDER INFO
+========================================================= */
+
+.earning-order-info strong {
+    display: block;
+
+    color: #1f2937;
+
+    font-size: 11px;
+
+    margin-bottom: 4px;
+}
+
+.earning-order-info span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   DELIVERY DATE
+========================================================= */
+
+.earning-date strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 10px;
+
+    margin-bottom: 4px;
+}
+
+.earning-date span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   ORDER VALUE
+========================================================= */
+
+.earning-order-value strong {
+    display: block;
+
+    color: #374151;
+
+    font-size: 11px;
+}
+
+.earning-order-value span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 9px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   DELIVERY EARNING
+========================================================= */
+
+.earning-amount {
+    text-align: right;
+}
+
+.earning-amount strong {
+    display: block;
+
+    color: #2e7d32;
+
+    font-size: 13px;
+}
+
+.earning-amount span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #9ca3af;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   EARNED BADGE
+========================================================= */
+
+.earned-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.earning-loading {
+    padding: 50px 20px;
+
+    text-align: center;
+
+    color: #6b7280;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.earning-container .empty-state {
+    padding: 55px 20px;
+
+    text-align: center;
+}
+
+.earning-container .empty-icon {
+    font-size: 40px;
+
+    margin-bottom: 12px;
+}
+
+.earning-container .empty-state h3 {
+    margin: 0 0 6px;
+
+    color: #374151;
+
+    font-size: 14px;
+}
+
+.earning-container .empty-state p {
+    margin: 0;
+
+    color: #9ca3af;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .earning-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .earning-row {
+        grid-template-columns:
+            50px
+            1fr
+            120px
+            100px;
+    }
+
+    .earning-date {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .earning-hero {
+        padding: 24px;
+    }
+
+    .earning-hero h2 {
+        font-size: 29px;
+    }
+
+    .earning-row {
+        grid-template-columns:
+            48px
+            1fr
+            100px;
+    }
+
+    .earning-order-value {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .earning-page {
+        gap: 14px;
+    }
+
+    .earning-hero {
+        padding: 21px;
+
+        border-radius: 15px;
+    }
+
+    .earning-hero h2 {
+        font-size: 26px;
+    }
+
+    .earning-hero p {
+        font-size: 9px;
+    }
+
+    .earning-hero-icon {
+        width: 55px;
+
+        height: 55px;
+
+        border-radius: 15px;
+
+        font-size: 26px;
+    }
+
+
+    .earning-stats {
+        grid-template-columns: 1fr;
+
+        gap: 11px;
+    }
+
+    .earning-stat-card {
+        padding: 15px;
+    }
+
+    .earning-stat-icon {
+        width: 44px;
+
+        height: 44px;
+
+        font-size: 19px;
+    }
+
+
+    .earning-card-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 16px;
+    }
+
+    .earning-filter {
+        width: 100%;
+    }
+
+
+    .earning-container {
+        padding:
+            0 12px 8px;
+    }
+
+    .earning-row {
+        display: flex;
+
+        align-items: center;
+
+        gap: 9px;
+
+        padding: 14px 3px;
+    }
+
+    .earning-order-icon {
+        width: 38px;
+
+        height: 38px;
+
+        font-size: 16px;
+    }
+
+    .earning-order-info {
+        flex: 1;
+
+        min-width: 0;
+    }
+
+    .earning-order-info strong {
+        font-size: 10px;
+    }
+
+    .earning-order-info span {
+        white-space: nowrap;
+
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+    .earning-amount {
+        flex-shrink: 0;
+    }
+
+    .earning-amount strong {
+        font-size: 11px;
+    }
+
+    .earned-badge {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .earning-hero {
+        padding: 18px;
+    }
+
+    .earning-hero h2 {
+        font-size: 23px;
+    }
+
+    .earning-hero-icon {
+        width: 48px;
+
+        height: 48px;
+
+        font-size: 22px;
+    }
+
+    .earning-stat-card strong {
+        font-size: 18px;
+    }
+}

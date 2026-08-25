@@ -4,135 +4,118 @@
 ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+  const API_URL = "http://localhost:5000/api/products";
 
-    const API_URL = "http://localhost:5000/api/products";
+  const searchBox = document.getElementById("productSearch");
+  const categoryFilter = document.getElementById("categoryFilter");
+  const productGrid = document.getElementById("productGrid");
 
-const searchBox = document.getElementById("productSearch");
-const categoryFilter = document.getElementById("categoryFilter");
-const productGrid = document.getElementById("productGrid");
+  let allProducts = [];
 
-let allProducts = [];
-
-    /* =====================================================
+  /* =====================================================
        FETCH PRODUCTS FROM BACKEND
     ===================================================== */
 
-    async function loadProducts() {
-
-        try {
-
-            productGrid.innerHTML = `
+  async function loadProducts() {
+    try {
+      productGrid.innerHTML = `
                 <p style="text-align:center;">
                     Loading products...
                 </p>
             `;
 
-            const response = await fetch(API_URL);
+      const response = await fetch(API_URL);
 
-            if (!response.ok) {
-                throw new Error("Failed to fetch products");
-            }
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
 
-            const data = await response.json();
+      const data = await response.json();
 
-            allProducts = data.products || [];
+      allProducts = data.products || [];
 
-            renderProducts(allProducts);
+      renderProducts(allProducts);
+    } catch (error) {
+      console.error("Product API Error:", error);
 
-        } catch (error) {
-
-            console.error("Product API Error:", error);
-
-            productGrid.innerHTML = `
+      productGrid.innerHTML = `
                 <div style="text-align:center; width:100%;">
                     <h3>Unable to load products</h3>
                     <p>Please make sure FarmNest backend is running.</p>
                 </div>
             `;
-        }
     }
+  }
 
-
-    /* =====================================================
+  /* =====================================================
        CATEGORY CONVERSION
     ===================================================== */
 
-    function normalizeCategory(category) {
-
-        if (!category) {
-            return "";
-        }
-
-        const value = category.toLowerCase();
-
-        const categoryMap = {
-            cereals: "grains",
-            grains: "grains",
-            pulses: "pulses",
-            vegetables: "vegetables",
-            spices: "spices",
-            fruits: "fruits",
-            dairy: "dairy",
-            organic: "organic"
-        };
-
-        return categoryMap[value] || value;
+  function normalizeCategory(category) {
+    if (!category) {
+      return "";
     }
 
+    const value = category.toLowerCase();
 
-    /* =====================================================
+    const categoryMap = {
+      cereals: "grains",
+      grains: "grains",
+      pulses: "pulses",
+      vegetables: "vegetables",
+      spices: "spices",
+      fruits: "fruits",
+      dairy: "dairy",
+      organic: "organic",
+    };
+
+    return categoryMap[value] || value;
+  }
+
+  /* =====================================================
        IMAGE PATH
     ===================================================== */
 
-    function getProductImage(image) {
-
-        if (!image) {
-            return "../images/wheat.jpg";
-        }
-
-        return "../images/" + image;
+  function getProductImage(image) {
+    if (!image) {
+      return "../images/wheat.jpg";
     }
 
+    return "../images/" + image;
+  }
 
-    /* =====================================================
+  /* =====================================================
        RENDER PRODUCTS
     ===================================================== */
 
-    function renderProducts(products) {
+  function renderProducts(products) {
+    productGrid.innerHTML = "";
 
-        productGrid.innerHTML = "";
-
-        if (products.length === 0) {
-
-            productGrid.innerHTML = `
+    if (products.length === 0) {
+      productGrid.innerHTML = `
                 <div style="text-align:center; width:100%;">
                     <h3>No products found</h3>
                     <p>Try another search or category.</p>
                 </div>
             `;
 
-            return;
-        }
+      return;
+    }
 
+    products.forEach((product) => {
+      const farmerName = product.farmerId?.name || "FarmNest Farmer";
 
-        products.forEach(product => {
+      const category = normalizeCategory(product.category);
 
-            const farmerName =
-                product.farmerId?.name || "FarmNest Farmer";
+      const card = document.createElement("div");
 
-            const category =
-                normalizeCategory(product.category);
+      card.className = "product-card";
 
-            const card = document.createElement("div");
+      card.dataset.category = category;
 
-            card.className = "product-card";
+      card.dataset.id = product._id;
 
-            card.dataset.category = category;
-
-            card.dataset.id = product._id;
-
-
-            card.innerHTML = `
+      card.innerHTML = `
 
     <div class="wishlist">
         <i class="fa-solid fa-heart"></i>
@@ -171,256 +154,152 @@ let allProducts = [];
 
 `;
 
-            
+      productGrid.appendChild(card);
+    });
 
+    attachProductEvents();
+  }
 
-            productGrid.appendChild(card);
-
-        });
-
-
-        attachProductEvents();
-    }
-
-
-    /* =====================================================
+  /* =====================================================
        SEARCH + CATEGORY FILTER
     ===================================================== */
 
-    function filterProducts() {
+  function filterProducts() {
+    const searchValue = searchBox ? searchBox.value.toLowerCase().trim() : "";
 
-        const searchValue =
-            searchBox
-                ? searchBox.value.toLowerCase().trim()
-                : "";
+    const categoryValue = categoryFilter
+      ? categoryFilter.value.toLowerCase()
+      : "all";
 
-        const categoryValue =
-            categoryFilter
-                ? categoryFilter.value.toLowerCase()
-                : "all";
+    const filteredProducts = allProducts.filter((product) => {
+      const productName = product.name.toLowerCase();
 
+      const productCategory = normalizeCategory(product.category);
 
-        const filteredProducts = allProducts.filter(product => {
+      const matchesSearch = productName.includes(searchValue);
 
-            const productName =
-                product.name.toLowerCase();
+      const matchesCategory =
+        categoryValue === "all" || productCategory === categoryValue;
 
-            const productCategory =
-                normalizeCategory(product.category);
+      return matchesSearch && matchesCategory;
+    });
 
+    renderProducts(filteredProducts);
+  }
 
-            const matchesSearch =
-                productName.includes(searchValue);
+  if (searchBox) {
+    searchBox.addEventListener("input", filterProducts);
+  }
 
+  if (categoryFilter) {
+    categoryFilter.addEventListener("change", filterProducts);
+  }
 
-            const matchesCategory =
-                categoryValue === "all" ||
-                productCategory === categoryValue;
-
-
-            return matchesSearch && matchesCategory;
-
-        });
-
-
-        renderProducts(filteredProducts);
-    }
-
-
-    if (searchBox) {
-
-        searchBox.addEventListener(
-            "input",
-            filterProducts
-        );
-
-    }
-
-
-    if (categoryFilter) {
-
-        categoryFilter.addEventListener(
-            "change",
-            filterProducts
-        );
-
-    }
-
-
-    /* =====================================================
+  /* =====================================================
        CART + WISHLIST
     ===================================================== */
 
-    function attachProductEvents() {
+  function attachProductEvents() {
+    /* ================= CART ================= */
 
-        /* ================= CART ================= */
+    document.querySelectorAll(".cart-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const card = button.closest(".product-card");
 
-        document
-            .querySelectorAll(".cart-btn")
-            .forEach(button => {
+        const productId = card.dataset.id;
 
-                button.addEventListener("click", () => {
+        const product = allProducts.find((item) => item._id === productId);
 
-                    const card =
-                        button.closest(".product-card");
+        if (!product) {
+          return;
+        }
 
-                    const productId =
-                        card.dataset.id;
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-                    const product =
-                        allProducts.find(
-                            item => item._id === productId
-                        );
+        const existingProduct = cart.find(
+          (item) => item.productId === product._id,
+        );
 
-                    if (!product) {
-                        return;
-                    }
+        if (existingProduct) {
+          existingProduct.quantity += 1;
+        } else {
 
+            
+          cart.push({
+            productId: product._id,
 
-                    let cart =
-                        JSON.parse(
-                            localStorage.getItem("cart")
-                        ) || [];
+            name: product.name,
 
+            price: product.price,
 
-                    const existingProduct =
-                        cart.find(
-                            item => item.productId === product._id
-                        );
+            quantity: 1,
 
+            unit: product.unit,
 
-                    if (existingProduct) {
+            weightPerUnit: product.weightPerUnit,
 
-                        existingProduct.quantity += 1;
+            image: getProductImage(product.image),
 
-                    } else {
+            farmerId: product.farmerId?._id || null,
+          });
+        }
 
-                        cart.push({
+        localStorage.setItem("cart", JSON.stringify(cart));
 
-                            productId: product._id,
+        alert(product.name + " added to Cart 🛒");
+      });
+    });
 
-                            name: product.name,
+    /* ================= WISHLIST ================= */
 
-                            price: product.price,
+    document.querySelectorAll(".wishlist").forEach((button) => {
+      button.addEventListener("click", () => {
+        const card = button.closest(".product-card");
 
-                            quantity: 1,
+        const productId = card.dataset.id;
 
-                            unit: product.unit,
+        const product = allProducts.find((item) => item._id === productId);
 
-                            image: getProductImage(product.image),
+        if (!product) {
+          return;
+        }
 
-                            farmerId:
-                                product.farmerId?._id || null
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
-                        });
+        const alreadyExists = wishlist.some(
+          (item) => item.productId === product._id,
+        );
 
-                    }
+        if (alreadyExists) {
+          alert("Product already in Wishlist ❤️");
 
+          return;
+        }
 
-                    localStorage.setItem(
-                        "cart",
-                        JSON.stringify(cart)
-                    );
+        wishlist.push({
+          productId: product._id,
 
+          name: product.name,
 
-                    alert(
-                        product.name +
-                        " added to Cart 🛒"
-                    );
+          price: product.price,
 
-                });
+          image: getProductImage(product.image),
 
-            });
+          farmerId: product.farmerId?._id || null,
+        });
 
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-        /* ================= WISHLIST ================= */
+        button.style.color = "red";
 
-        document
-            .querySelectorAll(".wishlist")
-            .forEach(button => {
+        alert(product.name + " added to Wishlist ❤️");
+      });
+    });
+  }
 
-                button.addEventListener("click", () => {
-
-                    const card =
-                        button.closest(".product-card");
-
-                    const productId =
-                        card.dataset.id;
-
-                    const product =
-                        allProducts.find(
-                            item => item._id === productId
-                        );
-
-                    if (!product) {
-                        return;
-                    }
-
-
-                    let wishlist =
-                        JSON.parse(
-                            localStorage.getItem("wishlist")
-                        ) || [];
-
-
-                    const alreadyExists =
-                        wishlist.some(
-                            item =>
-                                item.productId === product._id
-                        );
-
-
-                    if (alreadyExists) {
-
-                        alert(
-                            "Product already in Wishlist ❤️"
-                        );
-
-                        return;
-                    }
-
-
-                    wishlist.push({
-
-                        productId: product._id,
-
-                        name: product.name,
-
-                        price: product.price,
-
-                        image:
-                            getProductImage(product.image),
-
-                        farmerId:
-                            product.farmerId?._id || null
-
-                    });
-
-
-                    localStorage.setItem(
-                        "wishlist",
-                        JSON.stringify(wishlist)
-                    );
-
-
-                    button.style.color = "red";
-
-                    alert(
-                        product.name +
-                        " added to Wishlist ❤️"
-                    );
-
-                });
-
-            });
-
-    }
-
-
-    /* =====================================================
+  /* =====================================================
        START
     ===================================================== */
 
-    loadProducts();
-
+  loadProducts();
 });

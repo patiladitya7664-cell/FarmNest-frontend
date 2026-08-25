@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>FarmNest | Assigned Orders</title>
+
+    <link rel="stylesheet" href="css/delivery.css" />
+    <link rel="stylesheet" href="css/order.css" />
+  </head>
+
+  <body>
+    <!-- ==============================
+         SIDEBAR
+    =============================== -->
+
+    <aside class="delivery-sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">🌱</div>
+
+        <div>
+          <h2>FarmNest</h2>
+          <span>Delivery</span>
+        </div>
+      </div>
+
+      <nav class="delivery-nav">
+        <a href="dashboard.html" class="nav-item">
+          <span class="nav-icon"> 🏠 </span>
+
+          <span> Dashboard </span>
+        </a>
+
+        <a href="orders.html" class="nav-item active">
+          <span class="nav-icon"> 📦 </span>
+
+          <span> Assigned Orders </span>
+        </a>
+
+        <a href="history.html" class="nav-item">
+          <span class="nav-icon"> 🛵 </span>
+
+          <span> Delivery History </span>
+        </a>
+
+        <a href="profile.html" class="nav-item">
+          <span class="nav-icon"> 👤 </span>
+
+          <span> Profile </span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="logout-btn" id="logoutBtn">
+          <span> 🚪 </span>
+
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- ==============================
+         MAIN CONTENT
+    =============================== -->
+
+    <main class="delivery-main">
+      <!-- HEADER -->
+
+      <header class="delivery-header">
+        <div class="header-left">
+          <button class="menu-btn" id="menuBtn">☰</button>
+
+          <div>
+            <h1>Assigned Orders</h1>
+
+            <p>View and manage your assigned deliveries</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="delivery-status">
+            <span class="status-dot"></span>
+
+            <span> Online </span>
+          </div>
+
+          <div class="delivery-user">
+            <div class="user-avatar">🚚</div>
+
+            <div class="user-info">
+              <strong id="deliveryName"> Delivery Partner </strong>
+
+              <small> Delivery Executive </small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ==============================
+             PAGE INTRO
+        =============================== -->
+
+      <section class="welcome-section">
+        <div class="welcome-content">
+          <span class="welcome-label"> DELIVERY MANAGEMENT </span>
+
+          <h2>Your Assigned Orders 📦</h2>
+
+          <p>Pick up and deliver orders assigned to you.</p>
+        </div>
+
+        <div class="welcome-icon">📦</div>
+      </section>
+
+      <!-- ==============================
+             ORDER FILTERS
+        =============================== -->
+
+      <section class="dashboard-card">
+        <div class="card-header">
+          <div>
+            <h2>Orders</h2>
+
+            <p>Manage your current delivery assignments</p>
+          </div>
+
+          <select id="statusFilter" class="order-filter">
+            <option value="all">All Orders</option>
+
+            <option value="Pending">Pending</option>
+
+            <option value="Confirmed">Confirmed</option>
+
+            <option value="Processing">Processing</option>
+
+            <option value="Out for Delivery">Out for Delivery</option>
+
+            <option value="Delivered">Delivered</option>
+          </select>
+        </div>
+
+        <!-- ==============================
+                 ORDERS CONTAINER
+            =============================== -->
+
+        <div id="ordersContainer" class="orders-container">
+          <!-- Orders will be loaded by JavaScript -->
+
+          <div class="empty-state">
+            <div class="empty-icon">📦</div>
+
+            <h3>Loading orders...</h3>
+
+            <p>Please wait while we load your assigned orders.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================
+             FOOTER
+        =============================== -->
+
+      <footer class="delivery-footer">
+        <p>
+          © 2026
+          <strong>FarmNest</strong>
+          — Connecting Farmers & Customers 🌱
+        </p>
+      </footer>
+    </main>
+
+    <!-- ==============================
+         JAVASCRIPT
+    ============================== -->
+
+    <script src="JS/orders.js"></script>
+  </body>
+</html>

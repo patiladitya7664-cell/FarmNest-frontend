@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Notifications | FarmNest</title>
+
+    <!-- Main FarmNest CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- Notification CSS -->
+    <link rel="stylesheet" href="../css/notification.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+      <div class="logo">
+
+        <img
+          src="../images/web-logo/farmnest-logo.png"
+          alt="FarmNest Logo"
+        />
+
+        <h2>FarmNest</h2>
+
+      </div>
+
+
+      <ul>
+
+        <li>
+          <a href="farmer-dashboard.html">
+            <i class="fa fa-home"></i>
+            Dashboard
+          </a>
+        </li>
+
+
+        <li>
+          <a href="my-crops.html">
+            <i class="fa fa-seedling"></i>
+            My Crops
+          </a>
+        </li>
+
+
+        <li>
+          <a href="add-product.html">
+            <i class="fa fa-plus"></i>
+            Add Product
+          </a>
+        </li>
+
+
+        <li>
+          <a href="inventory.html">
+            <i class="fa fa-box"></i>
+            Inventory
+          </a>
+        </li>
+
+
+        <li>
+          <a href="farmer-orders.html">
+            <i class="fa fa-shopping-cart"></i>
+            Orders
+          </a>
+        </li>
+
+
+        <li>
+          <a href="storage.html">
+            <i class="fa fa-warehouse"></i>
+            Smart Storage
+          </a>
+        </li>
+
+
+        <li>
+          <a href="earnings.html">
+            <i class="fa fa-money-bill"></i>
+            Earnings
+          </a>
+        </li>
+
+
+        <li>
+          <a href="analytics.html">
+            <i class="fa fa-chart-line"></i>
+            Analytics
+          </a>
+        </li>
+
+
+        <li>
+          <a href="reports.html">
+            <i class="fa fa-file"></i>
+            Reports
+          </a>
+        </li>
+
+
+        <!-- ACTIVE -->
+
+        <li class="active">
+
+          <a href="notifications.html">
+
+            <i class="fa fa-bell"></i>
+
+            Notifications
+
+            <span
+              id="sidebarNotificationCount"
+              class="notification-badge"
+            >
+              0
+            </span>
+
+          </a>
+
+        </li>
+
+
+        <li>
+          <a href="profile.html">
+            <i class="fa fa-user"></i>
+            Profile
+          </a>
+        </li>
+
+      </ul>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <div class="main">
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <header>
+
+        <div>
+
+          <h1>Notifications</h1>
+
+          <p>
+            Stay updated with your FarmNest activities 🔔
+          </p>
+
+        </div>
+
+
+        <div class="profile">
+
+          <img
+            src="../images/farmer.png"
+            alt="Farmer"
+          />
+
+          <span>
+            Aditya Farmer
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <!-- ===================================================
+           NOTIFICATION HEADER
+      ==================================================== -->
+
+      <section class="notification-header">
+
+        <div>
+
+          <h2>
+            Farmer Notifications
+          </h2>
+
+          <p>
+
+            You have
+
+            <strong id="headerUnreadCount">
+              0
+            </strong>
+
+            unread notifications.
+
+          </p>
+
+        </div>
+
+
+        <div class="notification-actions">
+
+          <button id="markAllBtn">
+
+            <i class="fa fa-check-double"></i>
+
+            Mark All as Read
+
+          </button>
+
+
+          <button
+            id="clearAllBtn"
+            class="clear-btn"
+          >
+
+            <i class="fa fa-trash"></i>
+
+            Clear All
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           SUMMARY CARDS
+      ==================================================== -->
+
+      <section class="notification-summary">
+
+
+        <!-- TOTAL -->
+
+        <div class="summary-card">
+
+          <i class="fa fa-bell"></i>
+
+          <div>
+
+            <h3 id="totalNotifications">
+              0
+            </h3>
+
+            <p>
+              Total Notifications
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- UNREAD -->
+
+        <div class="summary-card">
+
+          <i class="fa fa-envelope"></i>
+
+          <div>
+
+            <h3 id="unreadNotifications">
+              0
+            </h3>
+
+            <p>
+              Unread
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- READ -->
+
+        <div class="summary-card">
+
+          <i class="fa fa-check-circle"></i>
+
+          <div>
+
+            <h3 id="readNotifications">
+              0
+            </h3>
+
+            <p>
+              Read
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+      <!-- ===================================================
+           NOTIFICATION PANEL
+      ==================================================== -->
+
+      <section class="notification-panel">
+
+
+        <h2>
+
+          <i class="fa fa-bell"></i>
+
+          Recent Notifications
+
+        </h2>
+
+
+        <!-- JavaScript will load notifications here -->
+
+        <div
+          id="notificationList"
+          class="notification-list"
+        ></div>
+
+
+        <!-- Empty State -->
+
+        <div
+          id="emptyNotification"
+          class="empty-notification"
+          style="display: none"
+        >
+
+          <i class="fa fa-bell-slash"></i>
+
+          <h3>
+            No Notifications
+          </h3>
+
+          <p>
+            You don't have any notifications right now.
+          </p>
+
+        </div>
+
+
+      </section>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         FARMER DASHBOARD JS
+    ====================================================== -->
+
+    <script src="../js/farmer-dashboard.js"></script>
+
+
+    <!-- =====================================================
+         NOTIFICATION JS
+    ====================================================== -->
+
+    <script src="../js/notification.js"></script>
+
+  </body>
+</html>

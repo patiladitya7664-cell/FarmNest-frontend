@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FarmNest | Delivery Earnings</title>
+
+    <link
+        rel="stylesheet"
+        href="css/delivery.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/earning.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="delivery-sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+                🌱
+            </div>
+
+            <div>
+
+                <h2>
+                    FarmNest
+                </h2>
+
+                <span>
+                    Delivery
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="delivery-nav">
+
+
+            <a
+                href="dashboard.html"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    🏠
+                </span>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="orders.html"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    📦
+                </span>
+
+                <span>
+                    Assigned Orders
+                </span>
+
+            </a>
+
+
+            <a
+                href="history.html"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    🛵
+                </span>
+
+                <span>
+                    Delivery History
+                </span>
+
+            </a>
+
+
+            <a
+                href="earning.html"
+                class="nav-item active"
+            >
+
+                <span class="nav-icon">
+                    💰
+                </span>
+
+                <span>
+                    Earnings
+                </span>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="nav-item"
+            >
+
+                <span class="nav-icon">
+                    👤
+                </span>
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="logout-btn"
+                id="logoutBtn"
+            >
+
+                <span>
+                    🚪
+                </span>
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="delivery-main">
+
+
+        <!-- HEADER -->
+
+        <header class="delivery-header">
+
+
+            <div class="header-left">
+
+
+                <button
+                    class="menu-btn"
+                    id="menuBtn"
+                >
+                    ☰
+                </button>
+
+
+                <div>
+
+                    <h1>
+                        Earnings
+                    </h1>
+
+                    <p>
+                        Track your delivery earnings
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="header-right">
+
+
+                <div class="delivery-status">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        Online
+                    </span>
+
+                </div>
+
+
+                <div class="delivery-user">
+
+                    <div
+                        class="user-avatar"
+                        id="headerAvatar"
+                    >
+                        🚚
+                    </div>
+
+
+                    <div class="user-info">
+
+                        <strong id="deliveryName">
+                            Delivery Partner
+                        </strong>
+
+                        <small>
+                            Delivery Executive
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             EARNINGS CONTENT
+        ================================================== -->
+
+        <section class="earning-page">
+
+
+            <!-- HERO -->
+
+            <div class="earning-hero">
+
+
+                <div>
+
+                    <span>
+                        TOTAL EARNINGS
+                    </span>
+
+
+                    <h2 id="totalEarnings">
+                        ₹0
+                    </h2>
+
+
+                    <p>
+                        From successfully completed deliveries
+                    </p>
+
+                </div>
+
+
+                <div class="earning-hero-icon">
+                    💰
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EARNING STATISTICS
+            ================================================== -->
+
+            <div class="earning-stats">
+
+
+                <div class="earning-stat-card">
+
+                    <div class="earning-stat-icon">
+                        📅
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Today's Earnings
+                        </span>
+
+                        <strong id="todayEarnings">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="earning-stat-card">
+
+                    <div class="earning-stat-icon">
+                        📊
+                    </div>
+
+                    <div>
+
+                        <span>
+                            This Week
+                        </span>
+
+                        <strong id="weekEarnings">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="earning-stat-card">
+
+                    <div class="earning-stat-icon">
+                        🗓️
+                    </div>
+
+                    <div>
+
+                        <span>
+                            This Month
+                        </span>
+
+                        <strong id="monthEarnings">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="earning-stat-card">
+
+                    <div class="earning-stat-icon">
+                        📦
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Delivered Orders
+                        </span>
+
+                        <strong id="deliveredOrders">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EARNING HISTORY
+            ================================================== -->
+
+            <section class="earning-card">
+
+
+                <div class="earning-card-header">
+
+
+                    <div>
+
+                        <h2>
+                            Earnings History
+                        </h2>
+
+                        <p>
+                            Earnings from completed deliveries
+                        </p>
+
+                    </div>
+
+
+                    <select
+                        id="earningFilter"
+                        class="earning-filter"
+                    >
+
+                        <option value="all">
+                            All
+                        </option>
+
+                        <option value="today">
+                            Today
+                        </option>
+
+                        <option value="week">
+                            This Week
+                        </option>
+
+                        <option value="month">
+                            This Month
+                        </option>
+
+                    </select>
+
+
+                </div>
+
+
+
+                <!-- HISTORY -->
+
+                <div
+                    id="earningContainer"
+                    class="earning-container"
+                >
+
+                    <div class="earning-loading">
+
+                        💰 Loading earnings...
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <footer class="delivery-footer">
+
+            <p>
+
+                © 2026
+
+                <strong>
+                    FarmNest
+                </strong>
+
+                — Connecting Farmers & Customers 🌱
+
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script
+        src="JS/earnings.js"
+    ></script>
+
+
+</body>
+
+</html>

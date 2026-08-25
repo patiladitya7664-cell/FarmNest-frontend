@@ -1,0 +1,707 @@
+
+/* =========================================================
+   FARMNEST DELIVERY
+   ORDER DETAILS PAGE CSS
+========================================================= */
+
+
+/* =========================================================
+   ORDER DETAILS CONTAINER
+========================================================= */
+
+#orderDetailsContainer {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   DETAILS HEADER
+========================================================= */
+
+.details-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 25px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.details-order-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.details-order-icon {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 16px;
+
+    background: #e8f5e9;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+}
+
+.details-order-info h2 {
+    font-size: 20px;
+
+    color: #1f2937;
+
+    margin-bottom: 5px;
+}
+
+.details-order-info p {
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   DETAILS STATUS
+========================================================= */
+
+.details-status {
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.details-status.pending {
+    background: #fff7e6;
+
+    color: #b45309;
+}
+
+.details-status.confirmed {
+    background: #e8f0ff;
+
+    color: #1d4ed8;
+}
+
+.details-status.processing {
+    background: #f3e8ff;
+
+    color: #7e22ce;
+}
+
+.details-status.out-for-delivery,
+.details-status.shipped {
+    background: #e0f2fe;
+
+    color: #0369a1;
+}
+
+.details-status.delivered {
+    background: #e8f5e9;
+
+    color: #2e7d32;
+}
+
+.details-status.cancelled {
+    background: #fee2e2;
+
+    color: #b91c1c;
+}
+
+
+/* =========================================================
+   DETAILS CONTENT
+========================================================= */
+
+.details-content {
+    padding: 25px;
+}
+
+
+/* =========================================================
+   INFORMATION GRID
+========================================================= */
+
+.details-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   INFORMATION BOX
+========================================================= */
+
+.info-box {
+    padding: 20px;
+
+    border-radius: 14px;
+
+    background: #f8faf8;
+
+    border: 1px solid #edf2ee;
+}
+
+.info-box h3 {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 14px;
+
+    color: #1f2937;
+
+    margin-bottom: 15px;
+}
+
+.info-row {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 9px 0;
+
+    border-bottom:
+        1px solid #edf0ed;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+
+    padding-bottom: 0;
+}
+
+.info-label {
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+.info-value {
+    color: #374151;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   DELIVERY ADDRESS
+========================================================= */
+
+.address-box {
+    margin-bottom: 25px;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f1f8f2,
+            #f8fbf8
+        );
+
+    border: 1px solid #dfeee1;
+}
+
+.address-box h3 {
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+    color: #1f2937;
+}
+
+.address-content {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+}
+
+.address-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: #e0f0e2;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.address-content p {
+    color: #4b5563;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ORDER ITEMS
+========================================================= */
+
+.items-section {
+    margin-bottom: 25px;
+}
+
+.items-section h3 {
+    font-size: 15px;
+
+    margin-bottom: 12px;
+
+    color: #1f2937;
+}
+
+.items-list {
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
+.item-row {
+    display: grid;
+
+    grid-template-columns:
+        1fr 100px 100px;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 14px 16px;
+
+    border-bottom:
+        1px solid #eeeeee;
+}
+
+.item-row:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.item-image {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 9px;
+
+    background: #e8f5e9;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+.item-name strong {
+    display: block;
+
+    font-size: 12px;
+
+    color: #374151;
+}
+
+.item-name small {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 10px;
+
+    margin-top: 3px;
+}
+
+.item-quantity {
+    color: #6b7280;
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+.item-price {
+    color: #2e7d32;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   ORDER SUMMARY
+========================================================= */
+
+.order-summary {
+    margin-left: auto;
+
+    width: 320px;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background: #f8faf8;
+
+    border: 1px solid #edf2ee;
+}
+
+.summary-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 7px 0;
+
+    color: #6b7280;
+
+    font-size: 11px;
+}
+
+.summary-row strong {
+    color: #374151;
+}
+
+.summary-row.total {
+    margin-top: 8px;
+
+    padding-top: 13px;
+
+    border-top:
+        1px solid #dfe5df;
+
+    color: #1f2937;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.summary-row.total strong {
+    color: #2e7d32;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   DELIVERY ACTIONS
+========================================================= */
+
+.delivery-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #eeeeee;
+}
+
+.delivery-action-btn {
+    border: none;
+
+    padding: 11px 18px;
+
+    border-radius: 9px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.back-orders-btn {
+    background: #f1f5f2;
+
+    color: #2e7d32;
+}
+
+.back-orders-btn:hover {
+    background: #e2eee3;
+}
+
+.update-delivery-btn {
+    background: #2e7d32;
+
+    color: white;
+}
+
+.update-delivery-btn:hover {
+    background: #1b5e20;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   DELIVERY TIMELINE
+========================================================= */
+
+.delivery-timeline {
+    margin: 25px 0;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    background: #fafcfa;
+
+    border: 1px solid #edf2ee;
+}
+
+.delivery-timeline h3 {
+    font-size: 14px;
+
+    margin-bottom: 20px;
+}
+
+.timeline {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    position: relative;
+}
+
+.timeline::before {
+    content: "";
+
+    position: absolute;
+
+    top: 14px;
+
+    left: 8%;
+
+    right: 8%;
+
+    height: 2px;
+
+    background: #dce5dd;
+
+    z-index: 0;
+}
+
+.timeline-step {
+    position: relative;
+
+    z-index: 1;
+
+    width: 25%;
+
+    text-align: center;
+}
+
+.timeline-icon {
+    width: 30px;
+    height: 30px;
+
+    margin: 0 auto 8px;
+
+    border-radius: 50%;
+
+    background: #e5e7eb;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+
+    border: 3px solid #ffffff;
+}
+
+.timeline-step.completed .timeline-icon {
+    background: #2e7d32;
+
+    color: white;
+}
+
+.timeline-step.active .timeline-icon {
+    background: #66bb6a;
+
+    color: white;
+
+    box-shadow:
+        0 0 0 5px rgba(102, 187, 106, 0.15);
+}
+
+.timeline-step span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 9px;
+}
+
+.timeline-step.completed span,
+.timeline-step.active span {
+    color: #2e7d32;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .details-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .order-summary {
+        width: 100%;
+    }
+
+    .item-row {
+        grid-template-columns:
+            1fr 70px 80px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .details-header {
+        padding: 18px;
+    }
+
+    .details-content {
+        padding: 18px;
+    }
+
+    .details-order-info h2 {
+        font-size: 17px;
+    }
+
+    .details-order-icon {
+        width: 48px;
+        height: 48px;
+
+        font-size: 22px;
+    }
+
+    .item-row {
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .item-quantity,
+    .item-price {
+        text-align: left;
+    }
+
+    .delivery-actions {
+        flex-direction: column;
+    }
+
+    .delivery-action-btn {
+        width: 100%;
+    }
+
+    .timeline::before {
+        display: none;
+    }
+
+    .timeline {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .timeline-step {
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        text-align: left;
+    }
+
+    .timeline-icon {
+        margin: 0;
+
+        flex-shrink: 0;
+    }
+}

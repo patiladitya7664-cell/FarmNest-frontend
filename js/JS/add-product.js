@@ -1,290 +1,325 @@
-```javascript
-/* =========================================
-   FARMNEST - ADD PRODUCT JAVASCRIPT
-   ========================================= */
+/* ==========================================================
+   FARMNEST - ADD PRODUCT JAVASCRIPT v2.0
+   FARMER → BACKEND → MONGODB
+   PRODUCT + WEIGHT + IMAGE NAME
+========================================================== */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+  const API_URL = "http://localhost:5000/api/products";
 
-    const form = document.getElementById("addProductForm");
-    const productImage = document.getElementById("productImage");
+  const form = document.getElementById("addProductForm");
+  const productImage = document.getElementById("productImage");
 
-    /* =========================================
+  /* ======================================================
        IMAGE PREVIEW
-       ========================================= */
+    ====================================================== */
 
-    if (productImage) {
+  if (productImage) {
+    productImage.addEventListener("change", function () {
+      const file = this.files[0];
 
-        productImage.addEventListener("change", function () {
+      if (!file) return;
 
-            const file = this.files[0];
+      if (!file.type.startsWith("image/")) {
+        alert("Please select a valid image file.");
 
-            if (!file) return;
+        this.value = "";
 
-            // Check image type
-            if (!file.type.startsWith("image/")) {
+        return;
+      }
 
-                alert("Please select a valid image file.");
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Image size should be less than 5MB.");
 
-                this.value = "";
+        this.value = "";
 
-                return;
-            }
+        return;
+      }
 
-            // Check file size - maximum 5MB
-            if (file.size > 5 * 1024 * 1024) {
+      const reader = new FileReader();
 
-                alert("Image size should be less than 5MB.");
+      reader.onload = function (event) {
+        let preview = document.getElementById("imagePreview");
 
-                this.value = "";
+        if (!preview) {
+          preview = document.createElement("img");
 
-                return;
-            }
+          preview.id = "imagePreview";
 
-            // Create preview
-            const reader = new FileReader();
+          preview.style.width = "130px";
+          preview.style.height = "130px";
+          preview.style.objectFit = "cover";
+          preview.style.borderRadius = "10px";
+          preview.style.marginTop = "15px";
+          preview.style.border = "2px solid #2e7d32";
+          preview.style.display = "block";
+          preview.style.marginLeft = "auto";
+          preview.style.marginRight = "auto";
 
-            reader.onload = function (event) {
+          productImage.parentElement.appendChild(preview);
+        }
 
-                let preview = document.getElementById("imagePreview");
+        preview.src = event.target.result;
+      };
 
-                if (!preview) {
+      reader.readAsDataURL(file);
+    });
+  }
 
-                    preview = document.createElement("img");
-
-                    preview.id = "imagePreview";
-
-                    preview.style.width = "130px";
-                    preview.style.height = "130px";
-                    preview.style.objectFit = "cover";
-                    preview.style.borderRadius = "10px";
-                    preview.style.marginTop = "15px";
-                    preview.style.border = "2px solid #2e7d32";
-                    preview.style.display = "block";
-                    preview.style.marginLeft = "auto";
-                    preview.style.marginRight = "auto";
-
-                    productImage.parentElement.appendChild(preview);
-                }
-
-                preview.src = event.target.result;
-            };
-
-            reader.readAsDataURL(file);
-
-        });
-
-    }
-
-
-    /* =========================================
+  /* ======================================================
        ADD PRODUCT
-       ========================================= */
+    ====================================================== */
 
-    if (form) {
+  if (form) {
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
 
-        form.addEventListener("submit", function (event) {
+      /* ==================================================
+               GET FORM VALUES
+            ================================================== */
 
-            event.preventDefault();
+      const productName = document.getElementById("productName")?.value.trim();
 
-            /* Get values */
+      const category = document.getElementById("category")?.value;
 
-            const productName =
-                document.getElementById("productName").value.trim();
+      const price = document.getElementById("price")?.value;
 
-            const category =
-                document.getElementById("category").value;
+      const unit = document.getElementById("unit")?.value;
 
-            const price =
-                document.getElementById("price").value;
+      const weightPerUnit = document.getElementById("weightPerUnit")?.value;
 
-            const unit =
-                document.getElementById("unit").value;
+      const stock = document.getElementById("stock")?.value;
 
-            const stock =
-                document.getElementById("stock").value;
+      const warehouse = document.getElementById("warehouse")?.value;
 
-            const warehouse =
-                document.getElementById("warehouse").value;
+      const productType =
+        document.querySelector('input[name="productType"]:checked')?.value ||
+        "Organic";
 
-            const productType =
-                document.querySelector(
-                    'input[name="productType"]:checked'
-                )?.value || "Organic";
+      const description = document.getElementById("description")?.value.trim();
 
-            const description =
-                document.getElementById("description").value.trim();
-
-
-            /* =========================================
+      /* ==================================================
                VALIDATION
-               ========================================= */
+            ================================================== */
 
-            if (productName === "") {
+      if (!productName) {
+        alert("Please enter product name.");
 
-                alert("Please enter product name.");
+        document.getElementById("productName")?.focus();
 
-                document.getElementById("productName").focus();
+        return;
+      }
 
-                return;
-            }
+      if (!category) {
+        alert("Please select product category.");
 
+        document.getElementById("category")?.focus();
 
-            if (category === "") {
+        return;
+      }
 
-                alert("Please select product category.");
+      if (
+        price === "" ||
+        !Number.isFinite(Number(price)) ||
+        Number(price) <= 0
+      ) {
+        alert("Please enter a valid product price.");
 
-                document.getElementById("category").focus();
+        document.getElementById("price")?.focus();
 
-                return;
-            }
+        return;
+      }
 
+      if (!unit) {
+        alert("Please select product unit.");
 
-            if (price === "" || Number(price) <= 0) {
+        document.getElementById("unit")?.focus();
 
-                alert("Please enter a valid product price.");
+        return;
+      }
 
-                document.getElementById("price").focus();
+      if (
+        weightPerUnit === "" ||
+        !Number.isFinite(Number(weightPerUnit)) ||
+        Number(weightPerUnit) <= 0
+      ) {
+        alert("Please enter a valid weight per unit.");
 
-                return;
-            }
+        document.getElementById("weightPerUnit")?.focus();
 
+        return;
+      }
 
-            if (unit === "") {
+      if (
+        stock === "" ||
+        !Number.isFinite(Number(stock)) ||
+        Number(stock) < 0
+      ) {
+        alert("Please enter a valid stock quantity.");
 
-                alert("Please select product unit.");
+        document.getElementById("stock")?.focus();
 
-                document.getElementById("unit").focus();
+        return;
+      }
 
-                return;
-            }
+      if (!description) {
+        alert("Please enter product description.");
 
+        document.getElementById("description")?.focus();
 
-            if (stock === "" || Number(stock) < 0) {
+        return;
+      }
 
-                alert("Please enter a valid stock quantity.");
+      /* ==================================================
+               TOKEN
+            ================================================== */
 
-                document.getElementById("stock").focus();
+      const token = localStorage.getItem("token");
 
-                return;
-            }
+      if (!token) {
+        alert("Please login as a farmer before adding a product.");
 
+        return;
+      }
 
-            if (description === "") {
+      /* ==================================================
+               IMAGE
+            ================================================== */
 
-                alert("Please enter product description.");
+      const imageFile = productImage?.files?.[0];
 
-                document.getElementById("description").focus();
+      const imageName = imageFile ? imageFile.name : "";
 
-                return;
-            }
+      /* ==================================================
+               PRODUCT DATA
+            ================================================== */
 
+      const productData = {
+        name: productName,
 
-            /* =========================================
-               PRODUCT OBJECT
-               ========================================= */
+        category: category,
 
-            const product = {
+        description: description,
 
-                id: "P" + Date.now(),
+        price: Number(price),
 
-                productName: productName,
+        quantity: Number(stock),
 
-                category: category,
+        weightPerUnit: Number(weightPerUnit),
 
-                price: Number(price),
+        unit: unit.toLowerCase(),
 
-                unit: unit,
+        image: imageName,
+      };
 
-                stock: Number(stock),
+      console.log("Sending Product:", productData);
 
-                warehouse: warehouse,
+      /* ==================================================
+               DISABLE BUTTON
+            ================================================== */
 
-                productType: productType,
+      const submitButton = form.querySelector('button[type="submit"]');
 
-                description: description,
+      if (submitButton) {
+        submitButton.disabled = true;
 
-                image: productImage?.files[0]?.name || "",
+        submitButton.innerHTML =
+          '<i class="fas fa-spinner fa-spin"></i> Adding Product...';
+      }
 
-                status:
-                    Number(stock) === 0
-                        ? "Out of Stock"
-                        : Number(stock) <= 20
-                            ? "Low Stock"
-                            : "In Stock",
+      /* ==================================================
+               SEND TO BACKEND
+            ================================================== */
 
-                createdAt: new Date().toLocaleDateString("en-IN")
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
 
-            };
+          headers: {
+            "Content-Type": "application/json",
 
+            Authorization: "Bearer " + token,
+          },
 
-            /* =========================================
-               SAVE TO LOCAL STORAGE
-               ========================================= */
-
-            let products =
-                JSON.parse(localStorage.getItem("farmnestProducts")) || [];
-
-            products.push(product);
-
-            localStorage.setItem(
-                "farmnestProducts",
-                JSON.stringify(products)
-            );
-
-
-            /* =========================================
-               SUCCESS MESSAGE
-               ========================================= */
-
-            alert(
-                "Product added successfully! 🌱\n\n" +
-                "Product: " + productName
-            );
-
-
-            /* =========================================
-               RESET FORM
-               ========================================= */
-
-            form.reset();
-
-            const preview =
-                document.getElementById("imagePreview");
-
-            if (preview) {
-
-                preview.remove();
-
-            }
-
+          body: JSON.stringify(productData),
         });
 
-    }
+        const data = await response.json();
 
+        console.log("Backend Response:", data);
 
-    /* =========================================
-       RESET FORM
-       ========================================= */
+        /* ==================================================
+                   BACKEND ERROR
+                ================================================== */
 
-    const resetButton =
-        document.querySelector(".cancel-btn");
+        if (!response.ok) {
+          throw new Error(data.message || "Failed to add product");
+        }
 
-    if (resetButton) {
+        /* ==================================================
+                   SUCCESS
+                ================================================== */
 
-        resetButton.addEventListener("click", function () {
+        console.log("Product Added:", data.product);
 
-            const preview =
-                document.getElementById("imagePreview");
+        alert(
+          "🌱 Product added successfully!\n\n" +
+            "Product: " +
+            productName +
+            "\n\n" +
+            "Status: Pending Admin Approval",
+        );
 
-            if (preview) {
+        /* ==================================================
+                   RESET FORM
+                ================================================== */
 
-                preview.remove();
+        form.reset();
 
-            }
+        const preview = document.getElementById("imagePreview");
 
-        });
+        if (preview) {
+          preview.remove();
+        }
 
-    }
+        /* ==================================================
+                   OPTIONAL REDIRECT
+                ================================================== */
 
+        // Inventory page par bhejna ho to uncomment karo
+
+        // window.location.href = "inventory.html";
+      } catch (error) {
+        console.error("Add Product Error:", error);
+
+        alert(error.message || "Failed to add product.");
+      } finally {
+        /* ==================================================
+                   ENABLE BUTTON
+                ================================================== */
+
+        if (submitButton) {
+          submitButton.disabled = false;
+
+          submitButton.innerHTML = '<i class="fas fa-plus"></i> Add Product';
+        }
+      }
+    });
+  }
+
+  /* ======================================================
+       RESET BUTTON
+    ====================================================== */
+
+  const resetButton = document.querySelector(".cancel-btn");
+
+  if (resetButton) {
+    resetButton.addEventListener("click", function () {
+      const preview = document.getElementById("imagePreview");
+
+      if (preview) {
+        preview.remove();
+      }
+    });
+  }
 });
-```

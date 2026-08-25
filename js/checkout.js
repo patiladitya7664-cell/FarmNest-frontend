@@ -1,381 +1,570 @@
 /* ==========================================================
-   FARMNEST CHECKOUT JS v2.0
+   FARMNEST CHECKOUT JS v4.0
    CUSTOMER → ORDER API
+   DELIVERY CHARGE → BACKEND CALCULATION
 ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
+  const API_URL = "http://localhost:5000/api/orders";
 
-    const API_URL = "http://localhost:5000/api/orders";
+  /* =====================================================
+       CART
+    ===================================================== */
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    const checkoutItems =
-        document.getElementById("checkoutItems");
+  /* =====================================================
+       DOM ELEMENTS
+    ===================================================== */
 
-    const checkoutTotal =
-        document.getElementById("checkoutTotal");
+  const checkoutItems = document.getElementById("checkoutItems");
 
-    const checkoutForm =
-        document.getElementById("checkoutForm");
+  const checkoutTotal = document.getElementById("checkoutTotal");
 
+  const checkoutForm = document.getElementById("checkoutForm");
 
-    /* =====================================================
+  const distanceInput = document.getElementById("distance");
+
+  const deliveryDistance = document.getElementById("deliveryDistance");
+
+  const deliveryWeight = document.getElementById("deliveryWeight");
+
+  const deliveryVehicle = document.getElementById("deliveryVehicle");
+
+  const deliveryCharge = document.getElementById("deliveryCharge");
+
+  /* =====================================================
        LOAD CHECKOUT
     ===================================================== */
 
-    function loadCheckout() {
+  function loadCheckout() {
+    if (!checkoutItems) return;
 
-        if (!checkoutItems) return;
+    checkoutItems.innerHTML = "";
 
-        checkoutItems.innerHTML = "";
+    /* EMPTY CART */
 
-        if (cart.length === 0) {
+    if (cart.length === 0) {
+      checkoutItems.innerHTML = `
+                <div class="checkout-empty">
 
-            checkoutItems.innerHTML = `
-                <h3>Your Cart is Empty</h3>
+                    <i class="fa-solid fa-cart-shopping"></i>
 
-                <a href="products.html" class="btn">
-                    Shop Products
-                </a>
+                    <h3>Your Cart is Empty</h3>
+
+                    <p>Add some fresh products to continue.</p>
+
+                    <a href="products.html" class="shop-btn">
+
+                        <i class="fa-solid fa-bag-shopping"></i>
+
+                        Shop Products
+
+                    </a>
+
+                </div>
             `;
 
-            checkoutTotal.innerHTML = "₹0";
+      if (checkoutTotal) {
+        checkoutTotal.innerHTML = "₹0";
+      }
 
-            return;
-        }
+      return;
+    }
 
+    /* SUBTOTAL */
 
-        let subtotal = 0;
+    let subtotal = 0;
 
+    cart.forEach((item) => {
+      const qty = Number(item.quantity) || 1;
 
-        cart.forEach(item => {
+      const price = Number(item.price) || 0;
 
-            const qty = item.quantity || 1;
+      subtotal += price * qty;
 
-            const price = Number(item.price) || 0;
-
-            subtotal += price * qty;
-
-
-            checkoutItems.innerHTML += `
+      checkoutItems.innerHTML += `
 
                 <div class="checkout-item">
 
                     <div>
 
                         <h4>
-                            ${item.name}
+                            ${item.name || "Product"}
                         </h4>
 
                         <small>
-                            Qty : ${qty} ${item.unit || "kg"}
+                            Qty: ${qty} ${item.unit || "kg"}
                         </small>
 
                     </div>
 
                     <span>
-                        ₹${price * qty}
+                        ₹${(price * qty).toFixed(2)}
                     </span>
 
                 </div>
 
             `;
+    });
 
-        });
+    /*
+        Product subtotal only.
+        Delivery charge will be calculated by backend.
+        */
 
+    if (checkoutTotal) {
+      checkoutTotal.innerHTML = "₹" + subtotal.toFixed(2);
+    }
+  }
 
-        // Delivery charge
-        const deliveryCharge = 50;
+  /* =====================================================
+       GET ITEM WEIGHT
+    ===================================================== */
 
-        const total = subtotal + deliveryCharge;
+  function getItemWeight(item) {
+    /*
+        Priority:
 
-        checkoutTotal.innerHTML = "₹" + total;
+        1. weightPerUnit
+        2. weight
+        3. quantity when unit is kg
+        4. 0
+        */
 
+    const weightPerUnit = Number(item.weightPerUnit);
+
+    if (Number.isFinite(weightPerUnit) && weightPerUnit > 0) {
+      return weightPerUnit;
     }
 
+    const weight = Number(item.weight);
 
-    /* =====================================================
+    if (Number.isFinite(weight) && weight > 0) {
+      return weight;
+    }
+
+    /*
+        If quantity itself represents KG,
+        use quantity as weight.
+        */
+
+    const unit = String(item.unit || "")
+      .toLowerCase()
+      .trim();
+
+    if (
+      unit === "kg" ||
+      unit === "kgs" ||
+      unit === "kilogram" ||
+      unit === "kilograms"
+    ) {
+      const quantity = Number(item.quantity) || 0;
+
+      return quantity;
+    }
+
+    return 0;
+  }
+
+  /* =====================================================
+       CALCULATE TOTAL CART WEIGHT
+    ===================================================== */
+
+  function calculateTotalWeight() {
+    let totalWeight = 0;
+
+    cart.forEach((item) => {
+      const quantity = Number(item.quantity) || 1;
+
+      const weightPerUnit = getItemWeight(item);
+
+      /*
+            If weightPerUnit is already equal to
+            the complete quantity weight, avoid
+            multiplying twice when unit is KG.
+            */
+
+      const unit = String(item.unit || "")
+        .toLowerCase()
+        .trim();
+
+      if (
+        unit === "kg" ||
+        unit === "kgs" ||
+        unit === "kilogram" ||
+        unit === "kilograms"
+      ) {
+        /*
+                For KG products:
+
+                quantity = actual weight
+
+                Example:
+                quantity = 5
+                unit = kg
+
+                Total = 5 KG
+                */
+
+        totalWeight += quantity;
+      } else {
+        /*
+                For piece/unit products:
+
+                weightPerUnit × quantity
+                */
+
+        totalWeight += weightPerUnit * quantity;
+      }
+    });
+
+    return totalWeight;
+  }
+
+  /* =====================================================
+       UPDATE DELIVERY PREVIEW
+    ===================================================== */
+
+  function updateDeliveryPreview() {
+    const distance = Number(distanceInput?.value) || 0;
+
+    const totalWeight = calculateTotalWeight();
+
+    /* ===============================
+           DISTANCE
+        =============================== */
+
+    if (deliveryDistance) {
+      deliveryDistance.innerText = distance.toFixed(1) + " KM";
+    }
+
+    /* ===============================
+           WEIGHT
+        =============================== */
+
+    if (deliveryWeight) {
+      deliveryWeight.innerText = totalWeight.toFixed(2) + " KG";
+    }
+
+    /* ===============================
+           VEHICLE BY WEIGHT
+        =============================== */
+
+    let vehicle = "-";
+
+    if (totalWeight > 0 && totalWeight <= 10) {
+      vehicle = "Bike";
+    } else if (totalWeight > 10 && totalWeight <= 100) {
+      vehicle = "Auto";
+    } else if (totalWeight > 100 && totalWeight <= 500) {
+      vehicle = "Small Truck";
+    } else if (totalWeight > 500) {
+      vehicle = "Larger Vehicle";
+    }
+
+    if (deliveryVehicle) {
+      deliveryVehicle.innerText = vehicle;
+    }
+
+    /* ===============================
+           DELIVERY CHARGE
+           BACKEND WILL CALCULATE
+        =============================== */
+
+    if (deliveryCharge) {
+      deliveryCharge.innerText = "Calculated at order";
+    }
+  }
+
+  /* =====================================================
+       DISTANCE INPUT CHANGE
+    ===================================================== */
+
+  if (distanceInput) {
+    distanceInput.addEventListener("input", updateDeliveryPreview);
+
+    distanceInput.addEventListener("change", updateDeliveryPreview);
+  }
+
+  /* =====================================================
        PLACE ORDER
     ===================================================== */
 
-    if (checkoutForm) {
+  if (checkoutForm) {
+    checkoutForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-        checkoutForm.addEventListener("submit", async function(e) {
+      /* =========================================
+                   RELOAD CART
+                ========================================= */
 
-            e.preventDefault();
+      cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+      /* =========================================
+                   CART CHECK
+                ========================================= */
 
-            if (cart.length === 0) {
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
 
-                alert("Your cart is empty.");
+        return;
+      }
 
-                return;
-            }
+      /* =========================================
+                   CUSTOMER DETAILS
+                ========================================= */
 
+      const name = document.getElementById("customerName")?.value.trim();
 
-            /* =================================================
-               GET CUSTOMER DETAILS
-            ================================================= */
+      const email = document.getElementById("customerEmail")?.value.trim();
 
-            const inputs =
-                checkoutForm.querySelectorAll(
-                    "input, textarea"
-                );
+      const phone = document.getElementById("customerPhone")?.value.trim();
 
+      const address = document.getElementById("deliveryAddress")?.value.trim();
 
-            const name =
-                inputs[0]?.value.trim();
+      const city = document.getElementById("city")?.value.trim();
 
-            const email =
-                inputs[1]?.value.trim();
+      const state = document.getElementById("state")?.value.trim();
 
-            const phone =
-                inputs[2]?.value.trim();
+      const pincode = document.getElementById("pincode")?.value.trim();
 
-            const address =
-                inputs[3]?.value.trim();
+      /* =========================================
+                   DISTANCE
+                ========================================= */
 
-             const city =
-                 inputs[4]?.value.trim();
+      const distance = Number(distanceInput?.value);
 
-            const state =
-                 inputs[5]?.value.trim();
+      if (!Number.isFinite(distance) || distance < 0) {
+        alert("Please enter a valid delivery distance.");
 
-            const pincode =
-                 inputs[6]?.value.trim();   
+        return;
+      }
 
+      /* =========================================
+                   VALIDATE CUSTOMER DETAILS
+                ========================================= */
 
-            if (!name || !email || !phone || !address || !city || !state || !pincode) {
-              alert("Please fill all delivery details.");
-              return;
-            }
+      if (
+        !name ||
+        !email ||
+        !phone ||
+        !address ||
+        !city ||
+        !state ||
+        !pincode
+      ) {
+        alert("Please fill all delivery details.");
 
+        return;
+      }
 
-            /* =================================================
-               PAYMENT METHOD
-            ================================================= */
+      /* =========================================
+                   PAYMENT METHOD
+                ========================================= */
 
-            const paymentInput =
-                checkoutForm.querySelector(
-                    'input[name="payment"]:checked'
-                );
+      const paymentInput = checkoutForm.querySelector(
+        'input[name="payment"]:checked',
+      );
 
+      const paymentMethod = paymentInput ? paymentInput.value : "COD";
 
-            let paymentMethod = "COD";
+      /* =========================================
+                   SHIPPING ADDRESS
+                ========================================= */
 
+      const shippingAddress = {
+        name: name,
 
-            if (
-                paymentInput &&
-                paymentInput.nextSibling
-            ) {
+        phone: phone,
 
-                const paymentText =
-                    paymentInput.parentElement
-                        .innerText
-                        .trim();
+        address: address,
 
+        city: city,
 
-                if (
-                    paymentText
-                        .toLowerCase()
-                        .includes("upi") ||
-                    paymentText
-                        .toLowerCase()
-                        .includes("card")
-                ) {
+        state: state,
 
-                    paymentMethod = "Online";
+        pincode: pincode,
+      };
 
-                }
+      /* =========================================
+                   PRODUCTS
+                ========================================= */
 
-            }
+      const products = cart.map((item) => ({
+        productId: item.productId,
 
+        quantity: Number(item.quantity) || 1,
+      }));
 
-            /* =================================================
-               SHIPPING ADDRESS
-            ================================================= */
+      /* =========================================
+                   VALIDATE PRODUCT IDS
+                ========================================= */
 
-            const shippingAddress = {
-                name: name,
-                phone: phone,
-                address: address,
-                city: city,
-                state: state,
-                pincode: pincode
-            };
+      const invalidProduct = products.some((item) => !item.productId);
 
+      if (invalidProduct) {
+        alert("Some cart products are invalid. Please add the products again.");
 
-            /* =================================================
-               PRODUCTS FOR BACKEND
-            ================================================= */
+        return;
+      }
 
-            const products = cart.map(item => ({
+      /* =========================================
+                   TOKEN
+                ========================================= */
 
-                productId: item.productId,
+      const token = localStorage.getItem("token");
 
-                quantity: item.quantity || 1
+      if (!token) {
+        alert("Please login before placing an order.");
 
-            }));
+        return;
+      }
 
-
-            try {
-
-                const token =
-                    localStorage.getItem("token");
-
-
-                if (!token) {
-
-                    alert(
-                        "Please login before placing an order."
-                    );
-
-                    return;
-
-                }
-
-
-                /* =================================================
+      /* =========================================
                    DISABLE BUTTON
-                ================================================= */
+                ========================================= */
 
-                const submitButton =
-                    checkoutForm.querySelector(
-                        'button[type="submit"]'
-                    );
+      const submitButton = checkoutForm.querySelector('button[type="submit"]');
 
+      if (submitButton) {
+        submitButton.disabled = true;
 
-                if (submitButton) {
+        submitButton.innerText = "Placing Order...";
+      }
 
-                    submitButton.disabled = true;
-
-                    submitButton.innerText =
-                        "Placing Order...";
-
-                }
-
-
-                /* =================================================
+      /* =========================================
                    CREATE ORDER
-                ================================================= */
+                ========================================= */
 
-                const response =
-                    await fetch(API_URL, {
+      try {
+        console.log("Cart:", cart);
 
-                        method: "POST",
+        console.log("Products:", products);
 
-                        headers: {
+        console.log(
+          "Calculated Frontend Weight:",
+          calculateTotalWeight(),
+          "KG",
+        );
 
-                            "Content-Type":
-                                "application/json",
+        const response = await fetch(API_URL, {
+          method: "POST",
 
-                            "Authorization":
-                                "Bearer " + token
+          headers: {
+            "Content-Type": "application/json",
 
-                        },
+            Authorization: "Bearer " + token,
+          },
 
-                        body: JSON.stringify({
+          body: JSON.stringify({
+            products,
 
-                            products,
+            shippingAddress,
 
-                            shippingAddress,
+            paymentMethod,
 
-                            paymentMethod
-
-                        })
-
-                    });
-
-
-                const data =
-                    await response.json();
-
-
-                /* =================================================
-                   API ERROR
-                ================================================= */
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        data.message ||
-                        "Failed to place order"
-                    );
-
-                }
-
-
-                /* =================================================
-                   SUCCESS
-                ================================================= */
-
-                console.log(
-                    "Order Created:",
-                    data.order
-                );
-
-
-                alert(
-                    "🎉 Order placed successfully!"
-                );
-
-
-                // Clear cart
-                localStorage.removeItem("cart");
-
-
-                // Save latest order ID
-                localStorage.setItem(
-                    "lastOrderId",
-                    data.order._id
-                );
-
-
-                // Go to tracking
-                window.location.href =
-                    "tracking.html";
-
-
-            } catch (error) {
-
-                console.error(
-                    "Order Error:",
-                    error
-                );
-
-
-                alert(
-                    error.message ||
-                    "Failed to place order."
-                );
-
-
-                const submitButton =
-                    checkoutForm.querySelector(
-                        'button[type="submit"]'
-                    );
-
-
-                if (submitButton) {
-
-                    submitButton.disabled = false;
-
-                    submitButton.innerText =
-                        "Place Order";
-
-                }
-
-            }
-
+            distance,
+          }),
         });
 
-    }
+        /* =====================================
+                       RESPONSE
+                    ===================================== */
 
+        const data = await response.json();
 
-    /* =====================================================
-       START
+        console.log("Backend Response:", data);
+
+        /* =====================================
+                       API ERROR
+                    ===================================== */
+
+        if (!response.ok) {
+          throw new Error(data.message || "Failed to place order");
+        }
+
+        /* =====================================
+                       SUCCESS
+                    ===================================== */
+
+        console.log("Order Created:", data.order);
+
+        console.log("Delivery Details:", data.delivery);
+
+        /* =====================================
+                       SHOW BACKEND DELIVERY DATA
+                    ===================================== */
+
+        if (data.delivery) {
+          if (deliveryDistance) {
+            deliveryDistance.innerText =
+              Number(data.delivery.distance).toFixed(1) + " KM";
+          }
+
+          if (deliveryWeight) {
+            deliveryWeight.innerText =
+              Number(data.delivery.totalWeight).toFixed(2) + " KG";
+          }
+
+          if (deliveryVehicle) {
+            deliveryVehicle.innerText = data.delivery.vehicleType || "-";
+          }
+
+          if (deliveryCharge) {
+            deliveryCharge.innerText =
+              "₹" + Number(data.delivery.deliveryCharge).toFixed(2);
+          }
+        }
+
+        /* =====================================
+                       SUCCESS MESSAGE
+                    ===================================== */
+
+        alert("🎉 Order placed successfully!");
+
+        /* =====================================
+                       CLEAR CART
+                    ===================================== */
+
+        localStorage.removeItem("cart");
+
+        /* =====================================
+                       SAVE ORDER ID
+                    ===================================== */
+
+        if (data.order && data.order._id) {
+          localStorage.setItem("lastOrderId", data.order._id);
+        }
+
+        /* =====================================
+                       GO TO TRACKING
+                    ===================================== */
+
+        window.location.href = "tracking.html";
+      } catch (error) {
+        console.error("Order Error:", error);
+
+        alert(error.message || "Failed to place order.");
+
+        /* =====================================
+                       ENABLE BUTTON AGAIN
+                    ===================================== */
+
+        if (submitButton) {
+          submitButton.disabled = false;
+
+          submitButton.innerText = "Place Order";
+        }
+      }
+    });
+  }
+
+  /* =====================================================
+       START CHECKOUT
     ===================================================== */
 
-    loadCheckout();
+  loadCheckout();
 
+  updateDeliveryPreview();
 });

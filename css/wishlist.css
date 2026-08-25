@@ -1,267 +1,592 @@
 /* =========================================================
-   FARMNEST COMMON HEADER
-   Homepage Screenshot Matching Design
+   FARMNEST WISHLIST CSS
+   ========================================================= */
+
+/* =========================================================
+   GLOBAL
    ========================================================= */
 
 * {
   box-sizing: border-box;
 }
 
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.farmnest-header {
-  width: 100%;
-  height: 118px;
-
-  background: #72dfb5;
-
-  position: relative;
-
-  z-index: 1000;
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5faf5;
+  color: #183b24;
 }
 
 /* =========================================================
-   HEADER CONTAINER
+   WISHLIST HERO
    ========================================================= */
 
-.header-container {
+.wishlist-hero {
   width: 100%;
-  max-width: 1440px;
+  min-height: 180px;
 
-  height: 118px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      rgba(35, 125, 55, 0.62),
+      rgba(35, 125, 55, 0.62)
+    ),
+    url("../images/farm-background.jpg");
+
+  background-size: cover;
+  background-position: center;
+}
+
+/* If background image is not available */
+.wishlist-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(46, 125, 50, 0.65),
+      rgba(102, 187, 106, 0.45)
+    );
+}
+
+.wishlist-hero-content {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 40px 40px;
+
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+}
+
+.wishlist-hero-content h1 {
+  margin: 0 0 12px;
+
+  color: #ffffff;
+
+  font-size: 42px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.wishlist-hero-content p {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   MAIN WISHLIST CONTAINER
+   ========================================================= */
+
+.wishlist-container {
+  width: 100%;
+  max-width: 1200px;
 
   margin: 0 auto;
 
-  padding: 0 116px;
+  padding: 55px 30px 70px;
 
-  display: flex;
-
-  align-items: center;
+  min-height: 430px;
 }
 
 /* =========================================================
-   LOGO + FARMNEST
+   WISHLIST HEADING
    ========================================================= */
 
-.brand {
+.wishlist-heading {
+  width: 100%;
+
   display: flex;
 
   align-items: center;
+  justify-content: space-between;
 
-  gap: 14px;
+  gap: 20px;
 
-  text-decoration: none;
+  margin-bottom: 35px;
 
-  flex-shrink: 0;
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #dcebdc;
 }
 
-.brand img {
-  width: 53px;
-  height: 53px;
+.wishlist-heading h2 {
+  margin: 0 0 6px;
 
-  object-fit: contain;
+  color: #1b5e20;
+
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.wishlist-heading p {
+  margin: 0;
+
+  color: #6c7d70;
+
+  font-size: 15px;
+}
+
+#wishlistCount {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 90px;
+
+  padding: 9px 16px;
+
+  border-radius: 25px;
+
+  background: #e8f5e9;
+
+  color: #2e7d32;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   EMPTY WISHLIST
+   ========================================================= */
+
+.wishlist-empty {
+  width: 100%;
+
+  min-height: 300px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 45px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2eee2;
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 30px rgba(30, 90, 40, 0.07);
+}
+
+.empty-icon {
+  width: 82px;
+  height: 82px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
 
   border-radius: 50%;
 
-  display: block;
+  background: #e8f5e9;
+
+  color: #2e7d32;
+
+  font-size: 36px;
 }
 
-.brand span {
-  margin: 0;
+.wishlist-empty h2 {
+  margin: 0 0 10px;
 
-  color: #287c35;
+  color: #245b2d;
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+}
 
-  font-size: 28px;
+.wishlist-empty p {
+  margin: 0 0 25px;
 
-  font-weight: 700;
+  color: #718071;
 
-  letter-spacing: 0.2px;
+  font-size: 16px;
 }
 
 /* =========================================================
-   NAVIGATION
+   SHOP BUTTON
    ========================================================= */
 
-.main-nav {
-  height: 100%;
-
-  display: flex;
+.shop-btn {
+  display: inline-flex;
 
   align-items: center;
-
-  gap: 34px;
-
-  margin-left: auto;
-
-  margin-right: 42px;
-}
-
-.main-nav .nav-link {
-  position: relative;
-
-  height: 100%;
-
-  display: flex;
-
-  align-items: center;
-
   justify-content: center;
 
-  padding: 0;
+  gap: 9px;
+
+  padding: 13px 24px;
+
+  border-radius: 28px;
+
+  background: #2e7d32;
+
+  color: #ffffff;
 
   text-decoration: none;
 
-  color: #123c26;
+  font-size: 15px;
+  font-weight: 700;
 
-  font-family: Arial, Helvetica, sans-serif;
+  transition: all 0.25s ease;
+}
+
+.shop-btn:hover {
+  background: #1b5e20;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 18px rgba(46, 125, 50, 0.22);
+}
+
+/* =========================================================
+   WISHLIST GRID
+   ========================================================= */
+
+.wishlist-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 25px;
+}
+
+/* =========================================================
+   WISHLIST PRODUCT CARD
+   ========================================================= */
+
+.wishlist-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e2eee2;
+
+  border-radius: 16px;
+
+  box-shadow: 0 7px 25px rgba(30, 90, 40, 0.08);
+
+  transition: all 0.25s ease;
+}
+
+.wishlist-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 12px 30px rgba(30, 90, 40, 0.14);
+}
+
+.wishlist-card img {
+  width: 100%;
+
+  height: 210px;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.wishlist-card-content {
+  padding: 18px;
+}
+
+.wishlist-card-content h3 {
+  margin: 0 0 8px;
+
+  color: #245b2d;
+
+  font-size: 19px;
+}
+
+.wishlist-card-content p {
+  margin: 0 0 12px;
+
+  color: #718071;
+
+  font-size: 14px;
+}
+
+.wishlist-price {
+  color: #2e7d32;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.remove-wishlist {
+  position: absolute;
+
+  top: 12px;
+  right: 12px;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #d32f2f;
 
   font-size: 17px;
 
-  font-weight: 600;
+  cursor: pointer;
 
-  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 
-  transition: color 0.25s ease;
+  transition: all 0.2s ease;
+}
+
+.remove-wishlist:hover {
+  background: #ffebee;
+
+  transform: scale(1.05);
 }
 
 /* =========================================================
-   NAV HOVER
+   FOOTER
    ========================================================= */
 
-.main-nav .nav-link:hover {
-  color: #267b35;
+.farmnest-footer {
+  width: 100%;
+
+  background: #185f20;
+
+  color: #ffffff;
+
+  margin-top: 0;
+}
+
+.footer-container {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 55px 30px 45px;
+
+  display: grid;
+
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+
+  gap: 45px;
+
+  align-items: start;
 }
 
 /* =========================================================
-   ACTIVE NAVIGATION
+   FOOTER BRAND
    ========================================================= */
 
-.main-nav .nav-link.active {
-  color: #267b35;
-
-  font-weight: 600;
+.footer-brand {
+  min-width: 0;
 }
 
-.main-nav .nav-link.active::after {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  right: 0;
-
-  bottom: 33px;
-
-  height: 3px;
-
-  background: #267b35;
-
-  border-radius: 10px;
-}
-
-/* =========================================================
-   LOGIN / REGISTER
-   ========================================================= */
-
-.auth-buttons {
+.footer-logo {
   display: flex;
 
   align-items: center;
 
   gap: 12px;
 
-  flex-shrink: 0;
+  margin-bottom: 18px;
 }
 
-.auth-btn {
-  width: 122px;
+.footer-logo img {
+  width: 55px;
+  height: 55px;
 
-  height: 57px;
+  object-fit: contain;
 
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  padding: 3px;
+}
+
+.footer-logo span {
+  color: #ffffff;
+
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.footer-brand p {
+  margin: 0;
+
+  max-width: 300px;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   FOOTER LINKS
+   ========================================================= */
+
+.footer-links h3,
+.footer-social h3 {
+  margin: 0 0 18px;
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  font-weight: 700;
+}
+
+.footer-links {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+.footer-links a {
+  margin-bottom: 10px;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #b9f6ca;
+
+  transform: translateX(2px);
+}
+
+/* =========================================================
+   SOCIAL
+   ========================================================= */
+
+.footer-social {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+.social-icons {
   display: flex;
 
   align-items: center;
 
+  gap: 12px;
+}
+
+.social-icons a {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
   justify-content: center;
 
-  border-radius: 32px;
+  border-radius: 50%;
 
-  background: #298536;
+  background: rgba(255, 255, 255, 0.12);
 
   color: #ffffff;
 
   text-decoration: none;
 
-  font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 16px;
-
-  font-weight: 700;
-
-  box-shadow: 0 7px 18px rgba(0, 80, 30, 0.12);
-
   transition: all 0.25s ease;
 }
 
-.auth-btn:hover {
-  background: #1f722d;
+.social-icons a:hover {
+  background: rgba(255, 255, 255, 0.25);
 
-  transform: translateY(-2px);
-
-  box-shadow: 0 10px 22px rgba(0, 80, 30, 0.18);
+  transform: translateY(-3px);
 }
 
 /* =========================================================
-   MOBILE MENU BUTTON
+   FOOTER BOTTOM
    ========================================================= */
 
-.mobile-menu-btn {
-  display: none;
+.footer-bottom {
+  width: 100%;
 
-  border: none;
+  padding: 18px 20px;
 
-  outline: none;
+  text-align: center;
 
-  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
 
-  color: #176b2b;
+.footer-bottom p {
+  margin: 0;
 
-  font-size: 27px;
+  color: rgba(255, 255, 255, 0.9);
 
-  cursor: pointer;
-
-  padding: 5px;
+  font-size: 14px;
 }
 
 /* =========================================================
    TABLET
    ========================================================= */
 
-@media (max-width: 1200px) {
-  .header-container {
-    padding: 0 45px;
+@media (max-width: 1000px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+
+    gap: 35px;
   }
 
-  .main-nav {
-    gap: 22px;
-
-    margin-right: 25px;
+  .wishlist-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .main-nav .nav-link {
-    font-size: 15px;
-  }
-
-  .auth-btn {
-    width: 105px;
-
-    height: 52px;
-
-    font-size: 15px;
+  .wishlist-hero-content h1 {
+    font-size: 36px;
   }
 }
 
@@ -269,93 +594,58 @@
    MOBILE
    ========================================================= */
 
-@media (max-width: 850px) {
-  .farmnest-header {
-    height: 82px;
+@media (max-width: 700px) {
+  .wishlist-hero {
+    min-height: 160px;
   }
 
-  .header-container {
-    height: 82px;
-
-    padding: 0 20px;
+  .wishlist-hero-content {
+    padding: 35px 20px;
   }
 
-  .brand {
-    gap: 10px;
+  .wishlist-hero-content h1 {
+    font-size: 30px;
   }
 
-  .brand img {
-    width: 45px;
-
-    height: 45px;
+  .wishlist-hero-content p {
+    font-size: 15px;
   }
 
-  .brand span {
-    font-size: 23px;
+  .wishlist-container {
+    padding: 35px 18px 50px;
   }
 
-  /* Mobile menu button */
-
-  .mobile-menu-btn {
-    display: block;
-
-    margin-left: auto;
-  }
-
-  /* Hide desktop auth */
-
-  .auth-buttons {
-    display: none;
-  }
-
-  /* Mobile navigation */
-
-  .main-nav {
-    position: absolute;
-
-    top: 82px;
-
-    left: 0;
-
-    width: 100%;
-
-    height: auto;
-
-    display: none;
+  .wishlist-heading {
+    align-items: flex-start;
 
     flex-direction: column;
 
-    align-items: stretch;
-
-    gap: 0;
-
-    margin: 0;
-
-    padding: 10px 20px 20px;
-
-    background: #72dfb5;
-
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    gap: 12px;
   }
 
-  .main-nav.show {
-    display: flex;
+  .wishlist-heading h2 {
+    font-size: 24px;
   }
 
-  .main-nav .nav-link {
-    width: 100%;
-
-    height: 48px;
-
-    justify-content: flex-start;
-
-    font-size: 16px;
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  .wishlist-grid {
+    grid-template-columns: 1fr;
   }
 
-  .main-nav .nav-link.active::after {
-    display: none;
+  .footer-container {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+
+    padding: 40px 25px;
+  }
+
+  .footer-brand p {
+    max-width: 100%;
+  }
+
+  .footer-links,
+  .footer-social {
+    align-items: flex-start;
   }
 }
 
@@ -364,21 +654,34 @@
    ========================================================= */
 
 @media (max-width: 480px) {
-  .header-container {
-    padding: 0 15px;
+  .wishlist-hero-content h1 {
+    font-size: 26px;
   }
 
-  .brand img {
-    width: 41px;
-
-    height: 41px;
+  .wishlist-hero-content p {
+    font-size: 14px;
   }
 
-  .brand span {
+  .wishlist-empty {
+    padding: 35px 15px;
+  }
+
+  .wishlist-empty h2 {
     font-size: 21px;
   }
 
-  .mobile-menu-btn {
-    font-size: 24px;
+  .wishlist-empty p {
+    font-size: 14px;
+  }
+
+  .empty-icon {
+    width: 70px;
+    height: 70px;
+
+    font-size: 30px;
+  }
+
+  .footer-container {
+    padding: 35px 20px;
   }
 }

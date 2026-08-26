@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Smart Storage | FarmNest</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- Storage CSS -->
+    <link rel="stylesheet" href="../css/storage.css" />
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+</head>
+
+<body>
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img
+                src="../images/web-logo/farmnest-logo.png"
+                alt="FarmNest Logo"
+            />
+
+            <h2>FarmNest</h2>
+
+        </div>
+
+
+        <ul>
+
+            <li>
+                <a href="farmer-dashboard.html">
+                    <i class="fa fa-home"></i>
+                    Dashboard
+                </a>
+            </li>
+
+
+            <li>
+                <a href="my-crops.html">
+                    <i class="fa fa-seedling"></i>
+                    My Crops
+                </a>
+            </li>
+
+
+            <li>
+                <a href="add-product.html">
+                    <i class="fa fa-plus"></i>
+                    Add Product
+                </a>
+            </li>
+
+
+            <li>
+                <a href="inventory.html">
+                    <i class="fa fa-box"></i>
+                    Inventory
+                </a>
+            </li>
+
+
+            <li>
+                <a href="farmer-orders.html">
+                    <i class="fa fa-shopping-cart"></i>
+                    Orders
+                </a>
+            </li>
+
+
+            <!-- SMART STORAGE ACTIVE -->
+
+            <li class="active">
+
+                <a href="storage.html">
+
+                    <i class="fa fa-warehouse"></i>
+
+                    Smart Storage
+
+                </a>
+
+            </li>
+
+
+            <li>
+                <a href="earnings.html">
+                    <i class="fa fa-money-bill"></i>
+                    Earnings
+                </a>
+            </li>
+
+
+            <li>
+                <a href="analytics.html">
+                    <i class="fa fa-chart-line"></i>
+                    Analytics
+                </a>
+            </li>
+
+
+            <li>
+                <a href="reports.html">
+                    <i class="fa fa-file"></i>
+                    Reports
+                </a>
+            </li>
+
+
+            <li>
+                <a href="notifications.html">
+                    <i class="fa fa-bell"></i>
+                    Notifications
+                </a>
+            </li>
+
+
+            <li>
+                <a href="profile.html">
+                    <i class="fa fa-user"></i>
+                    Profile
+                </a>
+            </li>
+
+        </ul>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <div class="main">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="storage-header">
+
+            <div class="header-left">
+
+                <div class="header-icon">
+
+                    <i class="fa fa-warehouse"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h1>Smart Storage Management</h1>
+
+                    <p>
+                        Manage your warehouses, storage capacity and
+                        product locations
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <button
+                    type="button"
+                    class="profile-btn"
+                    onclick="window.location.href='profile.html'"
+                >
+
+                    <i class="fa fa-user"></i>
+
+                    Profile
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="farmerLogoutBtn"
+                    class="logout-btn"
+                >
+
+                    <i class="fa fa-sign-out-alt"></i>
+
+                    Logout
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             STORAGE CONTENT
+        ================================================== -->
+
+        <main class="storage-page">
+
+
+            <!-- PAGE TITLE -->
+
+            <section class="storage-intro">
+
+                <div>
+
+                    <span class="storage-label">
+                        FARMER STORAGE
+                    </span>
+
+                    <h2>
+                        Your Storage Overview
+                    </h2>
+
+                    <p>
+                        Monitor warehouse capacity and manage
+                        where your farm products are stored.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="add-warehouse-btn"
+                    id="addWarehouseBtn"
+                >
+
+                    <i class="fa fa-plus"></i>
+
+                    Add Warehouse
+
+                </button>
+
+            </section>
+
+
+            <!-- =================================================
+                 STORAGE SUMMARY CARDS
+            ================================================== -->
+
+            <section class="storage-stats">
+
+
+                <!-- TOTAL STORAGE -->
+
+                <div class="storage-card">
+
+                    <div class="storage-card-icon">
+
+                        <i class="fa fa-warehouse"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>Total Storage</p>
+
+                        <h3 id="totalStorage">
+                            0 kg
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- USED STORAGE -->
+
+                <div class="storage-card">
+
+                    <div class="storage-card-icon">
+
+                        <i class="fa fa-boxes-stacked"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>Used Storage</p>
+
+                        <h3 id="usedStorage">
+                            0 kg
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AVAILABLE STORAGE -->
+
+                <div class="storage-card">
+
+                    <div class="storage-card-icon">
+
+                        <i class="fa fa-expand"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>Available Space</p>
+
+                        <h3 id="availableStorage">
+                            0 kg
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOTAL WAREHOUSES -->
+
+                <div class="storage-card">
+
+                    <div class="storage-card-icon">
+
+                        <i class="fa fa-building"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p>Total Warehouses</p>
+
+                        <h3 id="totalWarehouses">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 STORAGE CAPACITY
+            ================================================== -->
+
+            <section class="capacity-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            <i class="fa fa-chart-pie"></i>
+                            Storage Capacity
+                        </h2>
+
+                        <p>
+                            Overall warehouse utilization
+                        </p>
+
+                    </div>
+
+                    <span
+                        class="capacity-percent"
+                        id="capacityPercent"
+                    >
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="capacity-bar">
+
+                    <div
+                        class="capacity-progress"
+                        id="capacityProgress"
+                        style="width: 0%;"
+                    ></div>
+
+                </div>
+
+
+                <div class="capacity-info">
+
+                    <span>
+                        Used:
+                        <strong id="capacityUsed">
+                            0 kg
+                        </strong>
+                    </span>
+
+                    <span>
+                        Total:
+                        <strong id="capacityTotal">
+                            0 kg
+                        </strong>
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 WAREHOUSE SECTION
+            ================================================== -->
+
+            <section class="warehouse-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            <i class="fa fa-warehouse"></i>
+                            My Warehouses
+                        </h2>
+
+                        <p>
+                            Manage your storage locations
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WAREHOUSE CARDS -->
+
+                <div
+                    class="warehouse-grid"
+                    id="warehouseGrid"
+                >
+
+
+                    <!-- EMPTY STATE -->
+
+                    <div
+                        class="empty-storage"
+                        id="emptyStorage"
+                    >
+
+                        <div class="empty-icon">
+
+                            <i class="fa fa-warehouse"></i>
+
+                        </div>
+
+                        <h3>
+                            No Warehouse Added
+                        </h3>
+
+                        <p>
+                            Add your first warehouse to start
+                            managing your storage.
+                        </p>
+
+                        <button
+                            class="add-warehouse-btn"
+                            id="emptyAddWarehouseBtn"
+                        >
+
+                            <i class="fa fa-plus"></i>
+
+                            Add Warehouse
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 STORAGE ALERTS
+            ================================================== -->
+
+            <section class="storage-alerts">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>
+                            <i class="fa fa-bell"></i>
+                            Storage Alerts
+                        </h2>
+
+                        <p>
+                            Important storage notifications
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="alerts-grid">
+
+
+                    <!-- CAPACITY ALERT -->
+
+                    <div class="alert-card warning">
+
+                        <div class="alert-icon">
+
+                            <i class="fa fa-triangle-exclamation"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Capacity Monitoring
+                            </h3>
+
+                            <p>
+                                Your storage capacity alerts
+                                will appear here.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONDITION ALERT -->
+
+                    <div class="alert-card info">
+
+                        <div class="alert-icon">
+
+                            <i class="fa fa-temperature-half"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Storage Conditions
+                            </h3>
+
+                            <p>
+                                Monitor temperature and humidity
+                                for sensitive products.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="../js/farmer-profile.js"></script>
+
+    <script src="../js/farmer-storage.js"></script>
+
+</body>
+
+</html>

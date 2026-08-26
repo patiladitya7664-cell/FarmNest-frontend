@@ -35,19 +35,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (type === "login") {
 
-            loginForm.classList.add("active");
-            registerForm.classList.remove("active");
+            if (loginForm) {
+                loginForm.classList.add("active");
+            }
 
-            loginTab.classList.add("active");
-            registerTab.classList.remove("active");
+            if (registerForm) {
+                registerForm.classList.remove("active");
+            }
+
+            if (loginTab) {
+                loginTab.classList.add("active");
+            }
+
+            if (registerTab) {
+                registerTab.classList.remove("active");
+            }
 
         } else {
 
-            registerForm.classList.add("active");
-            loginForm.classList.remove("active");
+            if (registerForm) {
+                registerForm.classList.add("active");
+            }
 
-            registerTab.classList.add("active");
-            loginTab.classList.remove("active");
+            if (loginForm) {
+                loginForm.classList.remove("active");
+            }
+
+            if (registerTab) {
+                registerTab.classList.add("active");
+            }
+
+            if (loginTab) {
+                loginTab.classList.remove("active");
+            }
         }
     };
 
@@ -60,15 +80,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const input = document.getElementById(inputId);
 
+        if (!input) return;
+
         if (input.type === "password") {
 
             input.type = "text";
-            button.textContent = "🙈";
+
+            if (button) {
+                button.textContent = "🙈";
+            }
 
         } else {
 
             input.type = "password";
-            button.textContent = "👁️";
+
+            if (button) {
+                button.textContent = "👁️";
+            }
         }
     };
 
@@ -80,6 +108,11 @@ document.addEventListener("DOMContentLoaded", function () {
     window.registerUser = async function (event) {
 
         event.preventDefault();
+
+
+        /* ================================
+           GET REGISTER VALUES
+        ================================= */
 
         const name =
             document.getElementById("registerName").value.trim();
@@ -99,7 +132,9 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("confirmPassword").value;
 
 
-        /* Validate Name */
+        /* ================================
+           VALIDATE NAME
+        ================================= */
 
         if (name.length < 2) {
 
@@ -112,7 +147,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Validate Email */
+        /* ================================
+           VALIDATE EMAIL
+        ================================= */
 
         if (!validateEmail(email)) {
 
@@ -125,7 +162,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Validate Role */
+        /* ================================
+           VALIDATE ROLE
+        ================================= */
 
         if (!role) {
 
@@ -138,7 +177,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Validate Password */
+        /* ================================
+           VALIDATE PASSWORD
+        ================================= */
 
         if (password.length < 6) {
 
@@ -151,7 +192,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Confirm Password */
+        /* ================================
+           CONFIRM PASSWORD
+        ================================= */
 
         if (password !== confirmPassword) {
 
@@ -198,6 +241,10 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
 
+            /* ================================
+               REGISTER FAILED
+            ================================= */
+
             if (!response.ok) {
 
                 showMessage(
@@ -209,7 +256,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            /* Success */
+            /* ================================
+               REGISTER SUCCESS
+            ================================= */
 
             showMessage(
                 "Account created successfully! Please login.",
@@ -217,24 +266,37 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-            registerForm.reset();
+            /* Reset form */
+
+            if (registerForm) {
+                registerForm.reset();
+            }
 
 
-            /* Switch to Login */
+            /* ================================
+               SWITCH TO LOGIN
+            ================================= */
 
             setTimeout(function () {
 
                 showForm("login");
 
-                document.getElementById("loginEmail").value =
-                    email;
+                const loginEmail =
+                    document.getElementById("loginEmail");
+
+                if (loginEmail) {
+                    loginEmail.value = email;
+                }
 
             }, 1000);
 
 
         } catch (error) {
 
-            console.error("Register Error:", error);
+            console.error(
+                "Register Error:",
+                error
+            );
 
             showMessage(
                 "Cannot connect to FarmNest server. Make sure backend is running.",
@@ -252,6 +314,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         event.preventDefault();
 
+
+        /* ================================
+           GET LOGIN VALUES
+        ================================= */
+
         const email =
             document.getElementById("loginEmail").value
             .trim()
@@ -261,7 +328,9 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("loginPassword").value;
 
 
-        /* Validate Email */
+        /* ================================
+           VALIDATE EMAIL
+        ================================= */
 
         if (!validateEmail(email)) {
 
@@ -274,7 +343,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        /* Validate Password */
+        /* ================================
+           VALIDATE PASSWORD
+        ================================= */
 
         if (!password) {
 
@@ -319,12 +390,29 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
 
-            /* Login failed */
+            /* ================================
+               LOGIN FAILED
+            ================================= */
 
             if (!response.ok) {
 
                 showMessage(
                     data.message || "Invalid email or password.",
+                    "error"
+                );
+
+                return;
+            }
+
+
+            /* ================================
+               CHECK RESPONSE
+            ================================= */
+
+            if (!data.token || !data.user) {
+
+                showMessage(
+                    "Invalid response from FarmNest server.",
                     "error"
                 );
 
@@ -343,11 +431,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             /* ================================
-               SAVE USER
+               SAVE CURRENT USER
             ================================= */
 
             localStorage.setItem(
                 "farmnestCurrentUser",
+                JSON.stringify(data.user)
+            );
+
+
+            /*
+               Compatibility:
+               Existing Farmer Dashboard
+               currently uses "user".
+            */
+
+            localStorage.setItem(
+                "user",
                 JSON.stringify(data.user)
             );
 
@@ -376,7 +476,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             /* ================================
-               SUCCESS
+               SUCCESS MESSAGE
             ================================= */
 
             showMessage(
@@ -386,7 +486,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             /* ================================
-               REDIRECT
+               ROLE BASED REDIRECT
             ================================= */
 
             setTimeout(function () {
@@ -398,7 +498,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         } catch (error) {
 
-            console.error("Login Error:", error);
+            console.error(
+                "Login Error:",
+                error
+            );
 
             showMessage(
                 "Cannot connect to FarmNest server. Make sure backend is running.",
@@ -414,25 +517,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function redirectUser(user) {
 
+        if (!user || !user.role) {
+
+            showMessage(
+                "User role not found.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        /* ================================
+           FARMER
+        ================================= */
+
         if (user.role === "farmer") {
 
             window.location.href =
                 "../Farmer/farmer-dashboard.html";
 
+            return;
         }
 
-        else if (user.role === "admin") {
+
+        /* ================================
+           ADMIN
+        ================================= */
+
+        if (user.role === "admin") {
 
             window.location.href =
                 "../ADMIN/dashboard.html";
 
+            return;
         }
 
-        else {
+
+        /* ================================
+           CUSTOMER
+        ================================= */
+
+        if (user.role === "customer") {
 
             window.location.href =
                 "index.html";
+
+            return;
         }
+
+
+        /* ================================
+           UNKNOWN ROLE
+        ================================= */
+
+        showMessage(
+            "Invalid user role.",
+            "error"
+        );
     }
 
 
@@ -443,6 +585,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.forgotPassword = function (event) {
 
         event.preventDefault();
+
 
         const email =
             document.getElementById("loginEmail").value
@@ -457,7 +600,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 "error"
             );
 
-            document.getElementById("loginEmail").focus();
+            document.getElementById(
+                "loginEmail"
+            ).focus();
 
             return;
         }
@@ -543,15 +688,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log(
                 "FarmNest JWT session active:",
-                user.name
+                user.name,
+                "| Role:",
+                user.role
             );
 
         } catch (error) {
+
+            console.error(
+                "Invalid saved session:",
+                error
+            );
 
             localStorage.removeItem("token");
 
             localStorage.removeItem(
                 "farmnestCurrentUser"
+            );
+
+            localStorage.removeItem(
+                "user"
             );
         }
     }

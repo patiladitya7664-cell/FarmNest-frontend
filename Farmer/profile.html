@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Farmer Profile | FarmNest</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+    
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+      <div class="logo">
+        <img
+          src="../images/web-logo/farmnest-logo.png"
+          alt="FarmNest Logo"
+        />
+
+        <h2>FarmNest</h2>
+      </div>
+
+      <ul>
+
+        <li>
+          <a href="farmer-dashboard.html">
+            <i class="fa fa-home"></i>
+            Dashboard
+          </a>
+        </li>
+
+        <li>
+          <a href="my-crops.html">
+            <i class="fa fa-seedling"></i>
+            My Crops
+          </a>
+        </li>
+
+        <li>
+          <a href="add-product.html">
+            <i class="fa fa-plus"></i>
+            Add Product
+          </a>
+        </li>
+
+        <li>
+          <a href="inventory.html">
+            <i class="fa fa-box"></i>
+            Inventory
+          </a>
+        </li>
+
+        <li>
+          <a href="farmer-orders.html">
+            <i class="fa fa-shopping-cart"></i>
+            Orders
+          </a>
+        </li>
+
+        <li>
+          <a href="storage.html">
+            <i class="fa fa-warehouse"></i>
+            Smart Storage
+          </a>
+        </li>
+
+        <li>
+          <a href="earnings.html">
+            <i class="fa fa-money-bill"></i>
+            Earnings
+          </a>
+        </li>
+
+        <li>
+          <a href="analytics.html">
+            <i class="fa fa-chart-line"></i>
+            Analytics
+          </a>
+        </li>
+
+        <li>
+          <a href="reports.html">
+            <i class="fa fa-file"></i>
+            Reports
+          </a>
+        </li>
+
+        <li>
+          <a href="notifications.html">
+            <i class="fa fa-bell"></i>
+            Notifications
+          </a>
+        </li>
+
+        <!-- PROFILE ACTIVE -->
+
+        <li class="active">
+          <a href="profile.html">
+            <i class="fa fa-user"></i>
+            Profile
+          </a>
+        </li>
+
+      </ul>
+    </aside>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <div class="main">
+
+      <!-- =========================================
+     PREMIUM FARMER PROFILE HEADER
+========================================= -->
+
+
+
+      <!-- =========================================
+           PROFILE CONTENT
+      ========================================== -->
+
+      <div class="profile-page">
+
+
+        <!-- PROFILE CARD -->
+
+        <section class="profile-card">
+
+          <div class="profile-image-section">
+
+  <img
+    id="profileImage"
+    class="profile-image"
+    src="../images/farmer.png"
+    alt="Farmer Profile"
+  />
+
+  <label for="profileUpload" class="upload-btn">
+    <i class="fa fa-camera"></i>
+    Change Photo
+  </label>
+
+  <input
+    type="file"
+    id="profileUpload"
+    accept="image/*"
+    hidden
+  />
+
+</div>
+
+          <h2>Aditya Farmer</h2>
+
+          <p>FarmNest Farmer</p>
+
+          <span class="farmer-badge">
+            <i class="fa fa-check-circle"></i>
+            Verified Farmer
+          </span>
+
+          <div class="account-info">
+
+            <div class="info-box">
+
+              <i class="fa fa-seedling"></i>
+
+              <h4>25</h4>
+
+              <p>Total Crops</p>
+
+            </div>
+
+            <div class="info-box">
+
+              <i class="fa fa-box"></i>
+
+              <h4>120</h4>
+
+              <p>Products</p>
+
+            </div>
+
+            <div class="info-box">
+
+              <i class="fa fa-shopping-cart"></i>
+
+              <h4>45</h4>
+
+              <p>Orders</p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- PROFILE DETAILS -->
+
+        <section class="profile-details">
+
+          <h2>
+            <i class="fa fa-user"></i>
+            Personal Information
+          </h2>
+
+
+          <form id="profileForm">
+
+            <div class="form-grid">
+
+
+              <!-- NAME -->
+
+              <div class="form-group">
+
+                <label for="name">
+                  Full Name
+                </label>
+
+                <input
+                  type="text"
+                  id="name"
+                  value="Aditya Farmer"
+                  required
+                />
+
+              </div>
+
+
+              <!-- EMAIL -->
+
+              <div class="form-group">
+
+                <label for="email">
+                  Email Address
+                </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  value="farmer@farmnest.com"
+                  required
+                />
+
+              </div>
+
+
+              <!-- PHONE -->
+
+              <div class="form-group">
+
+                <label for="phone">
+                  Mobile Number
+                </label>
+
+                <input
+                  type="tel"
+                  id="phone"
+                  value="+91 9876543210"
+                  required
+                />
+
+              </div>
+
+
+              <!-- FARM NAME -->
+
+              <div class="form-group">
+
+                <label for="farmName">
+                  Farm Name
+                </label>
+
+                <input
+                  type="text"
+                  id="farmName"
+                  value="Aditya Farm"
+                />
+
+              </div>
+
+
+              <!-- LOCATION -->
+
+              <div class="form-group">
+
+                <label for="location">
+                  Location
+                </label>
+
+                <input
+                  type="text"
+                  id="location"
+                  value="Maharashtra, India"
+                />
+
+              </div>
+
+
+              <!-- FARM SIZE -->
+
+              <div class="form-group">
+
+                <label for="farmSize">
+                  Farm Size
+                </label>
+
+                <input
+                  type="text"
+                  id="farmSize"
+                  value="5 Acres"
+                />
+
+              </div>
+
+
+              <!-- ADDRESS -->
+
+              <div class="form-group full">
+
+                <label for="address">
+                  Farm Address
+                </label>
+
+                <textarea id="address">
+Maharashtra, India</textarea>
+
+              </div>
+
+
+              <!-- BIO -->
+
+              <div class="form-group full">
+
+                <label for="bio">
+                  About Farmer
+                </label>
+
+                <textarea id="bio">
+I am a farmer registered with FarmNest. I provide fresh and quality farm products directly to customers.</textarea>
+
+              </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="profile-actions">
+
+              <button
+                type="submit"
+                class="save-btn"
+              >
+                <i class="fa fa-save"></i>
+                Save Changes
+              </button>
+
+              <button
+                type="reset"
+                class="cancel-btn"
+              >
+                <i class="fa fa-rotate-left"></i>
+                Reset
+              </button>
+
+            </div>
+
+          </form>
+
+        </section>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================================
+         PROFILE JAVASCRIPT
+    ========================================== -->
+
+    <script src="../js/farmer-profile.js"></script>
+
+  </body>
+</html>

@@ -1,502 +1,321 @@
-/* ==========================================================
-   FARMNEST - FARMER NOTIFICATION JS
-   DEMO VERSION
-   Backend integration later
-========================================================== */
+/* =========================================
+   FARMNEST - NOTIFICATION JAVASCRIPT
+   ========================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const notificationList =
-    document.getElementById("notificationList");
+document.addEventListener("DOMContentLoaded", function () {
+  const API_URL = "http://localhost:5000/api/notifications";
 
-  const emptyNotification =
-    document.getElementById("emptyNotification");
+  const token = localStorage.getItem("token");
 
-  const totalNotifications =
-    document.getElementById("totalNotifications");
+  const notificationList = document.getElementById("notificationList");
 
-  const unreadNotifications =
-    document.getElementById("unreadNotifications");
+  const emptyNotification = document.getElementById("emptyNotification");
 
-  const readNotifications =
-    document.getElementById("readNotifications");
+  const totalNotifications = document.getElementById("totalNotifications");
 
-  const headerUnreadCount =
-    document.getElementById("headerUnreadCount");
+  const unreadNotifications = document.getElementById("unreadNotifications");
 
-  const sidebarNotificationCount =
-    document.getElementById("sidebarNotificationCount");
+  const readNotifications = document.getElementById("readNotifications");
 
-  const markAllBtn =
-    document.getElementById("markAllBtn");
+  const headerUnreadCount = document.getElementById("headerUnreadCount");
 
-  const clearAllBtn =
-    document.getElementById("clearAllBtn");
-
-
-  /* ==========================================================
-     DEMO NOTIFICATIONS
-  ========================================================== */
-
-  let notifications = JSON.parse(
-    localStorage.getItem("farmerNotifications")
+  const sidebarNotificationCount = document.getElementById(
+    "sidebarNotificationCount",
   );
 
+  const markAllBtn = document.getElementById("markAllBtn");
 
-  /* ==========================================================
-     CREATE DEMO DATA FIRST TIME
-  ========================================================== */
+  const clearAllBtn = document.getElementById("clearAllBtn");
 
-  if (!notifications) {
+  /* =========================================
+       AUTH CHECK
+       ========================================= */
 
-    notifications = [
+  if (!token) {
+    alert("Please login first.");
+    window.location.href = "../login.html";
+    return;
+  }
 
-      {
-        id: 1,
-        type: "order",
-        title: "New Order Received",
-        message:
-          "You received a new order for Premium Wheat.",
-        time: "Just now",
-        read: false
-      },
+  /* =========================================
+       LOAD NOTIFICATIONS
+       ========================================= */
 
-      {
-        id: 2,
-        type: "product",
-        title: "Product Approved",
-        message:
-          "Your Premium Wheat product has been approved by admin.",
-        time: "10 minutes ago",
-        read: false
-      },
+  async function loadNotifications() {
+    try {
+      const response = await fetch(API_URL, {
+        method: "GET",
 
-      {
-        id: 3,
-        type: "stock",
-        title: "Low Stock Alert",
-        message:
-          "Your Premium Wheat stock is running low.",
-        time: "30 minutes ago",
-        read: false
-      },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      {
-        id: 4,
-        type: "payment",
-        title: "Payment Received",
-        message:
-          "Payment for Order #FN102 has been received successfully.",
-        time: "1 hour ago",
-        read: true
-      },
+      const data = await response.json();
 
-      {
-        id: 5,
-        type: "delivery",
-        title: "Order Shipped",
-        message:
-          "Order #FN101 has been shipped to the customer.",
-        time: "2 hours ago",
-        read: true
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to load notifications");
       }
 
-    ];
+      const notifications = data.notifications || [];
 
-    saveNotifications();
+      renderNotifications(notifications);
+    } catch (error) {
+      console.error("Notification Error:", error);
+
+      notificationList.innerHTML = `
+          <div class="empty-notification">
+            <i class="fa fa-triangle-exclamation"></i>
+            <h3>Unable to Load Notifications</h3>
+            <p>${error.message}</p>
+          </div>
+        `;
+    }
   }
 
+  /* =========================================
+       RENDER NOTIFICATIONS
+       ========================================= */
 
-  /* ==========================================================
-     SAVE NOTIFICATIONS
-  ========================================================== */
-
-  function saveNotifications() {
-
-    localStorage.setItem(
-      "farmerNotifications",
-      JSON.stringify(notifications)
-    );
-
-  }
-
-
-  /* ==========================================================
-     GET NOTIFICATION ICON
-  ========================================================== */
-
-  function getIcon(type) {
-
-    const icons = {
-
-      order: "fa-shopping-cart",
-
-      product: "fa-seedling",
-
-      stock: "fa-box",
-
-      payment: "fa-indian-rupee-sign",
-
-      delivery: "fa-truck",
-
-      system: "fa-circle-info"
-
-    };
-
-    return icons[type] || "fa-bell";
-  }
-
-
-  /* ==========================================================
-     DISPLAY NOTIFICATIONS
-  ========================================================== */
-
-  function renderNotifications() {
-
+  function renderNotifications(notifications) {
     notificationList.innerHTML = "";
 
-
-    /* EMPTY STATE */
-
     if (notifications.length === 0) {
-
       emptyNotification.style.display = "block";
 
-    } else {
+      updateCounts([]);
 
-      emptyNotification.style.display = "none";
-
+      return;
     }
 
+    emptyNotification.style.display = "none";
 
-    /* CREATE NOTIFICATION CARDS */
+    notifications.forEach(function (notification) {
+      const item = document.createElement("div");
 
-    notifications.forEach((notification) => {
+      item.className = "notification-item";
 
-      const notificationElement =
-        document.createElement("div");
-
-
-      notificationElement.className =
-        "notification " +
-        (notification.read
-          ? "read"
-          : "unread");
-
-
-      notificationElement.innerHTML = `
-
-        <div class="notification-icon">
-
-          <i class="fa ${getIcon(notification.type)}"></i>
-
-        </div>
-
-
-        <div class="notification-content">
-
-          <h3>
-            ${notification.title}
-          </h3>
-
-          <p>
-            ${notification.message}
-          </p>
-
-          <div class="notification-time">
-
-            <i class="fa fa-clock"></i>
-
-            ${notification.time}
-
-          </div>
-
-        </div>
-
-
-        <div class="notification-buttons">
-
-
-          ${
-            !notification.read
-              ? `
-                <button
-                  class="read-btn"
-                  data-id="${notification.id}"
-                  title="Mark as Read"
-                >
-
-                  <i class="fa fa-check"></i>
-
-                </button>
-              `
-              : ""
-          }
-
-
-          <button
-            class="delete-btn"
-            data-id="${notification.id}"
-            title="Delete"
-          >
-
-            <i class="fa fa-trash"></i>
-
-          </button>
-
-
-        </div>
-
-      `;
-
-
-      notificationList.appendChild(
-        notificationElement
-      );
-
-    });
-
-
-    updateCounters();
-
-  }
-
-
-  /* ==========================================================
-     UPDATE COUNTERS
-  ========================================================== */
-
-  function updateCounters() {
-
-    const total =
-      notifications.length;
-
-
-    const unread =
-      notifications.filter(
-        (notification) =>
-          notification.read === false
-      ).length;
-
-
-    const read =
-      notifications.filter(
-        (notification) =>
-          notification.read === true
-      ).length;
-
-
-    if (totalNotifications) {
-
-      totalNotifications.textContent =
-        total;
-
-    }
-
-
-    if (unreadNotifications) {
-
-      unreadNotifications.textContent =
-        unread;
-
-    }
-
-
-    if (readNotifications) {
-
-      readNotifications.textContent =
-        read;
-
-    }
-
-
-    if (headerUnreadCount) {
-
-      headerUnreadCount.textContent =
-        unread;
-
-    }
-
-
-    if (sidebarNotificationCount) {
-
-      sidebarNotificationCount.textContent =
-        unread;
-
-
-      if (unread === 0) {
-
-        sidebarNotificationCount.style.display =
-          "none";
-
-      } else {
-
-        sidebarNotificationCount.style.display =
-          "inline-block";
-
+      if (!notification.isRead) {
+        item.classList.add("unread");
       }
 
-    }
+      const date = new Date(notification.createdAt);
 
-  }
+      const formattedDate = date.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
 
+      const formattedTime = date.toLocaleTimeString("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
 
-  /* ==========================================================
-     NOTIFICATION BUTTON ACTIONS
-  ========================================================== */
+      let icon = "fa-bell";
 
-  notificationList.addEventListener(
-    "click",
-    (event) => {
+      if (notification.type === "New Order") {
+        icon = "fa-cart-shopping";
+      } else if (notification.type === "Payment") {
+        icon = "fa-money-bill";
+      } else if (notification.type === "Order Status") {
+        icon = "fa-truck";
+      }
 
+      item.innerHTML = `
 
-      /* ======================================================
-         MARK AS READ
-      ====================================================== */
+            <div class="notification-icon">
+              <i class="fa ${icon}"></i>
+            </div>
 
-      const readButton =
-        event.target.closest(".read-btn");
+            <div class="notification-content">
 
+              <h3>
+                ${notification.title}
+              </h3>
 
-      if (readButton) {
+              <p>
+                ${notification.message}
+              </p>
 
-        const id =
-          Number(readButton.dataset.id);
+              <small>
+                ${formattedDate}
+                •
+                ${formattedTime}
+              </small>
 
+            </div>
 
-        notifications =
-          notifications.map(
-            (notification) => {
+            <div class="notification-actions">
 
-              if (notification.id === id) {
-
-                notification.read = true;
-
+              ${
+                notification.isRead
+                  ? `<span class="read-label">
+                       Read
+                     </span>`
+                  : `<button
+                       class="read-btn"
+                       data-id="${notification._id}">
+                       <i class="fa fa-check"></i>
+                       Mark Read
+                     </button>`
               }
 
-              return notification;
+            </div>
 
-            }
-          );
+          `;
 
+      notificationList.appendChild(item);
+    });
 
-        saveNotifications();
+    updateCounts(notifications);
 
-        renderNotifications();
+    attachReadEvents();
+  }
 
-      }
+  /* =========================================
+       UPDATE COUNTS
+       ========================================= */
 
+  function updateCounts(notifications) {
+    const total = notifications.length;
 
-      /* ======================================================
-         DELETE NOTIFICATION
-      ====================================================== */
+    const unread = notifications.filter(
+      (notification) => !notification.isRead,
+    ).length;
 
-      const deleteButton =
-        event.target.closest(".delete-btn");
+    const read = total - unread;
 
+    totalNotifications.textContent = total;
 
-      if (deleteButton) {
+    unreadNotifications.textContent = unread;
 
-        const id =
-          Number(deleteButton.dataset.id);
+    readNotifications.textContent = read;
 
+    headerUnreadCount.textContent = unread;
 
-        notifications =
-          notifications.filter(
-            (notification) =>
-              notification.id !== id
-          );
+    sidebarNotificationCount.textContent = unread;
 
-
-        saveNotifications();
-
-        renderNotifications();
-
-      }
-
+    if (unread === 0) {
+      sidebarNotificationCount.style.display = "none";
+    } else {
+      sidebarNotificationCount.style.display = "inline-flex";
     }
-  );
+  }
 
+  /* =========================================
+       MARK SINGLE AS READ
+       ========================================= */
 
-  /* ==========================================================
-     MARK ALL AS READ
-  ========================================================== */
+  function attachReadEvents() {
+    const buttons = document.querySelectorAll(".read-btn");
+
+    buttons.forEach(function (button) {
+      button.addEventListener("click", async function () {
+        const id = this.dataset.id;
+
+        try {
+          const response = await fetch(`${API_URL}/${id}/read`, {
+            method: "PUT",
+
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message);
+          }
+
+          loadNotifications();
+        } catch (error) {
+          console.error("Read Notification Error:", error);
+
+          alert("Failed to mark notification as read.");
+        }
+      });
+    });
+  }
+
+  /* =========================================
+       MARK ALL AS READ
+       ========================================= */
 
   if (markAllBtn) {
+    markAllBtn.addEventListener("click", async function () {
+      try {
+        const response = await fetch(`${API_URL}/read-all`, {
+          method: "PUT",
 
-    markAllBtn.addEventListener(
-      "click",
-      () => {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-        notifications =
-          notifications.map(
-            (notification) => ({
+        const data = await response.json();
 
-              ...notification,
+        if (!response.ok) {
+          throw new Error(data.message);
+        }
 
-              read: true
+        loadNotifications();
+      } catch (error) {
+        console.error("Mark All Error:", error);
 
-            })
-          );
-
-
-        saveNotifications();
-
-        renderNotifications();
-
+        alert("Failed to mark notifications as read.");
       }
-    );
-
+    });
   }
 
-
-  /* ==========================================================
-     CLEAR ALL NOTIFICATIONS
-  ========================================================== */
+  /* =========================================
+       CLEAR ALL
+       ========================================= */
 
   if (clearAllBtn) {
+    clearAllBtn.addEventListener("click", async function () {
+      const confirmClear = confirm(
+        "Are you sure you want to clear all notifications?",
+      );
 
-    clearAllBtn.addEventListener(
-      "click",
-      () => {
-
-
-        if (notifications.length === 0) {
-
-          return;
-
-        }
-
-
-        const confirmDelete =
-          confirm(
-            "Are you sure you want to delete all notifications?"
-          );
-
-
-        if (!confirmDelete) {
-
-          return;
-
-        }
-
-
-        notifications = [];
-
-
-        saveNotifications();
-
-        renderNotifications();
-
+      if (!confirmClear) {
+        return;
       }
-    );
 
+      try {
+        const response = await fetch(`${API_URL}/clear`, {
+          method: "DELETE",
+
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message);
+        }
+
+        loadNotifications();
+      } catch (error) {
+        console.error("Clear Notification Error:", error);
+
+        alert("Failed to clear notifications.");
+      }
+    });
   }
 
+  /* =========================================
+       INITIAL LOAD
+       ========================================= */
 
-  /* ==========================================================
-     INITIAL LOAD
-  ========================================================== */
+  loadNotifications();
 
-  renderNotifications();
+  /* =========================================
+       AUTO REFRESH
+       ========================================= */
 
+  setInterval(loadNotifications, 30000);
 });

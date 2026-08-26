@@ -1,0 +1,871 @@
+/* =========================================================
+   FARMNEST - SMART STORAGE MANAGEMENT
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f4f8f4;
+    color: #263238;
+}
+
+
+/* =========================================================
+   MAIN AREA
+========================================================= */
+
+.main {
+    margin-left: 245px;
+    width: calc(100% - 245px);
+    min-height: 100vh;
+    background: #f4f8f4;
+}
+
+
+/* =========================================================
+   PREMIUM HEADER
+========================================================= */
+
+.storage-header {
+    width: 100%;
+    min-height: 82px;
+
+    padding: 15px 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5ebe5;
+
+    box-shadow: 0 4px 20px rgba(27, 94, 32, 0.07);
+
+    position: relative;
+    z-index: 10;
+}
+
+
+/* LEFT */
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #2e7d32,
+        #66bb6a
+    );
+
+    color: #ffffff;
+
+    font-size: 21px;
+
+    box-shadow: 0 6px 16px rgba(46, 125, 50, 0.25);
+}
+
+.header-left h1 {
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    color: #1b5e20;
+}
+
+.header-left p {
+    margin: 3px 0 0;
+
+    font-size: 12px;
+
+    color: #78907a;
+}
+
+
+/* RIGHT */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* PROFILE + LOGOUT */
+
+.storage-header .profile-btn,
+.storage-header .logout-btn {
+    height: 42px;
+
+    padding: 0 17px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.storage-header .profile-btn {
+    background: #edf7ee;
+
+    color: #1b5e20;
+
+    border: 1px solid #cfe5d1;
+}
+
+.storage-header .profile-btn:hover {
+    background: #dff0e1;
+    transform: translateY(-2px);
+}
+
+.storage-header .logout-btn {
+    background: #1b5e20;
+
+    color: #ffffff;
+
+    border: 1px solid #1b5e20;
+}
+
+.storage-header .logout-btn:hover {
+    background: #c62828;
+    border-color: #c62828;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   STORAGE PAGE
+========================================================= */
+
+.storage-page {
+    padding: 28px 30px 45px;
+}
+
+
+/* =========================================================
+   INTRO SECTION
+========================================================= */
+
+.storage-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+.storage-label {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.storage-intro h2 {
+    margin: 8px 0 4px;
+
+    font-size: 25px;
+
+    color: #263238;
+}
+
+.storage-intro p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #78909c;
+}
+
+
+/* =========================================================
+   ADD WAREHOUSE BUTTON
+========================================================= */
+
+.add-warehouse-btn {
+    border: none;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #2e7d32,
+        #43a047
+    );
+
+    color: #ffffff;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(46, 125, 50, 0.20);
+
+    transition: 0.3s ease;
+}
+
+.add-warehouse-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(46, 125, 50, 0.28);
+}
+
+
+/* =========================================================
+   STORAGE STAT CARDS
+========================================================= */
+
+.storage-stats {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+.storage-card {
+    min-height: 115px;
+
+    padding: 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #e7eee7;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow:
+        0 5px 18px rgba(27, 94, 32, 0.06);
+
+    transition: 0.3s ease;
+}
+
+.storage-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(27, 94, 32, 0.11);
+}
+
+.storage-card-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #eaf5eb;
+
+    color: #2e7d32;
+
+    font-size: 20px;
+}
+
+.storage-card p {
+    margin: 0 0 5px;
+
+    font-size: 12px;
+
+    color: #78909c;
+}
+
+.storage-card h3 {
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #263238;
+}
+
+
+/* =========================================================
+   COMMON SECTION
+========================================================= */
+
+.capacity-section,
+.warehouse-section,
+.storage-alerts {
+    background: #ffffff;
+
+    border: 1px solid #e7eee7;
+
+    border-radius: 16px;
+
+    padding: 24px;
+
+    margin-bottom: 24px;
+
+    box-shadow:
+        0 5px 18px rgba(27, 94, 32, 0.055);
+}
+
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    margin: 0;
+
+    font-size: 18px;
+
+    color: #263238;
+}
+
+.section-header h2 i {
+    margin-right: 8px;
+
+    color: #2e7d32;
+}
+
+.section-header p {
+    margin: 5px 0 0;
+
+    font-size: 12px;
+
+    color: #90a4ae;
+}
+
+
+/* =========================================================
+   CAPACITY
+========================================================= */
+
+.capacity-percent {
+    padding: 7px 12px;
+
+    border-radius: 8px;
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.capacity-bar {
+    width: 100%;
+
+    height: 13px;
+
+    background: #edf2ed;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-top: 10px;
+}
+
+.capacity-progress {
+    height: 100%;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #2e7d32,
+        #66bb6a
+    );
+
+    transition: width 0.5s ease;
+}
+
+.capacity-info {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 12px;
+
+    font-size: 12px;
+
+    color: #78909c;
+}
+
+.capacity-info strong {
+    color: #37474f;
+}
+
+
+/* =========================================================
+   WAREHOUSE GRID
+========================================================= */
+
+.warehouse-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================================================
+   WAREHOUSE CARD
+========================================================= */
+
+.warehouse-card {
+    padding: 20px;
+
+    border: 1px solid #e3ebe3;
+
+    border-radius: 14px;
+
+    background: #fbfdfb;
+
+    transition: 0.3s ease;
+}
+
+.warehouse-card:hover {
+    border-color: #a5cda8;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(46, 125, 50, 0.08);
+}
+
+.warehouse-card-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+.warehouse-name {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.warehouse-name-icon {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+}
+
+.warehouse-name h3 {
+    margin: 0;
+
+    font-size: 15px;
+
+    color: #263238;
+}
+
+.warehouse-location {
+    margin: 3px 0 0;
+
+    font-size: 11px;
+
+    color: #90a4ae;
+}
+
+.warehouse-status {
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background: #e8f5e9;
+
+    color: #2e7d32;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   WAREHOUSE CAPACITY
+========================================================= */
+
+.warehouse-capacity {
+    margin-top: 15px;
+}
+
+.warehouse-capacity-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+    font-size: 11px;
+
+    color: #78909c;
+}
+
+.warehouse-progress {
+    width: 100%;
+
+    height: 8px;
+
+    background: #e9efea;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.warehouse-progress-bar {
+    height: 100%;
+
+    border-radius: 10px;
+
+    background: #43a047;
+}
+
+.warehouse-details {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin-top: 17px;
+}
+
+.warehouse-detail {
+    padding: 10px;
+
+    border-radius: 9px;
+
+    background: #f4f8f4;
+}
+
+.warehouse-detail span {
+    display: block;
+
+    font-size: 10px;
+
+    color: #90a4ae;
+}
+
+.warehouse-detail strong {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 13px;
+
+    color: #37474f;
+}
+
+
+/* =========================================================
+   EMPTY STORAGE
+========================================================= */
+
+.empty-storage {
+    grid-column: 1 / -1;
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    border: 2px dashed #d5e3d6;
+
+    border-radius: 14px;
+
+    background: #fbfdfb;
+}
+
+.empty-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eaf5eb;
+
+    color: #2e7d32;
+
+    font-size: 25px;
+}
+
+.empty-storage h3 {
+    margin: 0 0 7px;
+
+    font-size: 17px;
+
+    color: #37474f;
+}
+
+.empty-storage p {
+    margin: 0 auto 18px;
+
+    max-width: 420px;
+
+    font-size: 12px;
+
+    color: #90a4ae;
+}
+
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.alerts-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+.alert-card {
+    display: flex;
+
+    gap: 14px;
+
+    padding: 17px;
+
+    border-radius: 12px;
+
+    border: 1px solid #e8ece8;
+}
+
+.alert-card.warning {
+    background: #fffaf0;
+
+    border-color: #f3dfae;
+}
+
+.alert-card.info {
+    background: #f2f8fc;
+
+    border-color: #d5e6f1;
+}
+
+.alert-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+.warning .alert-icon {
+    background: #fff0c9;
+
+    color: #c48a00;
+}
+
+.info .alert-icon {
+    background: #dceef9;
+
+    color: #1976a8;
+}
+
+.alert-card h3 {
+    margin: 0 0 5px;
+
+    font-size: 14px;
+
+    color: #37474f;
+}
+
+.alert-card p {
+    margin: 0;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    color: #78909c;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .storage-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .main {
+        margin-left: 0;
+
+        width: 100%;
+    }
+
+    .storage-header {
+        padding: 14px 18px;
+    }
+
+    .header-left p {
+        display: none;
+    }
+
+    .storage-page {
+        padding: 20px 18px;
+    }
+
+    .storage-intro {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .alerts-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .storage-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .storage-header .profile-btn,
+    .storage-header .logout-btn {
+        width: 40px;
+
+        padding: 0;
+
+        justify-content: center;
+    }
+
+    .storage-header .profile-btn span,
+    .storage-header .logout-btn span {
+        display: none;
+    }
+
+    .header-icon {
+        width: 42px;
+        height: 42px;
+
+        font-size: 18px;
+    }
+
+    .header-left h1 {
+        font-size: 17px;
+    }
+
+    .storage-intro h2 {
+        font-size: 21px;
+    }
+
+    .capacity-section,
+    .warehouse-section,
+    .storage-alerts {
+        padding: 18px;
+    }
+
+}

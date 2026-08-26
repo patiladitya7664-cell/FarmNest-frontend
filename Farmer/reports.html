@@ -1,173 +1,177 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Reports | FarmNest</title>
 
-
     <!-- COMMON FARMNEST CSS -->
 
-    <link rel="stylesheet"
-          href="../css/style.css">
-
-    <link rel="stylesheet"
-          href="../css/header.css">
-
-
-    <!-- REPORT CSS -->
-
-    <link rel="stylesheet"
-          href="../css/report.css">
-
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/report.css" />
 
     <!-- FONT AWESOME -->
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-</head>
+  <body>
+    <!-- SIDEBAR -->
 
+    <aside class="sidebar">
+      <div class="logo">
+        <img src="../images/web-logo/farmnest-logo.png" />
+        <h2>FarmNest</h2>
+      </div>
 
-<body>
+      <ul>
+        <li>
+          <a href="my-crops.html">
+            <i class="fa fa-seedling"></i>
+            My Crops
+          </a>
+        </li>
 
+        <li>
+          <a href="add-product.html">
+            <i class="fa fa-plus"></i>
+            Add Product
+          </a>
+        </li>
 
-<!-- =====================================================
-     COMMON FARMNEST HEADER
-===================================================== -->
+        <li>
+          <a href="inventory.html">
+            <i class="fa fa-box"></i>
+            Inventory Management
+          </a>
+        </li>
 
-<div id="header"></div>
+        <li>
+          <a href="farmer-orders.html">
+            <i class="fa fa-shopping-cart"></i>
+            Orders Received
+          </a>
+        </li>
 
+        <li>
+          <a href="earnings.html">
+            <i class="fa fa-money-bill"></i>
+            Earnings
+          </a>
+        </li>
 
+        <li>
+          <a href="farmer-dashboard.html">
+            <i class="fa fa-warehouse"></i>
+            Farmer Dashboard
+          </a>
+        </li>
 
-<!-- =====================================================
+        <li>
+          <a href="storage.html">
+            <i class="fa fa-warehouse"></i>
+            Smart Storage Management
+          </a>
+        </li>
+
+        <li>
+          <a href="warehouse.html">
+            <i class="fa fa-warehouse"></i>
+            Warehouse Management
+          </a>
+        </li>
+
+        <li>
+          <a href="analytics.html">
+            <i class="fa fa-chart-line"></i>
+            Analytics
+          </a>
+        </li>
+
+        <li>
+          <a href="reports.html">
+            <i class="fa fa-file"></i>
+            Reports
+          </a>
+        </li>
+
+        <li>
+          <a href="notifications.html">
+            <i class="fa fa-bell"></i>
+            Notifications
+          </a>
+        </li>
+
+        <li>
+          <a href="profile.html">
+            <i class="fa fa-user"></i>
+            Profile & Settings
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- =====================================================
      REPORT PAGE
 ===================================================== -->
 
-<main class="report-page">
+    <main class="report-page">
+      <!-- REPORT CONTENT -->
 
-
-    <section class="report-header">
-
-        <h1>
-            Reports
-        </h1>
-
-        <p>
-            View and manage your FarmNest farming reports
-        </p>
-
-    </section>
-
-
-    <!-- REPORT CONTENT -->
-
-    <section class="reports-container">
-
-
+      <section class="reports-container">
         <div class="report-card">
+          <i class="fa-solid fa-chart-line"></i>
 
-            <i class="fa-solid fa-chart-line"></i>
+          <h2>Sales Report</h2>
 
-            <h2>
-                Sales Report
-            </h2>
+          <p>View your product sales and earnings.</p>
 
-            <p>
-                View your product sales and earnings.
-            </p>
-
-            <button>
-                View Report
-            </button>
-
+          <button>View Report</button>
         </div>
 
-
-
         <div class="report-card">
+          <i class="fa-solid fa-box"></i>
 
-            <i class="fa-solid fa-box"></i>
+          <h2>Product Report</h2>
 
-            <h2>
-                Product Report
-            </h2>
+          <p>Check your products and inventory details.</p>
 
-            <p>
-                Check your products and inventory details.
-            </p>
-
-            <button>
-                View Report
-            </button>
-
+          <button>View Report</button>
         </div>
 
-
-
         <div class="report-card">
+          <i class="fa-solid fa-warehouse"></i>
 
-            <i class="fa-solid fa-warehouse"></i>
+          <h2>Storage Report</h2>
 
-            <h2>
-                Storage Report
-            </h2>
+          <p>Check warehouse and storage information.</p>
 
-            <p>
-                Check warehouse and storage information.
-            </p>
-
-            <button>
-                View Report
-            </button>
-
+          <button>View Report</button>
         </div>
 
-
-
         <div class="report-card">
+          <i class="fa-solid fa-indian-rupee-sign"></i>
 
-            <i class="fa-solid fa-indian-rupee-sign"></i>
+          <h2>Earnings Report</h2>
 
-            <h2>
-                Earnings Report
-            </h2>
+          <p>View your total earnings and transactions.</p>
 
-            <p>
-                View your total earnings and transactions.
-            </p>
-
-            <button>
-                View Report
-            </button>
-
+          <button>View Report</button>
         </div>
+      </section>
+    </main>
 
-
-    </section>
-
-
-</main>
-
-
-
-<!-- =====================================================
+    <!-- =====================================================
      COMMON HEADER JAVASCRIPT
 ===================================================== -->
 
-<script src="../js/header.js"></script>
+    <!-- REPORT JAVASCRIPT -->
 
-
-<!-- REPORT JAVASCRIPT -->
-
-<script src="../ADMIN/jss/report.js"></script>
-
-
-</body>
-
+    <script src="../js/report.js"></script>
+  </body>
 </html>

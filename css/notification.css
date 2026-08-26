@@ -691,3 +691,287 @@
   margin-left: auto !important;
   margin-right: 0 !important;
 }
+/* ==========================================================
+   FARMNEST - SIDEBAR FINAL FIX
+========================================================== */
+
+/* IMPORTANT: sidebar width includes padding */
+.sidebar {
+    width: 270px !important;
+    height: 100vh !important;
+
+    box-sizing: border-box !important;
+
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    bottom: auto !important;
+
+    padding: 20px 14px !important;
+
+    background: linear-gradient(
+        180deg,
+        #123f17 0%,
+        #1b5e20 55%,
+        #145a1a 100%
+    ) !important;
+
+    overflow-y: auto !important;
+
+    z-index: 1000 !important;
+
+    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.12) !important;
+}
+
+
+/* ==========================================================
+   LOGO
+========================================================== */
+
+.sidebar .logo {
+    width: 100% !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 12px !important;
+
+    padding: 6px 10px 20px !important;
+
+    margin: 0 0 18px 0 !important;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.sidebar .logo img {
+    width: 48px !important;
+    height: 48px !important;
+
+    object-fit: contain !important;
+}
+
+.sidebar .logo h2 {
+    margin: 0 !important;
+
+    color: #ffffff !important;
+
+    font-size: 23px !important;
+    font-weight: 700 !important;
+}
+
+
+/* ==========================================================
+   MENU LIST
+========================================================== */
+
+.sidebar ul {
+    width: 100% !important;
+
+    list-style: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* ==========================================================
+   MENU ITEM
+========================================================== */
+
+.sidebar ul li {
+    width: 100% !important;
+
+    margin: 0 0 6px 0 !important;
+    padding: 0 !important;
+
+    border-radius: 12px !important;
+
+    background: transparent !important;
+
+    transition: 0.25s ease !important;
+}
+
+
+/* ==========================================================
+   MENU LINK
+========================================================== */
+
+.sidebar ul li a {
+    width: 100% !important;
+
+    min-height: 48px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 14px !important;
+
+    padding: 11px 14px !important;
+
+    border-radius: 12px !important;
+
+    color: rgba(255, 255, 255, 0.9) !important;
+
+    text-decoration: none !important;
+
+    font-size: 15px !important;
+
+    font-weight: 500 !important;
+
+    line-height: 1.3 !important;
+
+    box-sizing: border-box !important;
+
+    transition: 0.25s ease !important;
+}
+
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.sidebar ul li a i {
+    width: 25px !important;
+
+    min-width: 25px !important;
+
+    text-align: center !important;
+
+    font-size: 17px !important;
+
+    color: #a5d6a7 !important;
+}
+
+
+/* ==========================================================
+   HOVER
+========================================================== */
+
+.sidebar ul li:hover {
+    transform: translateX(3px) !important;
+}
+
+.sidebar ul li:hover a {
+    background: rgba(255, 255, 255, 0.09) !important;
+
+    color: #ffffff !important;
+}
+
+.sidebar ul li:hover a i {
+    color: #ffffff !important;
+}
+
+
+/* ==========================================================
+   ACTIVE ITEM
+========================================================== */
+
+.sidebar ul li.active {
+    background: transparent !important;
+
+    box-shadow: none !important;
+}
+
+.sidebar ul li.active a {
+    background: linear-gradient(
+        135deg,
+        #4caf50,
+        #388e3c
+    ) !important;
+
+    color: #ffffff !important;
+
+    font-weight: 600 !important;
+
+    box-shadow:
+        0 6px 18px rgba(46, 125, 50, 0.30) !important;
+}
+
+.sidebar ul li.active a i {
+    color: #ffffff !important;
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+.sidebar::-webkit-scrollbar {
+    width: 5px !important;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22) !important;
+
+    border-radius: 10px !important;
+}
+
+
+/* ==========================================================
+   MAIN CONTENT ALIGNMENT
+========================================================== */
+
+.main-content {
+    width: calc(100% - 270px) !important;
+
+    margin-left: 270px !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* ==========================================================
+   FOOTER ALIGNMENT
+========================================================== */
+
+.footer {
+    margin-left: 270px !important;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 230px !important;
+    }
+
+    .main-content {
+        width: calc(100% - 230px) !important;
+        margin-left: 230px !important;
+    }
+
+    .footer {
+        margin-left: 230px !important;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+    }
+
+    .main-content {
+        width: 100% !important;
+
+        margin-left: 0 !important;
+    }
+
+    .footer {
+        margin-left: 0 !important;
+    }
+}

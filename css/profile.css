@@ -1,0 +1,624 @@
+/* ==========================================================
+   FARMNEST - FARMER PROFILE PAGE
+   ========================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   PROFILE PAGE LAYOUT
+   ========================================================== */
+
+.profile-page {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 25px;
+
+  margin-top: 25px;
+  width: 100%;
+}
+
+/* ==========================================================
+   PROFILE CARD
+   ========================================================== */
+
+.profile-card,
+.profile-details {
+  background: #ffffff;
+
+  border-radius: 15px;
+
+  padding: 30px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+  border: 1px solid #e8eee9;
+}
+
+.profile-card {
+  text-align: center;
+}
+
+/* Profile Image */
+
+.profile-image {
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 5px solid #2e7d32;
+
+  margin-bottom: 15px;
+}
+
+/* Profile Name */
+
+.profile-card h2 {
+  margin: 5px 0;
+
+  color: #222;
+
+  font-size: 28px;
+}
+
+.profile-card p {
+  color: #777;
+
+  margin-bottom: 20px;
+
+  font-size: 16px;
+}
+
+/* Verified Badge */
+
+.farmer-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  background: #e8f5e9;
+
+  color: #2e7d32;
+
+  padding: 8px 15px;
+
+  border-radius: 20px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+/* ==========================================================
+   ACCOUNT INFO
+   ========================================================== */
+
+.account-info {
+  margin-top: 25px;
+
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 12px;
+}
+
+.info-box {
+  background: #f7fdf7;
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  border-left: 4px solid #2e7d32;
+
+  text-align: left;
+}
+
+.info-box i {
+  color: #2e7d32;
+
+  font-size: 20px;
+
+  margin-bottom: 8px;
+}
+
+.info-box h4 {
+  margin: 5px 0;
+
+  color: #222;
+
+  font-size: 15px;
+}
+
+.info-box p {
+  margin: 0;
+
+  color: #777;
+
+  font-size: 13px;
+}
+
+/* ==========================================================
+   PROFILE DETAILS
+   ========================================================== */
+
+.profile-details h2 {
+  margin-bottom: 25px;
+
+  color: #222;
+
+  font-size: 22px;
+}
+
+.profile-details h2 i {
+  color: #2e7d32;
+
+  margin-right: 8px;
+}
+
+/* ==========================================================
+   FORM
+   ========================================================== */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-weight: 600;
+
+  margin-bottom: 8px;
+
+  color: #333;
+
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+
+  padding: 12px 15px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 8px;
+
+  outline: none;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  background: #fff;
+
+  color: #222;
+
+  transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #2e7d32;
+
+  box-shadow:
+    0 0 0 3px rgba(46, 125, 50, 0.08);
+}
+
+.form-group textarea {
+  resize: vertical;
+
+  min-height: 110px;
+}
+
+/* ==========================================================
+   PROFILE ACTION BUTTONS
+   ========================================================== */
+
+.profile-actions {
+  margin-top: 25px;
+
+  display: flex;
+
+  gap: 12px;
+}
+
+.save-btn {
+  border: none;
+
+  background: #2e7d32;
+
+  color: #ffffff;
+
+  padding: 12px 22px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background: #1b5e20;
+
+  transform: translateY(-1px);
+}
+
+.cancel-btn {
+  border: none;
+
+  background: #eeeeee;
+
+  color: #333;
+
+  padding: 12px 22px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.cancel-btn:hover {
+  background: #dddddd;
+}
+
+/* ==========================================================
+   PROFILE PAGE HEADER FIX
+   IMPORTANT:
+   .profile-page does not contain the header.
+   Therefore body:has(.profile-page) is used.
+   ========================================================== */
+
+/* Header background */
+
+body:has(.profile-page) .top-bar {
+  background: #ffffff !important;
+
+  color: #263238 !important;
+
+  box-shadow: none !important;
+
+  border: none !important;
+
+  border-radius: 0 !important;
+}
+
+/* Header title */
+
+body:has(.profile-page) .top-bar h1 {
+  color: #1b5e20 !important;
+}
+
+/* Header action container */
+
+body:has(.profile-page) .top-actions {
+  display: flex !important;
+
+  align-items: center !important;
+
+  justify-content: flex-end !important;
+
+  gap: 10px !important;
+
+  background: transparent !important;
+
+  padding: 0 !important;
+
+  margin: 0 !important;
+
+  border: none !important;
+
+  box-shadow: none !important;
+
+  border-radius: 0 !important;
+}
+
+/* =========================================================
+   FARMNEST - PROFILE PAGE HEADER BUTTONS
+========================================================= */
+
+
+/* =========================================================
+   1. COMMON HEADER BUTTON RESET
+========================================================= */
+
+body:has(.profile-page) .top-actions button {
+    width: auto !important;
+    height: 44px !important;
+
+    padding: 0 20px !important;
+
+    border: none !important;
+    border-radius: 8px !important;
+
+    box-shadow: none !important;
+
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+
+    cursor: pointer !important;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* =========================================================
+   2. PROFILE BUTTON
+========================================================= */
+
+body:has(.profile-page) .top-actions .profile-btn,
+body:has(.profile-page) .top-actions button:first-child {
+
+    background: #ffffff !important;
+
+    color: #263238 !important;
+
+    border: 1px solid #dfe6e1 !important;
+}
+
+
+/* Profile Button - Hover */
+
+body:has(.profile-page) .top-actions .profile-btn:hover,
+body:has(.profile-page) .top-actions button:first-child:hover {
+
+    background: #f1f8f2 !important;
+
+    color: #1b5e20 !important;
+
+    border-color: #c8dfca !important;
+}
+
+
+/* =========================================================
+   3. PROFILE BUTTON ICON
+========================================================= */
+
+body:has(.profile-page) .top-actions .profile-btn i,
+body:has(.profile-page) .top-actions button:first-child i {
+
+    margin-right: 7px;
+
+    color: #1b5e20 !important;
+}
+
+
+/* =========================================================
+   4. LOGOUT BUTTON
+========================================================= */
+
+body:has(.profile-page) .top-actions .logout-btn,
+body:has(.profile-page) .top-actions button:last-child {
+
+    background: #e53935 !important;
+
+    color: #ffffff !important;
+
+    border: 1px solid #e53935 !important;
+}
+
+
+/* Logout Button - Hover */
+
+body:has(.profile-page) .top-actions .logout-btn:hover,
+body:has(.profile-page) .top-actions button:last-child:hover {
+
+    background: #c62828 !important;
+
+    color: #ffffff !important;
+
+    border-color: #c62828 !important;
+}
+
+
+/* =========================================================
+   5. LOGOUT ICON
+========================================================= */
+
+body:has(.profile-page) .top-actions .logout-btn i,
+body:has(.profile-page) .top-actions button:last-child i {
+
+    margin-right: 7px;
+
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   6. BUTTON ACTIVE / FOCUS
+========================================================= */
+
+body:has(.profile-page) .top-actions button:focus-visible {
+
+    outline: 2px solid #66bb6a !important;
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   7. RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    body:has(.profile-page) .top-actions button {
+
+        height: 40px !important;
+
+        padding: 0 14px !important;
+
+        font-size: 13px !important;
+    }
+
+}
+/* ==========================================================
+   PREVENT ANALYTICS CSS FROM AFFECTING PROFILE
+   ========================================================== */
+
+body:has(.profile-page) .card {
+  transform: none !important;
+}
+
+body:has(.profile-page) .card:hover {
+  transform: none !important;
+}
+
+body:has(.profile-page) .search-section,
+body:has(.profile-page) .charts,
+body:has(.profile-page) .product-chart,
+body:has(.profile-page) .table-section,
+body:has(.profile-page) .bottom-grid,
+body:has(.profile-page) .activity-card {
+  all: revert;
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 1000px) {
+
+  .profile-page {
+    grid-template-columns: 1fr;
+  }
+
+  .account-info {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group.full {
+    grid-column: auto;
+  }
+
+  .account-info {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card,
+  .profile-details {
+    padding: 20px;
+  }
+
+  body:has(.profile-page) .top-actions {
+    flex-wrap: wrap !important;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .profile-actions {
+    flex-direction: column;
+  }
+
+  .save-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+
+  .profile-image {
+    width: 110px;
+
+    height: 110px;
+  }
+
+  body:has(.profile-page) .top-actions {
+    width: 100%;
+
+    justify-content: stretch !important;
+  }
+
+  body:has(.profile-page) .top-actions button {
+    flex: 1;
+  }
+}
+/* =========================================
+   PROFILE IMAGE UPLOAD
+========================================= */
+
+.profile-image-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-image-section .profile-image {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 15px;
+  border: 4px solid #2e7d32;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  background: #2e7d32;
+  color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.upload-btn:hover {
+  background: #1b5e20;
+  transform: translateY(-2px);
+}
+
+.upload-btn i {
+  font-size: 14px;
+}

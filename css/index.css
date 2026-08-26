@@ -987,7 +987,7 @@ nav ul li a.active::after {
   padding: 90px 8%;
 
   background:
-    linear-gradient(rgba(13, 159, 52, 0.7), rgba(237, 246, 241, 0.82)),
+    linear-gradient(rgba(13, 159, 52, 0.7), ),
     url("../images/bg-image.jpg");
 
   background-size: cover;
@@ -1064,7 +1064,7 @@ nav ul li a.active::after {
 
   background: linear-gradient(135deg, var(--primary), var(--dark));
 
-  color: white;
+  color: transparent;
 }
 
 .stats-container {
@@ -1120,7 +1120,7 @@ nav ul li a.active::after {
 }
 
 .testimonial {
-  background: white;
+  background: transparent;
 
   padding: 30px;
 

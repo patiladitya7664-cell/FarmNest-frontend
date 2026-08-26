@@ -66,28 +66,44 @@
           </li>
 
           <li>
-            <a href="cart.html"> Carts </a>
+            <a href="wishlist.html"> Wishlist </a>
           </li>
 
           <li>
-            <a href="checkout.html"> Checkout</a>
+            <a href="cart.html"> Cart</a>
           </li>
 
           <li>
-            <a href="about.html"> About </a>
+            <a href="tracking.html"> Orders </a>
           </li>
 
           <li>
-            <a href="contact.html"> Contact </a>
+            <a href="profile.html"> Profile </a>
           </li>
         </ul>
       </nav>
 
-      <!-- Login / Register -->
-      <div class="nav-buttons">
-        <a href="auth.html" class="btn login-btn"> Login </a>
+      <!-- Login / Register / Customer Account -->
+      <div class="nav-buttons" id="navAccount">
+        <!-- Guest -->
+        <div id="guestAccount">
+          <a href="auth.html" class="btn login-btn"> Login </a>
 
-        <a href="auth.html" class="btn register-btn"> Register </a>
+          <a href="auth.html" class="btn register-btn"> Register </a>
+        </div>
+
+        <!-- Logged-in Customer -->
+        <div id="customerAccount" style="display: none">
+          <a href="profile.html" class="btn account-btn">
+            <i class="fas fa-user-circle"></i>
+
+            <span id="customerName"> Account </span>
+          </a>
+
+          <button type="button" class="btn logout-btn" id="logoutBtn">
+            Logout
+          </button>
+        </div>
       </div>
 
       <!-- Mobile Menu -->
@@ -118,9 +134,11 @@
 
         <!-- Hero Buttons -->
         <div class="hero-buttons">
-          <a href="products.html" class="btn"> Shop Now </a>
+          <a href="products.html" class="btn">Shop Now</a>
 
-          <a href="../HOMEPAGE/auth.html" class="btn outline-btn"> Become Farmer </a>
+          <a href="../Farmer/farmer-dashboard.html" class="btn outline-btn">
+            Become Farmer
+          </a>
         </div>
       </div>
     </section>
@@ -349,13 +367,13 @@
         <div>
           <h3>Quick Links</h3>
 
-          <a href="HOMEPAGE/index.html"> Home </a>
+          <a href="index.html">Home</a>
 
-          <a href="HOMEPAGE/products.html"> Products </a>
+          <a href="products.html">Products</a>
 
-          <a href="HOMEPAGE/categories.html"> Categories </a>
+          <a href="categories.html">Categories</a>
 
-          <a href="HOMEPAGE/contact.html"> Contact </a>
+          <a href="contact.html">Contact</a>
         </div>
 
         <!-- Social Media -->
@@ -382,6 +400,10 @@
                        JAVASCRIPT
     ==================================================-->
 
-    <script src="../js/script.js"></script>
+    <!-- FarmNest Common JavaScript -->
+<script src="../js/script.js"></script>
+
+<!-- Home Page Backend Integration -->
+<script src="../js/index.js"></script>
   </body>
 </html>

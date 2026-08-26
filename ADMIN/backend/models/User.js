@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
+    // =====================================================
+    // BASIC USER INFORMATION
+    // =====================================================
+
     name: {
       type: String,
       required: true,
@@ -25,6 +29,55 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["farmer", "customer", "admin", "deliveryBoy"],
       required: true,
+    },
+
+    // =====================================================
+    // FARMER PROFILE
+    // =====================================================
+
+    phone: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    farmName: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    location: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    farmSize: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    address: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    bio: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    // =====================================================
+    // PROFILE IMAGE
+    // =====================================================
+
+    profileImage: {
+      type: String,
+      default: "",
     },
   },
   {

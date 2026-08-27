@@ -490,7 +490,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Warehouse is not stored in Product model
 
-    if (warehouseElement) warehouseElement.textContent = "Not Assigned";
+    // ==========================================
+// WAREHOUSE
+// ==========================================
+
+if (warehouseElement) {
+  if (product.warehouseId) {
+    if (typeof product.warehouseId === "object") {
+      warehouseElement.textContent =
+        product.warehouseId.warehouseName ||
+        product.warehouseId.name ||
+        "Assigned";
+    } else {
+      warehouseElement.textContent =
+        product.warehouseId;
+    }
+  } else {
+    warehouseElement.textContent =
+      "Not Assigned";
+  }
+}
 
     if (updatedElement)
       updatedElement.textContent = product.updatedAt

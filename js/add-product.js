@@ -3,7 +3,7 @@
    BACKEND INTEGRATION
 ========================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   console.log("🌱 FarmNest Add Product Loaded");
 
   const API_URL = "http://localhost:5000/api/products";
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const stock = document.getElementById("stock");
   const description = document.getElementById("description");
   const productImage = document.getElementById("productImage");
+  const warehouse = document.getElementById("warehouse");
 
   const submitBtn = document.querySelector(".submit-btn");
   const formTitle = document.querySelector(".top-bar h1");
@@ -35,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "../login.html";
     return;
   }
+
+  await loadWarehouses();
 
   // ==========================================
   // EDIT MODE CHECK
@@ -63,10 +66,76 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (error) {
         console.error("❌ Edit Product Parse Error:", error);
 
-        loadProductFromBackend(editProductId);
+        await loadProductFromBackend(editProductId);
       }
     } else {
-      loadProductFromBackend(editProductId);
+      await loadProductFromBackend(editProductId);
+    }
+  }
+
+  // ==========================================
+  // LOAD FARMER WAREHOUSES
+  // ==========================================
+
+  async function loadWarehouses() {
+    try {
+      if (!warehouse) {
+        console.warn("⚠️ Warehouse dropdown not found");
+        return;
+      }
+
+      const response = await fetch("http://localhost:5000/api/warehouses", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to load warehouses");
+      }
+
+      // Reset dropdown
+      warehouse.innerHTML = `
+      <option value="">Select Warehouse</option>
+    `;
+
+      const warehouses = data.warehouses || [];
+
+      if (warehouses.length === 0) {
+        warehouse.innerHTML = `
+        <option value="">No warehouse available</option>
+      `;
+
+        console.log("⚠️ No warehouses found for farmer");
+        return;
+      }
+
+      warehouses.forEach((item) => {
+        const option = document.createElement("option");
+
+        option.value = item._id;
+
+        const locationParts = [item.location, item.city, item.state].filter(
+          Boolean,
+        );
+
+        option.textContent = `${item.warehouseName} - ${locationParts.join(", ")}`;
+
+        warehouse.appendChild(option);
+      });
+
+      console.log("🏭 Warehouses loaded:", warehouses);
+    } catch (error) {
+      console.error("❌ Load Warehouses Error:", error);
+
+      if (warehouse) {
+        warehouse.innerHTML = `
+        <option value="">Unable to load warehouses</option>
+      `;
+      }
     }
   }
 
@@ -114,6 +183,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 <i class="fas fa-save"></i>
                 Update Product
             `;
+    }
+
+    if (warehouse && product.warehouseId) {
+      warehouse.value =
+        typeof product.warehouseId === "object"
+          ? product.warehouseId._id
+          : product.warehouseId;
     }
 
     console.log("✏️ Product loaded for editing:", product);
@@ -184,25 +260,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
   // ADD PRODUCT
   // ==========================================
-
   async function addProduct() {
     try {
       const productData = await collectProductData();
 
       if (!productData) return;
 
-      console.log("📦 Adding Product:", productData);
+      console.log("📦 Adding Product...");
 
+      const formData = new FormData();
+
+      formData.append("name", productData.name);
+      formData.append("category", productData.category);
+      formData.append("description", productData.description);
+      formData.append("price", productData.price);
+      formData.append("quantity", productData.quantity);
+      formData.append("weightPerUnit", productData.weightPerUnit);
+      formData.append("unit", productData.unit);
+      formData.append("warehouseId", productData.warehouseId);
+
+      // Actual image file
+      if (productData.image) {
+        formData.append("image", productData.image);
+      }
       const response = await fetch(API_URL, {
         method: "POST",
 
         headers: {
           Authorization: `Bearer ${token}`,
-
-          "Content-Type": "application/json",
         },
 
-        body: JSON.stringify(productData),
+        body: formData,
       });
 
       const data = await response.json();
@@ -224,7 +312,6 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(error.message || "Unable to add product.");
     }
   }
-
   // ==========================================
   // UPDATE PRODUCT
   // ==========================================
@@ -233,26 +320,120 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       if (!editProductId) {
         alert("Product ID not found.");
-
         return;
       }
 
-      const productData = await collectProductData();
+      // Basic form values
+      const name = productName.value.trim();
+      const selectedCategory = category.value;
+      const productPrice = Number(price.value);
+      const productUnit = unit.value;
+      const productWeight = Number(weightPerUnit.value);
+      const productQuantity = Number(stock.value);
+      const productDescription = description.value.trim();
+      const selectedWarehouse = warehouse.value;
 
-      if (!productData) return;
+      // ==========================================
+      // VALIDATION
+      // ==========================================
+
+      if (!name) {
+        alert("Please enter product name.");
+        productName.focus();
+        return;
+      }
+
+      if (!selectedCategory) {
+        alert("Please select category.");
+        category.focus();
+        return;
+      }
+
+      if (Number.isNaN(productPrice) || productPrice < 0) {
+        alert("Please enter a valid price.");
+        price.focus();
+        return;
+      }
+
+      if (!productUnit) {
+        alert("Please select unit.");
+        unit.focus();
+        return;
+      }
+
+      if (Number.isNaN(productWeight) || productWeight <= 0) {
+        alert("Weight per unit must be greater than 0.");
+        weightPerUnit.focus();
+        return;
+      }
+
+      if (Number.isNaN(productQuantity) || productQuantity < 0) {
+        alert("Stock quantity cannot be negative.");
+        stock.focus();
+        return;
+      }
+
+      if (!productDescription) {
+        alert("Please enter product description.");
+        description.focus();
+        return;
+      }
+
+      if (!selectedWarehouse) {
+        alert("Please select a warehouse.");
+        warehouse.focus();
+        return null;
+      }
+
+      // ==========================================
+      // FORM DATA
+      // ==========================================
+
+      const formData = new FormData();
+
+      formData.append("name", name);
+      formData.append("category", selectedCategory);
+      formData.append("description", productDescription);
+      formData.append("price", productPrice);
+      formData.append("quantity", productQuantity);
+      formData.append("weightPerUnit", productWeight);
+      formData.append("unit", productUnit);
+      formData.append("warehouseId", selectedWarehouse);
+
+      // ==========================================
+      // OPTIONAL IMAGE UPDATE
+      // ==========================================
+
+      if (productImage && productImage.files.length > 0) {
+        const file = productImage.files[0];
+
+        if (!file.type.startsWith("image/")) {
+          alert("Only image files are allowed.");
+          return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+          alert("Image size must be less than 5 MB.");
+          return;
+        }
+
+        formData.append("image", file);
+      }
 
       console.log("✏️ Updating Product:", editProductId);
+
+      // ==========================================
+      // BACKEND REQUEST
+      // ==========================================
 
       const response = await fetch(`${API_URL}/${editProductId}`, {
         method: "PUT",
 
         headers: {
           Authorization: `Bearer ${token}`,
-
-          "Content-Type": "application/json",
         },
 
-        body: JSON.stringify(productData),
+        body: formData,
       });
 
       const data = await response.json();
@@ -266,11 +447,9 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(data.message || "Product updated successfully!");
 
       // Remove temporary edit data
-
       localStorage.removeItem("editProduct");
 
       // Return to inventory
-
       window.location.href = "inventory.html";
     } catch (error) {
       console.error("❌ Update Product Error:", error);
@@ -278,7 +457,6 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(error.message || "Unable to update product.");
     }
   }
-
   // ==========================================
   // COLLECT FORM DATA
   // ==========================================
@@ -297,6 +475,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const productQuantity = Number(stock.value);
 
     const productDescription = description.value.trim();
+
+    const selectedWarehouse = warehouse.value;
 
     // ==========================================
     // VALIDATION
@@ -358,31 +538,40 @@ document.addEventListener("DOMContentLoaded", () => {
       return null;
     }
 
+    if (!selectedWarehouse) {
+      alert("Please select a warehouse.");
+      warehouse.focus();
+      return null;
+    }
+
     // ==========================================
     // IMAGE
     // ==========================================
 
-    let image = "";
+    let image = null;
 
-    if (productImage && productImage.files.length > 0) {
-      const file = productImage.files[0];
-
-      if (!file.type.startsWith("image/")) {
-        alert("Only image files are allowed.");
-
-        return null;
-      }
-
-      /*
-              Backend Product model currently
-              stores image as a String.
-
-              We therefore send the image
-              filename for now.
-            */
-
-      image = file.name;
+    if (!productImage || productImage.files.length === 0) {
+      alert("Please select a product image.");
+      productImage?.focus();
+      return null;
     }
+
+    const file = productImage.files[0];
+
+    // Check image type
+    if (!file.type.startsWith("image/")) {
+      alert("Only image files are allowed.");
+      return null;
+    }
+
+    // Check image size
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Image size must be less than 5 MB.");
+      return null;
+    }
+
+    // IMPORTANT: Keep actual File object
+    image = file;
 
     // ==========================================
     // BACKEND PRODUCT OBJECT
@@ -390,19 +579,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     return {
       name: name,
-
       category: selectedCategory,
-
       description: productDescription,
-
       price: productPrice,
-
       quantity: productQuantity,
-
       weightPerUnit: productWeight,
-
       unit: productUnit,
-
+      warehouseId: selectedWarehouse,
       image: image,
     };
   }
@@ -410,7 +593,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
   // RESET EDIT MODE
   // ==========================================
-
   const resetBtn = document.querySelector(".cancel-btn");
 
   if (resetBtn) {

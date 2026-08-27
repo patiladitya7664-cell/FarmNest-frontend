@@ -1,25 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
+    <title>Warehouse Management | FarmNest</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/werehouse.css" />
 
-<title>Warehouse Management | FarmNest</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
 
-<link rel="stylesheet" href="../css/werehouse.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-</head>
-
-
-<body>
-
-
-<!-- SIDEBAR -->
+  <body>
+    <!-- SIDEBAR -->
 
     <aside class="sidebar">
       <div class="logo">
@@ -114,373 +110,159 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       </ul>
     </aside>
 
+    <!-- MAIN -->
 
+    <div class="main">
+      <header>
+        <div>
+          <h1>Warehouse Management</h1>
 
+          <p>Manage your farm storage facilities</p>
+        </div>
 
+        <button class="add-btn">
+          <i class="fa fa-plus"></i>
 
+          Add Warehouse
+        </button>
+      </header>
 
+      <!-- STATS -->
 
-<!-- MAIN -->
+      <section class="cards">
+        <div class="card">
+          <i class="fa fa-building"></i>
 
+          <div>
+            <h3>3</h3>
 
-<div class="main">
+            <p>Total Warehouse</p>
+          </div>
+        </div>
 
+        <div class="card">
+          <i class="fa fa-box"></i>
 
+          <div>
+            <h3>4500 Kg</h3>
 
-<header>
+            <p>Stored Products</p>
+          </div>
+        </div>
 
+        <div class="card">
+          <i class="fa fa-chart-pie"></i>
 
-<div>
+          <div>
+            <h3>75%</h3>
 
-<h1>
-Warehouse Management
-</h1>
+            <p>Capacity Used</p>
+          </div>
+        </div>
 
-<p>
-Manage your farm storage facilities
-</p>
+        <div class="card">
+          <i class="fa fa-triangle-exclamation"></i>
 
-</div>
+          <div>
+            <h3>5</h3>
 
+            <p>Low Stock Alert</p>
+          </div>
+        </div>
+      </section>
 
+      <!-- WAREHOUSE LIST -->
 
-<button class="add-btn">
+      <section class="warehouse-section">
+        <h2>Warehouse List</h2>
 
-<i class="fa fa-plus"></i>
+        <div class="warehouse-grid">
+          <div class="warehouse-card">
+            <div class="icon">
+              <i class="fa fa-warehouse"></i>
+            </div>
 
-Add Warehouse
+            <h3>Main Storage</h3>
 
-</button>
+            <p>Location : Farm Area A</p>
 
+            <div class="capacity">
+              <span> Capacity 80% </span>
 
-</header>
+              <div class="bar">
+                <div style="width: 80%"></div>
+              </div>
+            </div>
 
+            <button>Manage</button>
+          </div>
 
+          <div class="warehouse-card">
+            <div class="icon">
+              <i class="fa fa-warehouse"></i>
+            </div>
 
+            <h3>Cold Storage</h3>
 
+            <p>Location : Farm Area B</p>
 
+            <div class="capacity">
+              <span> Capacity 55% </span>
 
-
-<!-- STATS -->
-
-
-<section class="cards">
-
-
-<div class="card">
-
-<i class="fa fa-building"></i>
-
-<div>
-
-<h3>3</h3>
-
-<p>Total Warehouse</p>
-
-</div>
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<i class="fa fa-box"></i>
-
-<div>
-
-<h3>4500 Kg</h3>
-
-<p>Stored Products</p>
-
-</div>
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<i class="fa fa-chart-pie"></i>
-
-<div>
-
-<h3>75%</h3>
-
-<p>Capacity Used</p>
-
-</div>
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<i class="fa fa-triangle-exclamation"></i>
-
-<div>
-
-<h3>5</h3>
-
-<p>Low Stock Alert</p>
-
-</div>
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- WAREHOUSE LIST -->
-
-
-<section class="warehouse-section">
-
-
-<h2>
-Warehouse List
-</h2>
-
-
-
-<div class="warehouse-grid">
-
-
-
-
-
-<div class="warehouse-card">
-
-
-<div class="icon">
-
-<i class="fa fa-warehouse"></i>
-
-</div>
-
-
-<h3>
-Main Storage
-</h3>
-
-
-<p>
-Location : Farm Area A
-</p>
-
-
-<div class="capacity">
-
-<span>
-Capacity 80%
-</span>
-
-
-<div class="bar">
-
-<div style="width:80%"></div>
-
-</div>
-
-
-</div>
-
-
-
-<button>
-Manage
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="warehouse-card">
-
-
-<div class="icon">
-
-<i class="fa fa-warehouse"></i>
-
-</div>
-
-
-<h3>
-Cold Storage
-</h3>
-
-
-<p>
-Location : Farm Area B
-</p>
-
-
-<div class="capacity">
-
-<span>
-Capacity 55%
-</span>
-
-
-<div class="bar">
-
-<div style="width:55%"></div>
-
-</div>
-
-
-</div>
-
-
-
-<button>
-Manage
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="warehouse-card">
-
-
-<div class="icon">
-
-<i class="fa fa-warehouse"></i>
-
-</div>
-
-
-<h3>
-Grain Storage
-</h3>
-
-
-<p>
-Location : Farm Area C
-</p>
-
-
-<div class="capacity">
-
-<span>
-Capacity 90%
-</span>
-
-
-<div class="bar">
-
-<div style="width:90%"></div>
-
-</div>
-
-
-</div>
-
-
-
-<button>
-Manage
-</button>
-
-
-</div>
-
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- RECENT ACTIVITY -->
-
-
-<section class="activity">
-
-
-<h2>
-Recent Activities
-</h2>
-
-
-<ul>
-
-
-<li>
-<i class="fa fa-check"></i>
-Rice stored successfully
-</li>
-
-
-<li>
-<i class="fa fa-arrow-down"></i>
-Wheat stock updated
-</li>
-
-
-<li>
-<i class="fa fa-warning"></i>
-Low stock alert generated
-</li>
-
-
-</ul>
-
-
-</section>
-
-
-
-
-
-
-
-</div>
-
-
-<script src="../js/warehouse.js"></script>
-
-
-</body>
-
+              <div class="bar">
+                <div style="width: 55%"></div>
+              </div>
+            </div>
+
+            <button>Manage</button>
+          </div>
+
+          <div class="warehouse-card">
+            <div class="icon">
+              <i class="fa fa-warehouse"></i>
+            </div>
+
+            <h3>Grain Storage</h3>
+
+            <p>Location : Farm Area C</p>
+
+            <div class="capacity">
+              <span> Capacity 90% </span>
+
+              <div class="bar">
+                <div style="width: 90%"></div>
+              </div>
+            </div>
+
+            <button>Manage</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RECENT ACTIVITY -->
+
+      <section class="activity">
+        <h2>Recent Activities</h2>
+
+        <ul>
+          <li>
+            <i class="fa fa-check"></i>
+            Rice stored successfully
+          </li>
+
+          <li>
+            <i class="fa fa-arrow-down"></i>
+            Wheat stock updated
+          </li>
+
+          <li>
+            <i class="fa fa-warning"></i>
+            Low stock alert generated
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <script src="../js/warehouse.js"></script>
+  </body>
 </html>

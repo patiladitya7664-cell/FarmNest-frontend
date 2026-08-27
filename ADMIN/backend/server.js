@@ -13,6 +13,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
 const farmerAnalyticsRoutes = require("./routes/farmerAnalyticsRoutes");
 const farmerProfileRoutes = require("./routes/farmerProfileRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/farmer", farmerAnalyticsRoutes);
 app.use("/api/farmer", farmerProfileRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   res.send("FarmNest Backend is Running Successfully! 🌱");

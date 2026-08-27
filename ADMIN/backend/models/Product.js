@@ -8,6 +8,20 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
 
+    // ==========================================
+    // WAREHOUSE
+    // ==========================================
+
+    warehouseId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Warehouse",
+      required: true,
+    },
+
+    // ==========================================
+    // PRODUCT INFORMATION
+    // ==========================================
+
     name: {
       type: String,
       required: true,
@@ -21,6 +35,15 @@ const productSchema = new mongoose.Schema(
     },
 
     description: {
+      type: String,
+      trim: true,
+    },
+
+    harvestDate: {
+      type: Date,
+    },
+
+    farmLocation: {
       type: String,
       trim: true,
     },
@@ -46,17 +69,33 @@ const productSchema = new mongoose.Schema(
     unit: {
       type: String,
       default: "kg",
+      trim: true,
     },
+
+    // ==========================================
+    // PRODUCT IMAGE
+    // ==========================================
 
     image: {
       type: String,
       default: "",
     },
 
+    // ==========================================
+    // PRODUCT STATUS
+    // ==========================================
+
     status: {
       type: String,
       enum: ["pending", "approved", "rejected"],
       default: "pending",
+    },
+
+    productType: {
+      type: String,
+      enum: ["Organic", "Regular"],
+      default: "Regular",
+      required: true,
     },
 
     isAvailable: {

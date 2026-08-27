@@ -9,21 +9,27 @@ const registerUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
 
-    // Required fields
+    // =====================================================
+    // REQUIRED FIELDS
+    // =====================================================
     if (!name || !email || !password || !role) {
       return res.status(400).json({
         message: "All fields are required",
       });
     }
 
-    // Allowed roles
+    // =====================================================
+    // ALLOWED ROLES
+    // =====================================================
     if (!["farmer", "customer", "admin"].includes(role)) {
       return res.status(400).json({
         message: "Invalid role",
       });
     }
 
-    // Check existing user
+    // =====================================================
+    // CHECK EXISTING USER
+    // =====================================================
     const existingUser = await User.findOne({
       email: email.toLowerCase(),
     });
@@ -34,10 +40,14 @@ const registerUser = async (req, res) => {
       });
     }
 
-    // Hash password
+    // =====================================================
+    // HASH PASSWORD
+    // =====================================================
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
+    // =====================================================
+    // CREATE USER
+    // =====================================================
     const user = await User.create({
       name,
       email: email.toLowerCase(),
@@ -45,6 +55,9 @@ const registerUser = async (req, res) => {
       role,
     });
 
+    // =====================================================
+    // REGISTRATION RESPONSE
+    // =====================================================
     res.status(201).json({
       message: "User registered successfully",
       user: {
@@ -52,6 +65,7 @@ const registerUser = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        verificationStatus: user.verificationStatus,
       },
     });
   } catch (error) {
@@ -63,7 +77,6 @@ const registerUser = async (req, res) => {
   }
 };
 
-
 // =====================================================
 // LOGIN USER
 // =====================================================
@@ -71,14 +84,18 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Required fields
+    // =====================================================
+    // REQUIRED FIELDS
+    // =====================================================
     if (!email || !password) {
       return res.status(400).json({
         message: "Email and password are required",
       });
     }
 
-    // Find user
+    // =====================================================
+    // FIND USER
+    // =====================================================
     const user = await User.findOne({
       email: email.toLowerCase(),
     });
@@ -89,11 +106,10 @@ const loginUser = async (req, res) => {
       });
     }
 
-    // Compare password
-    const isPasswordCorrect = await bcrypt.compare(
-      password,
-      user.password
-    );
+    // =====================================================
+    // COMPARE PASSWORD
+    // =====================================================
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {
       return res.status(401).json({
@@ -101,7 +117,44 @@ const loginUser = async (req, res) => {
       });
     }
 
-    // Generate JWT
+    // =====================================================
+    // FARMER VERIFICATION CHECK
+    // =====================================================
+    if (user.role === "farmer") {
+      // -----------------------------------------------------
+      // PENDING FARMER
+      // -----------------------------------------------------
+      if (user.verificationStatus === "pending") {
+        return res.status(403).json({
+          message: "Your farmer account is pending admin verification",
+          verificationStatus: "pending",
+        });
+      }
+
+      // -----------------------------------------------------
+      // REJECTED FARMER
+      // -----------------------------------------------------
+      if (user.verificationStatus === "rejected") {
+        return res.status(403).json({
+          message: "Your farmer account has been rejected by admin",
+          verificationStatus: "rejected",
+        });
+      }
+
+      // -----------------------------------------------------
+      // APPROVED FARMER
+      // -----------------------------------------------------
+      if (user.verificationStatus !== "approved") {
+        return res.status(403).json({
+          message: "Farmer account verification is incomplete",
+          verificationStatus: user.verificationStatus,
+        });
+      }
+    }
+
+    // =====================================================
+    // GENERATE JWT
+    // =====================================================
     const token = jwt.sign(
       {
         id: user._id,
@@ -110,10 +163,12 @@ const loginUser = async (req, res) => {
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
-      }
+      },
     );
 
-    // Response
+    // =====================================================
+    // LOGIN RESPONSE
+    // =====================================================
     res.status(200).json({
       message: "Login successful",
       token,
@@ -122,6 +177,7 @@ const loginUser = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
+        verificationStatus: user.verificationStatus,
       },
     });
   } catch (error) {
@@ -132,7 +188,6 @@ const loginUser = async (req, res) => {
     });
   }
 };
-
 
 // =====================================================
 // EXPORT

@@ -1,10 +1,40 @@
+const mongoose = require("mongoose");
 const Product = require("../models/Product");
+const Warehouse = require("../models/Warehouse");
+
+// ==========================================
+// HELPER - VALIDATE MONGODB ID
+// ==========================================
+const isValidObjectId = (id) => {
+  return mongoose.Types.ObjectId.isValid(id);
+};
+
+// ==========================================
+// HELPER - VALIDATE FARMER WAREHOUSE
+// ==========================================
+const validateFarmerWarehouse = async (warehouseId, farmerId) => {
+  if (!isValidObjectId(warehouseId)) {
+    return null;
+  }
+
+  return await Warehouse.findOne({
+    _id: warehouseId,
+    farmerId: farmerId,
+  });
+};
 
 // ==========================================
 // ADD PRODUCT - FARMER
 // ==========================================
 const addProduct = async (req, res) => {
   try {
+    // ONLY FARMER
+    if (req.user.role !== "farmer") {
+      return res.status(403).json({
+        message: "Only farmers can add products",
+      });
+    }
+
     const {
       name,
       category,
@@ -13,51 +43,171 @@ const addProduct = async (req, res) => {
       quantity,
       weightPerUnit,
       unit,
-      image,
+      warehouseId,
+      productType,
+      harvestDate,
+      farmLocation,
     } = req.body;
 
-    // Required fields
-    if (
-      !name ||
-      !category ||
-      price === undefined ||
-      quantity === undefined ||
-      weightPerUnit === undefined ||
-      Number(weightPerUnit) <= 0
-    ) {
+    // ==========================================
+    // REQUIRED FIELD VALIDATION
+    // ==========================================
+
+    if (!name || !name.trim()) {
       return res.status(400).json({
-        message:
-          "Name, category, price, quantity and valid weight are required",
+        message: "Product name is required",
       });
     }
-    // Only farmer can add products
-    if (req.user.role !== "farmer") {
-      return res.status(403).json({
-        message: "Only farmers can add products",
+
+    if (!category || !category.trim()) {
+      return res.status(400).json({
+        message: "Product category is required",
       });
     }
+
+    if (price === undefined || price === "") {
+      return res.status(400).json({
+        message: "Product price is required",
+      });
+    }
+
+    if (quantity === undefined || quantity === "") {
+      return res.status(400).json({
+        message: "Product quantity is required",
+      });
+    }
+
+    if (weightPerUnit === undefined || weightPerUnit === "") {
+      return res.status(400).json({
+        message: "Weight per unit is required",
+      });
+    }
+
+    if (!unit || !unit.trim()) {
+      return res.status(400).json({
+        message: "Product unit is required",
+      });
+    }
+
+    if (!warehouseId) {
+      return res.status(400).json({
+        message: "Warehouse is required",
+      });
+    }
+
+    // ==========================================
+    // NUMBER VALIDATION
+    // ==========================================
+
+    const productPrice = Number(price);
+    const productQuantity = Number(quantity);
+    const productWeight = Number(weightPerUnit);
+
+    if (!Number.isFinite(productPrice) || productPrice < 0) {
+      return res.status(400).json({
+        message: "Price must be a valid positive number",
+      });
+    }
+
+    if (!Number.isFinite(productQuantity) || productQuantity < 0) {
+      return res.status(400).json({
+        message: "Quantity cannot be negative",
+      });
+    }
+
+    if (!Number.isFinite(productWeight) || productWeight <= 0) {
+      return res.status(400).json({
+        message: "Weight per unit must be greater than 0",
+      });
+    }
+
+    // ==========================================
+    // PRODUCT TYPE
+    // ==========================================
+
+    const finalProductType = productType || "Regular";
+
+    if (!["Organic", "Regular"].includes(finalProductType)) {
+      return res.status(400).json({
+        message: "Product type must be Organic or Regular",
+      });
+    }
+
+    // ==========================================
+    // IMAGE REQUIRED
+    // ==========================================
+
+    if (!req.file) {
+      return res.status(400).json({
+        message: "Product image is required",
+      });
+    }
+
+    if (!req.file.mimetype.startsWith("image/")) {
+      return res.status(400).json({
+        message: "Only image files are allowed",
+      });
+    }
+
+    // ==========================================
+    // VALIDATE FARMER WAREHOUSE
+    // ==========================================
+
+    const warehouse = await validateFarmerWarehouse(warehouseId, req.user.id);
+
+    if (!warehouse) {
+      return res.status(400).json({
+        message: "Invalid warehouse or warehouse does not belong to you",
+      });
+    }
+
+    // ==========================================
+    // CREATE PRODUCT
+    // ==========================================
 
     const product = await Product.create({
       farmerId: req.user.id,
-      name,
-      category,
-      description,
-      price,
-      quantity,
-      weightPerUnit,
-      unit,
-      image,
+
+      warehouseId,
+
+      name: name.trim(),
+      category: category.trim(),
+      description: description ? description.trim() : "",
+
+      price: productPrice,
+      quantity: productQuantity,
+
+      weightPerUnit: productWeight,
+      unit: unit.trim(),
+
+      productType: finalProductType,
+
+      harvestDate,
+      farmLocation: farmLocation ? farmLocation.trim() : "",
+
+      image: `/uploads/products/${req.file.filename}`,
+
+      // Admin approval required
+      status: "pending",
+      isAvailable: false,
     });
 
-    res.status(201).json({
+    return res.status(201).json({
       message: "Product added successfully",
       product,
     });
   } catch (error) {
-    console.error("Add Product Error:", error);
+    console.error("❌ Add Product Error:", error);
 
-    res.status(500).json({
-      message: "Server error",
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        message: "Product validation failed",
+        error: error.message,
+      });
+    }
+
+    return res.status(500).json({
+      message: "Server error while adding product",
     });
   }
 };
@@ -67,7 +217,7 @@ const addProduct = async (req, res) => {
 // ==========================================
 const getMyProducts = async (req, res) => {
   try {
-    // Only farmer
+    // ONLY FARMER
     if (req.user.role !== "farmer") {
       return res.status(403).json({
         message: "Only farmers can access their products",
@@ -76,18 +226,23 @@ const getMyProducts = async (req, res) => {
 
     const products = await Product.find({
       farmerId: req.user.id,
-    }).sort({ createdAt: -1 });
+    })
+      .populate(
+        "warehouseId",
+        "warehouseName location address city state pincode totalStorage storageUnit",
+      )
+      .sort({ createdAt: -1 });
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Products fetched successfully",
       count: products.length,
       products,
     });
   } catch (error) {
-    console.error("Get My Products Error:", error);
+    console.error("❌ Get My Products Error:", error);
 
-    res.status(500).json({
-      message: "Server error",
+    return res.status(500).json({
+      message: "Server error while fetching products",
     });
   }
 };
@@ -103,18 +258,19 @@ const getAllProducts = async (req, res) => {
       quantity: { $gt: 0 },
     })
       .populate("farmerId", "name email")
+      .populate("warehouseId", "warehouseName location city state")
       .sort({ createdAt: -1 });
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Products fetched successfully",
       count: products.length,
       products,
     });
   } catch (error) {
-    console.error("Get All Products Error:", error);
+    console.error("❌ Get All Products Error:", error);
 
-    res.status(500).json({
-      message: "Server error",
+    return res.status(500).json({
+      message: "Server error while fetching products",
     });
   }
 };
@@ -126,13 +282,21 @@ const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Only farmer
+    // ONLY FARMER
     if (req.user.role !== "farmer") {
       return res.status(403).json({
         message: "Only farmers can update products",
       });
     }
 
+    // VALIDATE ID
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({
+        message: "Invalid product ID",
+      });
+    }
+
+    // FIND FARMER PRODUCT
     const product = await Product.findOne({
       _id: id,
       farmerId: req.user.id,
@@ -144,34 +308,198 @@ const updateProduct = async (req, res) => {
       });
     }
 
-    const allowedFields = [
-      "name",
-      "category",
-      "description",
-      "price",
-      "quantity",
-      "weightPerUnit",
-      "unit",
-      "image",
-    ];
+    const {
+      name,
+      category,
+      description,
+      price,
+      quantity,
+      weightPerUnit,
+      unit,
+      warehouseId,
+      productType,
+      harvestDate,
+      farmLocation,
+    } = req.body;
 
-    allowedFields.forEach((field) => {
-      if (req.body[field] !== undefined) {
-        product[field] = req.body[field];
+    // ==========================================
+    // NAME
+    // ==========================================
+
+    if (name !== undefined) {
+      if (!name.trim()) {
+        return res.status(400).json({
+          message: "Product name cannot be empty",
+        });
       }
-    });
 
-    await product.save();
+      product.name = name.trim();
+    }
 
-    res.status(200).json({
+    // ==========================================
+    // CATEGORY
+    // ==========================================
+
+    if (category !== undefined) {
+      if (!category.trim()) {
+        return res.status(400).json({
+          message: "Category cannot be empty",
+        });
+      }
+
+      product.category = category.trim();
+    }
+
+    // ==========================================
+    // DESCRIPTION
+    // ==========================================
+
+    if (description !== undefined) {
+      product.description = description.trim();
+    }
+
+    // ==========================================
+    // PRICE
+    // ==========================================
+
+    if (price !== undefined) {
+      const productPrice = Number(price);
+
+      if (!Number.isFinite(productPrice) || productPrice < 0) {
+        return res.status(400).json({
+          message: "Price must be a valid positive number",
+        });
+      }
+
+      product.price = productPrice;
+    }
+
+    // ==========================================
+    // QUANTITY
+    // ==========================================
+
+    if (quantity !== undefined) {
+      const productQuantity = Number(quantity);
+
+      if (!Number.isFinite(productQuantity) || productQuantity < 0) {
+        return res.status(400).json({
+          message: "Quantity cannot be negative",
+        });
+      }
+
+      product.quantity = productQuantity;
+    }
+
+    // ==========================================
+    // WEIGHT PER UNIT
+    // ==========================================
+
+    if (weightPerUnit !== undefined) {
+      const productWeight = Number(weightPerUnit);
+
+      if (!Number.isFinite(productWeight) || productWeight <= 0) {
+        return res.status(400).json({
+          message: "Weight per unit must be greater than 0",
+        });
+      }
+
+      product.weightPerUnit = productWeight;
+    }
+
+    // ==========================================
+    // UNIT
+    // ==========================================
+
+    if (unit !== undefined) {
+      if (!unit.trim()) {
+        return res.status(400).json({
+          message: "Unit cannot be empty",
+        });
+      }
+
+      product.unit = unit.trim();
+    }
+
+    // ==========================================
+    // PRODUCT TYPE
+    // ==========================================
+
+    if (productType !== undefined) {
+      if (!["Organic", "Regular"].includes(productType)) {
+        return res.status(400).json({
+          message: "Product type must be Organic or Regular",
+        });
+      }
+
+      product.productType = productType;
+    }
+
+    // ==========================================
+    // WAREHOUSE
+    // ==========================================
+
+    if (warehouseId !== undefined) {
+      const warehouse = await validateFarmerWarehouse(warehouseId, req.user.id);
+
+      if (!warehouse) {
+        return res.status(400).json({
+          message: "Invalid warehouse or warehouse does not belong to you",
+        });
+      }
+
+      product.warehouseId = warehouseId;
+    }
+
+    // ==========================================
+    // OPTIONAL FIELDS
+    // ==========================================
+
+    if (harvestDate !== undefined) {
+      product.harvestDate = harvestDate;
+    }
+
+    if (farmLocation !== undefined) {
+      product.farmLocation = farmLocation.trim();
+    }
+
+    // ==========================================
+    // IMAGE UPDATE
+    // ==========================================
+
+    if (req.file) {
+      if (!req.file.mimetype.startsWith("image/")) {
+        return res.status(400).json({
+          message: "Only image files are allowed",
+        });
+      }
+
+      product.image = `/uploads/products/${req.file.filename}`;
+
+      console.log("🖼️ New product image:", product.image);
+    }
+
+    // ==========================================
+    // SAVE
+    // ==========================================
+
+    const updatedProduct = await product.save();
+
+    return res.status(200).json({
       message: "Product updated successfully",
-      product,
+      product: updatedProduct,
     });
   } catch (error) {
-    console.error("Update Product Error:", error);
+    console.error("❌ Update Product Error:", error);
 
-    res.status(500).json({
-      message: "Server error",
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        message: "Product validation failed",
+        error: error.message,
+      });
+    }
+
+    return res.status(500).json({
+      message: "Server error while updating product",
     });
   }
 };
@@ -183,13 +511,21 @@ const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Only farmer
+    // ONLY FARMER
     if (req.user.role !== "farmer") {
       return res.status(403).json({
         message: "Only farmers can delete products",
       });
     }
 
+    // VALIDATE ID
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({
+        message: "Invalid product ID",
+      });
+    }
+
+    // FIND FARMER PRODUCT
     const product = await Product.findOne({
       _id: id,
       farmerId: req.user.id,
@@ -203,14 +539,14 @@ const deleteProduct = async (req, res) => {
 
     await Product.findByIdAndDelete(id);
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Product deleted successfully",
     });
   } catch (error) {
-    console.error("Delete Product Error:", error);
+    console.error("❌ Delete Product Error:", error);
 
-    res.status(500).json({
-      message: "Server error",
+    return res.status(500).json({
+      message: "Server error while deleting product",
     });
   }
 };
@@ -220,22 +556,30 @@ const deleteProduct = async (req, res) => {
 // ==========================================
 const getPendingProducts = async (req, res) => {
   try {
+    // ADMIN CHECK
+    if (req.user.role !== "admin") {
+      return res.status(403).json({
+        message: "Only admins can access pending products",
+      });
+    }
+
     const products = await Product.find({
       status: "pending",
     })
       .populate("farmerId", "name email")
+      .populate("warehouseId", "warehouseName location city state pincode")
       .sort({ createdAt: -1 });
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Pending products fetched successfully",
       count: products.length,
       products,
     });
   } catch (error) {
-    console.error("Get Pending Products Error:", error);
+    console.error("❌ Get Pending Products Error:", error);
 
-    res.status(500).json({
-      message: "Server error",
+    return res.status(500).json({
+      message: "Server error while fetching pending products",
     });
   }
 };
@@ -245,8 +589,23 @@ const getPendingProducts = async (req, res) => {
 // ==========================================
 const approveProduct = async (req, res) => {
   try {
+    // ADMIN CHECK
+    if (req.user.role !== "admin") {
+      return res.status(403).json({
+        message: "Only admins can approve products",
+      });
+    }
+
     const { id } = req.params;
 
+    // VALIDATE ID
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({
+        message: "Invalid product ID",
+      });
+    }
+
+    // FIND PRODUCT
     const product = await Product.findById(id);
 
     if (!product) {
@@ -255,20 +614,33 @@ const approveProduct = async (req, res) => {
       });
     }
 
-    product.status = "approved";
-    product.isAvailable = true;
+    // ==========================================
+    // APPROVE USING ATOMIC UPDATE
+    // ==========================================
 
-    const updatedProduct = await product.save();
+    const updatedProduct = await Product.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          status: "approved",
+          isAvailable: product.quantity > 0,
+        },
+      },
+      {
+        new: true,
+      },
+    );
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Product approved successfully",
       product: updatedProduct,
     });
   } catch (error) {
-    console.error("Approve Product Error:", error);
+    console.error("❌ Approve Product Error:", error);
 
-    res.status(500).json({
-      message: "Server error",
+    return res.status(500).json({
+      message: "Server error while approving product",
+      error: error.message,
     });
   }
 };
@@ -278,8 +650,23 @@ const approveProduct = async (req, res) => {
 // ==========================================
 const rejectProduct = async (req, res) => {
   try {
+    // ADMIN CHECK
+    if (req.user.role !== "admin") {
+      return res.status(403).json({
+        message: "Only admins can reject products",
+      });
+    }
+
     const { id } = req.params;
 
+    // VALIDATE ID
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({
+        message: "Invalid product ID",
+      });
+    }
+
+    // FIND PRODUCT
     const product = await Product.findById(id);
 
     if (!product) {
@@ -288,20 +675,33 @@ const rejectProduct = async (req, res) => {
       });
     }
 
-    product.status = "rejected";
-    product.isAvailable = false;
+    // ==========================================
+    // REJECT USING ATOMIC UPDATE
+    // ==========================================
 
-    const updatedProduct = await product.save();
+    const updatedProduct = await Product.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          status: "rejected",
+          isAvailable: false,
+        },
+      },
+      {
+        new: true,
+      },
+    );
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Product rejected successfully",
       product: updatedProduct,
     });
   } catch (error) {
-    console.error("Reject Product Error:", error);
+    console.error("❌ Reject Product Error:", error);
 
-    res.status(500).json({
-      message: "Server error",
+    return res.status(500).json({
+      message: "Server error while rejecting product",
+      error: error.message,
     });
   }
 };

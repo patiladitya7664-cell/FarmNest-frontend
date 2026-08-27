@@ -60,7 +60,6 @@ const createWarehouse = async (req, res) => {
   }
 };
 
-
 // ===============================
 // GET MY WAREHOUSES
 // ===============================
@@ -83,7 +82,6 @@ const getMyWarehouses = async (req, res) => {
     });
   }
 };
-
 
 // ===============================
 // GET SINGLE WAREHOUSE
@@ -118,7 +116,6 @@ const getWarehouseById = async (req, res) => {
   }
 };
 
-
 // ===============================
 // UPDATE WAREHOUSE
 // ===============================
@@ -150,38 +147,25 @@ const updateWarehouse = async (req, res) => {
       storageUnit,
     } = req.body;
 
-    warehouse.warehouseName =
-      warehouseName || warehouse.warehouseName;
+    warehouse.warehouseName = warehouseName || warehouse.warehouseName;
 
-    warehouse.location =
-      location || warehouse.location;
+    warehouse.location = location || warehouse.location;
 
-    warehouse.address =
-      address || warehouse.address;
+    warehouse.address = address || warehouse.address;
 
-    warehouse.city =
-      city || warehouse.city;
+    warehouse.city = city || warehouse.city;
 
-    warehouse.state =
-      state || warehouse.state;
+    warehouse.state = state || warehouse.state;
 
-    warehouse.pincode =
-      pincode || warehouse.pincode;
+    warehouse.pincode = pincode || warehouse.pincode;
 
     if (totalStorage !== undefined) {
       warehouse.totalStorage = totalStorage;
     }
 
-    if (usedStorage !== undefined) {
-      warehouse.usedStorage = usedStorage;
-    }
-
     if (storageUnit !== undefined) {
       warehouse.storageUnit = storageUnit;
     }
-
-    warehouse.availableStorage =
-      warehouse.totalStorage - warehouse.usedStorage;
 
     const updatedWarehouse = await warehouse.save();
 
@@ -198,7 +182,6 @@ const updateWarehouse = async (req, res) => {
     });
   }
 };
-
 
 // ===============================
 // DELETE WAREHOUSE
@@ -263,10 +246,24 @@ const getSmartStorage = async (req, res) => {
     // Import Product
     const Product = require("../models/Product");
 
-    // Get farmer's products
+    // Get products belonging to THIS warehouse
     const products = await Product.find({
       farmerId: req.user.id,
+      warehouseId: warehouse._id,
     });
+
+    console.log("🏭 Warehouse:", warehouse.warehouseName);
+    console.log("🆔 Warehouse ID:", warehouse._id.toString());
+
+    console.log(
+      "📦 Products:",
+      products.map((product) => ({
+        name: product.name,
+        warehouseId: product.warehouseId?.toString(),
+        quantity: product.quantity,
+        weightPerUnit: product.weightPerUnit,
+      })),
+    );
 
     // ===============================
     // CALCULATE STORAGE
@@ -277,28 +274,31 @@ const getSmartStorage = async (req, res) => {
     let totalProducts = products.length;
 
     products.forEach((product) => {
-      usedStorage += product.quantity;
-      storageValue += product.quantity * product.price;
+      const quantity = Number(product.quantity) || 0;
+      const weightPerUnit = Number(product.weightPerUnit) || 0;
+      const price = Number(product.price) || 0;
+
+      // Actual storage occupied
+      usedStorage += quantity * weightPerUnit;
+
+      // Total product value
+      storageValue += quantity * price;
     });
 
     const availableStorage = Math.max(
-      warehouse.totalStorage - usedStorage,
-      0
+      Number(warehouse.totalStorage) - usedStorage,
+      0,
     );
-
     // ===============================
     // ALERTS
     // ===============================
 
     const lowStockProducts = products.filter(
-      (product) =>
-        product.quantity > 0 &&
-        product.quantity <= 10
+      (product) => product.quantity > 0 && product.quantity <= 10,
     );
 
     const outOfStockProducts = products.filter(
-      (product) =>
-        product.quantity === 0
+      (product) => product.quantity === 0,
     );
 
     const lowStockAlert = lowStockProducts.length > 0;

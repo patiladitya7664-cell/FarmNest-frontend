@@ -1,4 +1,3 @@
-
 const Order = require("../models/Order");
 const Product = require("../models/Product");
 
@@ -18,12 +17,7 @@ const createOrder = async (req, res) => {
       });
     }
 
-    const {
-      products,
-      shippingAddress,
-      paymentMethod,
-      distance,
-    } = req.body;
+    const { products, shippingAddress, paymentMethod, distance } = req.body;
 
     if (!products || !Array.isArray(products) || products.length === 0) {
       return res.status(400).json({
@@ -63,11 +57,7 @@ const createOrder = async (req, res) => {
     const orderProducts = [];
 
     for (const item of products) {
-      if (
-        !item.productId ||
-        !item.quantity ||
-        item.quantity <= 0
-      ) {
+      if (!item.productId || !item.quantity || item.quantity <= 0) {
         return res.status(400).json({
           message: "Valid Product ID and quantity are required",
         });
@@ -110,8 +100,7 @@ const createOrder = async (req, res) => {
         });
       }
 
-      const itemWeight =
-        product.weightPerUnit * item.quantity;
+      const itemWeight = product.weightPerUnit * item.quantity;
 
       totalWeight += itemWeight;
 
@@ -127,10 +116,7 @@ const createOrder = async (req, res) => {
     // ===============================
     const orderDistance = Number(distance);
 
-    if (
-      !Number.isFinite(orderDistance) ||
-      orderDistance < 0
-    ) {
+    if (!Number.isFinite(orderDistance) || orderDistance < 0) {
       return res.status(400).json({
         message: "Valid delivery distance is required",
       });
@@ -139,17 +125,11 @@ const createOrder = async (req, res) => {
     // ===============================
     // DELIVERY CHARGE
     // ===============================
-    const deliveryDetails =
-      calculateDeliveryCharge(
-        orderDistance,
-        totalWeight
-      );
+    const deliveryDetails = calculateDeliveryCharge(orderDistance, totalWeight);
 
-    const deliveryCharge =
-      deliveryDetails.deliveryCharge;
+    const deliveryCharge = deliveryDetails.deliveryCharge;
 
-    const vehicleType =
-      deliveryDetails.vehicleType;
+    const vehicleType = deliveryDetails.vehicleType;
 
     // ===============================
     // FINAL TOTAL
@@ -160,41 +140,36 @@ const createOrder = async (req, res) => {
     // DEDUCT PRODUCT STOCK
     // ===============================
     for (const item of products) {
-      const updatedProduct =
-        await Product.findOneAndUpdate(
-          {
-            _id: item.productId,
-            status: "approved",
-            isAvailable: true,
-            quantity: {
-              $gte: item.quantity,
-            },
+      const updatedProduct = await Product.findOneAndUpdate(
+        {
+          _id: item.productId,
+          status: "approved",
+          isAvailable: true,
+          quantity: {
+            $gte: item.quantity,
           },
-          {
-            $inc: {
-              quantity: -item.quantity,
-            },
+        },
+        {
+          $inc: {
+            quantity: -item.quantity,
           },
-          {
-            new: true,
-          }
-        );
+        },
+        {
+          new: true,
+        },
+      );
 
       if (!updatedProduct) {
         return res.status(400).json({
-          message:
-            "Stock changed. Please try ordering again.",
+          message: "Stock changed. Please try ordering again.",
         });
       }
 
       // If stock becomes zero
       if (updatedProduct.quantity === 0) {
-        await Product.findByIdAndUpdate(
-          item.productId,
-          {
-            isAvailable: false,
-          }
-        );
+        await Product.findByIdAndUpdate(item.productId, {
+          isAvailable: false,
+        });
       }
     }
 
@@ -238,12 +213,8 @@ const createOrder = async (req, res) => {
         deliveryCharge: deliveryCharge,
       },
     });
-
   } catch (error) {
-    console.error(
-      "Create Order Error:",
-      error
-    );
+    console.error("Create Order Error:", error);
 
     res.status(500).json({
       message: "Failed to create order",
@@ -259,8 +230,7 @@ const getMyOrders = async (req, res) => {
   try {
     if (req.user.role !== "customer") {
       return res.status(403).json({
-        message:
-          "Only customers can access their orders",
+        message: "Only customers can access their orders",
       });
     }
 
@@ -274,12 +244,8 @@ const getMyOrders = async (req, res) => {
       message: "Orders fetched successfully",
       orders,
     });
-
   } catch (error) {
-    console.error(
-      "Get Orders Error:",
-      error
-    );
+    console.error("Get Orders Error:", error);
 
     res.status(500).json({
       message: "Failed to fetch orders",
@@ -293,20 +259,14 @@ const getMyOrders = async (req, res) => {
 // ===============================
 const getOrderById = async (req, res) => {
   try {
-
-    const order = await Order.findById(
-      req.params.id
-    )
-      .populate(
-        "customerId",
-        "name email"
-      )
+    const order = await Order.findById(req.params.id)
+      .populate("customerId", "name email")
       .populate({
         path: "products.productId",
         populate: {
           path: "farmerId",
-          select: "name email"
-        }
+          select: "name email",
+        },
       });
 
     if (!order) {
@@ -318,27 +278,19 @@ const getOrderById = async (req, res) => {
     // Customer can only view own order
     if (
       req.user.role === "customer" &&
-      order.customerId._id.toString() !==
-        req.user.id
+      order.customerId._id.toString() !== req.user.id
     ) {
       return res.status(403).json({
-        message:
-          "You are not authorized to view this order",
+        message: "You are not authorized to view this order",
       });
     }
 
     res.status(200).json({
-      message:
-        "Order fetched successfully",
+      message: "Order fetched successfully",
       order,
     });
-
   } catch (error) {
-
-    console.error(
-      "Get Order Error:",
-      error
-    );
+    console.error("Get Order Error:", error);
 
     res.status(500).json({
       message: "Failed to fetch order",
@@ -353,8 +305,7 @@ const updateOrderStatus = async (req, res) => {
   try {
     if (req.user.role === "customer") {
       return res.status(403).json({
-        message:
-          "Customers cannot update order status",
+        message: "Customers cannot update order status",
       });
     }
 
@@ -376,9 +327,7 @@ const updateOrderStatus = async (req, res) => {
       });
     }
 
-    const order = await Order.findById(
-      req.params.id
-    );
+    const order = await Order.findById(req.params.id);
 
     if (!order) {
       return res.status(404).json({
@@ -388,8 +337,7 @@ const updateOrderStatus = async (req, res) => {
 
     if (order.status === "Cancelled") {
       return res.status(400).json({
-        message:
-          "Cancelled order status cannot be changed",
+        message: "Cancelled order status cannot be changed",
       });
     }
 
@@ -400,16 +348,9 @@ const updateOrderStatus = async (req, res) => {
       let ownsProduct = false;
 
       for (const item of order.products) {
-        const product =
-          await Product.findById(
-            item.productId
-          );
+        const product = await Product.findById(item.productId);
 
-        if (
-          product &&
-          product.farmerId.toString() ===
-            req.user.id
-        ) {
+        if (product && product.farmerId.toString() === req.user.id) {
           ownsProduct = true;
           break;
         }
@@ -417,32 +358,32 @@ const updateOrderStatus = async (req, res) => {
 
       if (!ownsProduct) {
         return res.status(403).json({
-          message:
-            "You are not authorized to update this order",
+          message: "You are not authorized to update this order",
         });
       }
     }
 
     order.status = status;
 
-    const updatedOrder =
-      await order.save();
+    // =====================================================
+    // AUTO MARK COD PAYMENT AS PAID WHEN DELIVERED
+    // =====================================================
+
+    if (status === "Delivered" && order.paymentMethod === "COD") {
+      order.paymentStatus = "Paid";
+    }
+
+    const updatedOrder = await order.save();
 
     res.status(200).json({
-      message:
-        "Order status updated successfully",
+      message: "Order status updated successfully",
       order: updatedOrder,
     });
-
   } catch (error) {
-    console.error(
-      "Update Order Status Error:",
-      error
-    );
+    console.error("Update Order Status Error:", error);
 
     res.status(500).json({
-      message:
-        "Failed to update order status",
+      message: "Failed to update order status",
       error: error.message,
     });
   }
@@ -456,14 +397,11 @@ const cancelOrder = async (req, res) => {
     // Only customers can cancel orders
     if (req.user.role !== "customer") {
       return res.status(403).json({
-        message:
-          "Only customers can cancel orders",
+        message: "Only customers can cancel orders",
       });
     }
 
-    const order = await Order.findById(
-      req.params.id
-    );
+    const order = await Order.findById(req.params.id);
 
     if (!order) {
       return res.status(404).json({
@@ -472,13 +410,9 @@ const cancelOrder = async (req, res) => {
     }
 
     // Customer can cancel only own order
-    if (
-      order.customerId.toString() !==
-      req.user.id
-    ) {
+    if (order.customerId.toString() !== req.user.id) {
       return res.status(403).json({
-        message:
-          "You are not authorized to cancel this order",
+        message: "You are not authorized to cancel this order",
       });
     }
 
@@ -490,8 +424,7 @@ const cancelOrder = async (req, res) => {
       order.status === "Cancelled"
     ) {
       return res.status(400).json({
-        message:
-          "Order cannot be cancelled at this stage",
+        message: "Order cannot be cancelled at this stage",
       });
     }
 
@@ -499,14 +432,10 @@ const cancelOrder = async (req, res) => {
     // RESTORE PRODUCT STOCK
     // ===============================
     for (const item of order.products) {
-      const product =
-        await Product.findById(
-          item.productId
-        );
+      const product = await Product.findById(item.productId);
 
       if (product) {
-        product.quantity +=
-          item.quantity;
+        product.quantity += item.quantity;
 
         if (product.quantity > 0) {
           product.isAvailable = true;
@@ -521,24 +450,17 @@ const cancelOrder = async (req, res) => {
     // ===============================
     order.status = "Cancelled";
 
-    const updatedOrder =
-      await order.save();
+    const updatedOrder = await order.save();
 
     res.status(200).json({
-      message:
-        "Order cancelled successfully and stock restored",
+      message: "Order cancelled successfully and stock restored",
       order: updatedOrder,
     });
-
   } catch (error) {
-    console.error(
-      "Cancel Order Error:",
-      error
-    );
+    console.error("Cancel Order Error:", error);
 
     res.status(500).json({
-      message:
-        "Failed to cancel order",
+      message: "Failed to cancel order",
       error: error.message,
     });
   }
@@ -551,37 +473,25 @@ const getAllOrders = async (req, res) => {
   try {
     if (req.user.role !== "admin") {
       return res.status(403).json({
-        message:
-          "Only admin can access all orders",
+        message: "Only admin can access all orders",
       });
     }
 
     const orders = await Order.find()
-      .populate(
-        "customerId",
-        "name email"
-      )
-      .populate(
-        "products.productId"
-      )
+      .populate("customerId", "name email")
+      .populate("products.productId")
       .sort({ createdAt: -1 });
 
     res.status(200).json({
-      message:
-        "All orders fetched successfully",
+      message: "All orders fetched successfully",
       count: orders.length,
       orders,
     });
-
   } catch (error) {
-    console.error(
-      "Get All Orders Error:",
-      error
-    );
+    console.error("Get All Orders Error:", error);
 
     res.status(500).json({
-      message:
-        "Failed to fetch all orders",
+      message: "Failed to fetch all orders",
       error: error.message,
     });
   }
@@ -594,8 +504,7 @@ const getFarmerOrders = async (req, res) => {
   try {
     if (req.user.role !== "farmer") {
       return res.status(403).json({
-        message:
-          "Only farmers can access farmer orders",
+        message: "Only farmers can access farmer orders",
       });
     }
 
@@ -606,36 +515,23 @@ const getFarmerOrders = async (req, res) => {
           farmerId: req.user.id,
         },
       })
-      .populate(
-        "customerId",
-        "name email"
-      )
+      .populate("customerId", "name email")
       .sort({ createdAt: -1 });
 
-    const farmerOrders =
-      orders.filter((order) =>
-        order.products.some(
-          (item) =>
-            item.productId !== null
-        )
-      );
+    const farmerOrders = orders.filter((order) =>
+      order.products.some((item) => item.productId !== null),
+    );
 
     res.status(200).json({
-      message:
-        "Farmer orders fetched successfully",
+      message: "Farmer orders fetched successfully",
       count: farmerOrders.length,
       orders: farmerOrders,
     });
-
   } catch (error) {
-    console.error(
-      "Get Farmer Orders Error:",
-      error
-    );
+    console.error("Get Farmer Orders Error:", error);
 
     res.status(500).json({
-      message:
-        "Failed to fetch farmer orders",
+      message: "Failed to fetch farmer orders",
       error: error.message,
     });
   }
@@ -644,33 +540,19 @@ const getFarmerOrders = async (req, res) => {
 // ===============================
 // UPDATE PAYMENT STATUS
 // ===============================
-const updatePaymentStatus = async (
-  req,
-  res
-) => {
+const updatePaymentStatus = async (req, res) => {
   try {
-    const { paymentStatus } =
-      req.body;
+    const { paymentStatus } = req.body;
 
-    const allowedPaymentStatuses = [
-      "Paid",
-      "Failed",
-    ];
+    const allowedPaymentStatuses = ["Paid", "Failed"];
 
-    if (
-      !allowedPaymentStatuses.includes(
-        paymentStatus
-      )
-    ) {
+    if (!allowedPaymentStatuses.includes(paymentStatus)) {
       return res.status(400).json({
-        message:
-          "Invalid payment status",
+        message: "Invalid payment status",
       });
     }
 
-    const order = await Order.findById(
-      req.params.id
-    );
+    const order = await Order.findById(req.params.id);
 
     if (!order) {
       return res.status(404).json({
@@ -681,36 +563,28 @@ const updatePaymentStatus = async (
     // Customer can update only own order
     if (
       req.user.role === "customer" &&
-      order.customerId.toString() !==
-        req.user.id
+      order.customerId.toString() !== req.user.id
     ) {
       return res.status(403).json({
-        message:
-          "You are not authorized to update this payment",
+        message: "You are not authorized to update this payment",
       });
     }
 
     // Cancelled order cannot be updated
     if (order.status === "Cancelled") {
       return res.status(400).json({
-        message:
-          "Cancelled order payment cannot be updated",
+        message: "Cancelled order payment cannot be updated",
       });
     }
 
     // COD cannot be marked as Online Paid
-    if (
-      order.paymentMethod === "COD" &&
-      paymentStatus === "Paid"
-    ) {
+    if (order.paymentMethod === "COD" && paymentStatus === "Paid") {
       return res.status(400).json({
-        message:
-          "COD order cannot be marked as online paid",
+        message: "COD order cannot be marked as online paid",
       });
     }
 
-    order.paymentStatus =
-      paymentStatus;
+    order.paymentStatus = paymentStatus;
 
     // Online payment successful
     if (
@@ -721,24 +595,17 @@ const updatePaymentStatus = async (
       order.status = "Confirmed";
     }
 
-    const updatedOrder =
-      await order.save();
+    const updatedOrder = await order.save();
 
     res.status(200).json({
-      message:
-        "Payment status updated successfully",
+      message: "Payment status updated successfully",
       order: updatedOrder,
     });
-
   } catch (error) {
-    console.error(
-      "Update Payment Status Error:",
-      error
-    );
+    console.error("Update Payment Status Error:", error);
 
     res.status(500).json({
-      message:
-        "Failed to update payment status",
+      message: "Failed to update payment status",
       error: error.message,
     });
   }
@@ -770,7 +637,6 @@ const getDeliveryBoyOrders = async (req, res) => {
       count: orders.length,
       orders,
     });
-
   } catch (error) {
     console.error("Delivery Boy Orders Error:", error);
 
@@ -837,7 +703,6 @@ const assignDeliveryBoy = async (req, res) => {
       message: "Order assigned to delivery boy successfully",
       order: updatedOrder,
     });
-
   } catch (error) {
     console.error("Assign Delivery Boy Error:", error);
 

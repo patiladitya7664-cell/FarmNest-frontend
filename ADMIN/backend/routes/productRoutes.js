@@ -2,6 +2,10 @@ const express = require("express");
 
 const router = express.Router();
 
+// ==========================================
+// CONTROLLERS
+// ==========================================
+
 const {
   addProduct,
   getMyProducts,
@@ -13,81 +17,67 @@ const {
   rejectProduct,
 } = require("../controllers/productController");
 
+// ==========================================
+// MIDDLEWARE
+// ==========================================
+
 const authMiddleware = require("../middleware/authMiddleware");
-const adminMiddleware = require("../middleware/adminMiddleware");
 
-
-// ==========================================
-// FARMER PRODUCT ROUTES
-// ==========================================
-
-// Add Product
-router.post(
-  "/",
-  authMiddleware,
-  addProduct
-);
-
-// Get Farmer's Own Products
-router.get(
-  "/my",
-  authMiddleware,
-  getMyProducts
-);
-
-// Update Product
-router.put(
-  "/:id",
-  authMiddleware,
-  updateProduct
-);
-
-// Delete Product
-router.delete(
-  "/:id",
-  authMiddleware,
-  deleteProduct
-);
-
+// Product image upload middleware
+const upload = require("../middleware/productUpload");
 
 // ==========================================
-// PUBLIC PRODUCT ROUTES
+// GET ALL APPROVED PRODUCTS - PUBLIC
 // ==========================================
 
-// Get All Approved Products
-router.get(
-  "/",
-  getAllProducts
-);
-
+router.get("/", getAllProducts);
 
 // ==========================================
-// ADMIN PRODUCT ROUTES
+// GET MY PRODUCTS - FARMER
 // ==========================================
 
-// Get Pending Products
-router.get(
-  "/admin/pending",
-  authMiddleware,
-  adminMiddleware,
-  getPendingProducts
-);
+router.get("/my", authMiddleware, getMyProducts);
 
-// Approve Product
-router.put(
-  "/:id/approve",
-  authMiddleware,
-  adminMiddleware,
-  approveProduct
-);
+// ==========================================
+// GET PENDING PRODUCTS - ADMIN
+// ==========================================
 
-// Reject Product
-router.put(
-  "/:id/reject",
-  authMiddleware,
-  adminMiddleware,
-  rejectProduct
-);
+router.get("/pending", authMiddleware, getPendingProducts);
 
+// ==========================================
+// ADD PRODUCT - FARMER
+// IMAGE REQUIRED
+// ==========================================
+
+router.post("/", authMiddleware, upload.single("image"), addProduct);
+
+// ==========================================
+// UPDATE PRODUCT - FARMER
+// IMAGE OPTIONAL
+// ==========================================
+
+router.put("/:id", authMiddleware, upload.single("image"), updateProduct);
+
+// ==========================================
+// DELETE PRODUCT - FARMER
+// ==========================================
+
+router.delete("/:id", authMiddleware, deleteProduct);
+
+// ==========================================
+// APPROVE PRODUCT - ADMIN
+// ==========================================
+
+router.put("/:id/approve", authMiddleware, approveProduct);
+
+// ==========================================
+// REJECT PRODUCT - ADMIN
+// ==========================================
+
+router.put("/:id/reject", authMiddleware, rejectProduct);
+
+// ==========================================
+// EXPORT ROUTER
+// ==========================================
 
 module.exports = router;

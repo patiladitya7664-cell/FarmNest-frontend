@@ -30,6 +30,13 @@ const userSchema = new mongoose.Schema(
       enum: ["farmer", "customer", "admin", "deliveryBoy"],
       required: true,
     },
+    verificationStatus: {
+      type: String,
+      enum: ["pending", "approved", "rejected"],
+      default: function () {
+        return this.role === "farmer" ? "pending" : "approved";
+      },
+    },
 
     // =====================================================
     // FARMER PROFILE

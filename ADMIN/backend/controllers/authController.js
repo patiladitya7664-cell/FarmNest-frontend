@@ -21,7 +21,7 @@ const registerUser = async (req, res) => {
     // =====================================================
     // ALLOWED ROLES
     // =====================================================
-    if (!["farmer", "customer", "admin"].includes(role)) {
+    if (!["farmer", "customer", "admin", "deliveryBoy"].includes(role)) {
       return res.status(400).json({
         message: "Invalid role",
       });
@@ -188,6 +188,163 @@ const loginUser = async (req, res) => {
     });
   }
 };
+// =====================================================
+// GET MY PROFILE
+// =====================================================
+const getMyProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Profile fetched successfully",
+      user,
+    });
+  } catch (error) {
+    console.error("Get Profile Error:", error);
+
+    return res.status(500).json({
+      message: "Failed to fetch profile",
+      error: error.message,
+    });
+  }
+};
+// =====================================================
+// UPDATE MY PROFILE
+// =====================================================
+const updateMyProfile = async (req, res) => {
+  try {
+    const {
+      name,
+      email,
+      phone,
+      location,
+      address,
+    } = req.body;
+
+    // =====================================================
+    // BASIC VALIDATION
+    // =====================================================
+
+    if (!name || !name.trim()) {
+      return res.status(400).json({
+        message: "Name is required",
+      });
+    }
+
+    if (!email || !email.trim()) {
+      return res.status(400).json({
+        message: "Email is required",
+      });
+    }
+
+    const normalizedEmail =
+      email.trim().toLowerCase();
+
+    // =====================================================
+    // CHECK EMAIL FORMAT
+    // =====================================================
+
+    const emailRegex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(normalizedEmail)) {
+      return res.status(400).json({
+        message: "Please enter a valid email",
+      });
+    }
+
+    // =====================================================
+    // FIND CURRENT USER
+    // =====================================================
+
+    const user = await User.findById(
+      req.user.id
+    );
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    // =====================================================
+    // CHECK DUPLICATE EMAIL
+    // =====================================================
+
+    const existingUser =
+      await User.findOne({
+        email: normalizedEmail,
+        _id: { $ne: req.user.id },
+      });
+
+    if (existingUser) {
+      return res.status(400).json({
+        message:
+          "Email is already registered with another account",
+      });
+    }
+
+    // =====================================================
+    // UPDATE PROFILE
+    // =====================================================
+
+    user.name = name.trim();
+    user.email = normalizedEmail;
+    user.phone = phone
+      ? phone.trim()
+      : "";
+    user.location = location
+      ? location.trim()
+      : "";
+    user.address = address
+      ? address.trim()
+      : "";
+
+    const updatedUser =
+      await user.save();
+
+    // =====================================================
+    // RESPONSE
+    // =====================================================
+
+    return res.status(200).json({
+      message:
+        "Profile updated successfully",
+
+      user: {
+        id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        role: updatedUser.role,
+        phone: updatedUser.phone,
+        location: updatedUser.location,
+        address: updatedUser.address,
+        profileImage:
+          updatedUser.profileImage,
+        verificationStatus:
+          updatedUser.verificationStatus,
+      },
+    });
+  } catch (error) {
+    console.error(
+      "Update Profile Error:",
+      error
+    );
+
+    return res.status(500).json({
+      message:
+        "Failed to update profile",
+
+      error: error.message,
+    });
+  }
+};
 
 // =====================================================
 // EXPORT
@@ -195,4 +352,6 @@ const loginUser = async (req, res) => {
 module.exports = {
   registerUser,
   loginUser,
+  getMyProfile,
+  updateMyProfile,
 };

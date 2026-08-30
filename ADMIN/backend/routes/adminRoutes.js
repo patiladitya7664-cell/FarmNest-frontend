@@ -7,21 +7,28 @@ const router = express.Router();
 // =====================================================
 
 const {
+  addFarmer,
+  getAllFarmers,
   getPendingFarmers,
   approveFarmer,
   rejectFarmer,
   getDashboardStats,
+  getAdminAnalytics,
+
+  addCustomer,
   getAllCustomers,
   getCustomerById,
   deleteCustomer,
-} = require("../controllers/adminController");
 
-const {
   getPendingProducts,
   approveProduct,
   rejectProduct,
-} = require("../controllers/productController");
 
+  // Admin Settings
+  getAdminProfile,
+  updateAdminProfile,
+  changeAdminPassword,
+} = require("../controllers/adminController");
 // =====================================================
 // MIDDLEWARE
 // =====================================================
@@ -34,6 +41,47 @@ const adminMiddleware = require("../middleware/adminMiddleware");
 // =====================================================
 
 router.get("/dashboard", authMiddleware, adminMiddleware, getDashboardStats);
+
+// =====================================================
+// ADMIN ANALYTICS
+// =====================================================
+// =====================================================
+// ADMIN SETTINGS
+// =====================================================
+
+// GET ADMIN PROFILE
+router.get(
+  "/profile",
+  authMiddleware,
+  adminMiddleware,
+  getAdminProfile
+);
+
+// UPDATE ADMIN PROFILE
+router.put(
+  "/profile",
+  authMiddleware,
+  adminMiddleware,
+  updateAdminProfile
+);
+
+// CHANGE ADMIN PASSWORD
+router.put(
+  "/change-password",
+  authMiddleware,
+  adminMiddleware,
+  changeAdminPassword
+);
+router.get("/analytics", authMiddleware, adminMiddleware, getAdminAnalytics);
+// =====================================================
+// FARMER MANAGEMENT
+// =====================================================
+
+// ADD FARMER
+router.post("/farmers", authMiddleware, adminMiddleware, addFarmer);
+
+// GET ALL FARMERS
+router.get("/farmers", authMiddleware, adminMiddleware, getAllFarmers);
 
 // =====================================================
 // FARMER VERIFICATION
@@ -67,10 +115,15 @@ router.put(
 // CUSTOMER MANAGEMENT
 // =====================================================
 
+// ADD CUSTOMER
+router.post("/customers", authMiddleware, adminMiddleware, addCustomer);
+
 // GET ALL CUSTOMERS
+// Search + Filter + Pagination + Order Count
 router.get("/customers", authMiddleware, adminMiddleware, getAllCustomers);
 
 // GET CUSTOMER BY ID
+// Includes Order Count
 router.get("/customers/:id", authMiddleware, adminMiddleware, getCustomerById);
 
 // DELETE CUSTOMER
@@ -108,5 +161,9 @@ router.put(
   adminMiddleware,
   rejectProduct,
 );
+
+// =====================================================
+// EXPORT ROUTER
+// =====================================================
 
 module.exports = router;

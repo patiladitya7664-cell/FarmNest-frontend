@@ -30,6 +30,13 @@ const userSchema = new mongoose.Schema(
       enum: ["farmer", "customer", "admin", "deliveryBoy"],
       required: true,
     },
+
+    accountStatus: {
+      type: String,
+      enum: ["Active", "Blocked"],
+      default: "Active",
+    },
+
     verificationStatus: {
       type: String,
       enum: ["pending", "approved", "rejected"],
@@ -39,16 +46,10 @@ const userSchema = new mongoose.Schema(
     },
 
     // =====================================================
-    // FARMER PROFILE
+    // USER CONTACT INFORMATION
     // =====================================================
 
     phone: {
-      type: String,
-      default: "",
-      trim: true,
-    },
-
-    farmName: {
       type: String,
       default: "",
       trim: true,
@@ -60,13 +61,23 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
 
-    farmSize: {
+    address: {
       type: String,
       default: "",
       trim: true,
     },
 
-    address: {
+    // =====================================================
+    // FARMER PROFILE
+    // =====================================================
+
+    farmName: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+
+    farmSize: {
       type: String,
       default: "",
       trim: true,
@@ -86,10 +97,41 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+
+    // =====================================================
+    // ADMIN / USER PREFERENCES
+    // =====================================================
+
+    preferences: {
+      darkMode: {
+        type: Boolean,
+        default: false,
+      },
+
+      emailNotify: {
+        type: Boolean,
+        default: true,
+      },
+
+      smsNotify: {
+        type: Boolean,
+        default: false,
+      },
+
+      language: {
+        type: String,
+        enum: ["English", "Hindi", "Marathi"],
+        default: "English",
+      },
+    },
   },
   {
     timestamps: true,
   },
 );
+
+// =====================================================
+// EXPORT USER MODEL
+// =====================================================
 
 module.exports = mongoose.model("User", userSchema);

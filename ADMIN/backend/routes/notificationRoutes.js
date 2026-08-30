@@ -8,43 +8,88 @@ const {
   markAsRead,
   markAllAsRead,
   clearAllNotifications,
+
+  getAdminNotifications,
+  getAdminUnreadCount,
+  markAdminNotificationAsRead,
+  markAllAdminNotificationsAsRead,
+  clearAllAdminNotifications,
 } = require("../controllers/notificationController");
 
 const authMiddleware = require("../middleware/authMiddleware");
+const adminMiddleware = require("../middleware/adminMiddleware");
 
-// GET ALL NOTIFICATIONS
+// =====================================================
+// FARMER NOTIFICATIONS
+// =====================================================
+
 router.get(
-  "/",
+  "/farmer",
   authMiddleware,
   getNotifications
 );
 
-// GET UNREAD COUNT
 router.get(
-  "/unread-count",
+  "/farmer/unread-count",
   authMiddleware,
   getUnreadCount
 );
 
-// MARK SINGLE READ
 router.put(
-  "/:id/read",
+  "/farmer/:id/read",
   authMiddleware,
   markAsRead
 );
 
-// MARK ALL READ
 router.put(
-  "/read-all",
+  "/farmer/read-all",
   authMiddleware,
   markAllAsRead
 );
 
-// CLEAR ALL
 router.delete(
-  "/clear",
+  "/farmer/clear",
   authMiddleware,
   clearAllNotifications
+);
+
+// =====================================================
+// ADMIN NOTIFICATIONS
+// =====================================================
+
+router.get(
+  "/admin",
+  authMiddleware,
+  adminMiddleware,
+  getAdminNotifications
+);
+
+router.get(
+  "/admin/unread-count",
+  authMiddleware,
+  adminMiddleware,
+  getAdminUnreadCount
+);
+
+router.put(
+  "/admin/:id/read",
+  authMiddleware,
+  adminMiddleware,
+  markAdminNotificationAsRead
+);
+
+router.put(
+  "/admin/read-all",
+  authMiddleware,
+  adminMiddleware,
+  markAllAdminNotificationsAsRead
+);
+
+router.delete(
+  "/admin/clear",
+  authMiddleware,
+  adminMiddleware,
+  clearAllAdminNotifications
 );
 
 module.exports = router;
